@@ -413,6 +413,7 @@ ol {
 
 .header__logo a {
 	display: inline-block;
+	max-width: 40%;
 }
 
 .header__menu {
@@ -1701,8 +1702,8 @@ ol {
 }
 
 .product__details__text .product__details__price {
-	font-size: 30px;
-	color: #dd2222;
+	font-size: 25px;
+	color: #5caeef;
 	font-weight: 600;
 	margin-bottom: 15px;
 }
@@ -2636,6 +2637,7 @@ ol {
 
 .footer__about__logo a {
 	display: inline-block;
+	max-width: 70%
 }
 
 .footer__widget {
