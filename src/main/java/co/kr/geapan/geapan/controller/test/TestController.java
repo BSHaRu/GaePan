@@ -9,13 +9,13 @@ public class TestController {
     public String test() {
         return "test";
     }
-    @GetMapping("/blog_details")
+    @GetMapping("/pet/blog_details")
     public String blog_details() {
-        return "blog-details";
+        return "pet/blog-details";
     }
-    @GetMapping("/blog")
+    @GetMapping("/pet/blog")
     public String blog() {
-        return "blog";
+        return "pet/blog";
     }
     @GetMapping("/contact")
     public String contact() {
