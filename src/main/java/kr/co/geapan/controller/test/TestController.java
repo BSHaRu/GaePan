@@ -1,4 +1,4 @@
-package co.kr.geapan.geapan.controller.test;
+package kr.co.geapan.controller.test;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,8 +41,4 @@ public class TestController {
         return "shoping-cart";
     }
 
-    @GetMapping("/member/login")
-    public String login() {
-        return "member/login";
-    }
 }
