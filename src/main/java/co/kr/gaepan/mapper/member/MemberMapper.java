@@ -1,4 +1,4 @@
-package kr.co.geapan.mapper.member;
+package co.kr.gaepan.mapper.member;
 
 import org.apache.ibatis.annotations.Mapper;
 

@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-<head th:replace="~{/my/fragments/head :: head}">
+<head th:replace="~{/pet/fragments/head :: head}">
 </head>
 <body>
     <!-- Page Preloder -->
@@ -73,9 +73,9 @@
         </div>
     </div>
     <!-- Humberger End -->
-    <header th:replace="~{/my/fragments/header :: header}"></header>
+    <header th:replace="~{/pet/fragments/header :: header}"></header>
 
     <th:block layout:fragment="content"></th:block>
-    <footer th:replace="~{/my/fragments/footer :: footer}"></footer>
+    <footer th:replace="~{/pet/fragments/footer :: footer}"></footer>
 </body>
 </html>

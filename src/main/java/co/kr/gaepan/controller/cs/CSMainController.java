@@ -1,4 +1,4 @@
-package co.kr.geapan.controller.cs;
+package co.kr.gaepan.controller.cs;
 
 
 import org.springframework.stereotype.Controller;

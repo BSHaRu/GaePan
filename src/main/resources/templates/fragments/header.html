@@ -55,7 +55,7 @@
                         <ul>
                             <!--li태그에 class="active"가 내나 해당 카테고리 보고 있는 중인거 표시 -->
                             <li class="active">
-                                <a th:href="@{index}">Home</a>
+                                <a th:href="@{/index}">Home</a>
                             </li>
                             <li>
                                 <a th:href="@{shop_grid}">Shop</a>
@@ -74,12 +74,12 @@
                                         <a th:href="@{checkout}">Check Out</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{blog_details}">Blog Details</a>
+                                        <a th:href="@{/pet/blog_details}">Blog Details</a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{blog}">Blog</a>
+                                <a th:href="@{/pet/blog}">Blog</a>
                             </li>
                             <li>
                                 <a th:href="@{contact}">Contact</a>

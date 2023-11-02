@@ -1,4 +1,4 @@
-package kr.co.geapan.security;
+package co.kr.gaepan.security;
 
 public class SecurityUserService {
 }

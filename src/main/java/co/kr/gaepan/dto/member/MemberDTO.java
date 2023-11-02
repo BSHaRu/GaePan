@@ -1,4 +1,4 @@
-package kr.co.geapan.dto.member;
+package co.kr.gaepan.dto.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

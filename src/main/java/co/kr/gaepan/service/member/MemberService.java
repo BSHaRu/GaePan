@@ -1,4 +1,4 @@
-package kr.co.geapan.service.member;
+package co.kr.gaepan.service.member;
 
 import org.springframework.stereotype.Service;
 
