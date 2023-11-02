@@ -1,4 +1,4 @@
-package co.kr.geapan.geapan.controller;
+package co.kr.gaepan.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

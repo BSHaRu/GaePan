@@ -5,7 +5,6 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <body>
-
     <!-- Header Begin -->
     <header th:fragment="header">
         <div class="header__top">
@@ -16,7 +15,7 @@
                             <ul>
                                 <li>
                                     <i class="fa fa-envelope"></i>
-                                    GeaPan@GeaPan.com
+                                    GaePan@gaepan.com
                                 </li>
                                 <li>후원자를 찾습니다.</li>
                             </ul>
@@ -28,7 +27,7 @@
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                                <a th:href="@{admin/index}">admin</a>
                             </div>
                             <div class="header__top__right__auth">
                                 <a th:href="@{member/login}">
@@ -46,7 +45,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a th:href="@{index}"><img src="img/logo.png" alt=""></a>
+                        <a th:href="@{index}"><img th:src="@{/img/logo.png}" alt=""></a>
                     </div>
                 </div>
 
