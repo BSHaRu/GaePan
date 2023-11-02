@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/my/fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<th:block layout:fragment="content">
+    <main>
+        <aside>
+            <ul id="gnb">
+                <li>
+                    <a href="#"><i aria-hidden="true">이용 내역</i></a>
+                </li>
+                <li>
+                    <a href="#"><i aria-hidden="true">입양 후기</i></a>
+                </li>
+                <li>
+                    <a href="#"><i aria-hidden="true">문의 하기</i></a>
+                </li>
+                <li>
+                    <a href="#"><i aria-hidden="true">설정</i></a>
+                </li>
+            </ul>
+        </aside>
+        <section>
+            <article></article>
+            <article></article>
+            <article></article>
+            <article></article>
+        </section>
+    </main>
+</th:block>
+</html>
