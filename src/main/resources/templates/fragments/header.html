@@ -31,7 +31,7 @@
                                 <a th:href="@{my/index}">마이페이지</a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a th:href="@{member/login}">
+                                <a th:href="@{/member/login}">
                                     <i class="fa fa-user"></i> Login
                                 </a>
                             </div>
@@ -46,7 +46,7 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a th:href="@{index}"><img th:src="@{/img/logo.png}" alt=""></a>
+                        <a th:href="@{/index}"><img th:src="@{/img/logo.png}" alt=""></a>
                     </div>
                 </div>
 
@@ -58,20 +58,20 @@
                                 <a th:href="@{/index}">Home</a>
                             </li>
                             <li>
-                                <a th:href="@{shop_grid}">Shop</a>
+                                <a th:href="@{/shop_grid}">Shop</a>
                             </li>
                             <li>
                                 <a href="#">Pages</a>
                                 <!-- category hover시 리스트 출력 -->
                                 <ul class="header__menu__dropdown">
                                     <li>
-                                        <a th:href="@{shop_details}">Shop Details</a>
+                                        <a th:href="@{/shop_details}">Shop Details</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{shoping_cart}">Shoping Cart</a>
+                                        <a th:href="@{/shoping_cart}">Shoping Cart</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{checkout}">Check Out</a>
+                                        <a th:href="@{/checkout}">Check Out</a>
                                     </li>
                                     <li>
                                         <a th:href="@{/pet/blog_details}">Blog Details</a>
@@ -82,7 +82,7 @@
                                 <a th:href="@{/pet/blog}">Blog</a>
                             </li>
                             <li>
-                                <a th:href="@{contact}">Contact</a>
+                                <a th:href="@{/contact}">Contact</a>
                             </li>
                         </ul>
                     </nav>

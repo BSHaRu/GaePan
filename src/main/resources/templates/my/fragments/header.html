@@ -56,34 +56,34 @@
                         <ul>
                             <!--li태그에 class="active"가 내나 해당 카테고리 보고 있는 중인거 표시 -->
                             <li class="active">
-                                <a th:href="@{index}">Home</a>
+                                <a th:href="@{/index}">Home</a>
                             </li>
                             <li>
-                                <a th:href="@{shop_grid}">Shop</a>
+                                <a th:href="@{/shop_grid}">Shop</a>
                             </li>
                             <li>
                                 <a href="#">Pages</a>
                                 <!-- category hover시 리스트 출력 -->
                                 <ul class="header__menu__dropdown">
                                     <li>
-                                        <a th:href="@{shop_details}">Shop Details</a>
+                                        <a th:href="@{/shop_details}">Shop Details</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{shoping_cart}">Shoping Cart</a>
+                                        <a th:href="@{/shoping_cart}">Shoping Cart</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{checkout}">Check Out</a>
+                                        <a th:href="@{/checkout}">Check Out</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{blog_details}">Blog Details</a>
+                                        <a th:href="@{/pet/blog_details}">Blog Details</a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{blog}">Blog</a>
+                                <a th:href="@{/pet/blog}">Blog</a>
                             </li>
                             <li>
-                                <a th:href="@{contact}">Contact</a>
+                                <a th:href="@{/contact}">Contact</a>
                             </li>
                         </ul>
                     </nav>
