@@ -1,4 +1,4 @@
-package co.kr.geapan.geapan;
+package kr.co.geapan;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
