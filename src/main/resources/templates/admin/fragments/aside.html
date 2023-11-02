@@ -13,23 +13,26 @@
             </ol>
         </li>
         <li>
-            <a href="#"><i class="fas fa-store" aria-hidden="true"></i>상점관리</a>
+            <a href="#"><i class="fa fa-users" aria-hidden="true"></i>회원</a>
             <ol>
-                <li><a href="#">판매자현황</a></li>
-                <li><a href="#">재고관리</a></li>
+                <li>
+                    <a th:href="@{/admin/member}">회원관리</a>
+                </li>
             </ol>
         </li>
         <li>
-            <a href="#"><i class="fa fa-users" aria-hidden="true"></i>회원관리</a>
+            <a href="#"></i>반려동물 관리</a>
             <ol>
-                <li><a href="#">회원현황</a></li>
-                <li><a href="#">포인트관리</a></li>
-                <li><a href="#">비회원관리</a></li>
-                <li><a href="#">접속자집계</a></li>
+                <li>
+                    <a th:href="@{/admin/animal/person}">개인</a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/animal/company}">시설</a>
+                </li>
             </ol>
         </li>
         <li>
-            <a href="#"><i class="fas fa-box-open" aria-hidden="true"></i>상품관리</a>
+            <a href="#"><i class="fa fa-box-open" aria-hidden="true"></i>상품관리</a>
             <ol>
                 <li>
                     <a href="#">상품현황</a>
@@ -40,15 +43,6 @@
                 <li>
                     <a href="#">재고관리</a>
                 </li>
-            </ol>
-        </li>
-        <li>
-            <a href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>주문관리</a>
-            <ol>
-                <li><a href="#">주문현황</a></li>
-                <li><a href="#">매출현황</a></li>
-                <li><a href="#">결제관리</a></li>
-                <li><a href="#">배송관리</a></li>
             </ol>
         </li>
         <li>
@@ -63,6 +57,15 @@
                 <li>
                     <a href="#">문의하기</a>
                 </li>
+            </ol>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>주문관리</a>
+            <ol>
+                <li><a href="#">주문현황</a></li>
+                <li><a href="#">매출현황</a></li>
+                <li><a href="#">결제관리</a></li>
+                <li><a href="#">배송관리</a></li>
             </ol>
         </li>
     </ul>

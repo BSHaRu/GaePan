@@ -13,4 +13,9 @@ public class AdminMainController {
         return "admin/index";
     }
 
+    @GetMapping("/member")
+    public String member() {
+        return "admin/member";
+    }
+
 }

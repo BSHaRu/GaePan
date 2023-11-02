@@ -1623,6 +1623,7 @@ ol {
 .product__pagination,
 .blog__pagination {
 	padding-top: 10px;
+	text-align: center;
 }
 
 .product__pagination a,
@@ -2336,6 +2337,7 @@ ol {
 .blog__pagination {
 	padding-top: 5px;
 	position: relative;
+	text-align: center;
 }
 
 .blog__pagination:before {

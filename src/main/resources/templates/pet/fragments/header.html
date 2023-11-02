@@ -5,7 +5,6 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <body>
-
     <!-- Header Begin -->
     <header th:fragment="header">
         <div class="header__top">
@@ -16,7 +15,7 @@
                             <ul>
                                 <li>
                                     <i class="fa fa-envelope"></i>
-                                    GeaPan@GeaPan.com
+                                    GaePan@gaepan.com
                                 </li>
                                 <li>후원자를 찾습니다.</li>
                             </ul>
@@ -25,14 +24,11 @@
                     <div class="col-lg-6">
                         <div class="header__top__right">
                             <div class="header__top__right__social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                                <a th:href="@{my/index}">마이페이지</a>
+                                <a th:href="@{/admin/index}">admin</a>
+                                <a th:href="@{/my/index}">마이페이지</a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a th:href="@{member/login}">
+                                <a th:href="@{/member/login}">
                                     <i class="fa fa-user"></i> Login
                                 </a>
                             </div>
@@ -51,49 +47,48 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <nav class="header__menu">
                         <ul>
                             <!--li태그에 class="active"가 내나 해당 카테고리 보고 있는 중인거 표시 -->
                             <li class="active">
-                                <a th:href="@{/index}">Home</a>
+                                <a th:href="@{/index}">GaePan 소개</a>
                             </li>
                             <li>
-                                <a th:href="@{/shop_grid}">Shop</a>
+                                <a th:href="@{/pet/blog}">분양</a>
                             </li>
                             <li>
-                                <a href="#">Pages</a>
-                                <!-- category hover시 리스트 출력 -->
+                                <a href="#">제보/보호</a>
                                 <ul class="header__menu__dropdown">
                                     <li>
-                                        <a th:href="@{/shop_details}">Shop Details</a>
+                                        <a th:href="@{/pet/blog_details}">찾습니다</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{/shoping_cart}">Shoping Cart</a>
+                                        <a th:href="@{/shop_details}">보호중</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{/checkout}">Check Out</a>
-                                    </li>
-                                    <li>
-                                        <a th:href="@{/pet/blog_details}">Blog Details</a>
+                                        <a th:href="@{/contact}">후기</a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{/pet/blog}">Blog</a>
+                                <a th:href="@{/checkout}">입양하기</a>
                             </li>
                             <li>
-                                <a th:href="@{/contact}">Contact</a>
+                                <a th:href="@{/cs/index}">문의하기</a>
+                            </li>
+                            <li>
+                                <a th:href="@{/shop_grid}">후원하기</a>
                             </li>
                         </ul>
                     </nav>
                 </div>
 
-                <div class="col-lg-3">
+                <div class="col-lg-1">
                     <div class="header__cart">
                         <ul>
                             <li>
-                                <a href="#">
+                                <a th:href="@{/shoping_cart}">
                                     <i class="fa fa-heart"></i>
                                     <span>1</span>
                                 </a>
@@ -110,5 +105,4 @@
         </div>
     </header>
     <!-- Header Section End -->
-</body>
 </html>
