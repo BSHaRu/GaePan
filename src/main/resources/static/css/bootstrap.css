@@ -214,8 +214,10 @@ input[type=date],input[type=datetime-local],input[type=month],input[type=time] {
     -webkit-appearance:listbox
 }
 textarea {
+    width: 100%;
+    outline: none;
     overflow:auto;
-    resize:vertical
+    resize: none;
 }
 fieldset {
     min-width:0;
