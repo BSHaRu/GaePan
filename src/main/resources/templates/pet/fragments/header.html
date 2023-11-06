@@ -48,53 +48,39 @@
                 </div>
 
                 <div class="col-lg-8">
-                    <nav class="header__menu">
+                    <nav class="header__menu text-center">
                         <ul>
                             <!--li태그에 class="active"가 내나 해당 카테고리 보고 있는 중인거 표시 -->
                             <li class="active">
                                 <a th:href="@{/index}">GaePan 소개</a>
                             </li>
                             <li>
-                                <a th:href="@{/pet/blog}">분양</a>
-                            </li>
-                            <li>
-                                <a href="#">제보/보호</a>
-                                <ul class="header__menu__dropdown">
+                                <a href="#">분양</a>
+                                <ul class="header__menu__dropdown text-left">
                                     <li>
-                                        <a th:href="@{/pet/blog_details}">찾습니다</a>
+                                        <a th:href="@{/pet/petlist}">분양 목록</a>
                                     </li>
                                     <li>
-                                        <a th:href="@{/shop_details}">보호중</a>
-                                    </li>
-                                    <li>
-                                        <a th:href="@{/contact}">후기</a>
+                                        <a th:href="@{/pet/addpet}">분양 일기</a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
-                                <a th:href="@{/checkout}">입양하기</a>
+                                <a href="#">제보</a>
+                                <ul class="header__menu__dropdown text-left">
+                                    <li>
+                                        <a th:href="@{/pet/missinglist}">찾습니다</a>
+                                    </li>
+                                    <li>
+                                        <a th:href="@{/apot}">본 것 같아요</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
                                 <a th:href="@{/cs/index}">문의하기</a>
                             </li>
-                            <li>
-                                <a th:href="@{/shop_grid}">후원하기</a>
-                            </li>
                         </ul>
                     </nav>
-                </div>
-
-                <div class="col-lg-1">
-                    <div class="header__cart">
-                        <ul>
-                            <li>
-                                <a th:href="@{/shoping_cart}">
-                                    <i class="fa fa-heart"></i>
-                                    <span>1</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
 

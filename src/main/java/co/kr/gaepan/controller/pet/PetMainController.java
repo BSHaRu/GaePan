@@ -7,13 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PetMainController {
 
-    @RequestMapping("/blog")
+    @RequestMapping("/pet/petlist")
     public String main() {
-        return "pet/blog";
+        return "pet/petlist";
     }
 
-    @RequestMapping("/blog_details")
+    @RequestMapping("/pet/missinglist")
+    public String missing() {
+        return "pet/missinglist";
+    }
+
+    @RequestMapping("/pet/petdetails")
     public String blog_details() {
-        return "pet/blog-details";
+        return "pet/petdetails";
     }
 }
