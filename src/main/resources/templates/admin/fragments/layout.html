@@ -7,10 +7,12 @@
 </head>
 <body>
     <header th:replace="~{/admin/fragments/header :: header}"></header>
-    <main>
+    <main class="admin_container row">
     <header th:replace="~{/admin/fragments/aside :: aside}"></header>
 
-    <th:block layout:fragment="content"></th:block>
+    <div class="col-lg-9">
+        <th:block layout:fragment="content"></th:block>
+    </div>
     </main>
     <footer th:replace="~{/admin/fragments/footer :: footer}"></footer>
 </body>

@@ -1,53 +1,62 @@
 
-<aside th:fragment="aside">
-    <ul id="gnb">
-        <li>
-            <a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>환경설정</a>
-            <ol>
+<aside th:fragment="aside" class="col-lg-3">
+    <div class="admin__categories">
+        <nav class="admin_aside_nav">
+            <div class="admin_aside_div">
+                <i class="fa fa-bars"></i>
+                <span>카테고리</span>
+            </div>
+
+            <ul id="gnb">
                 <li>
-                    <a th:href="@{/admin/config/info}">기본환경정보</a>
+                    <a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>환경설정</a>
+                    <ol>
+                        <li>
+                            <a th:href="@{/admin/config/info}">기본환경정보</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/config/banner}">배너관리</a>
+                        </li>
+                    </ol>
                 </li>
                 <li>
-                    <a th:href="@{/admin/config/banner}">배너관리</a>
-                </li>
-            </ol>
-        </li>
-        <li>
-            <a href="#"><i class="fa fa-users" aria-hidden="true"></i>회원관리</a>
-            <ol>
-                <li>
-                    <a th:href="@{/admin/member/member}">회원</a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/member/black}">블랙리스트</a>
-                </li>
-            </ol>
-        </li>
-        <li>
-            <a href="#"><i class="fa fa-paw" aria-hidden="true"></i>반려동물 관리</a>
-            <ol>
-                <li>
-                    <a th:href="@{/admin/animal/person}">개인</a>
+                    <a href="#"><i class="fa fa-users" aria-hidden="true"></i>회원관리</a>
+                    <ol>
+                        <li>
+                            <a th:href="@{/admin/member/member}">회원</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/member/black}">블랙리스트</a>
+                        </li>
+                    </ol>
                 </li>
                 <li>
-                    <a th:href="@{/admin/animal/company}">시설</a>
-                </li>
-            </ol>
-        </li>
-        <li>
-            <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>게시판관리</a>
-            <ol>
-                <li>
-                    <a th:href="@{/admin/board/ad_notice}">공지사항</a>
-                </li>
-                <li>
-                    <a th:href="@{/admin/board/ad_faq}">FAQ</a>
+                    <a href="#"><i class="fa fa-paw" aria-hidden="true"></i>반려동물 관리</a>
+                    <ol>
+                        <li>
+                            <a th:href="@{/admin/animal/person}">개인</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/animal/company}">시설</a>
+                        </li>
+                    </ol>
                 </li>
                 <li>
-                    <a th:href="@{/admin/board/ad_qna}">QnA</a>
+                    <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>게시판관리</a>
+                    <ol>
+                        <li>
+                            <a th:href="@{/admin/board/ad_notice}">공지사항</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/board/ad_faq}">FAQ</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/admin/board/ad_qna}">QnA</a>
+                        </li>
+                    </ol>
                 </li>
-            </ol>
-        </li>
-    </ul>
+            </ul>
+        </nav>
+    </div>
 </aside>
 </html>
