@@ -4,14 +4,12 @@
       xmlns:layout="http://www.thymeleaf.org/"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
-<body>
-
 <!-- Header Begin -->
-<header th:fragment="header">
+<header th:fragment="header" class="mb-5">
     <div class="header__top">
         <div class="admin__container">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-4 admin__header_logo">
                     <div class="header__top__left">
                         <div class="header__logo">
                             <a th:href="@{/admin/index}"><img th:src="@{/img/logo.png}" alt=""></a>
@@ -19,7 +17,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-7">
+                <div class="col-lg-8 pt-3">
                     <div class="header__top__right">
                         <div class="header__top__right__social">
                             <a th:href="@{/index}">home</a>
@@ -36,7 +34,6 @@
         </div>
     </div>
 
-    </div>
 </header>
 <!-- Header Section End -->
 </html>
