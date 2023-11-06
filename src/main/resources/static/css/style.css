@@ -640,7 +640,7 @@ ol {
 }
 
 .hero__search__form {
-	width: 610px;
+	width: 848px;
 	height: 50px;
 	border: 1px solid #ebebeb;
 	position: relative;
@@ -648,7 +648,7 @@ ol {
 }
 
 .hero__search__form form .hero__search__categories {
-	width: 30%;
+	width: 10%;
 	float: left;
 	font-size: 16px;
 	color: #1c1c1c;
