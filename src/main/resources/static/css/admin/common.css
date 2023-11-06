@@ -1,7 +1,6 @@
 body{
     margin: 0;
     padding: 0;
-    color: #cdcdcd;
     font-family: "Cairo", sans-serif;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
@@ -111,6 +110,7 @@ main > section > nav > p {
 }
 main > section > nav > p > strong {
     font-weight: bold;
+    color: #5caeef;
 }
 
 main > section > article {
@@ -143,14 +143,6 @@ main table tr > td {
     padding: 10px;
     text-align: left;
 }
-main table tr > td:nth-child(1) {
-    width: 50px;
-    border-top: 1px solid #f5f5f5;
-    border-bottom: 1px solid #f5f5f5;
-    background: #f6f6f6;
-    padding: 10px;
-    text-align: left;
-}
 
 main table span {
     display: block;
@@ -159,6 +151,36 @@ main table span {
 .header__top__left .header__logo a {
     display: inline-block;
     max-width: 18%;
+}
+
+/* admin member table css 적용 */
+.admin__section  table tr > td:nth-child(1){
+    width: 50px;
+    border-top: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
+    background: #f6f6f6;
+    padding: 10px;
+    text-align: left;
+}
+
+/* admin config table css 적용 */
+.admin__article table tr > td:nth-child(1) {
+    width: 160px;
+    border-top: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
+    background: #f6f6f6;
+    padding: 10px;
+    text-align: left;
+}
+
+.admin__section nav a{
+    color: #6f6f6f;
+}
+
+.admin__section nav a:hover{
+    text-decoration: none;
+    outline: none;
+    color: #8972ee;
 }
 
 .admin_btn{

@@ -6,7 +6,15 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <th:block layout:fragment="content">
-    <section>
+    <section class="admin__section">
+        <nav>
+            <h3>반려동물 관리</h3>
+            <p>
+                <a th:href="@{/admin/index}">HOME</a> &gt; 반려동물 &gt;
+                <strong>시설</strong>
+            </p>
+        </nav>
+
         <div>
             <form action="#" method="get">
                 <select name="searchCate">
@@ -50,7 +58,6 @@
                     <td>1</td>
                     <td>
                         <a href="#" class="deleteBtn">[삭제]</a>
-                        <a href="#" class="modifyBtn">[수정]</a>
                     </td>
                 </tr>
                 </tbody>

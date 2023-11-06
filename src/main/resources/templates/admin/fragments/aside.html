@@ -5,23 +5,35 @@
             <a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>환경설정</a>
             <ol>
                 <li>
-                    <a href="#">기본환경정보</a>
+                    <a th:href="@{/admin/config/info}">기본환경정보</a>
                 </li>
                 <li>
-                    <a href="#">배너관리</a>
+                    <a th:href="@{/admin/config/banner}">배너관리</a>
                 </li>
             </ol>
         </li>
         <li>
-            <a href="#"><i class="fa fa-users" aria-hidden="true"></i>회원</a>
+            <a href="#"><i class="fa fa-users" aria-hidden="true"></i>회원관리</a>
             <ol>
                 <li>
-                    <a th:href="@{/admin/member}">회원관리</a>
+                    <a th:href="@{/admin/member/member}">회원</a>
+                </li>
+                <li>
+                    <a th:href="@{/admin/member/black}">블랙리스트</a>
                 </li>
             </ol>
         </li>
         <li>
-            <a href="#"></i>반려동물 관리</a>
+
+            <a href="#"><i class="fa fa-box-open" aria-hidden="true"></i>후원상품관리</a>
+            <ol>
+                <li>
+                    <a href="#">후원상품현황</a>
+                </li>
+                <li>
+                    <a href="#">후원상품등록</a>
+
+            <a href="#"><i class="fa fa-paw" aria-hidden="true"></i>반려동물 관리</a>
             <ol>
                 <li>
                     <a th:href="@{/admin/animal/person}">개인</a>
@@ -32,40 +44,17 @@
             </ol>
         </li>
         <li>
-            <a href="#"><i class="fa fa-box-open" aria-hidden="true"></i>후원상품관리</a>
-            <ol>
-                <li>
-                    <a href="#">후원상품현황</a>
-                </li>
-                <li>
-                    <a href="#">후원상품등록</a>
-                </li>
-                <li>
-                    <a href="#">재고관리</a>
-                </li>
-            </ol>
-        </li>
-        <li>
             <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>게시판관리</a>
             <ol>
                 <li>
-                    <a href="#">공지사항</a>
+                    <a th:href="@{/admin/board/ad_notice}">공지사항</a>
                 </li>
                 <li>
-                    <a href="#">자주묻는질문</a>
+                    <a th:href="@{/admin/board/ad_faq}">FAQ</a>
                 </li>
                 <li>
-                    <a href="#">문의하기</a>
+                    <a th:href="@{/admin/board/ad_qna}">QnA</a>
                 </li>
-            </ol>
-        </li>
-        <li>
-            <a href="#"><i class="fa fa-credit-card" aria-hidden="true"></i>주문관리</a>
-            <ol>
-                <li><a href="#">주문현황</a></li>
-                <li><a href="#">매출현황</a></li>
-                <li><a href="#">결제관리</a></li>
-                <li><a href="#">배송관리</a></li>
             </ol>
         </li>
     </ul>

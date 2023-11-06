@@ -14,4 +14,13 @@ public class CSMainController {
 
         return "cs/index";
     }
+    @GetMapping("/qna/list")
+    public String qnaList(){
+        return "/cs/qna/list";
+
+    }@GetMapping("/qna/write")
+    public String qnaWrite(){
+        return "/cs/qna/write";
+    }
+
 }

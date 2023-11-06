@@ -1,16 +1,15 @@
-package co.kr.gaepan.controller.admin;
+package co.kr.gaepan.controller.my;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/admin/*")
 @Controller
-public class AdminMainController {
+@RequestMapping("/my/*")
+public class MyInfoController {
 
-    @GetMapping("/index")
-    public String index() {
-        return "admin/index";
+    @GetMapping("/info")
+    public String view() {
+        return "my/info";
     }
-
 }
