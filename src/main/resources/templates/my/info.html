@@ -4,78 +4,85 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{/my/fragments/layout}"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<script src="/js/my/myInfo.js"></script>
+<script src="/js/my/passCheck.js"></script>
 <th:block layout:fragment="content">
     <main>
         <div id="my">
             <div class="home">
                 <ul>
                     <span class="menu_else"></span>
-                    <li><a th:href="@{/my/order}">전체신청내역</a></li>
-                    <li><a th:href="@{/my/review}">나의리뷰</a></li>
+                    <li><a th:href="@{/my/applylist}">전체신청내역</a></li>
+                    <li><a th:href="@{/my/apply}">입양신청하기</a></li>
+                    <li><a th:href="@{/my/review}">나의후기</a></li>
                     <li><a th:href="@{/my/qna}">문의하기</a></li>
-                    <li><a th:href="@{/my/info}">나의설정</a></li>
+                    <li><a th:href="@{/my/support}">후원하기</a></li>
+                    <li><a th:href="@{/my/info}">개인정보설정</a></li>
                 </ul>
                 <section>
                     <article>
                         <h3>회원정보 설정</h3>
-                        <table border="0">
-                            <tr>
-                                <td>사용자 ID</td>
-                                <td>chh****</td>
-                            </tr>
-                            <tr>
-                                <td>비밀번호</td>
-                                <td>
-                                    <button id="btnChangePass">비밀번호 수정</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>이름</td>
-                                <td>김*학</td>
-                            </tr>
-                            <tr>
-                                <td>생년월일</td>
-                                <td>1983년 05월 03일</td>
-                            </tr>
-                            <tr>
-                                <td>E-mail</td>
-                                <td>
-                                    <input type="text" name="email1" value="chakh101" style="width: 130px; height: 23px">@
-                                    <input type="text" name="email2" value="naver.com" style="width: 130px; height: 23px">
-                                    <button id="btnChangeEmail">수정하기</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>휴대폰</td>
-                                <td>
-                                    <p class="hp">
-                                        <input type="text" name="hp1" value="010" style="width: 130px; height: 23px"/>-
-                                        <input type="text" name="hp2" value="1234" style="width: 130px; height: 23px"/>-
-                                        <input type="text" name="hp3" value="1001" style="width: 130px; height: 23px"/>
-                                        <button id="btnChangeHp">수정하기</button>
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>주소</td>
-                                <td>
-                                    <input type="text" name="zip" style="width: 130px; height: 23px; margin-bottom: 1px"/>
-                                    <button id="btnFindZip">주소검색</button>
-                                    <p class="address">
-                                        <input type="text" name="addr1" style="width: 300px; height: 25px; margin-bottom: 2px"/>
-                                        <br>
-                                        <input type="text" name="addr2" style="width: 300px; height: 25px"/>
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>회원탈퇴</td>
-                                <td>
-                                    <button id="btnWithdraw">탈퇴하기</button>
-                                </td>
-                            </tr>
-                        </table>
-                        <button id="btnInfoChange">수정하기</button>
+                        <form th:action="@{/my/info}" method="post">
+                            <input type="hidden" name="m_no">
+                            <table border="0">
+                                <tr>
+                                    <td>사용자 ID</td>
+                                    <td id="userId">[[${MemberDTO.uid]]</td>
+                                </tr>
+                                <tr>
+                                    <td>비밀번호</td>
+                                    <td>
+                                        <button id="btnChangePass">비밀번호 수정</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>이름</td>
+                                    <td id="userName">[[${MemberDTO.name}]]</td>
+                                </tr>
+                                <tr>
+                                    <td>생년월일</td>
+                                    <td id="userBirth">[[${MemberDTO.birth}]]</td>
+                                </tr>
+                                <tr>
+                                    <td>E-mail</td>
+                                    <td>
+                                        <input type="text" name="memberEmail1" th:value="email1" style="width: 130px; height: 23px">@
+                                        <input type="text" name="memberEmail2" style="width: 130px; height: 23px">
+                                        <button id="btnChangeEmail">수정하기</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>휴대폰</td>
+                                    <td>
+                                        <p class="hp">
+                                            <input type="text" name="hp1" value="010" style="width: 130px; height: 23px"/>-
+                                            <input type="text" name="hp2" value="1234" style="width: 130px; height: 23px"/>-
+                                            <input type="text" name="hp3" value="1001" style="width: 130px; height: 23px"/>
+                                            <button id="btnChangeHp">수정하기</button>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>주소</td>
+                                    <td>
+                                        <input type="text" name="zip" style="width: 130px; height: 23px; margin-bottom: 1px"/>
+                                        <button id="btnFindZip">주소검색</button>
+                                        <p class="address">
+                                            <input type="text" name="addr1" style="width: 300px; height: 25px; margin-bottom: 2px"/>
+                                            <br>
+                                            <input type="text" name="addr2" style="width: 300px; height: 25px"/>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>회원탈퇴</td>
+                                    <td>
+                                        <button id="btnWithdraw">탈퇴하기</button>
+                                    </td>
+                                </tr>
+                            </table>
+                            <button id="btnInfoChange">수정하기</button>
+                        </form>
                     </article>
                 </section>
             </div>
