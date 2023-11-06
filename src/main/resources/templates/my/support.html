@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/my/fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<th:block layout:fragment="content">
+    <main>
+        <div id="my">
+            <div class="home">
+                <ul>
+                    <span class="menu_else"></span>
+                    <li><a th:href="@{/my/applylist}">전체신청내역</a></li>
+                    <li><a th:href="@{/my/apply}">입양신청하기</a></li>
+                    <li><a th:href="@{/my/review}">나의후기</a></li>
+                    <li><a th:href="@{/my/qna}">문의하기</a></li>
+                    <li><a th:href="@{/my/support}">후원하기</a></li>
+                    <li><a th:href="@{/my/info}">개인정보설정</a></li>
+                </ul>
+                <section>
+                    <article>
+                        <h3 style="font-size: 30px">후원하기</h3>
+                        <div style="position: relative;">
+                            <p style="position: absolute; font-size: 25px; padding: 20px; top: 0; left: 0; color: white">여러분들의 후원이<br><br> 더 많은 유기 동물들에게<br><br> 좋은 환경을 제공할 수 있습니다.</p>
+                            <img src="https://www.animals.or.kr/front/img/support/intro/m-main.jpg" style="width: 100%; height: 400px;">
+                        </div>
+                        <!-- 정기 후원 -->
+                        <div style="position: relative; display: flex;">
+                            <p style="position: absolute; font-size: 40px; padding: 20px; top: 0; color: white">정기 후원</p>
+                            <p style="position: absolute; font-size: 25px; padding: 20px; top: 60px; color: white">구조, 학대대응, 캠페인, 교육 등<br><br> 다방면의 활동을 후원합니다</p>
+                            <img src="https://www.animals.or.kr/front/img/support/intro/m-%EA%B2%B0%EC%97%B0%ED%9B%84%EC%9B%90.png" style="width: 100%; height: 400px;">
+                        </div>
+                        <br>
+                        <div style="border: 1px">
+                            <h3 style="text-align: center">후원계좌</h3><br>
+                            <h4 style="text-align: center">국민은행 000000 - 00 - 000000&nbsp;(예금주 : GaePan)</h4><br>
+                            <table border="0">
+                                <li style="font-size: 20px; width: 120%; color: #8972ee">개인은 연급여의 30% 이내에 해당하는 기부금액은 전액 소등공제를 받으실 수 있습니다.</li>
+                                <li style="font-size: 20px; width: 120%; color: #8972ee">법인(기업)의 기부금은 법인세법 제 24조 규정에 의해 손금을 인정 받을 수 있습니다.</li>
+                                <li style="font-size: 20px; width: 120%; color: #8972ee">계좌입금 시 기부금영수증 발행을 위해 '후원Q&A' 1대1 문의로 입금자명,<br>&nbsp;&nbsp;&nbsp; 입금일시, 금액, 전화번호를 남겨주시면 안내드립니다.</li>
+                            </table>
+                        </div>
+                    </article>
+                </section>
+            </div>
+        </div>
+    </main>
+</th:block>
+</html>
