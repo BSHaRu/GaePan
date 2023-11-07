@@ -198,7 +198,6 @@
             });
         }
     });
-
     /*-------------------
 		Quantity change
 	--------------------- */
@@ -220,5 +219,6 @@
         }
         $button.parent().find('input').val(newVal);
     });
+
 
 })(jQuery);
