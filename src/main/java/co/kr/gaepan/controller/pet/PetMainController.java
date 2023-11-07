@@ -21,4 +21,19 @@ public class PetMainController {
     public String blog_details() {
         return "pet/petdetails";
     }
+
+    @RequestMapping("/pet/adoptdiary")
+    public String adoptdiary() {
+        return "pet/adoptdiary";
+    }
+    @RequestMapping("/pet/sighting")
+    public String sighting() {
+        return "pet/sighting";
+    }
+
+    @RequestMapping("/pet/register")
+    public String register() {
+        return "pet/register";
+    }
+
 }
