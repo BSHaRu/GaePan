@@ -2639,11 +2639,11 @@ ol {
 
 .footer__about__logo a {
 	display: inline-block;
-	max-width: 70%
 }
 
 .footer__widget {
 	margin-bottom: 30px;
+	margin-left: 20px;
 	overflow: hidden;
 }
 
@@ -2654,8 +2654,9 @@ ol {
 }
 
 .footer__widget ul {
-	width: 50%;
 	float: left;
+	line-height: 250%;
+	margin-top: 20px;
 }
 
 .footer__widget ul li {

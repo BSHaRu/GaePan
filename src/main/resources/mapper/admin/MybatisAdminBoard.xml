@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="co.kr.gaepan.mapper.admin.MybatisAdminBoardMapper">
+
+    <!-- board List 출력 -->
+    <select id="findAll" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
+        SELECT * FROM gp_board
+        ORDER BY b_no DESC
+    </select>
+
+
+    <!-- board 조회수 증가 -->
+    <update id="updateViewCnt" parameterType="int">
+        UPDATE gp_board SET b_hit = b_hit + 1
+        WHERE b_no = #{b_no}
+    </update>
+
+    <!--resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO"-->
+</mapper>

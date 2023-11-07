@@ -16,7 +16,7 @@
         </nav>
 
         <div>
-            <form action="#" method="get">
+            <form class="admin_search_form" action="#" method="get">
                 <select name="searchCate">
                     <option value="prodName">종류</option>
                     <option value="prodNo">All</option>
@@ -24,9 +24,10 @@
                     <option value="seller">유기묘</option>
                 </select>
                 <input type="text" name="search">
-                <input type="submit" class="list-search" value="검색" />
+                <input type="submit" class="searchBtn" value="검색" />
             </form>
         </div>
+
         <table class="table table-hover">
             <form id="formCheck" action="#" method="post">
                 <thead>
@@ -52,20 +53,22 @@
                         <img src="#" class="thumb">
                     </td>
                     <td>Title</td>
-                    <td>유기묘</td>
+                    <td>유기견</td>
                     <td>admin</td>
-                    <td>2023-11-02</td>
+                    <td>23-11-02</td>
                     <td>1</td>
                     <td>
-                        <a href="#" class="deleteBtn">[삭제]</a>
+                        <a href="#" class="btn btn-sm btn-outline-danger">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
                     </td>
                 </tr>
                 </tbody>
             </form>
         </table>
-        <input type="button" class="list_delete admin_btn" value="선택삭제" />
+        <input type="button" class="deleteBtn admin_btn" value="선택삭제" />
 
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-5">
             <div class="product__pagination blog__pagination">
                 <a href="#"><i class="fa fa-long-arrow-left"></i></a>
                 <a href="#">1</a>

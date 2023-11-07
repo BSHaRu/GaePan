@@ -34,6 +34,14 @@
     <script th:src="@{/js/admin/canvasjs.min.js}"></script>
 
     </div>
+    <script>
+        $(function(){
+            $(".btnList").click(function(e){
+                e.preventDefault();
+                history.go(-1);
+            });
+        })
+    </script>
 </footer>
 <!-- Footer Section End -->
 </html>

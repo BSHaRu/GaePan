@@ -171,11 +171,14 @@ main h4 {
     font-weight: bold;
 }
 
-main table {
+main table{
     width: 100%;
-    border-collapse: collapse;
+    word-break: break-all;
+    height: auto;
 }
-main table tr {}
+main table tr {
+
+}
 main table tr > td {
     border-top: 1px solid #f5f5f5;
     border-bottom: 1px solid #f5f5f5;
@@ -186,6 +189,29 @@ main table tr > td {
 main table span {
     display: block;
 }
+
+.admin_title_board{
+    display: inline-block;
+    max-width: 300px;
+    min-width: 180px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.admin_title_board a{
+    display: block;
+    color : #212529;
+}
+
+.table_overflow{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+/*================================*/
 
 .header__top__left .header__logo a {
     display: inline-block;
@@ -235,6 +261,11 @@ main table span {
     margin-right: 15px;
 }
 
+/* search */
+.admin_search_form{
+    margin-bottom: 10px;
+}
+
 /* ================================== */
 #chartContainer{
     width: 100%;
@@ -248,4 +279,50 @@ main table span {
 
 .admin__footer{
     margin-left : 30px
+}
+
+/*================ butten =====================*/
+
+.primary-btn {
+    display: inline-block;
+    font-size: 14px;
+    padding: 10px 28px 10px;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 700;
+    background: #8972ee;
+    letter-spacing: 2px;
+}
+
+.deleteBtn{
+    display: inline-block;
+    font-size: 14px;
+    padding: 10px 28px 10px;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 700;
+    background: #586574;
+    letter-spacing: 2px;
+}
+
+.blackList_Btn{
+    display: inline-block;
+    font-size: 14px;
+    padding: 10px 28px 10px;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 700;
+    background: #EC1B30;
+    letter-spacing: 2px;
+}
+
+.searchBtn{
+    display: inline-block;
+    font-size: 11px;
+    padding: 10px 14px;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 500;
+    background: #2A80B9;
+    letter-spacing: 2px;
 }
