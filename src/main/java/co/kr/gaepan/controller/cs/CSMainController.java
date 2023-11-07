@@ -23,10 +23,14 @@ public class CSMainController {
         return "cs/qna/view";
 
     }
-
     @GetMapping("/qna/write")
     public String qnaWrite(){
+
         return "cs/qna/write";
     }
-
+    @GetMapping("/notice/list")
+    public String noticeList(){
+        return "cs/notice/list";
+    }
 }
+
