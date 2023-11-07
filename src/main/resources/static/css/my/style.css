@@ -1068,17 +1068,18 @@ footer p > strong {
     font-family: '돋움';
 }
 
-#my > .info > section > article > table th {
+#my > .info > section > article > table tr {
     padding: 6px;
     background-color: #a5a7a5;
     box-sizing: border-box;
-    color: #fff;
+    color: black;
 }
 #my > .info > section > article > table td {
     padding: 10px;
     border-left: 1px solid #f1f1f1;
     border-bottom: 1px solid #f1f1f1;
     box-sizing: border-box;
+    background-color: white;
     overflow: hidden;
     position: relative;
 }
@@ -1133,7 +1134,7 @@ footer p > strong {
     height: 30px;
     margin: 10px auto;
     background-image: url('/static/img/my/btn_my_change.png');
-    color: #fff;
+    color: black;
     font-family: '돋움';
     border: none;
 }
