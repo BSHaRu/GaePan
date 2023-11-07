@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>분양 글 등록 - Bootstrap</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/member/register.css}">
+    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+</head>
+<script>
+    window.onload = function() {
+        // 파일 입력 필드와 테이블 엘리먼트를 가져옵니다.
+        const fileInput = document.getElementById("file");
+        const selectedFilesTable = document.getElementById("selectedFilesTable");
+        const previewImagesDiv = document.getElementById("previewImages");
+
+        // 파일이 선택되었을 때 이벤트를 처리합니다.
+        // 파일이 선택되었을 때 이벤트를 처리합니다.
+        fileInput.addEventListener("change", function() {
+            const selectedFiles = fileInput.files;
+            const tbody = selectedFilesTable.querySelector("tbody");
+
+            // 선택한 파일과 이미지를 테이블에 추가합니다.
+            tbody.innerHTML = ""; // 기존 내용을 지우고 다시 추가
+            for (let i = 0; i < selectedFiles.length; i++) {
+                const fileName = selectedFiles[i].name;
+                const fileImage = createFileImageElement(selectedFiles[i]);
+                const row = document.createElement("tr");
+                const cellFileImage = document.createElement("td");
+                const cellFileName = document.createElement("td");
+
+                cellFileName.textContent = fileName;
+                cellFileImage.appendChild(fileImage);
+
+                row.appendChild(cellFileImage);
+                row.appendChild(cellFileName);
+                tbody.appendChild(row);
+            }
+        });
+
+        function createFileImageElement(file) {
+            const image = document.createElement("img");
+            image.src = URL.createObjectURL(file); // 이미지 미리보기 생성
+            image.width = 30; // 이미지 가로 크기 설정 (조절 가능)
+
+            return image;
+        }
+
+
+    };
+</script>
+
+<body class="fade">
+<div class="container">
+    <div class="input-form-backgroud row">
+        <div class="input-form col-md-12 mx-auto">
+            <h4 class="mb-3">분양 글 등록</h4>
+            <br>
+            <form class="registerForm" method="post" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="uid">제목</label>
+                    <input type="text" class="form-control" name="uid" id="uid" placeholder="" required/>
+                    <div class="invalid-feedback">
+                    </div>
+                </div>
+                <label for="file" >이미지 선택</label>
+                <div style="max-height: 100px;overflow-y: auto;">
+                <table id="selectedFilesTable">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+                </div>
+                <input type="file" class="form-control" name="file" id="file" placeholder="" required style="display: none" multiple/>
+                <br>
+                <div class="mb-3">
+                    <label>아이 이름</label>
+                    <input type="text" class="form-control" name="p_name" placeholder="" required/>
+                    <div class="invalid-feedback">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>종류</label>
+                    <input type="text" class="form-control" name="p_cate" placeholder="" required/>
+                    <div class="invalid-feedback">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>품종</label>
+                    <input type="text" class="form-control" name="p_type" placeholder="" required/>
+                    <div class="invalid-feedback">
+                    </div>
+                </div>
+                <div class="mb-3"> <!--  기관에서 등록할 경우 -->
+                    <label>기관 이름</label>
+                    <input type="text" class="form-control" name="company" placeholder="" required/>
+                    <div class="invalid-feedback">
+                    </div>
+                </div>
+                <br>
+                <label>내용</label>
+                <textarea name="content"></textarea>
+                <button class="btn primary-btn btn-lg btn-block" type="submit">글 올리기</button>
+            </form>
+        </div>
+    </div>
+    <footer class="my-3 text-center text-small">
+        <p class="mb-1">&copy; 2023 GaePan</p>
+    </footer>
+</div>
+<script th:src="@{/js/member/validation.js}"></script>
+<script th:src="@{/js/member/register.js}"></script>
+<script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
+<script th:src="@{/js/member/zipcode.js}"></script>
+</body>
+</html>
