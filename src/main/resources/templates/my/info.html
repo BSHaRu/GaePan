@@ -4,12 +4,12 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{/my/fragments/layout}"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-<script src="/js/my/myInfo.js"></script>
-<script src="/js/my/passCheck.js"></script>
 <th:block layout:fragment="content">
     <main>
+        <form th:action="@{/my/info}" method="post">
+
         <div id="my">
-            <div class="home">
+            <div class="info">
                 <ul>
                     <span class="menu_else"></span>
                     <li><a th:href="@{/my/applylist}">전체신청내역</a></li>
@@ -22,12 +22,12 @@
                 <section>
                     <article>
                         <h3>회원정보 설정</h3>
-                        <form th:action="@{/my/info}" method="post">
-                            <input type="hidden" name="m_no">
                             <table border="0">
                                 <tr>
                                     <td>사용자 ID</td>
-                                    <td id="userId">[[${MemberDTO.uid]]</td>
+                                    <td>
+                                        <input type="text" name="m_uid" id="userId" th:value="${myInfoDTO.m_uid}" readonly style="border: none">
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>비밀번호</td>
@@ -37,41 +37,61 @@
                                 </tr>
                                 <tr>
                                     <td>이름</td>
-                                    <td id="userName">[[${MemberDTO.name}]]</td>
+                                    <td>
+                                        <input type="text" name="m_name" id="userName" th:value="${myInfoDTO.m_name}" style="width: 130px; height: 23px"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>닉네임</td>
+                                    <td>
+                                        <input type="text" name="m_nick" th:value="${myInfoDTO.m_nick}" style="width: 130px; height: 23px">
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>생년월일</td>
-                                    <td id="userBirth">[[${MemberDTO.birth}]]</td>
+                                    <td>
+                                        <input type="text" name="m_birth" id="userBirth" th:value="${myInfoDTO.m_birth}" readonly style="border: none"/>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>E-mail</td>
                                     <td>
-                                        <input type="text" name="memberEmail1" th:value="email1" style="width: 130px; height: 23px">@
-                                        <input type="text" name="memberEmail2" style="width: 130px; height: 23px">
-                                        <button id="btnChangeEmail">수정하기</button>
+                                        <input type="text" name="m_email" th:value="${myInfoDTO.m_email.substring(0, myInfoDTO.m_email.indexOf('@'))}" style="width: 130px; height: 23px">@
+                                        <input type="text" name="m_email" th:value="${myInfoDTO.m_email.substring(myInfoDTO.m_email.indexOf('@') + 1)}" style="width: 130px; height: 23px">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>휴대폰</td>
                                     <td>
                                         <p class="hp">
-                                            <input type="text" name="hp1" value="010" style="width: 130px; height: 23px"/>-
-                                            <input type="text" name="hp2" value="1234" style="width: 130px; height: 23px"/>-
-                                            <input type="text" name="hp3" value="1001" style="width: 130px; height: 23px"/>
-                                            <button id="btnChangeHp">수정하기</button>
+                                            <input type="text" name="m_hp" th:value="${myInfoDTO.m_hp.substring(0, 3)}" style="width: 130px; height: 23px"/>-
+                                            <input type="text" name="m_hp" th:value="${myInfoDTO.m_hp.substring(3, 7)}" style="width: 130px; height: 23px"/>-
+                                            <input type="text" name="m_hp" th:value="${myInfoDTO.m_hp.substring(7)}" style="width: 130px; height: 23px"/>
                                         </p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>주소</td>
                                     <td>
-                                        <input type="text" name="zip" style="width: 130px; height: 23px; margin-bottom: 1px"/>
+                                        <input type="text" name="m_zip" style="width: 130px; height: 23px; margin-bottom: 1px"/>
                                         <button id="btnFindZip">주소검색</button>
                                         <p class="address">
-                                            <input type="text" name="addr1" style="width: 300px; height: 25px; margin-bottom: 2px"/>
-                                            <br>
-                                            <input type="text" name="addr2" style="width: 300px; height: 25px"/>
+                                            <input type="text" name="m_addr1" style="width: 300px; height: 25px; margin-bottom: 2px"/>
+                                            <input type="text" name="m_addr2" style="width: 300px; height: 25px"/>
                                         </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>양육경력</td>
+                                    <td style="font-size: 15px">
+                                        <input type="radio" name="m_exp" value="Y"> 있음&nbsp;
+                                        <input type="radio" name="m_exp" value="N"> 없음
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>입양횟수</td>
+                                    <td>
+                                        <input type="text" name="m_count" th:value="${myInfoDTO.m_count}" style="width: 130px; height: 23px"> 회
                                     </td>
                                 </tr>
                                 <tr>
@@ -81,12 +101,14 @@
                                     </td>
                                 </tr>
                             </table>
-                            <button id="btnInfoChange">수정하기</button>
-                        </form>
+                            <button type="submit" id="btnInfoChange">수정하기</button>
                     </article>
                 </section>
             </div>
         </div>
+        </form>
     </main>
 </th:block>
+<script src="/js/my/myInfo.js"></script>
+<script src="/js/my/passCheck.js"></script>
 </html>
