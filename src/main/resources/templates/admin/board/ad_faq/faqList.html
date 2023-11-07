@@ -8,14 +8,14 @@
 <th:block layout:fragment="content">
     <section id="admin_config_info" class="admin__section">
         <nav>
-            <h3>QnA</h3>
+            <h3>faq</h3>
             <p class="admin__p">
                 <a th:href="@{/admin/index}">HOME</a> &gt; 게시판 &gt;
-                <strong>QnA</strong>
+                <strong>faq</strong>
             </p>
         </nav>
 
-        <h4>QnA</h4>
+        <h4>faq</h4>
         <table class="table table-hover">
             <form id="formCheck" action="#" method="post">
                 <thead>
@@ -58,9 +58,9 @@
                 </tbody>
             </form>
         </table>
-        <input type="button" class="list_delete admin_btn" value="선택삭제" />
+        <input type="button" class="deleteBtn admin_btn" value="선택삭제" />
 
-        <div class="col-lg-12">
+        <div class="col-lg-12 mt-5">
             <div class="product__pagination blog__pagination">
                 <a href="#"><i class="fa fa-long-arrow-left"></i></a>
                 <a href="#">1</a>
