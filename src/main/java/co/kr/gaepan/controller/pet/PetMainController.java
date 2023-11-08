@@ -30,10 +30,14 @@ public class PetMainController {
     public String sighting() {
         return "pet/sighting";
     }
-
     @RequestMapping("/pet/register")
     public String register() {
         return "pet/register";
+    }
+
+    @RequestMapping("/pet/missingregister")
+    public String missingregister() {
+        return "pet/missingregister";
     }
 
 }

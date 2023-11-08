@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class GaePanApplicationTests {
 
+
 	@Test
 	void contextLoads() {
 	}
