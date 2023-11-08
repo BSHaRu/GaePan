@@ -171,29 +171,49 @@ main h4 {
     font-weight: bold;
 }
 
+/* ============== admin table ============== */
+
 main table{
-    width: 100%;
     word-break: break-all;
     height: auto;
 }
-main table tr {
-
+main table th {
+    vertical-align: middle !important;
+    text-align: center !important;
 }
-main table tr > td {
+
+/* admin config table css 적용 */
+.admin__article table tr > td:nth-child(1) {
+    width: 160px;
     border-top: 1px solid #f5f5f5;
     border-bottom: 1px solid #f5f5f5;
+    background: #f6f6f6;
     padding: 10px;
     text-align: left;
 }
 
-main table span {
-    display: block;
+/* 그외 admin table css 적용 */
+.admin__section table tr > td {
+    border-top: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle !important;
+}
+.admin__section table tr > td:nth-child(1){
+    width: 50px;
+    border-top: 1px solid #f5f5f5;
+    border-bottom: 1px solid #f5f5f5;
+    background: #f6f6f6;
+    padding: 10px;
+    text-align: center;
 }
 
+
 .admin_title_board{
-    display: inline-block;
+    display: flex;
     max-width: 300px;
-    min-width: 180px;
+    /*min-width: 180px;*/
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -202,6 +222,17 @@ main table span {
 .admin_title_board a{
     display: block;
     color : #212529;
+}
+.admin_title_board a:hover{
+    color: #8972ee;
+}
+
+.board_comment a{
+    padding: 0 8px;
+    color: #2A80B9;
+}
+.board_comment a:hover{
+    color: #ff3333;
 }
 
 .table_overflow{
@@ -218,26 +249,6 @@ main table span {
     max-width: 18%;
 }
 
-/* admin member table css 적용 */
-.admin__section  table tr > td:nth-child(1){
-    width: 50px;
-    border-top: 1px solid #f5f5f5;
-    border-bottom: 1px solid #f5f5f5;
-    background: #f6f6f6;
-    padding: 10px;
-    text-align: left;
-}
-
-/* admin config table css 적용 */
-.admin__article table tr > td:nth-child(1) {
-    width: 160px;
-    border-top: 1px solid #f5f5f5;
-    border-bottom: 1px solid #f5f5f5;
-    background: #f6f6f6;
-    padding: 10px;
-    text-align: left;
-}
-
 .admin__section{
     margin-left : 30px;
 }
@@ -252,16 +263,22 @@ main table span {
     color: #8972ee;
 }
 
-.admin_btn{
-    text-align: right;
-}
-
 .admin__p{
     text-align: right;
     margin-right: 15px;
 }
 
-/* search */
+/* ============= search ============= */
+.admin_search_div{
+    display: flex;
+    display: -ms-flexbox;
+    flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+}
+.admin_search_div > div {
+    margin: 0 15px 10px 15px;
+}
+
 .admin_search_form{
     margin-bottom: 10px;
 }
@@ -325,4 +342,8 @@ main table span {
     font-weight: 500;
     background: #2A80B9;
     letter-spacing: 2px;
+}
+
+.admin_btn{
+    float: right;
 }

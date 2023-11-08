@@ -10,7 +10,7 @@ public interface MybatisAdminBoardMapper {
 
     // 조회
     List<GP_AdminBoardDTO> findAll() throws Exception;
-
     // 조회수 증가
-    void updateViewCnt(int bno) throws Exception;
+    void updateViewCnt(int b_no) throws Exception;
+
 }

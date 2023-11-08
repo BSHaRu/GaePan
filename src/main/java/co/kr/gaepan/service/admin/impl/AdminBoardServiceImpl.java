@@ -74,7 +74,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
             }
         }
         // 쿠키가 존재하지 않으면 이하 실행
-        Cookie cookie = new Cookie(cookieBno, bno+""); // bno+"" == String.valueOf(bno)
+        Cookie cookie = new Cookie(cookieBno, bno+"");
         String path = request.getContextPath()+"/GaePan/";
         log.info("path : "+path);
         cookie.setPath(path);
