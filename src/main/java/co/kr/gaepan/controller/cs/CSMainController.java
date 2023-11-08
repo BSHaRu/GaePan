@@ -31,6 +31,13 @@ public class CSMainController {
     @GetMapping("/notice/list")
     public String noticeList(){
         return "cs/notice/list";
+    }@GetMapping("/notice/view")
+    public String noticeView(){
+        return "cs/notice/view";
+    }
+    @GetMapping("/faq/list")
+    public String faqList(){
+        return "cs/faq/list";
     }
 }
 
