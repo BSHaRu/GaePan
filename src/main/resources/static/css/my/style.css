@@ -1111,9 +1111,9 @@ footer p > strong {
     padding: 2px;
 }
 
-#my button {
+#my a {
     padding: 2px;
-    border: 1px solid #999;
+    /*border: 1px solid #999;*/
 }
 
 #my button:hover {

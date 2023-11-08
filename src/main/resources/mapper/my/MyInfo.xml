@@ -6,16 +6,16 @@
 <mapper namespace="co.kr.gaepan.mapper.my.MyInfo">
 
     <select id="selectInfo" resultType="co.kr.gaepan.dto.my.MyInfoDTO">
-        SELECT * FROM `gt_member` WHERE `m_uid` = #{m_uid}
+        SELECT * FROM `gt_member` WHERE `uid` = #{uid}
     </select>
 
     <update id="updateInfo">
-        UPDATE `gt_member` SET `m_pw` = #{m_pw}, `m_name` = #{m_name}, `m_nick` = #{m_nick}, `m_email` = #{m_email}, `m_hp` = #{m_hp}, `m_addr1` = #{m_addr1}, `m_addr2` = #{m_addr2}, `m_exp` = #{m_exp}, `m_count` = #{m_count}
-        WHERE `m_uid` = #{m_uid}
+        UPDATE `gt_member` SET `pw` = #{pw}, `name` = #{name}, `nick` = #{nick}, `email` = #{email}, `hp` = #{hp}, `addr1` = #{addr1}, `addr2` = #{addr2}, `exp` = #{exp}, `count` = #{count}
+        WHERE `uid` = #{uid}
     </update>
 
     <update id="deleteInfo">
-        UPDATE `gt_member` SET `m_uid` = #{m_uid}, `m_gender` = #{m_gender}, `m_hp` = #{m_hp}, `m_email` = #{m_email}, `m_type` = #{m_type}, `m_zip` = #{m_zip}, `m_addr1` = #{m_addr1}, `m_addr2` = #{m_addr2}, `m_company` = #{m_company}, `m_bizRegNum` = #{m_bizRegNum}, `m_levDate` = #{m_levDate}, `m_exp` = #{m_exp}, `m_count` = #{m_count}
-        WHERE `m_uid` = #{m_uid},
+        UPDATE `gt_member` SET `uid` = #{uid}, `gender` = #{gender}, `hp` = #{hp}, `email` = #{email}, ` type` = #{ type}, ` zip` = #{ zip}, ` addr1` = #{ addr1}, ` addr2` = #{ addr2}, ` company` = #{ company}, ` bizRegNum` = #{ bizRegNum}, ` levDate` = #{ levDate}, ` exp` = #{ exp}, ` count` = #{ count}
+        WHERE ` uid` = #{ uid},
     </update>
 </mapper>

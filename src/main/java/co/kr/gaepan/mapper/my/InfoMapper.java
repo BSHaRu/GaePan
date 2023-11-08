@@ -7,11 +7,11 @@ import org.apache.ibatis.annotations.Mapper;
 public interface InfoMapper {
 
     // 사용자 정보 불러오기
-    public MyInfoDTO selectInfo(String m_uid);
+    public MyInfoDTO selectInfo(String uid);
 
     // 사용자 정보 수정하기
-    public void updateInfo(String m_uid);
+    public void updateInfo(String uid);
 
     // 사용자 정보 삭제하기
-    public void deleteInfo(String m_uid);
+    public void deleteInfo(String uid);
 }
