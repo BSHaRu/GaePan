@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/admin/fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<th:block layout:fragment="content">
+    <section id="admin_config_info" class="admin__section">
+        <nav>
+            <p class="admin__p">
+                <a th:href="@{/admin/index}">HOME</a> &gt; 게시판 &gt;
+                <th:block th:switch="${group}">
+                    <span th:case="notice"><strong>notice</strong></span>
+                    <span th:case="faq"><strong>faq</strong></span>
+                    <span th:case="qna"><strong>qna</strong></span>
+                    <span th:case="qna"><strong>qna</strong></span>
+                </th:block>
+            </p>
+        </nav>
+
+        <article class="list">
+            <div class="admin_search_div">
+                <th:block th:switch="${group}">
+                    <span th:case="notice"><h3>공지사항</h3></span>
+                    <span th:case="faq"><h3>자주 묻는 질문</h3></span>
+                    <span th:case="qna"><h3>QnA</h3></span>
+                </th:block>
+                <!-- 이건 group에 따라서 cate가 달라지고, 그 cate글만 출력 -->
+                <div class="board_cate">
+                    <select name="b_cate">
+                        <option value="10">모시깽이1</option>
+                        <option value="11">모시깽이2</option>
+                        <option value="12">모시깽이3</option>
+                        <option value="13">모시깽이4</option>
+                    </select>
+                </div>
+            </div>
+
+            <form id="formCheck" action="#" method="post">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">
+                            <input type="checkbox" name="all" id="selectAll"/>
+                        </th>
+                        <th scope="col">번호</th>
+                        <th scope="col">제목</th>
+                        <th scope="col">닉네임</th>
+                        <th scope="col">조회수</th>
+                        <th scope="col">등록일</th>
+                        <th scope="col">관리</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="board : ${adminBoardList}">
+                        <tr>
+                            <td class="chk">
+                                <input type="checkbox" name="chk" class="checkbox" value="">
+                            </td>
+                            <td class="bno">[[${board.b_no}]]</td>
+                            <td class="tit">
+                                <div class="admin_title_board">
+                                    <a class="admin_title_board"
+                                       th:href="@{/admin/board/view(bno=${board.b_no})}">
+                                        <!-- 여기 b_cate는 나중에 join해서 cateName으로 바꿔야됨 -->
+                                        [<span th:text="${board.b_cate}"></span>]
+                                        [[${board.b_title}]]
+                                    </a>
+                                    <!-- 댓글이 있으면 해당 span 표시 없으면 그냥 그대로 -->
+                                    <span class="board_comment">
+                                        <a href="#">
+                                            [<span>3</span>]
+                                        </a>
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="user">[[${board.b_uid}]]</td>
+                            <td class="hit">[[${board.b_hit}]]</td>
+                            <td class="regdate">
+                                <span class="date"
+                                      th:text="${#temporals.format(board.b_regDate, 'MM-dd')}">
+                                </span>
+                            </td>
+                            <td>
+                                <a href="#" class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a href="#" class="btn btn-sm btn-outline-danger">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+                <input type="button" class="deleteBtn" value="선택삭제" />
+                <input type="submit" class="primary-btn admin_btn" value="글 쓰기" />
+            </form>
+
+            <!-- 페이징 -->
+            <div class="col-lg-12 mt-5">
+                <div class="product__pagination blog__pagination">
+                    <a href="#"><i class="fa fa-long-arrow-left"></i></a>
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                </div>
+            </div>
+        </article>
+    </section>
+</th:block>
+</html>
