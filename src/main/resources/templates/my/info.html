@@ -4,6 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{/my/fragments/layout}"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
 <th:block layout:fragment="content">
     <main>
         <form th:action="@{/my/info}" method="post">
@@ -14,7 +15,7 @@
                     <span class="menu_else"></span>
                     <li><a th:href="@{/my/applylist}">전체신청내역</a></li>
                     <li><a th:href="@{/my/apply}">입양신청하기</a></li>
-                    <li><a th:href="@{/my/review}">나의후기</a></li>
+                    <li><a th:href="@{/my/review}">입양일기</a></li>
                     <li><a th:href="@{/my/qna}">문의하기</a></li>
                     <li><a th:href="@{/my/support}">후원하기</a></li>
                     <li><a th:href="@{/my/info}">개인정보설정</a></li>
@@ -27,7 +28,7 @@
                                 <tr>
                                     <td>사용자 ID</td>
                                     <td>
-                                        <input type="text" name="m_uid" id="userId" th:value="${myInfoDTO.m_uid}" readonly style="border: none">
+                                        <input type="text" name="uid" id="userId" th:value="${myInfoDTO.uid}" readonly style="border: none">
                                     </td>
                                 </tr>
                                 <tr>
@@ -39,66 +40,66 @@
                                 <tr>
                                     <td>이름</td>
                                     <td>
-                                        <input type="text" name="m_name" id="userName" th:value="${myInfoDTO.m_name}" style="width: 130px; height: 23px"/>
+                                        <input type="text" name="name" id="userName" th:value="${myInfoDTO.name}" style="width: 130px; height: 23px"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>닉네임</td>
                                     <td>
-                                        <input type="text" name="m_nick" th:value="${myInfoDTO.m_nick}" style="width: 130px; height: 23px">
+                                        <input type="text" name="nick" th:value="${myInfoDTO.  nick}" style="width: 130px; height: 23px">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>생년월일</td>
                                     <td>
-                                        <input type="text" name="m_birth" id="userBirth" th:value="${myInfoDTO.m_birth}" readonly style="border: none"/>
+                                        <input type="text" name="birth" id="userBirth" th:value="${myInfoDTO.birth}" readonly style="border: none"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>E-mail</td>
                                     <td>
-                                        <input type="text" name="m_email" th:value="${myInfoDTO.m_email.substring(0, myInfoDTO.m_email.indexOf('@'))}" style="width: 130px; height: 23px">@
-                                        <input type="text" name="m_email" th:value="${myInfoDTO.m_email.substring(myInfoDTO.m_email.indexOf('@') + 1)}" style="width: 130px; height: 23px">
+                                        <input type="text" name="email" th:value="${myInfoDTO.  email.substring(0, myInfoDTO.  email.indexOf('@'))}" style="width: 130px; height: 23px">@
+                                        <input type="text" name="email" th:value="${myInfoDTO.  email.substring(myInfoDTO.  email.indexOf('@') + 1)}" style="width: 130px; height: 23px">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>휴대폰</td>
                                     <td>
                                         <p class="hp">
-                                            <input type="text" name="m_hp" th:value="${myInfoDTO.m_hp.substring(0, 3)}" style="width: 130px; height: 23px"/>-
-                                            <input type="text" name="m_hp" th:value="${myInfoDTO.m_hp.substring(3, 7)}" style="width: 130px; height: 23px"/>-
-                                            <input type="text" name="m_hp" th:value="${myInfoDTO.m_hp.substring(7)}" style="width: 130px; height: 23px"/>
+                                            <input type="text" name="  hp" th:value="${myInfoDTO.  hp.substring(0, 3)}" style="width: 130px; height: 23px"/>-
+                                            <input type="text" name="  hp" th:value="${myInfoDTO.  hp.substring(3, 7)}" style="width: 130px; height: 23px"/>-
+                                            <input type="text" name="  hp" th:value="${myInfoDTO.  hp.substring(7)}" style="width: 130px; height: 23px"/>
                                         </p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>주소</td>
                                     <td>
-                                        <input type="text" name="m_zip" style="width: 130px; height: 23px; margin-bottom: 1px"/>
-                                        <button id="btnFindZip">주소검색</button>
+                                        <input type="text" id="zip" name="zip" style="width: 130px; height: 23px; margin-bottom: 1px"/>
+                                        <button type="button" onclick="zipcode()" >주소검색</button>
                                         <p class="address">
-                                            <input type="text" name="m_addr1" style="width: 300px; height: 25px; margin-bottom: 2px"/>
-                                            <input type="text" name="m_addr2" style="width: 300px; height: 25px"/>
+                                            <input type="text" id="addr1" name="addr1" style="width: 300px; height: 25px; margin-bottom: 2px"/>
+                                            <input type="text" id="addr2" name="addr2" style="width: 300px; height: 25px"/>
                                         </p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>양육경력</td>
                                     <td style="font-size: 15px">
-                                        <input type="radio" name="m_exp" value="Y"> 있음&nbsp;
-                                        <input type="radio" name="m_exp" value="N"> 없음
+                                        <input type="radio" name="exp" value="Y"> 있음&nbsp;
+                                        <input type="radio" name="exp" value="N"> 없음
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>입양횟수</td>
                                     <td>
-                                        <input type="text" name="m_count" th:value="${myInfoDTO.m_count}" style="width: 130px; height: 23px"> 회
+                                        <input type="text" name="count" th:value="${myInfoDTO.count}" style="width: 130px; height: 23px"> 회
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>회원탈퇴</td>
                                     <td>
-                                        <button id="btnWithdraw">탈퇴하기</button>
+                                        <a th:href="@{/my/passcheck}" id="btnWithdraw">탈퇴하기</a>
                                     </td>
                                 </tr>
                             </table>
@@ -109,7 +110,10 @@
         </div>
         </form>
     </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/js/my/passCheck.js"></script>
+    <script src="/js/my/myInfo.js"></script>
+    <script src="/js/my/findzip.js"></script>
 </th:block>
-<script src="/js/my/myInfo.js"></script>
-<script src="/js/my/passCheck.js"></script>
 </html>

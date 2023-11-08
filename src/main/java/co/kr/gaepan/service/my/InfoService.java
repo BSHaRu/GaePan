@@ -13,16 +13,16 @@ public class InfoService {
 
     private final InfoMapper infoMapper;
 
-    public MyInfoDTO selectInfo(String m_uid){
-        MyInfoDTO myInfoDTO = infoMapper.selectInfo(m_uid);
+    public MyInfoDTO selectInfo(String uid){
+        MyInfoDTO myInfoDTO = infoMapper.selectInfo(uid);
         return myInfoDTO;
     }
 
-    public void updateInfo(String m_uid){
-        infoMapper.updateInfo(m_uid);
+    public void updateInfo(String uid){
+        infoMapper.updateInfo(uid);
     }
 
-    public void deleteInfo(String m_uid){
-        infoMapper.deleteInfo(m_uid);
+    public void deleteInfo(String uid){
+        infoMapper.deleteInfo(uid);
     }
 }

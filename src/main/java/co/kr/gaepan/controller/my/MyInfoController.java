@@ -7,10 +7,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/my/*")
@@ -21,19 +18,19 @@ public class MyInfoController {
     private InfoService infoService;
 
     @GetMapping("/info")
-    public String view(Model model, String m_uid) {
+    public String view(Model model, String uid) {
 
         MyInfoDTO myInfoDTO = MyInfoDTO.builder()
-                                .m_name("김유신")
-                                .m_uid("User1")
-                                .m_nick("Kim")
-                                .m_gender(1)
-                                .m_hp("01010011234")
-                                .m_email("kim@gmail.com")
-                                .m_birth("1983년 05월 03일")
-                                .m_addr1("부산광역시")
-                                .m_addr2("부산진구")
-                                .m_count(0)
+                                .name("김유신")
+                                .uid("User1")
+                                .nick("Kim")
+                                .gender(1)
+                                .hp("01010011234")
+                                .email("kim@gmail.com")
+                                .birth("1983년 05월 03일")
+                                .addr1("부산광역시")
+                                .addr2("부산진구")
+                                .count(0)
                                 .build();
 
         model.addAttribute("myInfoDTO", myInfoDTO);
@@ -42,10 +39,10 @@ public class MyInfoController {
     }
 
     @PostMapping("/info")
-    public String modify(String m_uid){
+    public String modify(String uid){
 
-        infoService.updateInfo(m_uid);
-        // infoService.deleteInfo(m_uid);
+        infoService.updateInfo(uid);
+        // infoService.deleteInfo(uid);
 
         log.info("infoService" +  infoService);
         // log.info("infoService" +  infoService);
@@ -53,8 +50,20 @@ public class MyInfoController {
         return "redirect:/index";
     }
 
+    @GetMapping("/passcheck")
+    public String passcheck(Model model, MyInfoDTO myInfoDTO) {
+
+        log.info("myInfoDTO : " + myInfoDTO);
+
+        model.addAttribute(myInfoDTO);
+
+        return "/my/passcheck";
+    }
+
+    @ResponseBody
     @PostMapping("/withdraw")
-    public void withdraw(){
+    public String withdraw(@RequestParam String uid){
         log.info("withdraw!!!");
+        return uid;
     }
 }
