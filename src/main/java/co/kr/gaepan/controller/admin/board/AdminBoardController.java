@@ -2,7 +2,7 @@ package co.kr.gaepan.controller.admin.board;
 
 
 import co.kr.gaepan.dto.admin.GP_AdminBoardDTO;
-import co.kr.gaepan.service.admin.impl.AdminBoardServiceImpl;
+import co.kr.gaepan.service.admin.AdminBoardService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -20,27 +21,29 @@ import java.util.List;
 @Log4j2
 public class AdminBoardController {
 
-    private final AdminBoardServiceImpl adminBoardService;
+    private final AdminBoardService adminBoardService;
 
-    @GetMapping("/ad_notice/noticeList")
-    public String ad_notice(Model model) {
+    @GetMapping("/list")
+    public String list(@RequestParam("group") String group, Model model) {
+        List<GP_AdminBoardDTO> adminBoardList = null;
         try {
-            List<GP_AdminBoardDTO> adminBoardList = adminBoardService.findAll();
-            model.addAttribute("adminBoardList", adminBoardList);
+            adminBoardList = adminBoardService.findAll();
             log.info("Admin Notice List : " + adminBoardList);
         } catch (Exception e) {
             log.error("Admin Notice List error : " + e.getMessage());
             throw new RuntimeException(e);
         }
-        return "admin/board/ad_notice/noticeList";
+        model.addAttribute("adminBoardList", adminBoardList);
+        model.addAttribute("group", group);
+        return "admin/board/list";
     }
 
-
-    @GetMapping("/ad_notice/noticeView")
+    @GetMapping("/view")
     public String findById(HttpServletRequest request,
                            HttpServletResponse response,
                            Model model, int bno) {
         try {
+            // 여기에서 GaePan 쿠키가 있을 때만 실행하게 해야되네..
             adminBoardService.updateViewCnt(request, response, bno);
 
             GP_AdminBoardDTO adminBoardDTO = adminBoardService.findById(bno);
@@ -50,17 +53,7 @@ public class AdminBoardController {
             throw new RuntimeException(e);
         }
 
-        return "admin/board/ad_notice/noticeView";
+        return "admin/board/view";
     }
 
-
-    @GetMapping("/ad_faq/faqList")
-    public String ad_faq() {
-        return "admin/board/ad_faq/faqList";
-    }
-
-    @GetMapping("/ad_qna/qnaList")
-    public String ad_qna() {
-        return "admin/board/ad_qna/qnaList";
-    }
 }
