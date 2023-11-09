@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class BoardTypeDTO {
 
-    private int b_cate1;
-    private int b_cate2;
-    private String b_cName2;
+    private int bt_no;
+    private int bt_cate;
+    private int bt_type;
+    private String bt_typeName;
 }

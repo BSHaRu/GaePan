@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
@@ -14,14 +15,26 @@ import java.time.LocalDateTime;
 public class BoardDTO {
 
     private int b_no;
-    private int b_parent;
-    private int b_group;
-    private int b_cate1;
-    private int b_cate2;
-    private String b_writer;
+    private String b_uid;
     private String b_title;
     private String b_content;
-    private String b_regip;
-    private LocalDateTime b_regdate;
+    private String b_group;
+    private int b_cate;
+    private int b_type;
+    private String b_regIP;
+
+    @CreatedDate
+    private LocalDateTime b_regDate;
+    private String thumb1;
+    private String thumb2;
+    private String thumb3;
+
+    @Builder.Default
+    private int b_hit = 0;
+    @Builder.Default
+    private int b_parent = 0;
+    private String b_comment;
+
+    // toEntity
 
 }
