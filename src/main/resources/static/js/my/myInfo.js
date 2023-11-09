@@ -7,32 +7,15 @@ $('#btnWithdraw').click(function(e){
     }else{
         return false;
     }
+});
 
-/*
-    if (result) {
-        $('#popWithdraw').addClass('on'); // 비밀번호 입력 팝업
+document.addEventListener('DOMContentLoaded', function() {
+    const userIdElement = document.getElementById('userId');
 
-        $('.btnPopWithdraw').click(function(e){
+    // 아이디 마스킹
+    const originalUserId = userIdElement.getAttribute('value'); // userIdElement의 value 속성 값을 originalUserId에 저장합니다.
+    const maskedUserId = originalUserId.substring(0, 3) + "****"; // originalUserId의 처음 세 글자를 제외한 나머지를 "****"로 대체하여 maskedUserId에 저장합니다.
 
-            const uid = $('input[name=uid]').val();
-            const inputPass = $('input[name=passCheck]').val();
-
-            $.ajax({
-                url: contextPath + '/my/withdraw',
-                type: 'POST',
-                data: {
-                    uid: uid,
-                    inputPass: inputPass
-                },
-                success: function(data) {
-                    if (data === "success") {
-                        alert('탈퇴가 완료되었습니다.');
-                        window.location.href=contextPath + "/member/logout";
-                    } else {
-                        alert("비밀번호가 일치하지 않습니다.");
-                    }
-                }
-            });
-        });
-    }*/
+    // value 속성을 변경하여 마스킹된 값을 보여줍니다.
+    userIdElement.setAttribute('value', maskedUserId);
 });

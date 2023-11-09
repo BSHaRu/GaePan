@@ -1357,3 +1357,19 @@ footer p > strong {
     margin: 10px auto;
     cursor: pointer;
 }
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* 버튼 사이의 간격을 조정합니다 */
+    padding: 10px;
+}
+
+.btnInfo {
+    font-size: 16px; /* 버튼의 글꼴 크기를 조정합니다 */
+    width: 150px; /* 버튼의 너비를 150px로 설정합니다 */
+    height: 40px; /* 버튼의 높이를 50px로 설정합니다 */
+    border: 1px solid black;
+    background-color: white;
+}
+

@@ -4,7 +4,7 @@ import co.kr.gaepan.dto.my.MyInfoDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface InfoMapper {
+public interface MyInfoMapper {
 
     // 사용자 정보 불러오기
     public MyInfoDTO selectInfo(String uid);

@@ -21,7 +21,6 @@
                 <section>
                     <article>
                         <h3>문의하기</h3>
-
                         <table border="0">
                             <tr>
                                 <th>번호</th>
@@ -31,60 +30,30 @@
                                 <th>작성일</th>
                                 <th>상태</th>
                             </tr>
-                            <tr>
-                                <td class="no">5</td>
-                                <td class="channel">고객센터</td>
-                                <td class="type">주문/결제</td>
-                                <td class="tit"><a href="#">신용카드 결제 중 오류가 난 경우 어떻게 하나요?</a></td>
-                                <td class="date">2024-12-12</td>
+                            <tr th:each="list:${qnaList}" th:if="${list.uid} == 'admin'">
+                                <td class="no" th:text="${list.no}"></td>
+                                <td class="channel" th:text="${list.cateName}"></td>
+                                <td class="type" th:text="${list.typeName}"></td>
+                                <td class="tit" th:text="${list.title}"><a href="#"></a></td>
+                                <td class="date" th:text="${list.regDate}"></td>
                                 <td class="status"><span class="notAnswerYet">검토중</span></td>
                             </tr>
-                            <tr>
-                                <td class="no">4</td>
-                                <td class="channel">고객센터</td>
-                                <td class="type">주문/결제</td>
-                                <td class="tit"><a href="#">신용카드 결제 중 오류가 난 경우 어떻게 하나요?</a></td>
-                                <td class="date">2024-12-12</td>
-                                <td class="status"><span class="answered">답변완료</span></td>
-                            </tr>
-                            <tr>
-                                <td class="no">3</td>
-                                <td class="channel">판매자게시판</td>
-                                <td class="type">배송</td>
-                                <td class="tit">
-                                    <a href="#" class="question">배송기간이 보통 얼마나 걸리나요?</a>
-                                </td>
-                                <td class="date">2024-12-12</td>
-                                <td class="status"><span class="answered">답변완료</span></td>
-                            </tr>
-                            <tr>
-                                <td class="no">2</td>
-                                <td class="channel">판매자게시판</td>
-                                <td class="type">상품</td>
-                                <td class="tit">
-                                    <a href="#">흰색 상품은 없나요?</a>
-                                </td>
-                                <td class="date">2024-12-12</td>
-                                <td class="status"><span class="answered">답변완료</span></td>
-                            </tr>
-                            <tr>
-                                <td class="no">1</td>
-                                <td class="channel">판매자게시판</td>
-                                <td class="type">반품</td>
-                                <td class="tit">
-                                    <a href="#">사이즈가 너무 작아요. 반품 요청합니다.</a>
-                                </td>
-                                <td class="date">2024-12-12</td>
-                                <td class="status"><span class="answered">답변완료</span></td>
-                            </tr>
                         </table>
-                        <p class="page" style="text-align: center; font-size: 60px; margin-top: 0">
-                            <a href="#" class="prev">이전</a>
-                            <a href="#" class="num on">1</a>
-                            <a href="#" class="num">2</a>
-                            <a href="#" class="num">3</a>
-                            <a href="#" class="next">다음</a>
-                        </p>
+                        <div class="page">
+                            <span class="prev" th:if="${pageGroupStart > 1}">
+                                <a th:href="@{/my/qna(pg=${pageGroupStart - 1})}"><&nbsp;이전</a>
+                            </span>
+                            <span class="num">
+                                <th:block th:each="i : ${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
+                                    <a th:href="@{/my/qna(pg=${i},search=${search})}" th:classappend="${currentPage == i} ? 'current' : 'off'">
+                                        [[${i}]]
+                                    </a>
+                                </th:block>
+                            </span>
+                            <span class="next" th:if="${pageGroupEnd < lastPageNum}">
+                                <a th:href="@{/my/qna(pg=${pageGroupEnd + 1})}">다음&nbsp;></a>
+                            </span>
+                        </div>
                     </article>
                 </section>
             </div>

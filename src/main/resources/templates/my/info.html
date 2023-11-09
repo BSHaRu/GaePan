@@ -58,28 +58,28 @@
                                 <tr>
                                     <td>E-mail</td>
                                     <td>
-                                        <input type="text" name="email" th:value="${myInfoDTO.  email.substring(0, myInfoDTO.  email.indexOf('@'))}" style="width: 130px; height: 23px">@
-                                        <input type="text" name="email" th:value="${myInfoDTO.  email.substring(myInfoDTO.  email.indexOf('@') + 1)}" style="width: 130px; height: 23px">
+                                        <input type="text" name="email" th:value="${myInfoDTO.  email.substring(0, myInfoDTO.email.indexOf('@'))}" style="width: 130px; height: 23px">@
+                                        <input type="text" name="email" th:value="${myInfoDTO.  email.substring(myInfoDTO.email.indexOf('@') + 1)}" style="width: 130px; height: 23px">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>휴대폰</td>
                                     <td>
                                         <p class="hp">
-                                            <input type="text" name="  hp" th:value="${myInfoDTO.  hp.substring(0, 3)}" style="width: 130px; height: 23px"/>-
-                                            <input type="text" name="  hp" th:value="${myInfoDTO.  hp.substring(3, 7)}" style="width: 130px; height: 23px"/>-
-                                            <input type="text" name="  hp" th:value="${myInfoDTO.  hp.substring(7)}" style="width: 130px; height: 23px"/>
+                                            <input type="text" name="  hp" th:value="${myInfoDTO.hp.substring(0, 3)}" style="width: 130px; height: 23px"/>-
+                                            <input type="text" name="  hp" th:value="${myInfoDTO.hp.substring(3, 7)}" style="width: 130px; height: 23px"/>-
+                                            <input type="text" name="  hp" th:value="${myInfoDTO.hp.substring(7)}" style="width: 130px; height: 23px"/>
                                         </p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>주소</td>
                                     <td>
-                                        <input type="text" id="zip" name="zip" style="width: 130px; height: 23px; margin-bottom: 1px"/>
+                                        <input type="text" id="zip" name="zip" th:value="${myInfoDTO.zip}" style="width: 130px; height: 23px; margin-bottom: 1px"/>
                                         <button type="button" onclick="zipcode()" >주소검색</button>
                                         <p class="address">
-                                            <input type="text" id="addr1" name="addr1" style="width: 300px; height: 25px; margin-bottom: 2px"/>
-                                            <input type="text" id="addr2" name="addr2" style="width: 300px; height: 25px"/>
+                                            <input type="text" id="addr1" name="addr1" th:value="${myInfoDTO.addr1}" style="width: 300px; height: 25px; margin-bottom: 2px"/>
+                                            <input type="text" id="addr2" name="addr2" th:value="${myInfoDTO.addr2}" style="width: 300px; height: 25px"/>
                                         </p>
                                     </td>
                                 </tr>

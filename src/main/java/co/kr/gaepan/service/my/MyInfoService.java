@@ -1,7 +1,7 @@
 package co.kr.gaepan.service.my;
 
 import co.kr.gaepan.dto.my.MyInfoDTO;
-import co.kr.gaepan.mapper.my.InfoMapper;
+import co.kr.gaepan.mapper.my.MyInfoMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -9,20 +9,20 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Log4j2
-public class InfoService {
+public class MyInfoService {
 
-    private final InfoMapper infoMapper;
+    private final MyInfoMapper myInfoMapper;
 
     public MyInfoDTO selectInfo(String uid){
-        MyInfoDTO myInfoDTO = infoMapper.selectInfo(uid);
+        MyInfoDTO myInfoDTO = myInfoMapper.selectInfo(uid);
         return myInfoDTO;
     }
 
     public void updateInfo(String uid){
-        infoMapper.updateInfo(uid);
+        myInfoMapper.updateInfo(uid);
     }
 
     public void deleteInfo(String uid){
-        infoMapper.deleteInfo(uid);
+        myInfoMapper.deleteInfo(uid);
     }
 }

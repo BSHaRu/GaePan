@@ -1,8 +1,7 @@
 package co.kr.gaepan.controller.my;
 
 import co.kr.gaepan.dto.my.MyInfoDTO;
-import co.kr.gaepan.mapper.my.InfoMapper;
-import co.kr.gaepan.service.my.InfoService;
+import co.kr.gaepan.service.my.MyInfoService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class MyInfoController {
 
     @Autowired
-    private InfoService infoService;
+    private MyInfoService infoService;
 
     @GetMapping("/info")
     public String view(Model model, String uid) {
@@ -28,6 +27,7 @@ public class MyInfoController {
                                 .hp("01010011234")
                                 .email("kim@gmail.com")
                                 .birth("1983년 05월 03일")
+                                .zip("13465")
                                 .addr1("부산광역시")
                                 .addr2("부산진구")
                                 .count(0)
