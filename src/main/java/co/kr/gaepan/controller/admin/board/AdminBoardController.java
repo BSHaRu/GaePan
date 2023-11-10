@@ -28,9 +28,7 @@ public class AdminBoardController {
         List<GP_AdminBoardDTO> adminBoardList = null;
         try {
             adminBoardList = adminBoardService.findAll();
-            log.info("Admin Notice List : " + adminBoardList);
         } catch (Exception e) {
-            log.error("Admin Notice List error : " + e.getMessage());
             throw new RuntimeException(e);
         }
         model.addAttribute("adminBoardList", adminBoardList);
@@ -49,7 +47,6 @@ public class AdminBoardController {
             GP_AdminBoardDTO adminBoardDTO = adminBoardService.findById(bno);
             model.addAttribute("adminBoardDTO", adminBoardDTO);
         } catch (Exception e) {
-            log.error("Admin Notice View error : " + e.getMessage());
             throw new RuntimeException(e);
         }
 

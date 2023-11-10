@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,14 +29,13 @@ public class AdminBoardServiceImpl implements AdminBoardService {
     @Override
     public void saveAdminBoard(GP_AdminBoardDTO dto) throws Exception {
         GP_AdminBoardEntity entity = adminBoardMapper.toEntity(dto);
-        log.info("GP_AdminBoardEntity entity : "+entity);
         adminBoardRepository.save(entity);
     }
 
     @Override
     public List<GP_AdminBoardDTO> findAll() throws Exception {
         List<GP_AdminBoardDTO> dto = mybatisAdminBoardMapper.findAll();
-        log.info("List<GP_AdminBoardDTO> dto : "+dto);
+
         return dto;
     }
 
@@ -76,7 +74,6 @@ public class AdminBoardServiceImpl implements AdminBoardService {
         // 쿠키가 존재하지 않으면 이하 실행
         Cookie cookie = new Cookie(cookieBno, bno+"");
         String path = request.getContextPath()+"/GaePan/";
-        log.info("path : "+path);
         cookie.setPath(path);
         cookie.setMaxAge(60*60); // 1시간
         response.addCookie(cookie);
