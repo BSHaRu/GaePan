@@ -3,16 +3,16 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-<head th:replace="~{/admin/fragments/head :: head}">
+<head th:replace="~{admin/fragments/head :: head}">
 </head>
 <body>
     <main class="admin_container row">
-        <header th:replace="~{/admin/fragments/aside :: aside}"></header>
+        <header th:replace="~{admin/fragments/aside :: aside}"></header>
         <div class="col-lg-9">
-            <header th:replace="~{/admin/fragments/header :: header}"></header>
+            <header th:replace="~{admin/fragments/header :: header}"></header>
 
             <th:block layout:fragment="content"></th:block>
-            <footer th:replace="~{/admin/fragments/footer :: footer}"></footer>
+            <footer th:replace="~{admin/fragments/footer :: footer}"></footer>
         </div>
     </main>
 </body>
