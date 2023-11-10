@@ -9,13 +9,13 @@
         SELECT * FROM `gp_member` WHERE `uid` = #{uid}
     </select>
 
-    <update id="updateInfo">
+    <update id="updateInfo" >
         UPDATE `gp_member` SET `pw` = #{pw}, `name` = #{name}, `nick` = #{nick}, `email` = #{email}, `hp` = #{hp}, `addr1` = #{addr1}, `addr2` = #{addr2}, `exp` = #{exp}, `count` = #{count}
         WHERE `uid` = #{uid}
     </update>
 
     <update id="deleteInfo">
         UPDATE `gp_member` SET `uid` = #{uid}, `gender` = #{gender}, `hp` = #{hp}, `email` = #{email}, ` type` = #{ type}, ` zip` = #{ zip}, ` addr1` = #{ addr1}, ` addr2` = #{ addr2}, ` company` = #{ company}, ` bizRegNum` = #{ bizRegNum}, ` levDate` = #{ levDate}, ` exp` = #{ exp}, ` count` = #{ count}
-        WHERE ` uid` = #{ uid},
+        WHERE ` uid` = #{uid}
     </update>
 </mapper>

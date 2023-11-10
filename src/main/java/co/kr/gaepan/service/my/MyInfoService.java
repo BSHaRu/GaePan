@@ -18,8 +18,9 @@ public class MyInfoService {
         return myInfoDTO;
     }
 
-    public void updateInfo(String uid){
-        myInfoMapper.updateInfo(uid);
+    public MyInfoDTO updateInfo(String uid){
+        MyInfoDTO myInfoDTO = myInfoMapper.updateInfo(uid);
+        return myInfoDTO;
     }
 
     public void deleteInfo(String uid){
