@@ -12,6 +12,12 @@ public class MemberController {
     public String login() {
         return "member/login";
     }
+
+    @GetMapping("/policy")
+    public String policy(){
+        return "member/policy";
+    }
+
     @GetMapping("/register")
     public String register() {
         return "member/register";

@@ -9,7 +9,7 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400');
 
 body, html {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   background-color: #ffffff;
   padding: 0;
   margin: 0;
@@ -54,10 +54,10 @@ body, html {
 .box h5 {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 13px;
-  color: #a1a4ad;
+  color: #8972ee;
   letter-spacing: 1.5px;
-  margin-top: -15px;
-  margin-bottom: 70px;
+  margin-top: 3px;
+  margin-bottom: 73px;
 }
 
 .box input[type = "text"],.box input[type = "password"] {
@@ -133,22 +133,23 @@ label span {
 
 .rmb {
   position: absolute;
-  margin-left: -24%;
+  margin-left: -36%;
   margin-top: 0px;
   color: #8972ee;
   font-size: 13px;
 }
 
 .forgetpass {
+  font-size: 14px;
   position: relative;
   float: right;
-  right: 28px;
+  right: 31px;
 }
 
 .dnthave{
     position: absolute;
     top: 92%;
-    left: 24%;
+    left: 28%;
 }
 
 [type=checkbox]:checked + span:before {/* <-- style its checked state */
@@ -204,4 +205,9 @@ label span {
 
 .footer .fa {
   color: #8972ee;;
+}
+
+.loginLogo {
+  width: 100px;
+  margin-top: 40px;
 }
