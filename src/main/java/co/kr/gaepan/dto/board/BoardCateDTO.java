@@ -11,7 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class BoardCateDTO {
 
-    private int b_cate;
-    private String b_cName1;
+    private int bc_no;
+    private int bc_cate;
+    private String bc_cateName;
 
 }
