@@ -38,10 +38,10 @@ function zipcode() {
             }
 
             // 우편번호와 주소 정보를 해당 필드에 넣는다.
-            document.getElementsByName('m_zip')[0].value = data.zonecode;
-            document.getElementsByName("m_addr1")[0].value = addr;
+            document.getElementsByName('zip')[0].value = data.zonecode;
+            document.getElementsByName("addr1")[0].value = addr;
             // 커서를 상세주소 필드로 이동한다.
-            document.getElementsByName("m_addr2")[0].focus();
+            document.getElementsByName("addr2")[0].focus();
         }
     }).open();
 }
