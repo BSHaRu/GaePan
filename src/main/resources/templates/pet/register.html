@@ -75,6 +75,8 @@
         // 앞으로가기
         $('#summernote').summernote('redo');
 
+
+
     };
 </script>
 
@@ -84,11 +86,13 @@
         <div class="input-form col-md-12 mx-auto">
             <h4 class="mb-3 text-center">분양 글 등록</h4>
             <br>
-            <form class="registerForm" method="post" enctype="multipart/form-data">
+            <form class="registerForm" th:action="@{/pet/register}" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="regip" value="0.0.0.1">
+                <input type="hidden" name="uid" value="test">
                 <div class="mb-3">
                     <label>종류</label>
                     <br>
-                    <select class="form-select" name="p_cate" style="border: 1px solid #ccc; padding: 5px;">
+                    <select class="form-select" name="cate" style="border: 1px solid #ccc; padding: 5px;">
                         <option value="1">강아지</option>
                         <option value="2">고양이</option>
                         <option value="3">기타</option>
@@ -97,14 +101,14 @@
                 <div class="mb-3">
                     <label>품종</label>
                     <br>
-                    <select class="form-select" name="p_cate" style="border: 1px solid #ccc; padding: 5px;">
+                    <select class="form-select" name="type" style="border: 1px solid #ccc; padding: 5px;">
                         <option value="1">기타</option>
                     </select>
                 </div>
                 <br>
                 <div class="mb-3">
                     <label>등록할 아이 이름</label>
-                    <input type="text" class="form-control" name="p_name" placeholder="" required/>
+                    <input type="text" class="form-control" name="name" placeholder="" required/>
                     <div class="invalid-feedback">
                     </div>
                 </div>
@@ -132,7 +136,7 @@
                 <input type="file" class="form-control" name="file" id="file" placeholder="" required style="display: none"/>
                 <br>
                 <label>내용</label>
-                <textarea id="summernote" name="editordata"></textarea>
+                <textarea id="summernote" name="content"></textarea>
                 <br>
                 <div>
                      <button class="btn primary-btn btn-lg btn-block" type="submit">글 올리기</button>
@@ -144,9 +148,6 @@
         <p class="mb-1">&copy; 2023 GaePan</p>
     </footer>
 </div>
-<script th:src="@{/js/member/validation.js}"></script>
 <script th:src="@{/js/member/register.js}"></script>
-<script th:src="@{//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js}"></script>
-<script th:src="@{/js/member/zipcode.js}"></script>
 </body>
 </html>

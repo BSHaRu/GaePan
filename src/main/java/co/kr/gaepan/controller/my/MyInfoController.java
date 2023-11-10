@@ -43,8 +43,6 @@ public class MyInfoController {
 
         infoService.updateInfo(uid);
         // infoService.deleteInfo(uid);
-
-        log.info("infoService" +  infoService);
         // log.info("infoService" +  infoService);
 
         return "redirect:/index";
@@ -52,8 +50,6 @@ public class MyInfoController {
 
     @GetMapping("/passcheck")
     public String passcheck(Model model, MyInfoDTO myInfoDTO) {
-
-        log.info("myInfoDTO : " + myInfoDTO);
 
         model.addAttribute(myInfoDTO);
 
@@ -63,7 +59,6 @@ public class MyInfoController {
     @ResponseBody
     @PostMapping("/withdraw")
     public String withdraw(@RequestParam String uid){
-        log.info("withdraw!!!");
         return uid;
     }
 }
