@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
-<head th:replace="~{/cs/fragments/head :: head}"> <!-- /cs/fragments/head.html 에서 fragment="head"를 찾는다 -->
+<head th:replace="~{cs/fragments/head :: head}"> <!-- /cs/fragments/head.html 에서 fragment="head"를 찾는다 -->
 </head>
 <body>
     <!-- Page Preloder -->
@@ -73,9 +73,9 @@
         </div>
     </div>
     <!-- Humberger End -->
-    <header th:replace="~{/cs/fragments/header :: header}"></header>
+    <header th:replace="~{cs/fragments/header :: header}"></header>
 
     <th:block layout:fragment="content"></th:block>
-    <footer th:replace="~{/cs/fragments/footer :: footer}"></footer>
+    <footer th:replace="~{cs/fragments/footer :: footer}"></footer>
 </body>
 </html>
