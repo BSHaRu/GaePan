@@ -82,9 +82,9 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 
     // board에서 글 쓸 때 태그 공격 막기
     public GP_AdminBoardDTO replace(GP_AdminBoardDTO dto){
-        dto.setB_title(gpUtil.replaceScript(dto.getB_title()));
-        dto.setB_content(gpUtil.replaceScript(dto.getB_content()));
-        dto.setB_uid(gpUtil.replaceScript(dto.getB_uid()));
+        dto.setTitle(gpUtil.replaceScript(dto.getTitle()));
+        dto.setContent(gpUtil.replaceScript(dto.getContent()));
+        dto.setUid(gpUtil.replaceScript(dto.getUid()));
 
         return dto;
     }

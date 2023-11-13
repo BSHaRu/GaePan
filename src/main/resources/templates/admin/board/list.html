@@ -58,14 +58,14 @@
                             <td class="chk">
                                 <input type="checkbox" name="chk" class="checkbox" value="">
                             </td>
-                            <td class="bno">[[${board.b_no}]]</td>
+                            <td class="bno">[[${board.bno}]]</td>
                             <td class="tit">
                                 <div class="admin_title_board">
                                     <a class="admin_title_board"
-                                       th:href="@{/admin/board/view(bno=${board.b_no})}">
+                                       th:href="@{/admin/board/view(bno=${board.bno})}">
                                         <!-- 여기 b_cate는 나중에 join해서 cateName으로 바꿔야됨 -->
-                                        [<span th:text="${board.b_cate}"></span>]
-                                        [[${board.b_title}]]
+                                        [<span th:text="${board.cate}"></span>]
+                                        [[${board.title}]]
                                     </a>
                                     <!-- 댓글이 있으면 해당 span 표시 없으면 그냥 그대로 -->
                                     <span class="board_comment">
@@ -75,11 +75,11 @@
                                     </span>
                                 </div>
                             </td>
-                            <td class="user">[[${board.b_uid}]]</td>
-                            <td class="hit">[[${board.b_hit}]]</td>
+                            <td class="user">[[${board.uid}]]</td>
+                            <td class="hit">[[${board.hit}]]</td>
                             <td class="regdate">
                                 <span class="date"
-                                      th:text="${#temporals.format(board.b_regDate, 'MM-dd')}">
+                                      th:text="${#temporals.format(board.regDate, 'MM-dd')}">
                                 </span>
                             </td>
                             <td>
