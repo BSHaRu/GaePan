@@ -29,6 +29,7 @@ public class AdminBoardController {
         try {
             adminBoardList = adminBoardService.findAll();
         } catch (Exception e) {
+            log.error("admin board list error", e.getMessage());
             throw new RuntimeException(e);
         }
         model.addAttribute("adminBoardList", adminBoardList);
@@ -47,6 +48,7 @@ public class AdminBoardController {
             GP_AdminBoardDTO adminBoardDTO = adminBoardService.findById(bno);
             model.addAttribute("adminBoardDTO", adminBoardDTO);
         } catch (Exception e) {
+            log.error("admin board view error", e.getMessage());
             throw new RuntimeException(e);
         }
 

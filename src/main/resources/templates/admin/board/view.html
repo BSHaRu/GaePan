@@ -11,17 +11,17 @@
         <article class="view">
             <nav>
                 <h2 class="title">
-                    [<span th:text="${adminBoardDTO.b_type}"></span>]
-                    [[${adminBoardDTO.b_title}]]
+                    [<span th:text="${adminBoardDTO.type}"></span>]
+                    [[${adminBoardDTO.title}]]
                 </h2>
                 <span class="date"
-                      th:text="${#temporals.format(adminBoardDTO.b_regDate, 'yy-MM-dd')}">
+                      th:text="${#temporals.format(adminBoardDTO.regDate, 'yy-MM-dd')}">
                 </span>
             </nav>
 
             <div class="content">
               <pre>
-                [[${adminBoardDTO.b_content}]]
+                [[${adminBoardDTO.content}]]
               </pre>
             </div>
             <a href="#" class="btnList">목록보기</a>

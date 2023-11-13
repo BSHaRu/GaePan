@@ -10,8 +10,8 @@ import lombok.*;
 @Builder
 public class GP_AdminBoardTypeDTO {
 
-    private int bt_no;
-    private int bt_cate;
-    private int bt_type;
-    private String bt_typeName;
+    private int tno;
+    private int cate;
+    private int type;
+    private String typeName;
 }

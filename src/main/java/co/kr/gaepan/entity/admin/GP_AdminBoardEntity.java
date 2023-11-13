@@ -17,25 +17,22 @@ public class GP_AdminBoardEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int b_no;
-    private String b_uid;
-    private String b_title;
-    private String b_content;
-    private String b_group;
-    private int b_cate;
-    private int b_type;
-    private String b_redIP;
+    private int bno;
+    private String uid;
+    private String title;
+    private String content;
+    private String group;
+    private int cate;
+    private int type;
+    private String regIP;
 
     @CreatedDate
-    private LocalDateTime b_regDate;
-    private String thumb1;
-    private String thumb2;
-    private String thumb3;
+    private LocalDateTime regDate;
 
     @Builder.Default
-    private int b_hit = 0;
+    private int hit = 0;
     @Builder.Default
-    private int b_parent = 0;
-    private String b_comment;
+    private int parent = 0;
+    private String comment;
 
 }

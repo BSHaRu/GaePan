@@ -8,13 +8,13 @@
     <!-- board List 출력 -->
     <select id="findAll" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
         SELECT * FROM gp_board
-        ORDER BY b_no DESC
+        ORDER BY bno DESC
     </select>
 
     <!-- board 조회수 증가 -->
     <update id="updateViewCnt" parameterType="int">
-        UPDATE gp_board SET b_hit = b_hit + 1
-        WHERE b_no = #{b_no}
+        UPDATE gp_board SET hit = hit + 1
+        WHERE bno = #{bno}
     </update>
 
     <!--resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO"-->
