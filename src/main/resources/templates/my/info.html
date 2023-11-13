@@ -86,8 +86,8 @@
                                 <tr>
                                     <td>양육경력</td>
                                     <td style="font-size: 15px">
-                                        <input type="radio" name="exp" value="Y"> 있음&nbsp;
-                                        <input type="radio" name="exp" value="N"> 없음
+                                        <input type="radio" name="exp" th:value="${myInfoDTO.exp}" th:checked="${myInfoDTO.exp == 'Y'}"> 있음&nbsp;
+                                        <input type="radio" name="exp" th:value="${myInfoDTO.exp}" th:checked="${myInfoDTO.exp == 'N'}"> 없음
                                     </td>
                                 </tr>
                                 <tr>

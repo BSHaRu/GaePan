@@ -10,7 +10,7 @@ public interface MyInfoMapper {
     public MyInfoDTO selectInfo(String uid);
 
     // 사용자 정보 수정하기
-    public void updateInfo(String uid);
+    public MyInfoDTO updateInfo(String uid);
 
     // 사용자 정보 삭제하기
     public void deleteInfo(String uid);

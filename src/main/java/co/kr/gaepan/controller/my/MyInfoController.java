@@ -30,6 +30,7 @@ public class MyInfoController {
                                 .zip("13465")
                                 .addr1("부산광역시")
                                 .addr2("부산진구")
+                                .exp("N")
                                 .count(0)
                                 .build();
 
@@ -42,10 +43,9 @@ public class MyInfoController {
     public String modify(String uid){
 
         infoService.updateInfo(uid);
-        // infoService.deleteInfo(uid);
-        // log.info("infoService" +  infoService);
+        log.info("infoService" +  infoService);
 
-        return "redirect:/index";
+        return "redirect:my/index";
     }
 
     @GetMapping("/passcheck")
@@ -53,7 +53,7 @@ public class MyInfoController {
 
         model.addAttribute(myInfoDTO);
 
-        return "/my/passcheck";
+        return "my/passcheck";
     }
 
     @ResponseBody
