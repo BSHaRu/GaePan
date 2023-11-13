@@ -1,5 +1,6 @@
 package co.kr.gaepan.util;
 
+import co.kr.gaepan.dto.member.MemberDTO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,4 +19,13 @@ public class GP_Util {
         text = text.replace(word, "<b style='color:#8972ee;'>"+word+"</b>");
         return text;
     }
+
+    public MemberDTO addrSubString(MemberDTO memberDTO) {
+        memberDTO.setAddr1(addrSubString(memberDTO.getAddr1()));
+        return memberDTO;
+    }
+    public String addrSubString(String addr){
+        return addr.substring(0, 2);
+    }
+
 }

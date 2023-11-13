@@ -27,7 +27,8 @@ public class AdminBoardController {
     public String list(@RequestParam("group") String group, Model model) {
         List<GP_AdminBoardDTO> adminBoardList = null;
         try {
-            adminBoardList = adminBoardService.findAll();
+            adminBoardList = adminBoardService.findAll(group);
+//            log.info("admin board list : {}", adminBoardList);
         } catch (Exception e) {
             log.error("admin board list error", e.getMessage());
             throw new RuntimeException(e);

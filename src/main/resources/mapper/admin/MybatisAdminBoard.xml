@@ -8,6 +8,7 @@
     <!-- board List 출력 -->
     <select id="findAll" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
         SELECT * FROM gp_board
+        WHERE `group` = #{group}
         ORDER BY bno DESC
     </select>
 

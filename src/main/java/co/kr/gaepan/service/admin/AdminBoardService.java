@@ -11,7 +11,7 @@ public interface AdminBoardService {
     // 게시글 등록
     void saveAdminBoard(GP_AdminBoardDTO dto) throws Exception;
     // 게시글 리스트 보기
-    List<GP_AdminBoardDTO> findAll() throws Exception;
+    List<GP_AdminBoardDTO> findAll(String group) throws Exception;
 
     // 게시글 수정
     void modifyAdminBoard(GP_AdminBoardDTO dto) throws Exception;

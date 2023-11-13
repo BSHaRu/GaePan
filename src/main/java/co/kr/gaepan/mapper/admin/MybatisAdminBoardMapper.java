@@ -9,7 +9,7 @@ import java.util.List;
 public interface MybatisAdminBoardMapper {
 
     // 조회
-    List<GP_AdminBoardDTO> findAll() throws Exception;
+    List<GP_AdminBoardDTO> findAll(String group) throws Exception;
     // 조회수 증가
     void updateViewCnt(int bno) throws Exception;
 

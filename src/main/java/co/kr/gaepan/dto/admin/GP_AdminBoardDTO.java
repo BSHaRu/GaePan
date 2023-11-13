@@ -28,4 +28,9 @@ public class GP_AdminBoardDTO {
     private int hit;
     private int parent;
     private String comment;
+
+    // 추가 필드
+    private String cateName;
+    private String typeName;
+
 }

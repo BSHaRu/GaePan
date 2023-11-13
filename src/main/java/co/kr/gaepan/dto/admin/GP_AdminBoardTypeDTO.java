@@ -14,4 +14,7 @@ public class GP_AdminBoardTypeDTO {
     private int cate;
     private int type;
     private String typeName;
+
+    // 추가 필드
+    private String cateName;
 }

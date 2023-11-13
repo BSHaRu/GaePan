@@ -33,9 +33,8 @@ public class AdminBoardServiceImpl implements AdminBoardService {
     }
 
     @Override
-    public List<GP_AdminBoardDTO> findAll() throws Exception {
-        List<GP_AdminBoardDTO> dto = mybatisAdminBoardMapper.findAll();
-
+    public List<GP_AdminBoardDTO> findAll(String group) throws Exception {
+        List<GP_AdminBoardDTO> dto = mybatisAdminBoardMapper.findAll(group);
         return dto;
     }
 

@@ -11,10 +11,9 @@
             <p class="admin__p">
                 <a th:href="@{/admin/index}">HOME</a> &gt; 게시판 &gt;
                 <th:block th:switch="${group}">
-                    <span th:case="notice"><strong>notice</strong></span>
-                    <span th:case="faq"><strong>faq</strong></span>
-                    <span th:case="qna"><strong>qna</strong></span>
-                    <span th:case="qna"><strong>qna</strong></span>
+                    <span th:case="notice"><strong>Notice</strong></span>
+                    <span th:case="faq"><strong>FAQ</strong></span>
+                    <span th:case="qna"><strong>QnA</strong></span>
                 </th:block>
             </p>
         </nav>
@@ -28,7 +27,7 @@
                 </th:block>
                 <!-- 이건 group에 따라서 cate가 달라지고, 그 cate글만 출력 -->
                 <div class="board_cate">
-                    <select name="b_cate">
+                    <select name="cate">
                         <option value="10">모시깽이1</option>
                         <option value="11">모시깽이2</option>
                         <option value="12">모시깽이3</option>
@@ -45,7 +44,7 @@
                             <input type="checkbox" name="all" id="selectAll"/>
                         </th>
                         <th scope="col">번호</th>
-                        <th scope="col">제목</th>
+                        <th scope="col" class="tit">제목</th>
                         <th scope="col">닉네임</th>
                         <th scope="col">조회수</th>
                         <th scope="col">등록일</th>
@@ -63,18 +62,21 @@
                                 <div class="admin_title_board">
                                     <a class="admin_title_board"
                                        th:href="@{/admin/board/view(bno=${board.bno})}">
-                                        <!-- 여기 b_cate는 나중에 join해서 cateName으로 바꿔야됨 -->
+                                        <!-- todo 여기 cate는 나중에 join해서 cateName으로 바꿔야됨 -->
                                         [<span th:text="${board.cate}"></span>]
                                         [[${board.title}]]
                                     </a>
-                                    <!-- 댓글이 있으면 해당 span 표시 없으면 그냥 그대로 -->
-                                    <span class="board_comment">
-                                        <a href="#">
-                                            [<span>3</span>]
-                                        </a>
-                                    </span>
+                                    <th:block th:if="${board.comment != null}">
+                                        <span class="board_comment">
+                                            <a href="#">
+                                                <!-- todo parent의 count계산을 하고 넣어줘야됨 -->
+                                                [<span th:text="${board.parent}"></span>]
+                                            </a>
+                                        </span>
+                                    </th:block>
                                 </div>
                             </td>
+                            <!-- todo uid가 아니라 join해서 nick으로 바꿔야됨  -->
                             <td class="user">[[${board.uid}]]</td>
                             <td class="hit">[[${board.hit}]]</td>
                             <td class="regdate">
@@ -95,7 +97,7 @@
                     </tbody>
                 </table>
                 <input type="button" class="deleteBtn" value="선택삭제" />
-                <input type="submit" class="primary-btn admin_btn" value="글 쓰기" />
+                <input type="button" class="primary-btn admin_btn" value="글 쓰기" />
             </form>
 
             <!-- 페이징 -->
