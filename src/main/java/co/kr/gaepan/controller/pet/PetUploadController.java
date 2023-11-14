@@ -16,12 +16,5 @@ public class PetUploadController {
     @Autowired
     private PetBoardService petBoardService;
 
-    @PostMapping("/upload")
-    public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
-        // PetBoardService의 파일 업로드 메서드 호출
-        String fileUrl = petBoardService.uploadFile(file);
-
-        return ResponseEntity.ok(fileUrl);
-    }
 }
 
