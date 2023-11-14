@@ -1,11 +1,10 @@
 package co.kr.gaepan.dto.board;
 
+import co.kr.gaepan.entity.admin.GP_AdminBoardEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-
 import java.time.LocalDateTime;
 
 @Data
@@ -14,27 +13,34 @@ import java.time.LocalDateTime;
 @Builder
 public class BoardDTO {
 
-    private int b_no;
-    private String b_uid;
-    private String b_title;
-    private String b_content;
-    private String b_group;
-    private int b_cate;
-    private int b_type;
-    private String b_regIP;
-
-    @CreatedDate
-    private LocalDateTime b_regDate;
-    private String thumb1;
-    private String thumb2;
-    private String thumb3;
-
-    @Builder.Default
-    private int b_hit = 0;
-    @Builder.Default
-    private int b_parent = 0;
-    private String b_comment;
+    private int bno;
+    private String uid;
+    private String title;
+    private String content;
+    private String group;
+    private int cate;
+    private int type;
+    private String regIP;
+    private LocalDateTime regDate;
+    private int hit;
+    private int parent;
+    private String comment;
 
     // toEntity
-
+    public GP_AdminBoardEntity toEntity(){
+        return GP_AdminBoardEntity.builder()
+                .bno(bno)
+                .uid(uid)
+                .title(title)
+                .content(content)
+                .group(group)
+                .cate(cate)
+                .type(type)
+                .regIP(regIP)
+                .regDate(regDate)
+                .hit(hit)
+                .parent(parent)
+                .comment(comment)
+                .build();
+    }
 }

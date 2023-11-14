@@ -21,7 +21,7 @@ public class PageRequestDTO {
     private int size = 10;
 
     @Builder.Default
-    private int cate = 10; // notice=10 qna=20 faq=30
+    private int cate = 10; // notice=10 faq=20 qna=30
 
     @Builder.Default
     private int type = 0;
