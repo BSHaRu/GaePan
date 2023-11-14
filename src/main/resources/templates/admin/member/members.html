@@ -41,13 +41,20 @@
                 <th:block th:each="member : ${memberDTO}">
                 <tr>
                     <td class="chk">
-                        <input type="checkbox" name="chk" class="checkbox">
+                        <input type="checkbox" name="chk" class="checkbox" th:value="${member.no}">
                     </td>
                     <td th:text="${member.no}"></td>
                     <td th:text="${member.uid}"></td>
                     <td th:text="${member.name}"></td>
                     <td th:text="${member.nick}"></td>
-                    <td th:text="${member.gender == 1 ? '남' : '여'}"></td>
+                    <td>
+                       <th:block th:if="${member.gender == 1}">
+                           <span>남</span>
+                       </th:block>
+                        <th:block th:if="${member.gender == 2}">
+                            <span>여</span>
+                        </th:block>
+                    </td>
                     <td th:text="${member.hp}"></td>
                     <td th:text="${member.email}"></td>
                     <td th:text="${member.exp}"></td>
@@ -62,11 +69,12 @@
                             <span class="ingMember" th:text="가입중"></span>
                         </th:block>
                     </td>
-                    <td>
+                    <td class="memberType" th:data-type="${member.type}">
                         <th:block th:switch="${member.type}">
                             <span th:case="1" class="nomalMember">일반</span>
                             <span th:case="2" class="warningMember">주의</span>
                             <span th:case="3" class="blackMember">블랙</span>
+                            <span th:case="4" class="leaveMember">탈퇴</span>
                             <span th:case="99" class="adminMember">관리자</span>
                         </th:block>
                     </td>
@@ -75,6 +83,7 @@
                 </tbody>
             </table>
             <input type="button" class="blackList_Btn" value="블랙리스트 등록"/>
+            <input type="button" class="leaveMember_Btn" value="회원 탈퇴"/>
         </form>
 
         <div class="col-lg-12 mt-5">
@@ -89,3 +98,5 @@
     </section>
 </th:block>
 </html>
+<script th:src="@{/js/admin/blackList.js}"></script>
+<script th:src="@{/js/admin/leaveMember.js}"></script>
