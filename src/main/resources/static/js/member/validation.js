@@ -33,6 +33,7 @@ $(document).ready(function() {
                     input.addClass('is-valid');// 유효한 경우 테두리 색상을 원래대로 복원
                     isUidOk = true;
                 }
+
             });
 
 
