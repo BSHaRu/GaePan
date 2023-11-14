@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-11-09T11:51:05+0900",
+    date = "2023-11-14T13:59:50+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.8 (Oracle Corporation)"
 )
 @Component
@@ -23,21 +23,18 @@ public class AdminBoardMapperImpl implements AdminBoardMapper {
 
         GP_AdminBoardDTOBuilder gP_AdminBoardDTO = GP_AdminBoardDTO.builder();
 
-        gP_AdminBoardDTO.b_no( entity.getB_no() );
-        gP_AdminBoardDTO.b_uid( entity.getB_uid() );
-        gP_AdminBoardDTO.b_title( entity.getB_title() );
-        gP_AdminBoardDTO.b_content( entity.getB_content() );
-        gP_AdminBoardDTO.b_group( entity.getB_group() );
-        gP_AdminBoardDTO.b_cate( entity.getB_cate() );
-        gP_AdminBoardDTO.b_type( entity.getB_type() );
-        gP_AdminBoardDTO.b_redIP( entity.getB_redIP() );
-        gP_AdminBoardDTO.b_regDate( entity.getB_regDate() );
-        gP_AdminBoardDTO.thumb1( entity.getThumb1() );
-        gP_AdminBoardDTO.thumb2( entity.getThumb2() );
-        gP_AdminBoardDTO.thumb3( entity.getThumb3() );
-        gP_AdminBoardDTO.b_hit( entity.getB_hit() );
-        gP_AdminBoardDTO.b_parent( entity.getB_parent() );
-        gP_AdminBoardDTO.b_comment( entity.getB_comment() );
+        gP_AdminBoardDTO.bno( entity.getBno() );
+        gP_AdminBoardDTO.uid( entity.getUid() );
+        gP_AdminBoardDTO.title( entity.getTitle() );
+        gP_AdminBoardDTO.content( entity.getContent() );
+        gP_AdminBoardDTO.group( entity.getGroup() );
+        gP_AdminBoardDTO.cate( entity.getCate() );
+        gP_AdminBoardDTO.type( entity.getType() );
+        gP_AdminBoardDTO.regIP( entity.getRegIP() );
+        gP_AdminBoardDTO.regDate( entity.getRegDate() );
+        gP_AdminBoardDTO.hit( entity.getHit() );
+        gP_AdminBoardDTO.parent( entity.getParent() );
+        gP_AdminBoardDTO.comment( entity.getComment() );
 
         return gP_AdminBoardDTO.build();
     }
@@ -50,21 +47,18 @@ public class AdminBoardMapperImpl implements AdminBoardMapper {
 
         GP_AdminBoardEntityBuilder gP_AdminBoardEntity = GP_AdminBoardEntity.builder();
 
-        gP_AdminBoardEntity.b_no( dto.getB_no() );
-        gP_AdminBoardEntity.b_uid( dto.getB_uid() );
-        gP_AdminBoardEntity.b_title( dto.getB_title() );
-        gP_AdminBoardEntity.b_content( dto.getB_content() );
-        gP_AdminBoardEntity.b_group( dto.getB_group() );
-        gP_AdminBoardEntity.b_cate( dto.getB_cate() );
-        gP_AdminBoardEntity.b_type( dto.getB_type() );
-        gP_AdminBoardEntity.b_redIP( dto.getB_redIP() );
-        gP_AdminBoardEntity.b_regDate( dto.getB_regDate() );
-        gP_AdminBoardEntity.thumb1( dto.getThumb1() );
-        gP_AdminBoardEntity.thumb2( dto.getThumb2() );
-        gP_AdminBoardEntity.thumb3( dto.getThumb3() );
-        gP_AdminBoardEntity.b_hit( dto.getB_hit() );
-        gP_AdminBoardEntity.b_parent( dto.getB_parent() );
-        gP_AdminBoardEntity.b_comment( dto.getB_comment() );
+        gP_AdminBoardEntity.bno( dto.getBno() );
+        gP_AdminBoardEntity.uid( dto.getUid() );
+        gP_AdminBoardEntity.title( dto.getTitle() );
+        gP_AdminBoardEntity.content( dto.getContent() );
+        gP_AdminBoardEntity.group( dto.getGroup() );
+        gP_AdminBoardEntity.cate( dto.getCate() );
+        gP_AdminBoardEntity.type( dto.getType() );
+        gP_AdminBoardEntity.regIP( dto.getRegIP() );
+        gP_AdminBoardEntity.regDate( dto.getRegDate() );
+        gP_AdminBoardEntity.hit( dto.getHit() );
+        gP_AdminBoardEntity.parent( dto.getParent() );
+        gP_AdminBoardEntity.comment( dto.getComment() );
 
         return gP_AdminBoardEntity.build();
     }
