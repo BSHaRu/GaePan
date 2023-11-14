@@ -10,4 +10,44 @@
         SELECT * FROM gp_member
         ORDER BY `no` DESC;
     </select>
+
+    <!-- blckList 등록
+        foreach : List를 반복하기 위해서 mybatis 제공
+        collection : 내가 매개변수로 사용할 이름
+        open : ()를 열어 주는 친구
+        separator : List를 반복하기 떄문에 ,를 통해 구분해줌
+        close : ()를 닫아 주는 친구
+    -->
+    <update id="blackMember">
+        UPDATE gp_member SET
+        type = 3,
+        levDate = NOW()
+        WHERE `no` in
+        <foreach item="member" index="index" collection="memberDTOList"
+                 open="(" separator="," close=")">
+            #{member.no}
+        </foreach>
+    </update>
+
+    <!-- 탈퇴 -->
+    <update id="leaveMember">
+        UPDATE gp_member SET
+        `name` = null,
+        gender = 0,
+        hp = null,
+        email = null,
+        birth = null,
+        type = 4,
+        zip = 0,
+        addr1 = '  ',
+        addr2 = '  ',
+        exp = null,
+        count = 0,
+        levDate = NOW()
+        WHERE `no` in
+        <foreach item="member" index="index" collection="memberDTO"
+                 open="(" separator="," close=")">
+            #{member.no}
+        </foreach>
+    </update>
 </mapper>

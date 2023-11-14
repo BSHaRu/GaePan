@@ -238,6 +238,9 @@ main table th {
 #formCheck .blackMember{
     color: #dc3545;
 }
+#formCheck .leaveMember{
+    color : #e83e8c;
+}
 #formCheck .adminMember{
     color: #8972ee;
 }

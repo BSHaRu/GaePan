@@ -1,6 +1,7 @@
 package co.kr.gaepan.controller.cs;
 
 
+import co.kr.gaepan.dto.cs.PageRequestDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,7 @@ public class CSMainController {
         return "cs/index"; // return 시작할 때 / 붙이지 않기w
     }
     @GetMapping("/qna/list")
-    public String qnaList(){
+    public String qnaList(PageRequestDTO PageRequestDTO){
 
 
         return "cs/qna/list";
