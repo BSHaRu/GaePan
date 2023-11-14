@@ -3,11 +3,13 @@ package co.kr.gaepan.entity.pet;
 import co.kr.gaepan.dto.pet.PetRegisterDTO;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,7 +29,7 @@ public class PetRegisterEntity {
     private int cate;
     private int type;
     private String regip;
-    @CreatedDate
+    @CreationTimestamp
     private LocalDateTime regDate;
 
     public PetRegisterDTO  toDTO() {
