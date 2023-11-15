@@ -11,4 +11,10 @@ import org.springframework.stereotype.Service;
 @Log4j2
 public class MyAdoptApplyService {
 
+    private final MyAdoptApplyMapper myAdoptApplyMapper;
+
+    public int insertApply(PetAdoptApplyDTO petAdoptApplyDTO) {
+
+        return myAdoptApplyMapper.insertApply(petAdoptApplyDTO);
+    }
 }
