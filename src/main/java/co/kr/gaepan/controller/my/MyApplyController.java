@@ -25,7 +25,7 @@ public class MyApplyController {
 
         myAdoptApplyService.insertApply(petAdoptApplyDTO);
 
-        return "redircet:/my/apply";
+        return "redircet:/my/index";
     }
 
 }
