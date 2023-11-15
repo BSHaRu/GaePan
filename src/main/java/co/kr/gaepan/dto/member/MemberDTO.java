@@ -30,5 +30,10 @@ public class MemberDTO {
     private int count;
     private LocalDateTime regDate;
     private LocalDateTime levDate;
+    
+    // 추가
+    private String pass1;
+    private String company;
+    private String bizRegNum;
 
 }
