@@ -6,14 +6,18 @@ import co.kr.gaepan.entity.pet.PetRegisterEntity;
 import co.kr.gaepan.mapper.pet.PetListMapper;
 import co.kr.gaepan.repository.pet.PetBoardRepository;
 import co.kr.gaepan.repository.pet.PetFileRepository;
+import com.nimbusds.jose.shaded.gson.JsonObject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
 
