@@ -6,11 +6,13 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <th:block layout:fragment="content">
-    <!-- Hero Section Begin
-        => 여기가 header 바로 밑에 있는 검색 바 라인
-    -->
-    <!-- Breadcrumb Section End -->
-
+    <style>
+        .title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
     <!-- Blog Section Begin -->
         <div class="container">
             <div class="row">
@@ -38,7 +40,7 @@
                             <div class="blog__sidebar__recent">
                                 <a href="#" class="blog__sidebar__recent__item">
                                     <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-1.jpg" alt="">
+                                        <img src="/img/blog/sidebar/sr-1.jpg" alt="">
                                     </div>
                                     <div class="blog__sidebar__recent__item__text">
                                         <h6>09 Kinds Of Vegetables<br /> Protect The Liver</h6>
@@ -47,7 +49,7 @@
                                 </a>
                                 <a href="#" class="blog__sidebar__recent__item">
                                     <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-2.jpg" alt="">
+                                        <img src="/img/blog/sidebar/sr-2.jpg" alt="">
                                     </div>
                                     <div class="blog__sidebar__recent__item__text">
                                         <h6>Tips You To Balance<br /> Nutrition Meal Day</h6>
@@ -56,7 +58,7 @@
                                 </a>
                                 <a href="#" class="blog__sidebar__recent__item">
                                     <div class="blog__sidebar__recent__item__pic">
-                                        <img src="img/blog/sidebar/sr-3.jpg" alt="">
+                                        <img src="/img/blog/sidebar/sr-3.jpg" alt="">
                                     </div>
                                     <div class="blog__sidebar__recent__item__text">
                                         <h6>4 Principles Help You Lose <br />Weight With Vegetables</h6>
@@ -83,8 +85,16 @@
                                         <li><i class="fa fa-comment-o"></i>1</li>
                                     </ul>
                                     <h5>
-                                        <a href="#">[[${petall.title}]]</a>
+                                        <a th:href="@{/pet/petdetails(no=${petall.no})}" class="title" th:id="${'title_' + petall.no}" th:text="${petall.title}"></a>
                                     </h5>
+                                    <script th:inline="javascript">
+                                        /* JavaScript로 동적으로 타이틀 조정 */
+                                        var maxLength = 10;
+                                        var titleElement = document.getElementById('title_' + /*[[${petall.no}]]*/);
+                                        if (titleElement.textContent.length > maxLength) {
+                                            titleElement.textContent = titleElement.textContent.slice(0, maxLength) + '...';
+                                        }
+                                    </script>
                                     <a th:href="@{/pet/petdetails(no=${petall.no})}" class="blog__btn">
                                         READ MORE <span class="arrow_right"></span>
                                     </a>
@@ -107,7 +117,6 @@
             </div>
         </div>
     </section><br></br>
-    <!-- Blog Section End -->
 </th:block>
 
 </html>

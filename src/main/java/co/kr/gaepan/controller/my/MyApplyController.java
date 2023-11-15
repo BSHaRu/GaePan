@@ -23,6 +23,7 @@ public class MyApplyController {
     @PostMapping("/apply")
     public String write(PetAdoptApplyDTO petAdoptApplyDTO) {
 
+        return "my/apply";
     }
 
 }
