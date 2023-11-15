@@ -5,7 +5,7 @@
       layout:decorate="~{my/fragments/layout}"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
-<th:block layout:fragment="content">
+<th:block th:if="${myInfoDTO != null }" layout:fragment="content">
     <main>
         <form th:action="@{/my/info}" method="post">
 
@@ -28,58 +28,58 @@
                                 <tr>
                                     <td>사용자 ID</td>
                                     <td>
-                                        <input type="text" name="uid" id="userId" th:value="${myInfoDTO.uid}" readonly style="border: none">
+                                        <input name="uid" id="userId" th:value="${myInfoDTO.uid}" readonly style="border: none">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>비밀번호</td>
                                     <td>
-                                        <button id="btnChangePass">비밀번호 수정</button>
+                                        <button id="btnChangePass">비밀번호 변경</button>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>이름</td>
                                     <td>
-                                        <input type="text" name="name" id="userName" th:value="${myInfoDTO.name}" style="width: 130px; height: 23px"/>
+                                        <input name="name" id="userName" th:value="${myInfoDTO.name}" style="width: 130px; height: 23px"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>닉네임</td>
                                     <td>
-                                        <input type="text" name="nick" th:value="${myInfoDTO.  nick}" style="width: 130px; height: 23px">
+                                        <input name="nick" th:value="${myInfoDTO.  nick}" style="width: 130px; height: 23px">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>생년월일</td>
                                     <td>
-                                        <input type="text" name="birth" id="userBirth" th:value="${myInfoDTO.birth}" readonly style="border: none"/>
+                                        <input name="birth" id="userBirth" th:value="${myInfoDTO.birth}" readonly style="border: none"/>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>E-mail</td>
                                     <td>
-                                        <input type="text" name="email" th:value="${myInfoDTO.  email.substring(0, myInfoDTO.email.indexOf('@'))}" style="width: 130px; height: 23px">@
-                                        <input type="text" name="email" th:value="${myInfoDTO.  email.substring(myInfoDTO.email.indexOf('@') + 1)}" style="width: 130px; height: 23px">
+                                        <input name="email" th:value="${myInfoDTO.  email.substring(0, myInfoDTO.email.indexOf('@'))}" style="width: 130px; height: 23px">@
+                                        <input name="email" th:value="${myInfoDTO.  email.substring(myInfoDTO.email.indexOf('@') + 1)}" style="width: 130px; height: 23px">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>휴대폰</td>
                                     <td>
                                         <p class="hp">
-                                            <input type="text" name="  hp" th:value="${myInfoDTO.hp.substring(0, 3)}" style="width: 130px; height: 23px"/>-
-                                            <input type="text" name="  hp" th:value="${myInfoDTO.hp.substring(3, 7)}" style="width: 130px; height: 23px"/>-
-                                            <input type="text" name="  hp" th:value="${myInfoDTO.hp.substring(7)}" style="width: 130px; height: 23px"/>
+                                            <input name="  hp" th:value="${myInfoDTO.hp.substring(0, 3)}" style="width: 130px; height: 23px"/>-
+                                            <input name="  hp" th:value="${myInfoDTO.hp.substring(4, 8)}" style="width: 130px; height: 23px"/>-
+                                            <input name="  hp" th:value="${myInfoDTO.hp.substring(9)}" style="width: 130px; height: 23px"/>
                                         </p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>주소</td>
                                     <td>
-                                        <input type="text" id="zip" name="zip" th:value="${myInfoDTO.zip}" style="width: 130px; height: 23px; margin-bottom: 1px"/>
+                                        <input id="zip" name="zip" th:value="${myInfoDTO.zip}" style="width: 130px; height: 23px; margin-bottom: 1px"/>
                                         <button type="button" onclick="zipcode()" >주소검색</button>
                                         <p class="address">
-                                            <input type="text" id="addr1" name="addr1" th:value="${myInfoDTO.addr1}" style="width: 300px; height: 25px; margin-bottom: 2px"/>
-                                            <input type="text" id="addr2" name="addr2" th:value="${myInfoDTO.addr2}" style="width: 300px; height: 25px"/>
+                                            <input id="addr1" name="addr1" th:value="${myInfoDTO.addr1}" style="width: 300px; height: 25px; margin-bottom: 2px"/>
+                                            <input id="addr2" name="addr2" th:value="${myInfoDTO.addr2}" style="width: 300px; height: 25px"/>
                                         </p>
                                     </td>
                                 </tr>
@@ -115,5 +115,12 @@
     <script src="/js/my/passCheck.js"></script>
     <script src="/js/my/myInfo.js"></script>
     <script src="/js/my/findzip.js"></script>
+    <script>
+        // 버튼에 대한 클릭 이벤트 핸들러 등록
+        document.getElementById("btnChangePass").addEventListener("click", function() {
+            // 페이지 이동
+            window.location.href = "/my/passchange";
+        });
+    </script>
 </th:block>
 </html>

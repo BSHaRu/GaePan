@@ -22,8 +22,9 @@ public class MyApplyController {
 
     @PostMapping("/apply")
     public String write(PetAdoptApplyDTO petAdoptApplyDTO) {
+        myAdoptApplyService.insertApply(petAdoptApplyDTO);
 
-        return "my/apply";
+        return "redircet:/my/apply";
     }
 
 }
