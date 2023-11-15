@@ -11,9 +11,13 @@ public class MemberService {
 
     private final MemberMapper mapper;
 
-    public MemberDTO loginUser(String uid){
+    public MemberDTO loginUser(String uid) {
         return mapper.loginUser(uid);
     }
+
+    public void registerUser(MemberDTO dto) {
+        mapper.registerUser(dto);
+}
 
 
 }

@@ -31,12 +31,12 @@ public class AdminMemberServiceImpl implements AdminMemberService {
     }
 
     @Override
-    public void modifyMember(MemberDTO memberDTO) throws Exception {
-
+    public void blackMember(List<MemberDTO> memberDTOList) throws Exception {
+        mybatisAdminMemberMapper.blackMember(memberDTOList);
     }
 
     @Override
-    public void updateMember(MemberDTO memberDTO) throws Exception {
-
+    public void leaveMember(List<MemberDTO> memberDTO) throws Exception {
+        mybatisAdminMemberMapper.leaveMember(memberDTO);
     }
 }

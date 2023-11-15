@@ -84,7 +84,7 @@
 <div class="container">
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
-            <h4 class="mb-3 text-center">분양 글 등록</h4>
+            <h4 class="mb-3 text-center">입양 일기 등록</h4>
             <br>
             <form class="registerForm" th:action="@{/pet/register}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="regip" value="0.0.0.1">
@@ -121,17 +121,17 @@
                 </div>
                 <label for="file">썸네일</label>
                 <div style="max-height: 100px;overflow-y: auto;">
-                    <table id="selectedFilesTable">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                <table id="selectedFilesTable">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
                 </div>
                 <input type="file" class="form-control" name="filethumb" id="file" placeholder="" required style="display: none"/>
                 <br>
@@ -139,7 +139,7 @@
                 <textarea id="summernote" name="content"></textarea>
                 <br>
                 <div>
-                    <button class="btn primary-btn btn-lg btn-block" type="submit">글 올리기</button>
+                     <button class="btn primary-btn btn-lg btn-block" type="submit">글 올리기</button>
                 </div>
             </form>
         </div>

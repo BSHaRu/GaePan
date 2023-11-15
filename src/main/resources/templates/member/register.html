@@ -28,21 +28,28 @@
 
                 <div class="mb-3">
                     <label for="pass1">비밀번호</label>
-                    <input type="password" class="form-control" name="pass1" id="pass1" placeholder="" required>
+                    <input type="password" class="form-control" name="pass1" id="pass1" placeholder="사용하실 비밀번호를 입력해주세요." required>
                     <div class="invalid-feedback"></div>
                 </div>
 
                 <div class="mb-3">
                     <label for="pass2">비밀번호 확인</label>
-                    <input type="password" class="form-control" name="pass2" id="pass2" placeholder="" required>
+                    <input type="password" class="form-control" name="pass2" id="pass2" placeholder="사용하실 비밀번호를 확인해주세요." required>
                     <div class="invalid-feedback"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="name">별명</label>
+                    <input type="text" class="form-control" name="nick" id="nick" placeholder="닉네임 입력" required>
+                    <div class="invalid-feedback">
+                    </div>
                 </div>
                 <br>
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="name">이름</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="" value="" required>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="이름을 입력해주세요." value="" required>
                         <div class="invalid-feedback">
                         </div>
                     </div>
@@ -52,8 +59,8 @@
                         <label for="gender">성별</label>
                         <select class="custom-select d-block w-100" name="gender" id="gender" required>
                             <option value="">선택</option>
-                            <option value="M">남성</option>
-                            <option value="F">여성</option>
+                            <option value="1">남성</option>
+                            <option value="2">여성</option>
                         </select>
                         <div class="invalid-feedback">
                         </div>
@@ -82,6 +89,7 @@
                     <div class="invalid-feedback">
                     </div>
                 </div>
+                <br>
                 <div class="row">
                     <div class="col-md-4 mb-3">
                         <label for="zip">우편번호</label>
@@ -104,9 +112,7 @@
                     <div class="invalid-feedback">
                     </div>
                 </div>
-                <br>
-
-                <div class="row">
+                <!--<div class="row">
                     <div class="col-md-8 mb-3">
                         <span class="text-muted">&nbsp;(사업자 회원일시)</span>
                         <label for="company">사업자명</label>
@@ -116,7 +122,7 @@
                         <label for="bizRegNum">사업자 등록번호</label>
                         <input type="text" class="form-control" name="bizRegNum" id="bizRegNum" placeholder="">
                     </div>
-                </div>
+                </div> -->
                 <hr class="mb-4">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="aggrement" required>

@@ -71,21 +71,21 @@
                 <!-- 블로그 List -->
                 <div class="col-lg-8 col-md-7">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6" th:each="petall : ${petall}">
+                        <div class="col-lg-6 col-md-6 col-sm-6" th:each="PetCat : ${PetCat}">
                             <div class="blog__item" >
                                 <div class="blog__item__pic">
                                     <!-- petall.thumb 변수는 실제 이미지 파일의 이름을 가정합니다. -->
-                                    <img th:src="@{/upload/} + ${petall.thumb}">
+                                    <img th:src="@{/upload/} + ${PetCat.thumb}">
                                 </div>
                                 <div class="blog__item__text">
                                     <ul>
-                                        <li th:text="${#temporals.format(petall.regDate, 'yy-MM-dd')}"><i class="fa fa-calendar-o"></i></li>
+                                        <li th:text="${#temporals.format(PetCat.regDate, 'yy-MM-dd')}"><i class="fa fa-calendar-o"></i></li>
                                         <li><i class="fa fa-comment-o"></i>1</li>
                                     </ul>
                                     <h5>
-                                        <a href="#">[[${petall.title}]]</a>
+                                        <a href="#">[[${PetCat.title}]]</a>
                                     </h5>
-                                    <a th:href="@{/pet/petdetails(no=${petall.no})}" class="blog__btn">
+                                    <a th:href="@{/pet/petdetails}" class="blog__btn">
                                         READ MORE <span class="arrow_right"></span>
                                     </a>
                                 </div>
