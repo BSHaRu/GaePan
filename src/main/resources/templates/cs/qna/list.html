@@ -52,29 +52,20 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td colspan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+                                    <tr th:each="article:${pageResponseDTO.dtoList}">
+                                        <th scope="row">[[${article.typeName}]]</th>
+                                        <td>[[${article.title}]]</td>
+                                        <td>[[${article.uid}]]</td>
+                                        <td>[[${article.regDate}]]</td>
+                                    </tr>
+
                                 </tbody>
                             </table>
+
                        <div class="product__pagination" id="qnaList-page">
+                           <a href="#"><i class="fa fa-long-arrow-left"></i></a>
                            <a href="#">1</a>
                            <a href="#">2</a>
-                           <a href="#">3</a>
                            <a href="#"><i class="fa fa-long-arrow-right"></i></a>
                        </div>
 
