@@ -37,6 +37,7 @@ public class AdminBoardMapperImpl implements AdminBoardMapper {
         gP_AdminBoardDTO.comment( entity.getComment() );
 
         return gP_AdminBoardDTO.build();
+
     }
 
     @Override
@@ -61,5 +62,7 @@ public class AdminBoardMapperImpl implements AdminBoardMapper {
         gP_AdminBoardEntity.comment( dto.getComment() );
 
         return gP_AdminBoardEntity.build();
+
+
     }
 }

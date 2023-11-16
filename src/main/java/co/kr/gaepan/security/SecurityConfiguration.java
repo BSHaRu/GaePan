@@ -1,5 +1,6 @@
 package co.kr.gaepan.security;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,15 +18,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Log4j2
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfiguration implements WebMvcConfigurer {
 
-
-    @Autowired
-    private SecurityUserService service;
+    private final SecurityUserService service;
 
     //기술노트 [Spring] 정적 자원 리소스 경로설정
+
+    /*
+
     @Autowired
     private ResourceLoader resourceLoader;
+
+    */
+
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -71,8 +77,6 @@ public class SecurityConfiguration implements WebMvcConfigurer {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {

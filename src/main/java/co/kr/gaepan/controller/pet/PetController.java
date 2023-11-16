@@ -2,15 +2,19 @@ package co.kr.gaepan.controller.pet;
 
 import co.kr.gaepan.dto.pet.PetRegisterDTO;
 import co.kr.gaepan.service.pet.PetBoardService;
+import com.nimbusds.jose.shaded.gson.JsonObject;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @RequestMapping("/pet/*")
 @Controller

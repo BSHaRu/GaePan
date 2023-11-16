@@ -1,9 +1,15 @@
 package co.kr.gaepan.controller.pet;
 
+import co.kr.gaepan.dto.pet.PetRegisterDTO;
+import co.kr.gaepan.service.pet.PetBoardService;
 import com.nimbusds.jose.shaded.gson.JsonObject;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,15 +17,17 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.UUID;
 
-
 @Controller
-public class PetFileController {
+@RequiredArgsConstructor
+public class PetUploadController {
 
+    // 서머노트 이미지 업로드 temp폴더에 저장
     @PostMapping(value="/uploadSummernoteImageFile", produces = "application/json")
     @ResponseBody
-    public JsonObject uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
+    public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
 
         JsonObject jsonObject = new JsonObject();
 
@@ -34,7 +42,7 @@ public class PetFileController {
         try {
             InputStream fileStream = multipartFile.getInputStream();
             FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-            jsonObject.addProperty("url", "/summernoteImage/"+savedFileName);
+            jsonObject.addProperty("url", "/upload/"+savedFileName);
             jsonObject.addProperty("responseCode", "success");
 
         } catch (IOException e) {
@@ -43,7 +51,7 @@ public class PetFileController {
             e.printStackTrace();
         }
 
-        return jsonObject;
+        return jsonObject.toString();
     }
 
 }

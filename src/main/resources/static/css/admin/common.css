@@ -171,11 +171,22 @@ main h4 {
     font-weight: bold;
 }
 
+.pagination .board__cate{
+    margin: 0 20px;
+}
+.pagination .board__cate a{
+    color: #020715;
+}
+.pagination .board__cate a:hover{
+    color: #8972ee;
+}
+
 /* ============== admin table ============== */
 
 main table{
     word-break: break-all;
     height: auto;
+    width: 100%;
 }
 main table th {
     vertical-align: middle !important;
@@ -218,6 +229,7 @@ main table th {
 
 #formCheck{
     width: 1080px;
+    margin-top: 15px;
 }
 #formCheck .tit{
     width: 400px;
@@ -303,6 +315,10 @@ main table th {
 }
 
 /* ============= search ============= */
+#serachForm{
+    margin: 10px -15px;
+}
+
 .admin_search_div{
     display: flex;
     display: -ms-flexbox;
@@ -315,6 +331,10 @@ main table th {
 
 .admin_search_form{
     margin-bottom: 10px;
+}
+
+.active{
+    color: #5caeef;
 }
 
 /* ================================== */
@@ -376,6 +396,10 @@ main table th {
     font-weight: 500;
     background: #2A80B9;
     letter-spacing: 2px;
+}
+.searchBtn:hover{
+    background: #8972ee;
+    color: #fff;
 }
 
 .admin_btn{

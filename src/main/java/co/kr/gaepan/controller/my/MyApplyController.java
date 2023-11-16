@@ -12,6 +12,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/my/*")
 public class MyApplyController {
 
-
-
 }
