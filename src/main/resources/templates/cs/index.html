@@ -12,29 +12,29 @@
 
     <div class="container">
         <section id="cs">
-            <div class="card-deck">
-                <div class="card">
-                    <img class="card-img-top" src="./thumb1/flower1.jpg" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title"><a type="button" th:href="@{/cs/notice/list}">공지사항</a></h5>
 
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src=".../100px200/" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title"><a type="button" th:href="@{/cs/faq/list}">자주 묻는 질문</a></h5>
 
-                    </div>
-                </div>
-                <div class="card">
-                    <img class="card-img-top" src=".../100px200/" alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title"><a type="button" th:href="@{/cs/qna/list}">고객문의</a></h5>
-
-                    </div>
-                </div>
+            <div class="image-container">
+                <img src="../img/cs/dog1.png" class="index-images" alt="...">
+                <a class="index-atag" th:href="@{/cs/notice/list}">공지사항</a>
             </div>
+
+            <div class="image-container">
+                <img src="../img/cs/dog1.png" class="index-images" alt="...">
+                <a class="index-atag" th:href="@{/cs/faq/list}">자주 묻는 질문</a>
+            </div>
+
+            <div class="image-container" id="image-container3">
+                <img src="../img/cs/dog1.png" class="index-images" alt="...">
+                <a class="index-atag" th:href="@{/cs/qna/list(group='qna', cate=31)}">고객문의</a>
+            </div>
+
+
+
+
+
+
+
             <div><button type="button" class="btn btn-primary" id="index-button">문의하기</button></div> <!-- bootstrap 기존 설정은 안 건드리는 게 좋음(css 때문에) -->
         </section>
     </div>

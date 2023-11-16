@@ -4,12 +4,12 @@ import co.kr.gaepan.dto.member.MemberDTO;
 import co.kr.gaepan.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Log4j2
 @RequestMapping("/member/*")
@@ -27,9 +27,9 @@ public class MemberController {
         return "member/login";
     }
 
-    @GetMapping("/policy")
-    public String policy(){
-        return "member/policy";
+    @GetMapping("/register2")
+    public String register2(){
+        return "member/register2";
     }
 
     @GetMapping("/register")
@@ -52,4 +52,42 @@ public class MemberController {
         return "member/login";
     }
 
+    @GetMapping("/check/uid/{uid}")
+    public ResponseEntity<String> checkDuplicateUserId(@PathVariable String uid) {
+        if (service.isUserIdUnique(uid)) {
+            return ResponseEntity.ok("사용 가능한 아이디입니다.");
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 사용 중인 아이디입니다.");
+        }
+    }
+
+    @GetMapping("/check/nick/{nick}")
+    public ResponseEntity<String> checkDuplicateUserNick(@PathVariable String nick) {
+
+
+
+        if (service.isUserNickUnique(nick)) {
+            return ResponseEntity.status(HttpStatus.OK).body("사용 가능한 닉네임입니다.");
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 사용 중인 닉네임입니다.");
+        }
+    }
+
+    @GetMapping("/check/hp/{hp}")
+    public ResponseEntity<String> checkDuplicateUserHp(@PathVariable String hp) {
+        if (service.isUserHpUnique(hp)) {
+            return ResponseEntity.status(HttpStatus.OK).body("사용 가능한 휴대포");
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 사용 중인 휴대폰번호입니다.");
+        }
+    }
+
+    @GetMapping("/check/email/{email}")
+    public ResponseEntity<String> checkDuplicateUserEmail(@PathVariable String email) {
+        if (service.isUserEmailUnique(email)) {
+            return ResponseEntity.ok("사용 가능한 이메일입니다.");
+        } else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("이미 사용 중인 이메일입니다.");
+        }
+    }
 }

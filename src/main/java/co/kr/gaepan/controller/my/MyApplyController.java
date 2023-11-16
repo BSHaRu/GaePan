@@ -12,19 +12,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/my/*")
 public class MyApplyController {
 
-    @Autowired
-    private MyAdoptApplyService myAdoptApplyService;
-
-    @GetMapping("/apply")
-    public String view() {
-        return "my/apply";
-    }
-
-    @PostMapping("/apply")
-    public String write(PetAdoptApplyDTO petAdoptApplyDTO) {
-        myAdoptApplyService.insertApply(petAdoptApplyDTO);
-
-        return "redircet:/my/apply";
-    }
-
 }

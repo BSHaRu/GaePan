@@ -25,7 +25,7 @@
                             <a th:href="@{/admin/member/members}">회원</a>
                         </li>
                         <li>
-                            <a th:href="@{/admin/member/black}">블랙리스트</a>
+                            <a th:href="@{/admin/member/black(type=3)}">블랙리스트</a>
                         </li>
                     </ol>
                 </li>
@@ -44,15 +44,12 @@
                     <a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>게시판관리</a>
                     <ol>
                         <li>
-<!--                            <a th:href="@{/admin/board/ad_notice/noticeList}">Notice</a>-->
                             <a th:href="@{/admin/board/list(group=notice)}">Notice</a>
                         </li>
                         <li>
-                            <!--<a th:href="@{/admin/board/ad_faq/faqList}">FAQ</a>-->
                             <a th:href="@{/admin/board/list(group=faq)}">FAQ</a>
                         </li>
                         <li>
-                            <!--<a th:href="@{/admin/board/ad_qna/qnaList}">QnA</a>-->
                             <a th:href="@{/admin/board/list(group=qna)}">QnA</a>
                         </li>
                     </ol>
