@@ -9,4 +9,9 @@ public interface MemberMapper {
 
     public void registerUser(MemberDTO dto);
 
+    public int checkDuplicateId(String uid);
+    public int checkDuplicateNick(String nick);
+    public int checkDuplicateHp(String hp);
+    public int checkDuplicateEmail(String email);
+
 }

@@ -20,4 +20,17 @@
         )
     </insert>
 
+    <select id="checkDuplicateId" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM gp_member WHERE uid = #{uid}
+    </select>
+    <select id="checkDuplicateNick" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM gp_member WHERE nick = #{nick}
+    </select>
+    <select id="checkDuplicateHp" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM gp_member WHERE hp = #{hp}
+    </select>
+    <select id="checkDuplicateEmail" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM gp_member WHERE email = #{email}
+    </select>
+
 </mapper>
