@@ -106,6 +106,13 @@ public class AdminBoardServiceImpl implements AdminBoardService {
         return pm;
     }
 
+    @Override
+    public List<GP_AdminBoardDTO> cateAndType(String group, String cate, String type) throws Exception{
+        List<GP_AdminBoardDTO> dto = mybatisAdminBoardMapper.cateAndType(group, cate, type);
+        log.info("cateAndType dto : " + dto);
+        return dto;
+    }
+
     // board에서 글 쓸 때 태그 공격 막기
     public GP_AdminBoardDTO replace(GP_AdminBoardDTO dto){
         dto.setTitle(gpUtil.replaceScript(dto.getTitle()));

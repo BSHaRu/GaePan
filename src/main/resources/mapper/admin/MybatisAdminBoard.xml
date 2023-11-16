@@ -5,13 +5,6 @@
 
 <mapper namespace="co.kr.gaepan.mapper.admin.MybatisAdminBoardMapper">
 
-    <!-- board List 출력 -->
-    <select id="findAll" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
-        SELECT * FROM gp_board
-        WHERE `group` = #{group}
-        ORDER BY bno DESC
-    </select>
-
     <!-- board 조회수 증가 -->
     <update id="updateViewCnt" parameterType="int">
         UPDATE gp_board SET hit = hit + 1
@@ -62,6 +55,35 @@
         SELECT count(*) FROM gp_board
         WHERE 1 = 1
         <include refid="search" />
+    </select>
+
+    <select id = "cateAndType" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
+        SELECT
+            bno,
+            `group`,
+            b.cate,
+            b.`type`,
+            bc.cateName,
+            bt.typeName
+        FROM gp_board AS b
+        JOIN gp_board_cate AS bc
+        ON b.cate = bc.cate
+        JOIN gp_board_type AS bt
+        ON b.`type` = bt.`type`
+        WHERE `group` = #{group}
+        AND (
+            <choose>
+                <!-- cate가 10, 20, 30일 경우 -->
+                <when test="cate == 10 or cate == 20 or cate == 30">
+                    1=1 <!-- 전체 조회를 위한 항상 참인 조건 -->
+                </when>
+                <!-- 그 이외의 경우 -->
+                <otherwise>
+                    b.cate = #{cate}
+                </otherwise>
+            </choose>
+        )
+        ORDER BY bno DESC;
     </select>
 
     <!--resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO"-->
