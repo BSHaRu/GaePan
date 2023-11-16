@@ -18,6 +18,7 @@
 
 **개발 환경**
 - Intellj
+- Spring boot 3
 - Java 17
 - MySql
 - MyBatis
