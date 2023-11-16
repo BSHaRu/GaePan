@@ -26,6 +26,18 @@ public class RestAdminMember {
         // return값을 공백이라도 줘야 ajax에서 success 처리가 됨
         return "";
     }
+
+    @PostMapping("/blackListRemove")
+    public String blackListRemove(@RequestBody List<MemberDTO> memberDTOList) {
+        try {
+            adminMemberService.blackMemberRemove(memberDTOList);
+        } catch (Exception e) {
+            log.error("admin member blackListCheck error", e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return "";
+    }
+
     @PostMapping("/leaveCheck")
     public String leaveCheck(@RequestBody List<MemberDTO> memberDTO) {
         try {

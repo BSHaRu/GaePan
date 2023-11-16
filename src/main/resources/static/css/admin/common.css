@@ -176,6 +176,7 @@ main h4 {
 main table{
     word-break: break-all;
     height: auto;
+    width: 100%;
 }
 main table th {
     vertical-align: middle !important;
@@ -317,6 +318,10 @@ main table th {
     margin-bottom: 10px;
 }
 
+.activePage{
+    color: #5caeef;
+}
+
 /* ================================== */
 #chartContainer{
     width: 100%;
@@ -376,6 +381,10 @@ main table th {
     font-weight: 500;
     background: #2A80B9;
     letter-spacing: 2px;
+}
+.searchBtn:hover{
+    background: #8972ee;
+    color: #fff;
 }
 
 .admin_btn{
