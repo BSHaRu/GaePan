@@ -29,3 +29,18 @@
 - Github
 
 <br/>
+
+**Dependencies**
+- JPA
+- oauth2
+- security
+- thymeleaf
+- thymeleaf-layout-dialect
+- mybatis
+- lombok
+
+- modelmapper
+- mapstruct
+- commons-io
+- gson
+- PageMaker(paging처리 자체제작 lib)
