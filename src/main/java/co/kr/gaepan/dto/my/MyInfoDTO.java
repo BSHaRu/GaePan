@@ -19,8 +19,13 @@ public class MyInfoDTO {
     private String name;
     private String nick;
     private int gender;
-    private String hp;
-    private String email;
+    private String hp1;
+    private String hp2;
+    private String hp3;
+    private String hp = (hp1 + "-" + hp2 + "-" + hp3);
+    private String email1;
+    private String email2;
+    private String email = (email1 + "@" + email2);
     private String birth;
     private int type;
     private String zip;

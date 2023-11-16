@@ -7,7 +7,7 @@
 
 <th:block th:if="${myInfoDTO != null }" layout:fragment="content">
     <main>
-        <form th:action="@{/my/info}" method="post">
+        <form th:action="@{/my/info}" method="post" th:object="${myInfoDTO}">
 
         <div id="my">
             <div class="info">
@@ -28,13 +28,14 @@
                                 <tr>
                                     <td>사용자 ID</td>
                                     <td>
-                                        <input name="uid" id="userId" th:value="${myInfoDTO.uid}" readonly style="border: none">
+                                        <input id="userId" th:value="${myInfoDTO.uid}" readonly style="border: none">
+                                        <input type="hidden" name="uid" th:value="${myInfoDTO.uid}" readonly style="border: none">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>비밀번호</td>
                                     <td>
-                                        <button id="btnChangePass">비밀번호 변경</button>
+                                        <a th:href="@{/my/passchange}" id="btnChangePass">비밀번호변경</a>
                                     </td>
                                 </tr>
                                 <tr>
@@ -58,17 +59,17 @@
                                 <tr>
                                     <td>E-mail</td>
                                     <td>
-                                        <input name="email" th:value="${myInfoDTO.  email.substring(0, myInfoDTO.email.indexOf('@'))}" style="width: 130px; height: 23px">@
-                                        <input name="email" th:value="${myInfoDTO.  email.substring(myInfoDTO.email.indexOf('@') + 1)}" style="width: 130px; height: 23px">
+                                        <input name="email1" th:value="${myInfoDTO.email.substring(0, myInfoDTO.email.indexOf('@'))}" style="width: 130px; height: 23px">@
+                                        <input name="email2" th:value="${myInfoDTO.email.substring(myInfoDTO.email.indexOf('@') + 1)}" style="width: 130px; height: 23px">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>휴대폰</td>
                                     <td>
                                         <p class="hp">
-                                            <input name="  hp" th:value="${myInfoDTO.hp.substring(0, 3)}" style="width: 130px; height: 23px"/>-
-                                            <input name="  hp" th:value="${myInfoDTO.hp.substring(4, 8)}" style="width: 130px; height: 23px"/>-
-                                            <input name="  hp" th:value="${myInfoDTO.hp.substring(9)}" style="width: 130px; height: 23px"/>
+                                            <input name="hp1" th:value="${myInfoDTO.hp.substring(0, 3)}" style="width: 130px; height: 23px"/>-
+                                            <input name="hp2" th:value="${myInfoDTO.hp.substring(4, 8)}" style="width: 130px; height: 23px"/>-
+                                            <input name="hp3" th:value="${myInfoDTO.hp.substring(9)}" style="width: 130px; height: 23px"/>
                                         </p>
                                     </td>
                                 </tr>
@@ -103,7 +104,7 @@
                                     </td>
                                 </tr>
                             </table>
-                            <button type="submit" id="btnInfoChange">수정하기</button>
+                            <button type="submit" id="btnInfoChange" th:with="uid=${myInfoDTO.uid}">수정하기</button>
                     </article>
                 </section>
             </div>
@@ -115,12 +116,5 @@
     <script src="/js/my/passCheck.js"></script>
     <script src="/js/my/myInfo.js"></script>
     <script src="/js/my/findzip.js"></script>
-    <script>
-        // 버튼에 대한 클릭 이벤트 핸들러 등록
-        document.getElementById("btnChangePass").addEventListener("click", function() {
-            // 페이지 이동
-            window.location.href = "/my/passchange";
-        });
-    </script>
 </th:block>
 </html>

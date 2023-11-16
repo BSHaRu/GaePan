@@ -5,6 +5,5 @@
 
 <mapper namespace="co.kr.gaepan.mapper.my.MyReviewMapper">
     <select id="review_all" resultType="co.kr.gaepan.dto.my.MyQnaDTO">
-
     </select>
 </mapper>

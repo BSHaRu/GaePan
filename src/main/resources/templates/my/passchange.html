@@ -6,7 +6,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <th:block layout:fragment="content">
-    <form th:action="@{/my/passchange}" method="POST" id="myForm">
+    <form th:action="@{#}" method="POST">
         <main>
             <div id="my">
                 <div class="info">
@@ -23,17 +23,23 @@
                     <section>
                         <article>
                             <h3>비밀번호 확인</h3>
-                            <input type="hidden" name="uid" th:value="${myInfoDTO.uid}" />
-                            <input type="hidden" name="email" th:value="${myInfoDTO.email}" />
-                            <table border="0">
+                            <table>
                                 <tr>
                                     <td>사용자 ID</td>
-                                    <td id="passCheckId">[[${myInfoDTO.uid}]]</td>
+                                    <td>
+                                        <input type="text" name="uid" th:value="${myInfoDTO?.uid}" readonly style="border: none" />
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>비밀번호 확인</td>
+                                    <td>현재 비밀번호</td>
                                     <td>
-                                        <input type="password" id="passCheck" name="pass" placeholder="비밀번호 확인"/>
+                                        <input type="password" id="checkPass" name="currentPw" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>변경할 비밀번호</td>
+                                    <td>
+                                        <input type="password" id="modifyPass" name="newPw" />
                                     </td>
                                 </tr>
                             </table>
@@ -47,5 +53,43 @@
             </div>
         </main>
     </form>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $("#btnSubmit").click(function (event) {
+                // 폼 기본 동작 방지
+                event.preventDefault();
+
+                // AJAX를 이용한 비밀번호 변경 요청
+                var currentPw = $("#checkPass").val();
+                var newPw = $("#modifyPass").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/my/passchange",
+                    data: {
+                        "currentPw": currentPw,
+                        "newPw": newPw
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        // 서버에서 비밀번호 변경에 대한 응답 처리
+                        if (response.success) {
+                            alert("비밀번호 변경 성공");
+                            // 변경 성공 시 다시 로그인 페이지로 이동 또는 다른 작업 수행
+                            window.location.href = "/member/login";
+                        } else {
+                            alert("비밀번호 변경 실패: " + response.message);
+                        }
+                    },
+                    error: function (error) {
+                        console.error("Error during password change: " + error);
+                    }
+                });
+            });
+        });
+    </script>
 </th:block>
 </html>

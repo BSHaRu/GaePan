@@ -13,19 +13,20 @@ import java.time.LocalDateTime;
 @Builder
 public class MyQnaDTO {
 
-    private int no;
+    private int bno;
+    private String uid;
     private String title;
     private String content;
-    private String uid;
     private String group;
     private int cate;
     private int type;
-    private int hit;
-    private String comment;
     private String redIP;
     private LocalDateTime regDate;
-    private String thumb1;
-    private String thumb2;
-    private String thumb3;
+    private int hit;
+    private String comment;
+
+    // 추가 필드
+    private String cateName;
+    private String typeName;
 
 }

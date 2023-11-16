@@ -24,18 +24,18 @@
                         <table border="0">
                             <tr>
                                 <th>번호</th>
-                                <th>문의채널(cate)</th>
-                                <th>문의유형(type)</th>
+                                <th>문의유형1(cate)</th>
+                                <th>문의유형2(type)</th>
                                 <th>제목</th>
                                 <th>작성일</th>
                                 <th>상태</th>
                             </tr>
-                            <tr th:each="list:${qnaList}" th:if="${list.uid}>
-                                <td class="no" th:text="${list.no}"></td>
-                                <td class="channel" th:text="${list.cateName}"></td>
-                                <td class="type" th:text="${list.typeName}"></td>
+                            <tr th:each="list:${qnaList}" th:if="${list.uid != null}">
+                                <td class="bno" th:text="${list.bno}" />
+                                <td class="channel" th:text="${list.cateName}" />
+                                <td class="type" th:text="${list.typeName}" />
                                 <td class="tit" th:text="${list.title}"><a href="#"></a></td>
-                                <td class="date" th:text="${list.regDate}"></td>
+                                <td class="date" th:text="${list.regDate}" />
                                 <td class="status"><span class="notAnswerYet">검토중</span></td>
                             </tr>
                         </table>
