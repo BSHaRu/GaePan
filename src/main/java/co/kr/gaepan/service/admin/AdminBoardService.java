@@ -1,8 +1,10 @@
 package co.kr.gaepan.service.admin;
 
 import co.kr.gaepan.dto.admin.GP_AdminBoardDTO;
+import co.kr.gaepan.util.SearchCriteria;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import net.koreate.common.utils.PageMaker;
 
 import java.util.List;
 
@@ -29,9 +31,12 @@ public interface AdminBoardService {
             int bno
             ) throws Exception;
 
-    // 페이징 블럭 정보
+    // 검색 결과에 따른 게시글 페이징 처리된 목록
+    List<GP_AdminBoardDTO> pagingBoardList(SearchCriteria cri) throws Exception;
 
-    // 통합
+    // 페이징 블럭 정보
+    PageMaker getPageMaker(SearchCriteria cri) throws Exception;
+
 
 
 }
