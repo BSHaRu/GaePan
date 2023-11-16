@@ -7,11 +7,14 @@ import co.kr.gaepan.mapper.admin.MybatisAdminBoardMapper;
 import co.kr.gaepan.repository.admin.AdminBoardRepository;
 import co.kr.gaepan.service.admin.AdminBoardService;
 import co.kr.gaepan.util.GP_Util;
+import co.kr.gaepan.util.SearchCriteria;
+import co.kr.gaepan.util.SearchPageMaker;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import net.koreate.common.utils.PageMaker;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -77,6 +80,30 @@ public class AdminBoardServiceImpl implements AdminBoardService {
         cookie.setMaxAge(60*60); // 1시간
         response.addCookie(cookie);
         mybatisAdminBoardMapper.updateViewCnt(bno);
+    }
+
+    @Override
+    public List<GP_AdminBoardDTO> pagingBoardList(SearchCriteria cri) throws Exception {
+        String searchType = cri.getSearchType();
+        String word = cri.getKeyword();
+
+        log.info("searchType : " + searchType);
+        log.info("keyword : " +word);
+
+        List<GP_AdminBoardDTO> boardList = mybatisAdminBoardMapper.searchList(cri);
+        log.info("boardList : " + boardList);
+        return boardList;
+//        return null;
+    }
+
+    @Override
+    public PageMaker getPageMaker(SearchCriteria cri) throws Exception {
+        int totalCount = mybatisAdminBoardMapper.searchListCount(cri);
+
+        PageMaker pm = new SearchPageMaker();
+        pm.setCri(cri);
+        pm.setTotalCount(totalCount);
+        return pm;
     }
 
     // board에서 글 쓸 때 태그 공격 막기

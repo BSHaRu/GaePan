@@ -22,12 +22,12 @@
     <!-- Js Plugins -->
     <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
-    <script th:src="@{/js/jquery.nice-select.min.js}"></script>
     <script th:src="@{/js/jquery-ui.min.js}"></script>
     <script th:src="@{/js/jquery.slicknav.js}"></script>
     <script th:src="@{/js/mixitup.min.js}"></script>
     <script th:src="@{/js/owl.carousel.min.js}"></script>
     <script th:src="@{/js/main.js}"></script>
+
 
     <script th:src="@{/js/admin/gnb.js}"></script>
     <script th:src="@{/js/admin/checkbox.js}"></script>
@@ -37,9 +37,15 @@
     </div>
     <script>
         $(function(){
+            // 목록 버튼 누르면 뒤로가기
             $(".btnList").click(function(e){
                 e.preventDefault();
                 history.go(-1);
+            });
+
+            $("#searchForm").submit(function () {
+                // keyword 입력칸의 값을 빈 값으로 설정
+                $("input[name='keyword']").val('');
             });
         })
     </script>

@@ -18,5 +18,51 @@
         WHERE bno = #{bno}
     </update>
 
+    <!-- 검색 쿼리 -->
+    <sql id="search">
+        <if test='searchType != null and !searchType.equals("") and searchType != "n" '>
+            <choose>
+                <when test='searchType == "tc"'>
+                    <!--
+                        CONCAT : 문자열 이어주기 위해 쓰는친구
+                        Like : 해당 문자열 있으면 검색
+                        % == *
+                    -->
+                    AND title LIKE CONCAT('%',#{keyword},'%')
+                    OR content LIKE CONCAT('%',#{keyword},'%')
+                </when>
+                <when test='searchType == "tcw"'>
+                    AND title LIKE CONCAT('%',#{keyword},'%')
+                    OR content LIKE CONCAT('%',#{keyword},'%')
+                    OR uid LIKE CONCAT('%',#{keyword},'%')
+                </when>
+                <otherwise>
+                    <!--
+                       나머지는 searchType과 검색하고자하는 열이 같으니깐 이렇게 표현 해줄 수 있음
+                       ${}로 하는 이유는 #{}을 하면 WHERE 'searchType'이 되니깐 문법적 오류다
+                   -->
+                    AND ${searchType} LIKE CONCAT('%',#{keyword},'%')
+                </otherwise>
+            </choose>
+        </if>
+    </sql>
+
+    <!-- board List 출력 -> [검색에 따라서] paging 처리까지 됨 -->
+    <select id="searchList" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
+        SELECT * FROM gp_board
+        WHERE `group` = #{group}
+        <include refid="search" />
+        ORDER BY bno DESC
+        LIMIT #{startRow}, #{perPageNum}
+    </select>
+
+    <!-- 해당 검색 결과에 나오는 게시글 총 개수 -->
+    <select id = "searchListCount" parameterType="co.kr.gaepan.util.SearchCriteria"
+            resultType="int">
+        SELECT count(*) FROM gp_board
+        WHERE 1 = 1
+        <include refid="search" />
+    </select>
+
     <!--resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO"-->
 </mapper>
