@@ -99,4 +99,28 @@ $(document).ready(function () {
     });
 
     // 이메일 검사
-    $('input[name
+    $('input[name=email]').focusout(function () {
+        validateInput($(this), reEmail, '유효하지 않은 이메일 주소입니다.', 'isEmailOk');
+    });
+
+    // 최종 확인
+    $('.registerForm').submit(function (e) {
+        e.preventDefault(); // 폼 제출 이벤트 중지
+
+        // true면 전송, false면 전송 취소
+        if (!formValidation.isUidOk || !formValidation.isPassOk1 || !formValidation.isPassOk2 || !formValidation.isNameOk || !formValidation.isEmailOk || !formValidation.isHpOk) {
+
+            console.log('isUidOk:', formValidation.isUidOk);
+            console.log('isPassOk1:', formValidation.isPassOk1);
+            console.log('isPassOk2:', formValidation.isPassOk2);
+            console.log('isNameOk:', formValidation.isNameOk);
+            console.log('isEmailOk:', formValidation.isEmailOk);
+            console.log('isHpOk:', formValidation.isHpOk);
+
+            alert('입력 정보를 확인 해주세요.');
+        } else {
+            // 폼 전송
+            this.submit();
+        }
+    });
+});
