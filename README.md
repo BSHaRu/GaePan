@@ -38,7 +38,7 @@
 - thymeleaf-layout-dialect
 - mybatis
 - lombok
-<br/>
+--------------
 - modelmapper
 - mapstruct
 - commons-io
