@@ -25,6 +25,10 @@ public class BoardDTO {
     private int hit;
     private int parent;
     private String comment;
+    
+    // 추가필드
+    private String cateName;
+    private String typeName;
 
     // toEntity
     public GP_AdminBoardEntity toEntity(){

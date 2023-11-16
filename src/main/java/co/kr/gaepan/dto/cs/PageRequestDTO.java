@@ -18,15 +18,21 @@ public class PageRequestDTO {
     private int pg = 1;
 
     @Builder.Default
-    private int size = 10;
+    private int size = 10; // (pg-1) * size로 인덱스 표현한다 => 첫페이지는 시작 인덱스 0, 두번째페이지는 10, 세번째페이지는 20
 
+    private String group;
+    private int cate;
+    // 각페이지 시작 인덱스번호
+    private int offset = (this.pg - 1) * this.size;
+    // 페이지마다 표시할 최대 개수
     @Builder.Default
-    private int cate = 10; // notice=10 faq=20 qna=30
+    private int limit = 10;
 
-    @Builder.Default
-    private int type = 0;
-    public Pageable getPageable(String sort){ // sort에 "no" 값 넣음
 
+    /*public Pageable getPageable(String sort){ // sort에 "no" 값 넣음
+
+        // pageable 객체는 JPA 쓸 때 이용
         return PageRequest.of(this.pg - 1, this.size, Sort.by(sort).descending());
     }
+    */
 }
