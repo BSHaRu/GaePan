@@ -10,7 +10,21 @@
     </select>
 
     <update id="updateInfo" >
-        UPDATE `gp_member` SET `pw` = #{pw}, `name` = #{name}, `nick` = #{nick}, `email` = #{email}, `hp` = #{hp}, `addr1` = #{addr1}, `addr2` = #{addr2}, `exp` = #{exp}, `count` = #{count}
+        UPDATE `gp_member` SET
+        `name` = #{name},
+        `nick` = #{nick},
+        `email` = CONCAT(#{email1}, '@', #{email2}),
+        `hp` = CONCAT(#{hp1}, '-', #{hp2}, '-', #{hp3}),
+        `addr1` = #{addr1},
+        `addr2` = #{addr2},
+        `exp` = #{exp},
+        `count` = #{count}
+        WHERE `uid` = #{uid}
+    </update>
+
+    <update id="updatePassword" parameterType="co.kr.gaepan.dto.my.MyInfoDTO">
+        UPDATE `gp_member`
+        SET `pw` = #{newPw}
         WHERE `uid` = #{uid}
     </update>
 
