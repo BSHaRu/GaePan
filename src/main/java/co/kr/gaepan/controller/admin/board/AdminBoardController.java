@@ -44,10 +44,11 @@ public class AdminBoardController {
     public String pagingBoardList(@RequestParam("group") String group,
                                   Model model, SearchCriteria cri)  {
         // board List 출력
-        List<GP_AdminBoardDTO> adminBoardList = null;
         cri.setGroup(group);
         try {
-            adminBoardList = adminBoardService.pagingBoardList(cri);
+            List<GP_AdminBoardDTO> adminBoardList
+                    = adminBoardService.pagingBoardList(cri);
+            model.addAttribute("adminBoardList", adminBoardList);
         } catch (Exception e) {
             log.error("admin board list error", e.getMessage());
             throw new RuntimeException(e);
@@ -61,7 +62,6 @@ public class AdminBoardController {
             log.error("admin board pm error", e.getMessage());
             throw new RuntimeException(e);
         }
-        model.addAttribute("adminBoardList", adminBoardList);
         model.addAttribute("group", group);
 
         return "admin/board/list";
@@ -72,7 +72,7 @@ public class AdminBoardController {
                            HttpServletResponse response,
                            Model model, int bno) {
         try {
-            // 여기에서 GaePan 쿠키가 있을 때만 실행하게 해야되네..
+            // todo 여기에서 GaePan 쿠키가 있을 때만 실행하게 해야되네..
             adminBoardService.updateViewCnt(request, response, bno);
 
             GP_AdminBoardDTO adminBoardDTO = adminBoardService.findById(bno);

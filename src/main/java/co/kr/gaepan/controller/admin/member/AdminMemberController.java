@@ -21,20 +21,6 @@ public class AdminMemberController {
 
     private final AdminMemberService adminMemberService;
 
-/*    @GetMapping("/members")
-    public String index(Model model) {
-        List<MemberDTO> memberDTOList = null;
-        try {
-            memberDTOList = adminMemberService.findAll();
-//            log.info("admin member list : {}", memberDTOList);
-        } catch (Exception e) {
-            log.error("admin member list error", e.getMessage());
-            throw new RuntimeException(e);
-        }
-        model.addAttribute("memberDTO", memberDTOList);
-
-        return "admin/member/members";
-    }*/
     @GetMapping("/members")
     public String index(Model model, SearchCriteria cri) {
         try {
