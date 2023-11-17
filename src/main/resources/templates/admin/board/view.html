@@ -11,7 +11,7 @@
         <article class="view">
             <nav>
                 <h2 class="title">
-                    [<span th:text="${adminBoardDTO.type}"></span>]
+                    [<span th:text="${adminBoardDTO.cateName}"></span>]
                     [[${adminBoardDTO.title}]]
                 </h2>
                 <span class="date"
@@ -19,10 +19,13 @@
                 </span>
             </nav>
 
-            <div class="content">
-              <pre>
-                [[${adminBoardDTO.content}]]
-              </pre>
+            <div class="content mt-3 mb-5">
+              <textarea>[[${adminBoardDTO.content}]]</textarea>
+            </div>
+
+            <div class="comment">
+                <span>댓글 📝</span>
+                <textarea>[[${adminBoardDTO.comment}]]</textarea>
             </div>
             <a href="#" class="btnList">목록보기</a>
         </article>

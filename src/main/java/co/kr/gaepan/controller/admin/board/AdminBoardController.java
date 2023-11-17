@@ -2,6 +2,8 @@ package co.kr.gaepan.controller.admin.board;
 
 
 import co.kr.gaepan.dto.admin.GP_AdminBoardDTO;
+import co.kr.gaepan.dto.board.BoardCateDTO;
+import co.kr.gaepan.service.admin.AdminBoardCateService;
 import co.kr.gaepan.service.admin.AdminBoardService;
 import co.kr.gaepan.util.SearchCriteria;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,21 +26,7 @@ import java.util.List;
 public class AdminBoardController {
 
     private final AdminBoardService adminBoardService;
-
-/*    @GetMapping("/list")
-    public String list(@RequestParam("group") String group, Model model) {
-        List<GP_AdminBoardDTO> adminBoardList = null;
-        try {
-            adminBoardList = adminBoardService.findAll(group);
-//            log.info("admin board list : {}", adminBoardList);
-        } catch (Exception e) {
-            log.error("admin board list error", e.getMessage());
-            throw new RuntimeException(e);
-        }
-        model.addAttribute("adminBoardList", adminBoardList);
-        model.addAttribute("group", group);
-        return "admin/board/list";
-    }*/
+    private final AdminBoardCateService adminBoardCateService;
 
     @GetMapping("/list")
     public String pagingBoardList(@RequestParam("group") String group,
@@ -49,6 +37,9 @@ public class AdminBoardController {
             List<GP_AdminBoardDTO> adminBoardList
                     = adminBoardService.pagingBoardList(cri);
             model.addAttribute("adminBoardList", adminBoardList);
+
+            List<BoardCateDTO> cateDTO = adminBoardCateService.getCateName(group);
+            model.addAttribute("cateDTO", cateDTO);
         } catch (Exception e) {
             log.error("admin board list error", e.getMessage());
             throw new RuntimeException(e);

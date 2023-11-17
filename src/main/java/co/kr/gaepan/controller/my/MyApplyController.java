@@ -12,4 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/my/*")
 public class MyApplyController {
 
+    @GetMapping("/apply")
+    public String view() {
+        return "my/apply";
+    }
 }

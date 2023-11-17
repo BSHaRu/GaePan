@@ -37,7 +37,4 @@ public interface AdminBoardService {
     // 페이징 블럭 정보
     PageMaker getPageMaker(SearchCriteria cri) throws Exception;
 
-    // cate & type 이름 가져오기
-    List<GP_AdminBoardDTO> cateAndType(String group, String cate, String type) throws Exception;
-
 }

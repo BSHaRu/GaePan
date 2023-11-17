@@ -1,6 +1,7 @@
 package co.kr.gaepan.mapper.admin;
 
 import co.kr.gaepan.dto.admin.GP_AdminBoardDTO;
+import co.kr.gaepan.dto.board.BoardCateDTO;
 import co.kr.gaepan.util.SearchCriteria;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -22,6 +23,7 @@ public interface MybatisAdminBoardMapper {
     int searchListCount(SearchCriteria cri) throws Exception;
 
     // cate & type 이름 가져오기
-    List<GP_AdminBoardDTO> cateAndType(String group, String cate, String type) throws Exception;
+    List<GP_AdminBoardDTO> getCate(String group, int cate) throws Exception;
+    List<BoardCateDTO> getCateName(String group) throws Exception;
 
 }
