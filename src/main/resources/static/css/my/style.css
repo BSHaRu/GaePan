@@ -966,13 +966,13 @@ footer p > strong {
     border-collapse: collapse;
 }
 #my > .qna > section > article > table * {
-    font-family: 'ë‹ì›€';
+    font-family: '돋움';
     color: #444;
 }
 
 #my > .qna > section > article > table th {
     padding: 6px;
-    background-color: #a5a7a5;
+    background-color: #8972ee;
     box-sizing: border-box;
     color: #fff;
 }
@@ -1055,6 +1055,8 @@ footer p > strong {
     background: url('/static/img/my/my_sprites2.png') no-repeat -120px -300px;
     font-size: 0;
 }
+
+#my > .qna
 
 /* my - info(나의설정) */
 #my > .info > section > article > table {

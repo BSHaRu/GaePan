@@ -29,8 +29,8 @@ public class MyQnaService {
 
 
     // 페이징 시작
-    public int selectQnaCountTotal() {
-        return myQnaMapper.selectQnaCountTotal();
+    public int selectQnaCountTotal(String uid) {
+        return myQnaMapper.selectQnaCountTotal(uid);
     }
 
     public int getLastPageNum(int total) {

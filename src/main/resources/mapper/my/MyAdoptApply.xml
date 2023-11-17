@@ -8,6 +8,8 @@
         INSERT INTO
             `gp_pet_adopt_apply`
         SET
+            `petNo` = #{petNo},
+            `uid` = #{uid},
             `name` = #{name},
             `hp` = #{hp},
             `reason` = #{reason},

@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class PetAdoptApplyDTO {
 
     private int no;
+    private int petNo;
     private int status;
     private String uid;
     private String name;
