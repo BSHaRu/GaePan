@@ -2,8 +2,11 @@ package co.kr.gaepan.controller.admin.rest;
 
 import co.kr.gaepan.dto.admin.GP_AdminBoardDTO;
 import co.kr.gaepan.dto.board.BoardCateDTO;
+import co.kr.gaepan.dto.board.BoardTypeDTO;
 import co.kr.gaepan.service.admin.AdminBoardCateService;
 import co.kr.gaepan.service.admin.AdminBoardService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,19 +25,19 @@ public class RestAdminBoard {
     private final AdminBoardService adminBoardService;
     private final AdminBoardCateService adminBoardCateService;
 
-    @GetMapping("/getCateDTO")
-    public List<BoardCateDTO> getCateDTO(@RequestParam("group") String group,
-                                             int cate){
-        List<BoardCateDTO> cateDTO = null;
-        log.info("getCateDTO cate" + cate);
-        log.info("getCateDTO group" + group);
+    @GetMapping("/ajaxWrite")
+    public List<GP_AdminBoardDTO> ajaxWrite(@RequestParam String optionValue,
+                                            int cate, int type,
+                                            HttpServletResponse response){
+
+        List<GP_AdminBoardDTO> boardDTO = null;
         try {
-            cateDTO = adminBoardCateService.getCateName(group);
-            log.info("CateDTO: " + cateDTO);
+            boardDTO = adminBoardCateService.cateNameAndTypeName(optionValue, cate, type);
         } catch (Exception e) {
-            log.error("ajax getCate error" + e.getMessage());
+            log.error("ajaxWrite error : ", e.getMessage());
             throw new RuntimeException(e);
         }
-        return cateDTO;
+
+        return boardDTO;
     }
 }

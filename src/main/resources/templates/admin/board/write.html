@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<th:block layout:fragment="content">
+    <section id="admin_config_info" class="admin__section">
+        <article class="write">
+            <h1>Admin Board Write</h1>
+            <from action="write" method="post">
+                <table>
+                    <tr class="row mb-3">
+                        <td class="col-md-12" colspan="2">
+                            <!-- group / cate / type 설정 -->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <select id="boardGroup" class="form-control" name="group">
+                                        <option value="notice">공지사항</option>
+                                        <option value="faq">FAQ</option>
+                                        <option value="qna">QnA</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select id="cate" class="form-control" name="cate">
+                                        <option value="0">cateName</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select id="type" class="form-control" name="type">
+                                        <option value="0">typeName</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>제목</td>
+                        <td>
+                            <input type="text" name="title" required placeholder="제목을 입력하세요." />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>내용</td>
+                        <td>
+                            <textarea name="content" required placeholder="내용을 입력하세요."></textarea>
+                        </td>
+                    </tr>
+                </table>
+                <div class="write__div">
+                    <input type="button" class="btnList" value="취소하기">
+                    <input type="submit" class="btnSubmit" value="등록하기">
+                </div>
+            </from>
+            <a href="#" class="btnList">목록보기</a>
+        </article>
+    </section>
+</th:block>
+</html>
