@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="co.kr.gaepan.mapper.cs.CsBoardMapper">
 
-    <select id="findByGroupAndCate" resultType="co.kr.gaepan.dto.board.BoardDTO"> <!-- LEFT JOIN 해야되? 여기선 JOIN이나 LEFT JOIN이나 같음-->
+    <select id="findByGroupAndCate" resultType="co.kr.gaepan.dto.board.BoardDTO"> <!-- LEFT JOIN 해야됨-->
         SELECT a.*, b.cateName, c.typeName FROM gp_board a
         LEFT JOIN gp_board_cate b ON a.cate = b.cate
         LEFT JOIN gp_board_type c ON a.cate = c.cate AND a.type = c.type <!--cate랑 type으로 동시에 JOIN, cate만 하면 안됨 -->
