@@ -14,6 +14,7 @@ import net.koreate.common.utils.PageMaker;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,6 +28,18 @@ public class AdminBoardController {
 
     private final AdminBoardService adminBoardService;
     private final AdminBoardCateService adminBoardCateService;
+
+    @GetMapping("/write")
+    public String write(){
+
+        return "admin/board/write";
+    }
+
+    @PostMapping("/write")
+    public String write(GP_AdminBoardDTO dto){
+        
+        return "redirect:/list";
+    }
 
     @GetMapping("/list")
     public String pagingBoardList(@RequestParam("group") String group,
@@ -74,6 +87,21 @@ public class AdminBoardController {
         }
 
         return "admin/board/view";
+    }
+
+    @GetMapping("/list/{group}/{cate}")
+    public String getCate(String group, int cate){
+        log.info("group" + group);
+        log.info("cate" + cate);
+        try {
+            List<GP_AdminBoardDTO> boardList = adminBoardCateService.getCate(group, cate);
+            log.info("admin board getCate : " + boardList);
+        } catch (Exception e) {
+            log.error("admin board getCate Error" + e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return "redirect:/list";
     }
 
 }

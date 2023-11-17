@@ -314,6 +314,11 @@ main table th {
     margin-right: 15px;
 }
 
+/* ===================== write ===================== */
+.write__div{
+    float: right;
+}
+
 /* ============= search ============= */
 #serachForm{
     margin: 10px -15px;
@@ -337,7 +342,7 @@ main table th {
     color: #5caeef;
 }
 
-/* ================================== */
+/* =============== chart =================== */
 #chartContainer{
     width: 100%;
     height: 370px;

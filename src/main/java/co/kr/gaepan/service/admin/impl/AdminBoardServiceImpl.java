@@ -42,6 +42,20 @@ public class AdminBoardServiceImpl implements AdminBoardService {
     }
 
     @Override
+    public List<GP_AdminBoardDTO> pagingBoardList(SearchCriteria cri) throws Exception {
+        String searchType = cri.getSearchType();
+        String word = cri.getKeyword();
+
+        log.info("searchType : " + searchType);
+        log.info("keyword : " +word);
+
+        List<GP_AdminBoardDTO> boardList = mybatisAdminBoardMapper.searchList(cri);
+//        boardList.add(GP_AdminBoardDTO.builder().group(group).build());
+//        log.info("boardList group : " + boardList.get(1).getGroup());
+        return boardList;
+    }
+
+    @Override
     public void modifyAdminBoard(GP_AdminBoardDTO dto) throws Exception {
 
     }
@@ -80,18 +94,6 @@ public class AdminBoardServiceImpl implements AdminBoardService {
         cookie.setMaxAge(60*60); // 1시간
         response.addCookie(cookie);
         mybatisAdminBoardMapper.updateViewCnt(bno);
-    }
-
-    @Override
-    public List<GP_AdminBoardDTO> pagingBoardList(SearchCriteria cri) throws Exception {
-        String searchType = cri.getSearchType();
-        String word = cri.getKeyword();
-
-        log.info("searchType : " + searchType);
-        log.info("keyword : " +word);
-
-        List<GP_AdminBoardDTO> boardList = mybatisAdminBoardMapper.searchList(cri);
-        return boardList;
     }
 
     @Override

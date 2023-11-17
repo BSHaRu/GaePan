@@ -22,8 +22,11 @@ public interface MybatisAdminBoardMapper {
     // 검색된 게시물의 전체 개수
     int searchListCount(SearchCriteria cri) throws Exception;
 
-    // cate & type 이름 가져오기
+    // cate에 따라 board List 출력
     List<GP_AdminBoardDTO> getCate(String group, int cate) throws Exception;
+
+    // group에 따라 카테고리를 cateName에 맞게 출력
     List<BoardCateDTO> getCateName(String group) throws Exception;
 
+    List<GP_AdminBoardDTO> cateNameAndTypeName(String group, int cate, int type) throws Exception;
 }

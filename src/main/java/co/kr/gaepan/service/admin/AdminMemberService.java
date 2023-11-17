@@ -32,5 +32,6 @@ public interface AdminMemberService {
     List<MemberDTO> pagingMemberList(SearchCriteria cri) throws Exception;
     // 페이징 블럭 정보
     PageMaker getPageMaker(SearchCriteria cri) throws Exception;
-    SearchPageMaker getSearchPageMaker(SearchCriteria cri) throws Exception;
+
+//    SearchPageMaker getSearchPageMaker(SearchCriteria cri) throws Exception;
 }
