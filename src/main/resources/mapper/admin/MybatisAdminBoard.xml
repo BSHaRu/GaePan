@@ -42,7 +42,11 @@
 
     <!-- board List 출력 -> [검색에 따라서] paging 처리까지 됨 -->
     <select id="searchList" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
-        SELECT * FROM gp_board
+        SELECT * FROM gp_board AS B
+        JOIN gp_board_cate AS BC
+            ON B.cate = BC.cate
+        JOIN gp_board_type AS BT
+        ON B.`type` = BT.`type`
         WHERE `group` = #{group}
         <include refid="search" />
         ORDER BY bno DESC
@@ -57,19 +61,25 @@
         <include refid="search" />
     </select>
 
-    <select id = "cateAndType" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
+    <!-- cateName을 출력하기 위해 간단하게 조회 -->
+    <select id="getCateName" resultType="co.kr.gaepan.dto.board.BoardCateDTO">
+        SELECT DISTINCT
+            BC.*,
+            B.`group`
+        FROM gp_board_cate AS BC
+        JOIN gp_board AS B
+            ON BC.cate = B.cate
+        WHERE `group` = #{group}
+        ORDER BY cate ASC
+    </select>
+
+    <select id = "getCate" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
         SELECT
-            bno,
-            `group`,
-            b.cate,
-            b.`type`,
-            bc.cateName,
-            bt.typeName
-        FROM gp_board AS b
-        JOIN gp_board_cate AS bc
-        ON b.cate = bc.cate
-        JOIN gp_board_type AS bt
-        ON b.`type` = bt.`type`
+            B.*,
+            BC.cateName,
+        FROM gp_board AS B
+        JOIN gp_board_cate AS BC
+        ON B.cate = BC.cate
         WHERE `group` = #{group}
         AND (
             <choose>

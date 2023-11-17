@@ -91,9 +91,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
         log.info("keyword : " +word);
 
         List<GP_AdminBoardDTO> boardList = mybatisAdminBoardMapper.searchList(cri);
-        log.info("boardList : " + boardList);
         return boardList;
-//        return null;
     }
 
     @Override
@@ -104,13 +102,6 @@ public class AdminBoardServiceImpl implements AdminBoardService {
         pm.setCri(cri);
         pm.setTotalCount(totalCount);
         return pm;
-    }
-
-    @Override
-    public List<GP_AdminBoardDTO> cateAndType(String group, String cate, String type) throws Exception{
-        List<GP_AdminBoardDTO> dto = mybatisAdminBoardMapper.cateAndType(group, cate, type);
-        log.info("cateAndType dto : " + dto);
-        return dto;
     }
 
     // board에서 글 쓸 때 태그 공격 막기
