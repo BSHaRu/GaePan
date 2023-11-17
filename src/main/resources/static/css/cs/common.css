@@ -44,8 +44,7 @@
     border: none;
 }
 .card-body{
-    height: 300px;
-    background: url('../../img/cs/dog1.png') no-repeat;
+
 }
 
 /* qna */
@@ -86,6 +85,26 @@
 #accordionExample{
     width: 900px;
 }
+
+.accordion > div{
+    background-color: #d4ccf7;
+}
+
+.accordion > div > button{
+    text-align: left;
+}
+
+.accordion > div div{
+    background-color: #d4ccf7;
+    border: none;
+}
+
+.card-body {
+    padding-left: 35px; /* 여백 크기 조절 */
+}
+
+
+
 
 
 
