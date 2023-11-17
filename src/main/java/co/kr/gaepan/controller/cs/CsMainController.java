@@ -27,7 +27,11 @@ public class CsMainController {
     @GetMapping("/qna/list")
     public String qnaList(Model model, PageRequestDTO pageRequestDTO){ // DTO 속성으로 group, cate 있으므로 파라미터 받을 수 있음
 
+        // pg 값이 변경될 때마다 호출하여 offset 갱신
+        pageRequestDTO.updateOffset();
+        // ToString 이용해서 pageRequestDTO 속성 확인
         log.info("qnaList...1 : " + pageRequestDTO);
+
         PageResponseDTO pageResponseDTO = csBoardService.findByGroupAndCate(pageRequestDTO);
         log.info("pageResponseDTO : " + pageResponseDTO);
 
@@ -46,7 +50,17 @@ public class CsMainController {
         return "cs/qna/write";
     }
     @GetMapping("/notice/list")
-    public String noticeList(){
+    public String noticeList(Model model, PageRequestDTO pageRequestDTO){ // DTO 속성으로 group, cate 있으므로 파라미터 받을 수 있음
+
+        // pg 값이 변경될 때마다 호출하여 offset 갱신
+        pageRequestDTO.updateOffset();
+        // ToString 이용해서 pageRequestDTO 속성 확인
+        log.info("noticeList...1 : " + pageRequestDTO);
+
+        PageResponseDTO pageResponseDTO = csBoardService.findByGroupAndCate(pageRequestDTO);
+        log.info("pageResponseDTO : " + pageResponseDTO);
+
+        model.addAttribute(pageResponseDTO);
 
         return "cs/notice/list";
     }
@@ -56,7 +70,17 @@ public class CsMainController {
         return "cs/notice/view";
     }
     @GetMapping("/faq/list")
-    public String faqList(){
+    public String faqList(Model model, PageRequestDTO pageRequestDTO){ // DTO 속성으로 group, cate 있으므로 파라미터 받을 수 있음
+
+        // pg 값이 변경될 때마다 호출하여 offset 갱신
+        pageRequestDTO.updateOffset();
+        // ToString 이용해서 pageRequestDTO 속성 확인
+        log.info("faqList...1 : " + pageRequestDTO);
+
+        PageResponseDTO pageResponseDTO = csBoardService.findByGroupAndCate(pageRequestDTO);
+        log.info("pageResponseDTO : " + pageResponseDTO);
+
+        model.addAttribute(pageResponseDTO);
 
         return "cs/faq/list";
     }
