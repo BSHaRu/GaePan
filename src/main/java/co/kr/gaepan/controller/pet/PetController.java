@@ -1,6 +1,6 @@
 package co.kr.gaepan.controller.pet;
 
-import co.kr.gaepan.dto.pet.PetRegisterDTO;
+import co.kr.gaepan.dto.pet.*;
 import co.kr.gaepan.service.pet.PetBoardService;
 import com.nimbusds.jose.shaded.gson.JsonObject;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,35 +25,36 @@ public class PetController {
     private final PetBoardService petBoardService;
 
     @RequestMapping("/pet/petlist")
-    public String main(Model model) {
+    public String main(PageRequestDTO pageRequestDTO , Model model) {
 
-        List<PetRegisterDTO> petall = petBoardService.PetAll();
-        model.addAttribute("petall", petall);
+        PageResponseDTO pageResponseDTO = petBoardService.PetAll(pageRequestDTO);
+
+        model.addAttribute("pageResponseDTO", pageResponseDTO);
 
         return "pet/petlist";
 
     }
 
     @RequestMapping("/pet/petdoglist")
-    public String petdoglist(Model model) {
-        List<PetRegisterDTO> PetDog = petBoardService.PetDog("1");
-        model.addAttribute("PetDog", PetDog);
+    public String petdoglist(PageRequestDTO pageRequestDTO ,Model model) {
+        PageResponseDTO pageResponseDTO = petBoardService.PetDog(pageRequestDTO, 1);
+        model.addAttribute("pageResponseDTO", pageResponseDTO);
 
         return "pet/petdoglist";
     }
 
     @RequestMapping("/pet/petcatlist")
-    public String petcatlist(Model model) {
-        List<PetRegisterDTO> PetCat = petBoardService.PetCat("2");
-        model.addAttribute("PetCat", PetCat);
+    public String petcatlist(PageRequestDTO pageRequestDTO ,Model model) {
+        PageResponseDTO pageResponseDTO = petBoardService.PetCat(pageRequestDTO,2);
+        model.addAttribute("pageResponseDTO", pageResponseDTO);
 
         return "pet/petcatlist";
     }
 
     @RequestMapping("/pet/petetclist")
-    public String petetclist(Model model) {
-        List<PetRegisterDTO> PetEtc = petBoardService.PetEtc("3");
-        model.addAttribute("PetEtc", PetEtc);
+    public String petetclist(PageRequestDTO pageRequestDTO ,Model model) {
+        PageResponseDTO pageResponseDTO = petBoardService.PetEtc(pageRequestDTO,3);
+        model.addAttribute("pageResponseDTO", pageResponseDTO);
 
         return "pet/petetclist";
     }
@@ -69,8 +71,13 @@ public class PetController {
     }
 
     @RequestMapping("/pet/register")
-    public String register() {
+    public String register(Model model) {
+
+        List<PetCateDTO> petcate = petBoardService.petcate();
+        model.addAttribute("petcate", petcate);
+
         return "pet/register";
+
     }
 
     @PostMapping("/pet/register")

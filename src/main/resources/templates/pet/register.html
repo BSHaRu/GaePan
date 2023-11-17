@@ -82,25 +82,48 @@
             }
         });
 
-        function uploadSummernoteImageFile(file, editor) {
-            data = new FormData();
-            data.append("file", file);
-            $.ajax({
-                data: data,
-                type: "POST",
-                url: "/uploadSummernoteImageFile",
-                contentType: false,
-                processData: false,
-                success: function (data) {
-                    // 항상 업로드된 파일의 url이 있어야 한다.
-                    $(editor).summernote('insertImage', data.url);
-                    console.log("File upload success. URL: ", data.url);
-                },
-                error: function (error) {
-                    console.error("File upload error:", error);
+        document.querySelector('#petcate').addEventListener('change', function() {
+
+            var selectedCate1 = this.value;
+            var category2Select = document.querySelector('#pettype');
+            var url = `/pet/types/${selectedCate1}`;
+
+            console.log("url : " + url);
+
+            var xhr = new XMLHttpRequest();
+            console.log(xhr);
+            xhr.open('GET', url, true);
+
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // 이전 옵션 제거
+                    while (category2Select.firstChild) {
+                        category2Select.removeChild(category2Select.firstChild);
+                    }
+
+                    var data= JSON.parse(xhr.response);
+                    for (var i = 0; i < data.length; i++) {
+                        console.log(data); // Access each item in the array
+                    }
+                    var defaultOption = document.createElement('option');
+                    defaultOption.value = 'cate0';
+                    defaultOption.text = '품종 선택';
+                    category2Select.appendChild(defaultOption);
+
+                    data.forEach(function(type) {
+                        var option = document.createElement('option');
+                        option.value = type.type;
+                        option.text = type.tName;
+                        category2Select.appendChild(option);
+                    });
+                } else {
+                    console.error('카테고리 2 데이터를 가져오는데 실패했습니다.');
                 }
-            });
-        }
+            };
+
+            xhr.send();
+        });
+
 
 
     };
@@ -118,17 +141,17 @@
                 <div class="mb-3">
                     <label>종류</label>
                     <br>
-                    <select class="form-select" name="cate" style="border: 1px solid #ccc; padding: 5px;">
-                        <option value="1">강아지</option>
-                        <option value="2">고양이</option>
-                        <option value="3">기타</option>
+                    <select id="petcate" class="form-select" name="cate" style="border: 1px solid #ccc; padding: 5px;">
+                        <option value="0">종류 선택</option>
+                        <option th:each="cate : ${petcate}" th:value="${cate.cate}" th:selected="${cate eq selectedCate1}" th:text="${cate.cName}">
                     </select>
                 </div>
                 <div class="mb-3">
                     <label>품종</label>
                     <br>
-                    <select class="form-select" name="type" style="border: 1px solid #ccc; padding: 5px;">
-                        <option value="1">기타</option>
+                    <select id="pettype" class="form-select" name="type" style="border: 1px solid #ccc; padding: 5px;">
+                        <option value="0">품종 선택</option>
+                        <option th:each="type : ${pettypes}" th:value="${type.cate}" th:text="${type.tName}">
                     </select>
                 </div>
                 <br>

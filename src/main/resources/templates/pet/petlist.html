@@ -73,29 +73,29 @@
                 <!-- 블로그 List -->
                 <div class="col-lg-8 col-md-7">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6" th:each="petall : ${petall}">
+                        <div class="col-lg-6 col-md-6 col-sm-6" th:each="pageResponseDTO : ${pageResponseDTO.dtoList}">
                             <div class="blog__item" >
                                 <div class="blog__item__pic">
                                     <!-- petall.thumb 변수는 실제 이미지 파일의 이름을 가정합니다. -->
-                                    <img style="width: 360px; height: 280px" th:src="@{/upload/} + ${petall.thumb}">
+                                    <img style="width: 360px; height: 280px" th:src="@{/upload/} + ${pageResponseDTO.thumb}">
                                 </div>
                                 <div class="blog__item__text">
                                     <ul>
-                                        <li th:text="${#temporals.format(petall.regDate, 'yy-MM-dd')}"><i class="fa fa-calendar-o"></i></li>
+                                        <li th:text="${#temporals.format(pageResponseDTO.regDate, 'yy-MM-dd')}"><i class="fa fa-calendar-o"></i></li>
                                         <li><i class="fa fa-comment-o"></i>1</li>
                                     </ul>
                                     <h5>
-                                        <a th:href="@{/pet/petdetails(no=${petall.no})}" class="title" th:id="${'title_' + petall.no}" th:text="${petall.title}"></a>
+                                        <a th:href="@{/pet/petdetails(no=${pageResponseDTO.no})}" class="title" th:id="${'title_' + pageResponseDTO.no}" th:text="${pageResponseDTO.title}"></a>
                                     </h5>
                                     <script th:inline="javascript">
                                         /* JavaScript로 동적으로 타이틀 조정 */
                                         var maxLength = 10;
-                                        var titleElement = document.getElementById('title_' + /*[[${petall.no}]]*/);
+                                        var titleElement = document.getElementById('title_' + /*[[${pageResponseDTO.no}]]*/);
                                         if (titleElement.textContent.length > maxLength) {
                                             titleElement.textContent = titleElement.textContent.slice(0, maxLength) + '...';
                                         }
                                     </script>
-                                    <a th:href="@{/pet/petdetails(no=${petall.no})}" class="blog__btn">
+                                    <a th:href="@{/pet/petdetails(no=${pageResponseDTO.no})}" class="blog__btn">
                                         READ MORE <span class="arrow_right"></span>
                                     </a>
                                 </div>
@@ -104,12 +104,10 @@
                         </div>
                         <!-- 페이징 처리 -->
                         <div class="col-lg-12">
-                            <div class="product__pagination blog__pagination">
-                                <a href="#"><i class="fa fa-long-arrow-left"></i></a>
-                                <a href="#">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                            <div class="product__pagination blog__pagination" th:if="${pageResponseDTO.dtoList != null and pageResponseDTO.total > 0}">
+                                <a th:if="${pageResponseDTO.prev}" th:href="@{/pet/petlist(pg=${pageResponseDTO.start - 1})}"><i class="fa fa-long-arrow-left"></i></a>
+                                <a th:each="num: ${#numbers.sequence(pageResponseDTO.start, pageResponseDTO.end)}" th:href="@{/pet/petlist(pg=${num})}">[[${num}]]</a>
+                                <a th:if="${pageResponseDTO.next}" th:href="@{/pet/petlist(pg=${pageResponseDTO.end + 1})}"><i class="fa fa-long-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
