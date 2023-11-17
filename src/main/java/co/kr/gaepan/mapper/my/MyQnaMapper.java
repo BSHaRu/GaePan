@@ -12,7 +12,7 @@ import java.util.Map;
 public interface MyQnaMapper {
 
     // 페이징 - 전체 게시글 갯수 계산
-    public int selectQnaCountTotal();
+    public int selectQnaCountTotal(String uid);
 
     public List<BoardCateDTO> findCname(BoardCateDTO boardCateDTO);
 
