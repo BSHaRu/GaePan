@@ -28,6 +28,17 @@
 
     </select>
 
+    <select id="petcategory" resultType="co.kr.gaepan.dto.pet.PetCateDTO">
+
+        SELECT * FROM gp_pet_cate
+
+    </select>
+    <select id="petType" resultType="co.kr.gaepan.dto.pet.PetTypeDTO">
+
+        SELECT * FROM gp_pet_type WHERE cate= #{cate};
+
+    </select>
+
     <select id="pet" resultType="co.kr.gaepan.dto.pet.PetRegisterDTO">
 
         SELECT * FROM gp_pet WHERE `no`= #{no};

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-11-16T14:35:55+0900",
+    date = "2023-11-17T08:51:17+0900",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.8 (Oracle Corporation)"
 )
 @Component
@@ -37,7 +37,6 @@ public class AdminBoardMapperImpl implements AdminBoardMapper {
         gP_AdminBoardDTO.comment( entity.getComment() );
 
         return gP_AdminBoardDTO.build();
-
     }
 
     @Override
@@ -62,7 +61,5 @@ public class AdminBoardMapperImpl implements AdminBoardMapper {
         gP_AdminBoardEntity.comment( dto.getComment() );
 
         return gP_AdminBoardEntity.build();
-
-
     }
 }
