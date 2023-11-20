@@ -85,12 +85,12 @@
                                         <li><i class="fa fa-comment-o"></i>1</li>
                                     </ul>
                                     <h5>
-                                        <a th:href="@{/pet/petdetails(no=${pageResponseDTO.no})}" class="title" th:id="${'title_' + pageResponseDTO.no}" th:text="${pageResponseDTO.title}"></a>
+                                        <a th:href="@{/pet/petdetails(no=${pageResponseDTO.getNo})}" class="title" th:id="${'title_'}" th:text="${pageResponseDTO.getTitle()}"></a>
                                     </h5>
                                     <script th:inline="javascript">
                                         /* JavaScript로 동적으로 타이틀 조정 */
                                         var maxLength = 10;
-                                        var titleElement = document.getElementById('title_' + /*[[${pageResponseDTO.no}]]*/);
+                                        var titleElement = document.getElementById('title_');
                                         if (titleElement.textContent.length > maxLength) {
                                             titleElement.textContent = titleElement.textContent.slice(0, maxLength) + '...';
                                         }
