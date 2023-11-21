@@ -31,6 +31,7 @@ public class PetRegisterEntity {
     private String regip;
     @CreationTimestamp
     private LocalDateTime regDate;
+    private int division;
 
     public PetRegisterDTO  toDTO() {
         return PetRegisterDTO.builder()
@@ -44,6 +45,7 @@ public class PetRegisterEntity {
               .type(type)
               .regip(regip)
               .regDate(regDate)
+              .division(division)
               .build();
     }
 

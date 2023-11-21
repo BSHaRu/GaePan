@@ -15,6 +15,7 @@ public class PetRegisterDTO {
 
     private int no;
     private String uid;
+    private String tName;
     private String title;
     private String thumb;
     private MultipartFile filethumb;
@@ -24,6 +25,8 @@ public class PetRegisterDTO {
     private int type;
     private String regip;
     private LocalDateTime regDate;
+    private int division;
+
 
     public PetRegisterEntity toEntity() {
         return PetRegisterEntity.builder()
@@ -37,6 +40,7 @@ public class PetRegisterDTO {
               .type(type)
               .regip(regip)
               .regDate(regDate)
+              .division(division)
               .build();
     }
 
