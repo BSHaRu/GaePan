@@ -17,8 +17,11 @@ public class RestAdminMember {
     private final AdminMemberService adminMemberService;
     @PostMapping("/blackListCheck")
     public String blackListCheck(@RequestBody List<MemberDTO> memberDTOList) {
+        log.info("너는 나오냐?");
         try {
+            log.info("123");
             adminMemberService.blackMember(memberDTOList);
+            log.info("456");
         } catch (Exception e) {
             log.error("admin member blackListCheck error", e.getMessage());
             throw new RuntimeException(e);

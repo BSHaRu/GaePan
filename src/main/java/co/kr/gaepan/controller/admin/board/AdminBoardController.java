@@ -3,6 +3,8 @@ package co.kr.gaepan.controller.admin.board;
 
 import co.kr.gaepan.dto.admin.GP_AdminBoardDTO;
 import co.kr.gaepan.dto.board.BoardCateDTO;
+import co.kr.gaepan.dto.board.BoardDTO;
+import co.kr.gaepan.dto.board.BoardTypeDTO;
 import co.kr.gaepan.service.admin.AdminBoardCateService;
 import co.kr.gaepan.service.admin.AdminBoardService;
 import co.kr.gaepan.util.SearchCriteria;
@@ -30,15 +32,40 @@ public class AdminBoardController {
     private final AdminBoardCateService adminBoardCateService;
 
     @GetMapping("/write")
-    public String write(){
+    public String write(@RequestParam("group") String group,
+                        Model model) {
+        try {
+//            List<BoardDTO> boardDTO = adminBoardService.findByGroup(group);
+            List<BoardCateDTO> cateDTO = adminBoardCateService.getCateName(group);
+            List<BoardTypeDTO> typeDTO = adminBoardCateService.selectType(cateDTO.get(0).getCate());
 
+//            log.info("boardDTO:" + boardDTO);
+            log.info("cateDTO: " + cateDTO);
+            log.info("typeDTO: " + typeDTO);
+
+//            model.addAttribute("boardDTO", boardDTO);
+            model.addAttribute("cateDTO", cateDTO);
+            model.addAttribute("typeDTO", typeDTO);
+        } catch (Exception e) {
+            log.error("getWriteController error" + e.getMessage());
+            throw new RuntimeException(e);
+        }
         return "admin/board/write";
     }
 
     @PostMapping("/write")
-    public String write(GP_AdminBoardDTO dto){
-        
-        return "redirect:/list";
+    public String write(GP_AdminBoardDTO dto, HttpServletRequest request,
+                    @RequestParam("group") String group){
+        try {
+            String ip = request.getRemoteAddr();
+            dto.setRegIP(ip);
+            adminBoardService.saveAdminBoard(dto);
+        } catch (Exception e) {
+            log.error("getWriteController error" + e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return "redirect:list?group="+group;
     }
 
     @GetMapping("/list")
@@ -87,21 +114,6 @@ public class AdminBoardController {
         }
 
         return "admin/board/view";
-    }
-
-    @GetMapping("/list/{group}/{cate}")
-    public String getCate(String group, int cate){
-        log.info("group" + group);
-        log.info("cate" + cate);
-        try {
-            List<GP_AdminBoardDTO> boardList = adminBoardCateService.getCate(group, cate);
-            log.info("admin board getCate : " + boardList);
-        } catch (Exception e) {
-            log.error("admin board getCate Error" + e.getMessage());
-            throw new RuntimeException(e);
-        }
-
-        return "redirect:/list";
     }
 
 }

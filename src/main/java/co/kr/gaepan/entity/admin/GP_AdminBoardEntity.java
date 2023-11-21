@@ -2,7 +2,7 @@ package co.kr.gaepan.entity.admin;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -21,12 +21,14 @@ public class GP_AdminBoardEntity {
     private String uid;
     private String title;
     private String content;
+    @Column(name = "`group`")
     private String group;
     private int cate;
+    @Column(name = "`type`")
     private int type;
     private String regIP;
 
-    @CreatedDate
+    @CreationTimestamp
     private LocalDateTime regDate;
 
     @Builder.Default

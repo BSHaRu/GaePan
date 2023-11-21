@@ -73,8 +73,15 @@
         ORDER BY cate ASC
     </select>
 
+    <!-- cate에 따라 type 출력 -->
+    <select id="selectType" resultType="co.kr.gaepan.dto.board.BoardTypeDTO">
+        SELECT * FROM gp_board_type
+        WHERE `cate` = #{cate}
+        ORDER BY `type` ASC
+    </select>
+
     <!-- cate에 따라 boardList 출력 -->
-    <select id = "getCate" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
+    <select id="getCate" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
         SELECT
             B.*,
             BC.cateName,
@@ -97,8 +104,25 @@
         ORDER BY bno DESC;
     </select>
 
-    <select id="cateNameAndTypeName" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
-
+    <!-- board group만 추출 -->
+    <select id="findByGroup" resultType="co.kr.gaepan.dto.board.BoardDTO">
+        SELECT DISTINCT `group` FROM gp_board;
     </select>
+
+<!--    <select id="cateNameAndTypeName" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
+        SELECT DISTINCT
+            bt.*,
+            bc.cateName,
+            CASE
+                WHEN bt.`type` >= 10 AND bt.`type` < 20 THEN 'notice'
+                WHEN bt.`type` >= 20 AND bt.`type` < 30 THEN 'faq'
+                WHEN bt.`type` >= 30 AND bt.`type` < 40 THEN 'qna'
+                ELSE NULL
+            END AS `group`
+        FROM gp_board_type AS bt
+        JOIN gp_board_cate AS bc
+            ON bt.cate = bc.cate
+        ORDER BY bt.`type` ASC
+    </select>-->
 
 </mapper>

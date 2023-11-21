@@ -45,10 +45,10 @@ public class AdminMemberController {
     }
 
     @GetMapping("/black")
-    public String black(@RequestParam("type") int type, Model model) {
+    public String black(@RequestParam("role") int role, Model model) {
         List<MemberDTO> memberDTOList = null;
         try {
-            memberDTOList = adminMemberService.blackList(type);
+            memberDTOList = adminMemberService.blackList(role);
         } catch (Exception e) {
             log.error("admin member list error", e.getMessage());
             throw new RuntimeException(e);
