@@ -14,7 +14,7 @@ public interface AdminMemberService {
     List<MemberDTO> findAll() throws Exception;
 
     // 블랙리스트
-    List<MemberDTO> blackList(int type) throws Exception;
+    List<MemberDTO> blackList(int role) throws Exception;
 
     // 회원 상세 보기
     MemberDTO findById(int no) throws Exception;

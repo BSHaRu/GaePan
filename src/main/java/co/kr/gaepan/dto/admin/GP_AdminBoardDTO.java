@@ -1,8 +1,6 @@
 package co.kr.gaepan.dto.admin;
 
-import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 

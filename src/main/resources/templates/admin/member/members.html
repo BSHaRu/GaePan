@@ -16,7 +16,7 @@
         </nav>
 
         <div class="row">
-            <dvi class="col-md-12">
+            <div class="col-md-12">
                 <form id="serachForm" class="row">
                     <!-- 검색 카테고리 만들기 -->
                     <div class="col-md-3">
@@ -47,7 +47,7 @@
                         </select>
                     </div>
                 </form>
-            </dvi>
+            </div>
         </div>
 
         <form id="formCheck" action="#">
@@ -104,8 +104,8 @@
                             <span class="ingMember" th:text="가입중"></span>
                         </th:block>
                     </td>
-                    <td class="memberType" th:data-type="${member.type}">
-                        <th:block th:switch="${member.type}">
+                    <td class="memberRoles" th:data-role="${member.role}">
+                        <th:block th:switch="${member.role}">
                             <span th:case="1" class="nomalMember">일반</span>
                             <span th:case="2" class="warningMember">주의</span>
                             <span th:case="3" class="blackMember">블랙</span>

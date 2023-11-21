@@ -35,7 +35,7 @@
     <!-- black List 출력 -->
     <select id="blackList" resultType="co.kr.gaepan.dto.member.MemberDTO">
         SELECT * FROM gp_member
-        WHERE `type` IN(2,3)
+        WHERE role IN(2,3)
         ORDER BY `no` DESC;
     </select>
 
@@ -49,8 +49,8 @@
         close : ()를 닫아 주는 친구
     -->
     <update id="blackMember">
-        UPDATE gp_member SET
-        type = 3,
+        UPDATE `gp_member` SET
+        `role` = 3,
         levDate = NOW()
         WHERE `no` in
         <foreach item="member" index="index" collection="memberDTOList"
@@ -62,8 +62,8 @@
     <!-- 블랙리스트 해제 -->
     <update id="blackMemberRemove">
         UPDATE gp_member SET
-        type = 2,
-        levDate = NOW()
+        role = 2
+<!--        levDate = NOW()-->
         WHERE `no` in
         <foreach item="member" index="index" collection="memberDTOList"
                  open="(" separator="," close=")">
@@ -80,7 +80,7 @@
         hp = null,
         email = null,
         birth = null,
-        type = 4,
+        role = 4,
         zip = 0,
         addr1 = '  ',
         addr2 = '  ',

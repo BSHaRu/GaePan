@@ -30,8 +30,8 @@ public class AdminMemberServiceImpl implements AdminMemberService {
     }
 
     @Override
-    public List<MemberDTO> blackList(int type) throws Exception {
-        List<MemberDTO> blackList = mybatisAdminMemberMapper.blackList(type);
+    public List<MemberDTO> blackList(int role) throws Exception {
+        List<MemberDTO> blackList = mybatisAdminMemberMapper.blackList(role);
         blackList.replaceAll(gpUtil::addrSubString);
         return blackList;
     }

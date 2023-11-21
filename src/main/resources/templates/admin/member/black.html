@@ -69,8 +69,8 @@
                                 <span class="ingMember" th:text="가입중"></span>
                             </th:block>
                         </td>
-                        <td class="memberType" th:data-type="${member.type}">
-                            <th:block th:switch="${member.type}">
+                        <td class="memberRoles" th:data-type="${member.role}">
+                            <th:block th:switch="${member.role}">
                                 <span th:case="1" class="nomalMember">일반</span>
                                 <span th:case="2" class="warningMember">주의</span>
                                 <span th:case="3" class="blackMember">블랙</span>

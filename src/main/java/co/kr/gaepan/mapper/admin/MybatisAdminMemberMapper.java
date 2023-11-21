@@ -12,7 +12,7 @@ public interface MybatisAdminMemberMapper {
     List<MemberDTO> findAll() throws Exception;
 
     // 블랙리스트 회원 정보 조회
-    List<MemberDTO> blackList(int type) throws Exception;
+    List<MemberDTO> blackList(int role) throws Exception;
 
     // 블랙리스트 등록
     void blackMember(List<MemberDTO> memberDTOList) throws Exception;

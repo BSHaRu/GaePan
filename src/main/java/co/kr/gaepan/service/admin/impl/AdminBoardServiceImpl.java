@@ -1,6 +1,7 @@
 package co.kr.gaepan.service.admin.impl;
 
 import co.kr.gaepan.dto.admin.GP_AdminBoardDTO;
+import co.kr.gaepan.dto.board.BoardDTO;
 import co.kr.gaepan.entity.admin.GP_AdminBoardEntity;
 import co.kr.gaepan.mapper.admin.AdminBoardMapper;
 import co.kr.gaepan.mapper.admin.MybatisAdminBoardMapper;
@@ -32,13 +33,8 @@ public class AdminBoardServiceImpl implements AdminBoardService {
     @Override
     public void saveAdminBoard(GP_AdminBoardDTO dto) throws Exception {
         GP_AdminBoardEntity entity = adminBoardMapper.toEntity(dto);
+        log.info("Saving admin board : " + entity);
         adminBoardRepository.save(entity);
-    }
-
-    @Override
-    public List<GP_AdminBoardDTO> findAll(String group) throws Exception {
-        List<GP_AdminBoardDTO> dto = mybatisAdminBoardMapper.findAll(group);
-        return dto;
     }
 
     @Override
@@ -69,6 +65,12 @@ public class AdminBoardServiceImpl implements AdminBoardService {
     public GP_AdminBoardDTO findById(int bno) throws Exception {
         GP_AdminBoardEntity entity = adminBoardRepository.findById(bno).get();
         GP_AdminBoardDTO dto = adminBoardMapper.toDTO(entity);
+        return dto;
+    }
+
+    @Override
+    public List<BoardDTO> findByGroup(String group) throws Exception {
+        List<BoardDTO> dto = mybatisAdminBoardMapper.findByGroup(group);
         return dto;
     }
 

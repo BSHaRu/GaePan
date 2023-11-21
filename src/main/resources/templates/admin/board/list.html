@@ -31,7 +31,6 @@
                 <!-- 검색 -->
                 <dvi class="col-md-12">
                     <form id="serachForm" class="row">
-                        <input type="hidden" name="group" th:value="${group}" />
                         <!-- 검색 카테고리 만들기 -->
                         <div class="col-md-3">
                             <select class="form-control" name="searchType">
@@ -79,6 +78,7 @@
             </div>
 
             <form id="formCheck" th:action="@{write}" method="get">
+                <input type="hidden" name="group" th:value="${group}" />
                 <table class="table table-hover">
                     <thead>
                     <tr>
