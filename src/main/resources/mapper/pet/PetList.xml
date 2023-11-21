@@ -4,27 +4,57 @@
 
 <mapper namespace="co.kr.gaepan.mapper.pet.PetListMapper">
 
-    <select id="petlist" resultType="co.kr.gaepan.dto.pet.PetRegisterDTO">
+    <select id="mainmissinglist" resultType="co.kr.gaepan.dto.pet.PetRegisterDTO">
 
-        SELECT * FROM gp_pet ORDER BY `no` DESC;
-
-    </select>
-
-    <select id="petdoglist" resultType="co.kr.gaepan.dto.pet.PetRegisterDTO">
-
-        SELECT * FROM gp_pet WHERE cate= #{cate} ORDER BY `no` DESC;
-
-    </select>
-
-    <select id="petcatlist" resultType="co.kr.gaepan.dto.pet.PetRegisterDTO">
-
-        SELECT * FROM gp_pet WHERE cate= #{cate} ORDER BY `no` DESC;
+        SELECT
+            a.*,
+            b.tName
+        FROM gp_pet AS a
+        JOIN gp_pet_type AS b
+        ON a.type = b.type
+        WHERE division = 2 ORDER BY `no` DESC LIMIT 10;
 
     </select>
 
-    <select id="petetclist" resultType="co.kr.gaepan.dto.pet.PetRegisterDTO">
+    <select id="mainpetdoglist" resultType="co.kr.gaepan.dto.pet.PetRegisterDTO">
 
-        SELECT * FROM gp_pet WHERE cate= #{cate} ORDER BY `no` DESC;
+        SELECT
+            a.*,
+            b.tName
+        FROM gp_pet AS a
+                 JOIN gp_pet_type AS b
+                      ON a.`type` = b.`type`
+        WHERE a.cate= 1 AND division = 1
+        ORDER BY `no` DESC
+        LIMIT 12;
+
+    </select>
+
+    <select id="mainpetcatlist" resultType="co.kr.gaepan.dto.pet.PetRegisterDTO">
+
+        SELECT
+            a.*,
+            b.tName
+        FROM gp_pet AS a
+                 JOIN gp_pet_type AS b
+                      ON a.`type` = b.`type`
+        WHERE a.cate= 2 AND division = 1
+        ORDER BY `no` DESC
+        LIMIT 12;
+
+    </select>
+
+    <select id="mainpetetclist" resultType="co.kr.gaepan.dto.pet.PetRegisterDTO">
+
+        SELECT
+            a.*,
+            b.tName
+        FROM gp_pet AS a
+                 JOIN gp_pet_type AS b
+                      ON a.`type` = b.`type`
+        WHERE a.cate= 3 AND division = 1
+        ORDER BY `no` DESC
+        LIMIT 12;
 
     </select>
 

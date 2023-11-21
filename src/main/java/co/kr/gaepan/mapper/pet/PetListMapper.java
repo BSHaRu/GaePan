@@ -13,10 +13,10 @@ import java.util.List;
 @Mapper
 public interface PetListMapper {
 
-    public List<PetRegisterDTO> petlist();
-    public List<PetRegisterDTO> petdoglist(String cate);
-    public List<PetRegisterDTO> petcatlist(String cate);
-    public List<PetRegisterDTO> petetclist(String cate);
+    public List<PetRegisterDTO> mainmissinglist();
+    public List<PetRegisterDTO> mainpetdoglist();
+    public List<PetRegisterDTO> mainpetcatlist();
+    public List<PetRegisterDTO> mainpetetclist();
     public PetRegisterDTO pet(String no);
     public List<PetCateDTO> petcategory();
     public List<PetTypeDTO> petType(int cate);

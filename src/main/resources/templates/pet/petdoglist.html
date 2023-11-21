@@ -83,17 +83,10 @@
                                         <li><i class="fa fa-comment-o"></i>1</li>
                                     </ul>
                                     <h5>
-                                        <a href="#" class="title" th:id="${'title_'}" th:text="${PetDog.getTitle()}"></a>
+                                        <a href="#" class="title" th:text="${PetDog.getName()}"></a>
                                     </h5>
-                                    <script th:inline="javascript">
-                                        /* JavaScript로 동적으로 타이틀 조정 */
-                                        var maxLength = 10;
-                                        var titleElement = document.getElementById('title_');
-                                        if (titleElement.textContent.length > maxLength) {
-                                            titleElement.textContent = titleElement.textContent.slice(0, maxLength) + '...';
-                                        }
-                                    </script>
-                                    <a th:href="@{/pet/petdetails(no=${PetDog.getNo()})}" class="blog__btn">
+
+                                    <a th:href="@{/pet/details(no=${PetDog.getNo()})}" class="blog__btn">
                                         READ MORE <span class="arrow_right"></span>
                                     </a>
                                 </div>

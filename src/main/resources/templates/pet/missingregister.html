@@ -61,19 +61,68 @@
 
         $('#summernote').summernote({
             height: 400,                 // 에디터 높이
-            minHeight: 400,             // 최소 높이
+            minHeight: 400,              // 최소 높이
             maxHeight: null,             // 최대 높이
-            focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-            lang: "ko-KR",					// 한글 설정
-            placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
-
+            focus: true,                 // 에디터 로딩후 포커스를 맞출지 여부
+            lang: "ko-KR",               // 한글 설정
+            placeholder: '최대 2048자까지 쓸 수 있습니다',  // placeholder 설정
+            callbacks: {
+                onImageUpload: function (files) {
+                    uploadSummernoteImageFile(files[0], this);
+                },
+                onPaste: function (e) {
+                    var clipboardData = e.originalEvent.clipboardData;
+                    if (clipboardData && clipboardData.items && clipboardData.items.length) {
+                        var item = clipboardData.items[0];
+                        if (item.kind === 'file' && item.type.indexOf('upload/') !== -1) {
+                            e.preventDefault();
+                        }
+                    }
+                }
+            }
         });
-        // 서머노트 리셋
-        $('#summernote').summernote('reset');
-        // 마지막으로 한 행동 취소 ( 뒤로가기 )
-        $('#summernote').summernote('undo');
-        // 앞으로가기
-        $('#summernote').summernote('redo');
+
+        document.querySelector('#petcate').addEventListener('change', function() {
+
+            var selectedCate1 = this.value;
+            var category2Select = document.querySelector('#pettype');
+            var url = `/pet/types/${selectedCate1}`;
+
+            console.log("url : " + url);
+
+            var xhr = new XMLHttpRequest();
+            console.log(xhr);
+            xhr.open('GET', url, true);
+
+            xhr.onload = function() {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    // 이전 옵션 제거
+                    while (category2Select.firstChild) {
+                        category2Select.removeChild(category2Select.firstChild);
+                    }
+
+                    var data= JSON.parse(xhr.response);
+                    for (var i = 0; i < data.length; i++) {
+                        console.log(data); // Access each item in the array
+                    }
+                    var defaultOption = document.createElement('option');
+                    defaultOption.value = 'cate0';
+                    defaultOption.text = '품종 선택';
+                    category2Select.appendChild(defaultOption);
+
+                    data.forEach(function(type) {
+                        var option = document.createElement('option');
+                        option.value = type.type;
+                        option.text = type.tName;
+                        category2Select.appendChild(option);
+                    });
+                } else {
+                    console.error('카테고리 2 데이터를 가져오는데 실패했습니다.');
+                }
+            };
+
+            xhr.send();
+        });
 
 
 
@@ -84,25 +133,26 @@
 <div class="container">
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
-            <h4 class="mb-3 text-center">분양 글 등록</h4>
+            <h4 class="mb-3 text-center">실종 동물</h4>
             <br>
-            <form class="registerForm" th:action="@{/pet/register}" method="post" enctype="multipart/form-data">
+            <form class="registerForm" th:action="@{/pet/missingregister}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="regip" value="0.0.0.1">
                 <input type="hidden" name="uid" value="test">
+                <input type="hidden" name="division" value="2">
                 <div class="mb-3">
                     <label>종류</label>
                     <br>
-                    <select class="form-select" name="cate" style="border: 1px solid #ccc; padding: 5px;">
-                        <option value="1">강아지</option>
-                        <option value="2">고양이</option>
-                        <option value="3">기타</option>
+                    <select id="petcate" class="form-select" name="cate" style="border: 1px solid #ccc; padding: 5px;">
+                        <option value="0">종류 선택</option>
+                        <option th:each="cate : ${petcate}" th:value="${cate.cate}" th:selected="${cate eq selectedCate1}" th:text="${cate.cName}">
                     </select>
                 </div>
                 <div class="mb-3">
                     <label>품종</label>
                     <br>
-                    <select class="form-select" name="type" style="border: 1px solid #ccc; padding: 5px;">
-                        <option value="1">기타</option>
+                    <select id="pettype" class="form-select" name="type" style="border: 1px solid #ccc; padding: 5px;">
+                        <option value="0">품종 선택</option>
+                        <option th:each="type : ${pettypes}" th:value="${type.cate}" th:text="${type.tName}">
                     </select>
                 </div>
                 <br>

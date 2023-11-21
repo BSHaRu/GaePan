@@ -69,11 +69,11 @@ public class PetBoardService {
         return null; // 파일이 비어있거나 업로드 실패 시 null 반환
     }
 
-    public PageResponseDTO PetAll(PageRequestDTO pageRequestDTO) {
+    public PageResponseDTO PetAll(PageRequestDTO pageRequestDTO, int division) {
 
         Pageable pageable = pageRequestDTO.getPageable("no");
 
-        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAll(pageable);
+        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAllByDivision(pageable, division);
 
         Page<PetRegisterDTO> articles = petRegisterEntities.map(PetRegisterEntity::toDTO);
 
@@ -92,11 +92,11 @@ public class PetBoardService {
                 .build();
     }
 
-    public PageResponseDTO PetDog(PageRequestDTO pageRequestDTO, int cate) {
+    public PageResponseDTO PetDog(PageRequestDTO pageRequestDTO, int cate, int division) {
 
         Pageable pageable = pageRequestDTO.getPageable("no");
 
-        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAllByCate(pageable, cate);
+        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAllByCateAndDivision(pageable, cate, division);
 
         Page<PetRegisterDTO> articles = petRegisterEntities.map(PetRegisterEntity::toDTO);
 
@@ -115,11 +115,11 @@ public class PetBoardService {
                 .build();
     }
 
-    public PageResponseDTO PetCat(PageRequestDTO pageRequestDTO, int cate) {
+    public PageResponseDTO PetCat(PageRequestDTO pageRequestDTO, int cate, int division) {
 
         Pageable pageable = pageRequestDTO.getPageable("no");
 
-        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAllByCate(pageable, cate);
+        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAllByCateAndDivision(pageable, cate, division);
 
         Page<PetRegisterDTO> articles = petRegisterEntities.map(PetRegisterEntity::toDTO);
 
@@ -138,11 +138,194 @@ public class PetBoardService {
                 .build();
     }
 
-    public PageResponseDTO PetEtc(PageRequestDTO pageRequestDTO, int cate) {
+    public PageResponseDTO PetEtc(PageRequestDTO pageRequestDTO, int cate, int division) {
 
         Pageable pageable = pageRequestDTO.getPageable("no");
 
-        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAllByCate(pageable, cate);
+        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAllByCateAndDivision(pageable, cate, division);
+
+        Page<PetRegisterDTO> articles = petRegisterEntities.map(PetRegisterEntity::toDTO);
+
+        List<PetRegisterDTO> petAll = articles.getContent()
+                .stream()
+                .map(entity -> modelMapper.map(entity, PetRegisterDTO.class))
+                .toList();
+
+        // Fix total elements count retrieval
+        int totalElements = (int) articles.getTotalElements();
+
+        return PageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(petAll)
+                .total(totalElements)
+                .build();
+    }
+    public PageResponseDTO AdoptAll(PageRequestDTO pageRequestDTO, int division) {
+
+        Pageable pageable = pageRequestDTO.getPageable("no");
+
+        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAllByDivision(pageable, division);
+
+        Page<PetRegisterDTO> articles = petRegisterEntities.map(PetRegisterEntity::toDTO);
+
+        List<PetRegisterDTO> dtoList = articles.getContent()
+                .stream()
+                .map(entity -> modelMapper.map(entity, PetRegisterDTO.class))
+                .toList();
+
+        // Fix total elements count retrieval
+        int totalElements = (int) articles.getTotalElements();
+
+        return PageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total(totalElements)
+                .build();
+    }
+
+    public PageResponseDTO AdoptDog(PageRequestDTO pageRequestDTO, int cate, int division) {
+
+        Pageable pageable = pageRequestDTO.getPageable("no");
+
+        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAllByCateAndDivision(pageable, cate, division);
+
+        Page<PetRegisterDTO> articles = petRegisterEntities.map(PetRegisterEntity::toDTO);
+
+        List<PetRegisterDTO> petAll = articles.getContent()
+                .stream()
+                .map(entity -> modelMapper.map(entity, PetRegisterDTO.class))
+                .toList();
+
+        // Fix total elements count retrieval
+        int totalElements = (int) articles.getTotalElements();
+
+        return PageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(petAll)
+                .total(totalElements)
+                .build();
+    }
+
+    public PageResponseDTO AdoptCat(PageRequestDTO pageRequestDTO, int cate, int division) {
+
+        Pageable pageable = pageRequestDTO.getPageable("no");
+
+        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAllByCateAndDivision(pageable, cate, division);
+
+        Page<PetRegisterDTO> articles = petRegisterEntities.map(PetRegisterEntity::toDTO);
+
+        List<PetRegisterDTO> petAll = articles.getContent()
+                .stream()
+                .map(entity -> modelMapper.map(entity, PetRegisterDTO.class))
+                .toList();
+
+        // Fix total elements count retrieval
+        int totalElements = (int) articles.getTotalElements();
+
+        return PageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(petAll)
+                .total(totalElements)
+                .build();
+    }
+
+    public PageResponseDTO AdoptEtc(PageRequestDTO pageRequestDTO, int cate, int division) {
+
+        Pageable pageable = pageRequestDTO.getPageable("no");
+
+        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAllByCateAndDivision(pageable, cate, division);
+
+        Page<PetRegisterDTO> articles = petRegisterEntities.map(PetRegisterEntity::toDTO);
+
+        List<PetRegisterDTO> petAll = articles.getContent()
+                .stream()
+                .map(entity -> modelMapper.map(entity, PetRegisterDTO.class))
+                .toList();
+
+        // Fix total elements count retrieval
+        int totalElements = (int) articles.getTotalElements();
+
+        return PageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(petAll)
+                .total(totalElements)
+                .build();
+    }
+
+    public PageResponseDTO MsAll(PageRequestDTO pageRequestDTO, int division) {
+
+        Pageable pageable = pageRequestDTO.getPageable("no");
+
+        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAllByDivision(pageable, division);
+
+        Page<PetRegisterDTO> articles = petRegisterEntities.map(PetRegisterEntity::toDTO);
+
+        List<PetRegisterDTO> dtoList = articles.getContent()
+                .stream()
+                .map(entity -> modelMapper.map(entity, PetRegisterDTO.class))
+                .toList();
+
+        // Fix total elements count retrieval
+        int totalElements = (int) articles.getTotalElements();
+
+        return PageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total(totalElements)
+                .build();
+    }
+
+    public PageResponseDTO MsDog(PageRequestDTO pageRequestDTO, int cate, int division) {
+
+        Pageable pageable = pageRequestDTO.getPageable("no");
+
+        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAllByCateAndDivision(pageable, cate, division);
+
+        Page<PetRegisterDTO> articles = petRegisterEntities.map(PetRegisterEntity::toDTO);
+
+        List<PetRegisterDTO> petAll = articles.getContent()
+                .stream()
+                .map(entity -> modelMapper.map(entity, PetRegisterDTO.class))
+                .toList();
+
+        // Fix total elements count retrieval
+        int totalElements = (int) articles.getTotalElements();
+
+        return PageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(petAll)
+                .total(totalElements)
+                .build();
+    }
+
+    public PageResponseDTO MsCat(PageRequestDTO pageRequestDTO, int cate, int division) {
+
+        Pageable pageable = pageRequestDTO.getPageable("no");
+
+        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAllByCateAndDivision(pageable, cate, division);
+
+        Page<PetRegisterDTO> articles = petRegisterEntities.map(PetRegisterEntity::toDTO);
+
+        List<PetRegisterDTO> petAll = articles.getContent()
+                .stream()
+                .map(entity -> modelMapper.map(entity, PetRegisterDTO.class))
+                .toList();
+
+        // Fix total elements count retrieval
+        int totalElements = (int) articles.getTotalElements();
+
+        return PageResponseDTO.builder()
+                .pageRequestDTO(pageRequestDTO)
+                .dtoList(petAll)
+                .total(totalElements)
+                .build();
+    }
+
+    public PageResponseDTO MsEtc(PageRequestDTO pageRequestDTO, int cate, int division) {
+
+        Pageable pageable = pageRequestDTO.getPageable("no");
+
+        Page<PetRegisterEntity> petRegisterEntities = petBoardRepository.findAllByCateAndDivision(pageable, cate, division);
 
         Page<PetRegisterDTO> articles = petRegisterEntities.map(PetRegisterEntity::toDTO);
 
@@ -180,6 +363,34 @@ public class PetBoardService {
         List<PetTypeDTO> pettypes = petListMapper.petType(cate);
 
         return pettypes;
+
+    }
+
+    public List<PetRegisterDTO> MainMissingPet() {
+
+        List<PetRegisterDTO> missing = petListMapper.mainmissinglist();
+
+        return missing;
+
+    }
+    public List<PetRegisterDTO> MainPetDogList() {
+
+        List<PetRegisterDTO> MainPetDog = petListMapper.mainpetdoglist();
+
+        return MainPetDog;
+
+    }
+    public List<PetRegisterDTO> MainPetCatList() {
+
+        List<PetRegisterDTO> MainPetCat = petListMapper.mainpetcatlist();
+
+        return MainPetCat;
+
+    }
+    public List<PetRegisterDTO> MainPetEtcList() {
+
+        List<PetRegisterDTO> MainPetEtc = petListMapper.mainpetetclist();
+        return MainPetEtc;
 
     }
 

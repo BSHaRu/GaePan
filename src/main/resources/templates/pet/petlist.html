@@ -85,17 +85,9 @@
                                         <li><i class="fa fa-comment-o"></i>1</li>
                                     </ul>
                                     <h5>
-                                        <a th:href="@{/pet/petdetails(no=${pageResponseDTO.getNo})}" class="title" th:id="${'title_'}" th:text="${pageResponseDTO.getTitle()}"></a>
+                                        <a th:href="@{/pet/details(no=${pageResponseDTO.getNo})}" class="title" th:text="${pageResponseDTO.getName()}"></a>
                                     </h5>
-                                    <script th:inline="javascript">
-                                        /* JavaScript로 동적으로 타이틀 조정 */
-                                        var maxLength = 10;
-                                        var titleElement = document.getElementById('title_');
-                                        if (titleElement.textContent.length > maxLength) {
-                                            titleElement.textContent = titleElement.textContent.slice(0, maxLength) + '...';
-                                        }
-                                    </script>
-                                    <a th:href="@{/pet/petdetails(no=${pageResponseDTO.no})}" class="blog__btn">
+                                    <a th:href="@{/pet/details(no=${pageResponseDTO.no})}" class="blog__btn">
                                         READ MORE <span class="arrow_right"></span>
                                     </a>
                                 </div>

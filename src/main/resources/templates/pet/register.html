@@ -133,11 +133,12 @@
 <div class="container">
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
-            <h4 class="mb-3 text-center">분양 글 등록</h4>
+            <h4 class="mb-3 text-center">분양</h4>
             <br>
             <form class="registerForm" th:action="@{/pet/register}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="regip" value="0.0.0.1">
                 <input type="hidden" name="uid" value="test">
+                <input type="hidden" name="division" value="1">
                 <div class="mb-3">
                     <label>종류</label>
                     <br>

@@ -11,7 +11,8 @@ import java.util.List;
 @Repository
 public interface PetBoardRepository extends JpaRepository<PetRegisterEntity, Integer> {
 
-    Page<PetRegisterEntity> findAll(Pageable pageable);
-    Page<PetRegisterEntity> findAllByCate(Pageable pageable, int cate);
+    Page<PetRegisterEntity> findAllByDivision(Pageable pageable, int division);
+    Page<PetRegisterEntity> findAllByCateAndDivision(Pageable pageable, int cate, int division);
+
 
 }
