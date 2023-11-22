@@ -15,12 +15,45 @@
                 <div class="col-lg-12">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
-                                <input type="text" placeholder="종류와 품종 선택 후 검색 해주세용~">
-                                <button type="submit" class="site-btn">내 아이 찾기</button>
+                            <form id="searchForm">
+                                <select id="petsearch" onchange="changeInputName()">
+                                    <option value="tName">종류</option>
+                                    <option value="cName">품종</option>
+                                    <option value="name">반려동물이름</option>
+                                </select>
+                                <input type="text" id="searchInput" placeholder="검색할 키워드 선택후 검색해 주세요~!">
+                                <button style="background-color: mediumpurple; color: white; border: none; width: 100px; " type="button" onclick="searchPets()"> 검색 </button>
                             </form>
                         </div>
+                        <script>
+                            function changeInputName() {
+                                var petsearch = document.getElementById("petsearch");
+                                var searchInput = document.getElementById("searchInput");
+
+                                // 선택한 옵션의 값으로 인풋 필드의 name을 변경
+                                searchInput.name = petsearch.value;
+                            }
+
+                            function searchPets() {
+                                var petsearch = document.getElementById("petsearch").value;
+                                var searchInput = document.getElementById("searchInput").value;
+
+                                console.log(petsearch)
+                                console.log(searchInput)
+                                // AJAX를 사용하여 서버에 데이터 전송
+                                var xhr = new XMLHttpRequest();
+                                xhr.open("GET", "/pet/searchpetlist?" + petsearch + "=" + searchInput, true);
+                                xhr.onreadystatechange = function() {
+                                    if (xhr.readyState == 4 && xhr.status == 200) {
+                                        // 서버에서 받은 결과를 처리하는 코드
+                                        console.log(xhr.responseText);
+                                    }
+                                };
+                                xhr.send();
+                            }
+                        </script>
                     </div>
+                    <br><br>
                     <!-- 이게 메인 카테고리와 같이 뜨는 메인 이미지 -->
                     <div class="hero__item set-bg" data-setbg="/img/hero/banner.jpg">
                         <div class="hero__text">

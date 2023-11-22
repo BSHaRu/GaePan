@@ -75,4 +75,24 @@
 
     </select>
 
+    <select id="searchPets" resultType="co.kr.gaepan.dto.pet.PetRegisterDTO">
+        SELECT
+        gp_pet.*,
+        gp_pet_type.tName,
+        gp_pet_cate.cName
+        FROM gp_pet as a
+        LEFT JOIN gp_pet_type as b ON gp_pet.cate = pet_type.cate
+        LEFT JOIN gp_pet_cate as c ON gp_pet.cate = pet_cate.cate
+        WHERE
+        <if test="tName != null and tName.length() > 0">
+            AND gp_pet_type.tName = #{tName}
+        </if>
+        <if test="cName != null and cName.length() > 0">
+            AND gp_pet_cate.cName = #{cName}
+        </if>
+        <if test="name != null and cName.length() > 0">
+            AND gp_pet.name = #{name}
+        </if>
+    </select>
+
 </mapper>
