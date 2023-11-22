@@ -28,7 +28,6 @@ $(function() {
             // memberNo에 값이 있을 때만 ajax로 처리
             // -> memberType이 1 or 2일 경우만 해당
             if(memberNo.length > 0){
-                debugger;
                 $.ajax({
                     url: path,
                     type: "POST",

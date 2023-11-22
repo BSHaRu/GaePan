@@ -49,7 +49,7 @@
         close : ()를 닫아 주는 친구
     -->
     <update id="blackMember">
-        UPDATE `gp_member` SET
+        UPDATE gp_member SET
         `role` = 3,
         levDate = NOW()
         WHERE `no` in
@@ -62,8 +62,8 @@
     <!-- 블랙리스트 해제 -->
     <update id="blackMemberRemove">
         UPDATE gp_member SET
-        role = 2
-<!--        levDate = NOW()-->
+        role = 2,
+        levDate = NOW()
         WHERE `no` in
         <foreach item="member" index="index" collection="memberDTOList"
                  open="(" separator="," close=")">

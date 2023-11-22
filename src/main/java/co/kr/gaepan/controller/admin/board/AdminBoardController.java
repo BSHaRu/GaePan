@@ -104,7 +104,7 @@ public class AdminBoardController {
                            Model model, int bno) {
         try {
             // todo 여기에서 GaePan 쿠키가 있을 때만 실행하게 해야되네..
-            adminBoardService.updateViewCnt(request, response, bno);
+//            adminBoardService.updateViewCnt(request, response, bno);
 
             GP_AdminBoardDTO adminBoardDTO = adminBoardService.findById(bno);
             model.addAttribute("adminBoardDTO", adminBoardDTO);
