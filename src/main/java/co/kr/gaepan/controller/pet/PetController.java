@@ -3,12 +3,14 @@ package co.kr.gaepan.controller.pet;
 import co.kr.gaepan.dto.pet.*;
 import co.kr.gaepan.service.pet.PetBoardService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Log4j2
 @RequestMapping("/pet/*")
 @Controller
 @RequiredArgsConstructor
@@ -82,17 +84,19 @@ public class PetController {
         return "redirect:petlist";
     }
 
-    @GetMapping("/searchpetlist")
-    public String searchPets(
-            @RequestParam(name = "tName", required = false) String tName,
-            @RequestParam(name = "cName", required = false) String cName,
-            @RequestParam(name = "name", required = false) String name,
-            Model model) {
-
-        List<PetRegisterDTO> petList = petBoardService.searchPets(tName, cName, name);
+    @GetMapping("/pet/searchpetlist")
+    public String searchPets(@RequestParam String searchType,
+                             @RequestParam String key,
+                             Model model) {
+        log.info("searchType : " + searchType);
+        log.info("key : " + key);
+        List<PetRegisterDTO> petList = petBoardService.searchPets(searchType, key);
         model.addAttribute("petList", petList);
 
-        return "pet/searchResult"; // searchResult.html로 이동
+        log.info("petList : " + petList);
+
+        return "pet/searchpetlist";
     }
+
 
 }

@@ -5,6 +5,7 @@ import co.kr.gaepan.dto.pet.PetCateDTO;
 import co.kr.gaepan.dto.pet.PetRegisterDTO;
 import co.kr.gaepan.dto.pet.PetTypeDTO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.mybatis.spring.annotation.MapperScan;
 
 import java.util.List;
@@ -21,6 +22,6 @@ public interface PetListMapper {
     public List<PetCateDTO> petcategory();
     public List<PetTypeDTO> petType(int cate);
 
-    List<PetRegisterDTO> searchPets(String tName, String cName, String name);
+    List<PetRegisterDTO> searchPets(@Param("searchType") String searchType, @Param("key")  String key);
 
 }
