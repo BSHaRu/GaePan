@@ -103,17 +103,52 @@ public class AdminBoardController {
                            HttpServletResponse response,
                            Model model, int bno) {
         try {
-            // todo 여기에서 GaePan 쿠키가 있을 때만 실행하게 해야되네..
-//            adminBoardService.updateViewCnt(request, response, bno);
+            adminBoardService.updateViewCnt(request, response, bno);
 
             GP_AdminBoardDTO adminBoardDTO = adminBoardService.findById(bno);
-            model.addAttribute("adminBoardDTO", adminBoardDTO);
+            model.addAttribute("boardDTO", adminBoardDTO);
         } catch (Exception e) {
             log.error("admin board view error", e.getMessage());
             throw new RuntimeException(e);
         }
 
         return "admin/board/view";
+    }
+
+    @GetMapping("/modify")
+    public String modify(@RequestParam("group") String group,
+                         Model model, int bno){
+
+        try {
+            List<BoardCateDTO> cateDTO = adminBoardCateService.getCateName(group);
+            List<BoardTypeDTO> typeDTO = adminBoardCateService.selectType(cateDTO.get(0).getCate());
+            GP_AdminBoardDTO boardDTO = adminBoardService.findById(bno);
+
+            log.info("cateDTO: " + cateDTO);
+            log.info("typeDTO: " + typeDTO);
+
+            model.addAttribute("cateDTO", cateDTO);
+            model.addAttribute("typeDTO", typeDTO);
+            model.addAttribute("boardDTO", boardDTO);
+        } catch (Exception e) {
+            log.error("getModifyController error" + e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return "admin/board/modify";
+    }
+
+    @PostMapping("/modify")
+    public String modify(GP_AdminBoardDTO dto,
+                         @RequestParam("bno") int bno){
+        log.info("modify bno:" + bno);
+        try {
+            adminBoardService.modifyAdminBoard(dto);
+        } catch (Exception e) {
+            log.error("PostModifyController error" + e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return "redirect:view?bno=" + bno;
     }
 
 }

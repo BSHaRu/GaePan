@@ -53,7 +53,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 
     @Override
     public void modifyAdminBoard(GP_AdminBoardDTO dto) throws Exception {
-
+        mybatisAdminBoardMapper.modifyById(replace(dto));
     }
 
     @Override
@@ -63,8 +63,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 
     @Override
     public GP_AdminBoardDTO findById(int bno) throws Exception {
-        GP_AdminBoardEntity entity = adminBoardRepository.findById(bno).get();
-        GP_AdminBoardDTO dto = adminBoardMapper.toDTO(entity);
+        GP_AdminBoardDTO dto = mybatisAdminBoardMapper.findById(bno);
         return dto;
     }
 
@@ -91,7 +90,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
         }
         // 쿠키가 존재하지 않으면 이하 실행
         Cookie cookie = new Cookie(cookieBno, bno+"");
-        String path = request.getContextPath()+"/GaePan/";
+        String path = request.getContextPath();
         cookie.setPath(path);
         cookie.setMaxAge(60*60); // 1시간
         response.addCookie(cookie);
@@ -112,7 +111,6 @@ public class AdminBoardServiceImpl implements AdminBoardService {
     public GP_AdminBoardDTO replace(GP_AdminBoardDTO dto){
         dto.setTitle(gpUtil.replaceScript(dto.getTitle()));
         dto.setContent(gpUtil.replaceScript(dto.getContent()));
-        dto.setUid(gpUtil.replaceScript(dto.getUid()));
 
         return dto;
     }

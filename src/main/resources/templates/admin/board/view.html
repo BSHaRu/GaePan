@@ -9,24 +9,56 @@
     <section id="admin_config_info" class="admin__section">
 
         <article class="view">
-            <nav>
-                <h2 class="title">
-                    [<span th:text="${adminBoardDTO.cateName}"></span>]
-                    [[${adminBoardDTO.title}]]
-                </h2>
-                <span class="date"
-                      th:text="${#temporals.format(adminBoardDTO.regDate, 'yy-MM-dd')}">
-                </span>
-            </nav>
-
-            <div class="content mt-3 mb-5">
-              <textarea>[[${adminBoardDTO.content}]]</textarea>
+            <table class="csInputTable csViewTable">
+                <tr>
+                    <td>제목</td>
+                    <td>
+                        <div>
+                            [<span th:text="${boardDTO.typeName}"></span>]
+                            [[${boardDTO.title}]]
+                            <span class="date" style="float: right;"
+                               th:text="${#temporals.format(boardDTO.regDate, 'yy-MM-dd')}">
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>작성자</td>
+                    <td th:text="${boardDTO.nick}"></td>
+                </tr>
+                <tr>
+                    <td>내용</td>
+                    <td class="content mt-3 mb-5">
+                        <textarea>[[${boardDTO.content}]]</textarea>
+                    </td>
+                </tr>
+            </table>
+            <div class="admin_board_right">
+                <a th:href="@{/admin/board/modify(bno=${boardDTO.bno}, group=${boardDTO.group})}"
+                   class="">게시글 수정</a>
+                <a th:href="@{/admin/board/delete(bno=${boardDTO.bno})}"
+                   class="">게시글 삭제</a>
             </div>
 
-            <div class="comment">
-                <span>댓글 📝</span>
-                <textarea>[[${adminBoardDTO.comment}]]</textarea>
-            </div>
+            <section class="commentList">
+                <article class="comments">
+                    <span>댓글 📝</span>
+                    <div th:if="${boardDTO.parent != 0}">
+                        <textarea class="comment" name="comment" th:text="${boardDTO.comment}" readonly></textarea>
+                        <th:block>
+                            <a href="#" class="">댓글 수정</a>
+                            <a href="#" class="">댓글 삭제</a>
+                        </th:block>
+                    </div>
+                    <div th:unless="${boardDTO.parent != 0}">
+                        <p class="empty">등록된 댓글이 없습니다.</p>
+                    </div>
+                    <div class="admin_board_right">
+                        <a href="#" class="">댓글 작성</a>
+                    </div>
+                </article>
+            </section>
+
             <a href="#" class="btnList">목록보기</a>
         </article>
     </section>

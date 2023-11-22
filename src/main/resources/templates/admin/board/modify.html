@@ -8,9 +8,9 @@
 <th:block layout:fragment="content">
     <section id="admin_config_info" class="admin__section">
         <article class="write">
-            <form action="write" method="post">
-<!--                <input type="hidden" name="uid" th:value="${#authentication.principal.member.uid}" />-->
-                <input type="hidden" name="uid" value="admin" />
+            <form action="modify" method="post">
+<!--                <input type="hidden" name="uid" th:vale="${#authentication.principal.member.uid}" />-->
+                <input type="hidden" name="bno" th:value="${boardDTO.bno}" />
                 <table>
                     <!-- group / cate / type 설정 -->
                     <div class="row group_cate">
@@ -24,13 +24,13 @@
                         </div>
                         <div class="col-md-4">
                             <select id="cate" class="form-control" name="cate">
-                                <option selected disabled value="0">카테고리 선택</option>
+                                <option selected disabled th:value="${boardDTO.cate}" th:text="${boardDTO.cateName}"></option>
                                 <option th:each="cate : ${cateDTO}" th:value="${cate.cate}" th:text="${cate.cateName}"></option>
                             </select>
                         </div>
                         <div class="col-md-4">
                             <select id="type" class="form-control" name="type">
-                                <option selected disabled value="0">카테고리2 선택</option>
+                                <option selected disabled th:value="${boardDTO.type}" th:text="${boardDTO.typeName}"></option>
                                 <option th:each="type : ${typeDTO}" th:value="${type.type}" th:text="${type.typeName}"></option>
                             </select>
                         </div>
@@ -38,7 +38,7 @@
                     <tr>
                         <td>제목</td>
                         <td>
-                            <input type="text" name="title" required placeholder="제목을 입력하세요." />
+                            <input type="text" name="title" required th:value="${boardDTO.title}" />
                         </td>
                     </tr>
                     <tr>
@@ -50,17 +50,25 @@
                     <tr>
                         <td>내용</td>
                         <td>
-                            <textarea name="content" required placeholder="내용을 입력하세요."></textarea>
+                            <textarea name="content" required>[[${boardDTO.content}]]</textarea>
                         </td>
                     </tr>
                 </table>
                 <div class="write__div">
                     <input type="button" class="btnList" value="취소하기">
-                    <input type="submit" class="btnSubmit" value="등록하기">
+                    <input type="submit" class="btnSubmit" value="수정하기">
                 </div>
-                <a href="#" class="btnList">목록보기</a>
             </form>
         </article>
     </section>
 </th:block>
+<script>
+/*    $(document).ready(function(){
+        $(".btnList").click(function(e){
+            e.preventDefault();
+            const url = "admin/board/view" + bno;
+            location.replace(url);
+        });
+    }) ;*/
+</script>
 </html>
