@@ -18,6 +18,12 @@ public interface MybatisAdminBoardMapper {
     // 기본 조회 + 검색된 게시물 목록
     List<GP_AdminBoardDTO> searchList(SearchCriteria cri) throws Exception;
 
+    // 게시물 상세 보기
+    GP_AdminBoardDTO findById(int bno) throws Exception;
+
+    // 게시글 수정
+    void modifyById(GP_AdminBoardDTO dto) throws Exception;
+
     // 검색된 게시물의 전체 개수
     int searchListCount(SearchCriteria cri) throws Exception;
 

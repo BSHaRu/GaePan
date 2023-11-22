@@ -30,5 +30,7 @@ public class GP_AdminBoardDTO {
     // 추가 필드
     private String cateName;
     private String typeName;
+    private int rownum;
+    private String nick;
 
 }

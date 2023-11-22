@@ -42,16 +42,50 @@
 
     <!-- board List 출력 -> [검색에 따라서] paging 처리까지 됨 -->
     <select id="searchList" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
-        SELECT * FROM gp_board AS B
+        SELECT
+            @rownum := @rownum + 1 AS rownum,
+            B.*,
+            BC.cateName AS categoryName,
+            BT.typeName AS typeName,
+            M.nick
+        FROM gp_board AS B
+        JOIN gp_member AS M
+            ON B.uid = M.uid
         JOIN gp_board_cate AS BC
             ON B.cate = BC.cate
         JOIN gp_board_type AS BT
-        ON B.`type` = BT.`type`
+            ON B.`type` = BT.`type`
+            ,(SELECT @rownum := 0) AS R
         WHERE `group` = #{group}
+<!--            AND parent = 0-->
         <include refid="search" />
         ORDER BY bno DESC
         LIMIT #{startRow}, #{perPageNum}
     </select>
+
+    <!-- 게시글 상세 보기 -->
+    <select id="findById" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
+        SELECT
+            B.*,
+            BT.typeName,
+            M.nick
+        FROM gp_board B
+        JOIN gp_board_type AS BT
+            ON B.`type` = BT.`type`
+        JOIN gp_member AS M
+            ON B.uid = M.uid
+        WHERE bno = #{bno};
+    </select>
+
+    <update id="modifyById" parameterType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
+        UPDATE gp_board SET
+            title = #{title},
+            content = #{content},
+            `group` = #{group},
+            cate = #{cate},
+            `type` = #{type}
+        WHERE bno = #{bno};
+    </update>
 
     <!-- 해당 검색 결과에 나오는 게시글 총 개수 -->
     <select id = "searchListCount" parameterType="co.kr.gaepan.util.SearchCriteria"
