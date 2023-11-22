@@ -76,22 +76,22 @@
     </select>
 
     <select id="searchPets" resultType="co.kr.gaepan.dto.pet.PetRegisterDTO">
-        SELECT
-        gp_pet.*,
-        gp_pet_type.tName,
-        gp_pet_cate.cName
+        SELECT DISTINCT
+            a.*,
+            b.tName,
+            c.cName
         FROM gp_pet as a
-        LEFT JOIN gp_pet_type as b ON gp_pet.cate = pet_type.cate
-        LEFT JOIN gp_pet_cate as c ON gp_pet.cate = pet_cate.cate
+        LEFT JOIN gp_pet_type as b ON a.`type` = b.`type`
+        LEFT JOIN gp_pet_cate as c ON a.cate = c.cate
         WHERE
-        <if test="tName != null and tName.length() > 0">
-            AND gp_pet_type.tName = #{tName}
+        <if test="searchType == 'tName'">
+            b.tName LIKE CONCAT('%', #{key}, '%')
         </if>
-        <if test="cName != null and cName.length() > 0">
-            AND gp_pet_cate.cName = #{cName}
+        <if test="searchType == 'cName'">
+            c.cName LIKE CONCAT('%', #{key}, '%')
         </if>
-        <if test="name != null and cName.length() > 0">
-            AND gp_pet.name = #{name}
+        <if test="searchType == 'name'">
+            a.name LIKE CONCAT('%', #{key}, '%')
         </if>
     </select>
 

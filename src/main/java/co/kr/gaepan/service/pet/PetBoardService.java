@@ -394,9 +394,10 @@ public class PetBoardService {
 
     }
 
-    public List<PetRegisterDTO> searchPets(String tName, String cName, String name) {
-        // 여기서 필요한 비즈니스 로직 작성
-        return petListMapper.searchPets(tName, cName, name);
+    public List<PetRegisterDTO> searchPets(String searchType, String key) {
+
+        return petListMapper.searchPets(searchType, key);
+
     }
 
 }

@@ -1,6 +1,7 @@
 package co.kr.gaepan.dto.pet;
 
 import co.kr.gaepan.entity.pet.PetRegisterEntity;
+import jakarta.persistence.Table;
 import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "gp_pet")
 public class PetRegisterDTO {
 
     private int no;
