@@ -21,4 +21,6 @@ public interface PetListMapper {
     public List<PetCateDTO> petcategory();
     public List<PetTypeDTO> petType(int cate);
 
+    List<PetRegisterDTO> searchPets(String tName, String cName, String name);
+
 }

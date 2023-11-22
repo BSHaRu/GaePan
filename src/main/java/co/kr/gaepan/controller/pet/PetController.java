@@ -82,4 +82,17 @@ public class PetController {
         return "redirect:petlist";
     }
 
+    @GetMapping("/searchpetlist")
+    public String searchPets(
+            @RequestParam(name = "tName", required = false) String tName,
+            @RequestParam(name = "cName", required = false) String cName,
+            @RequestParam(name = "name", required = false) String name,
+            Model model) {
+
+        List<PetRegisterDTO> petList = petBoardService.searchPets(tName, cName, name);
+        model.addAttribute("petList", petList);
+
+        return "pet/searchResult"; // searchResult.html로 이동
+    }
+
 }
