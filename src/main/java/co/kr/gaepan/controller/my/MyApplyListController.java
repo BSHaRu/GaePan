@@ -1,26 +1,12 @@
 package co.kr.gaepan.controller.my;
 
-import co.kr.gaepan.dto.pet.PetAdoptApplyDTO;
-import co.kr.gaepan.service.my.MyAdoptApplyListService;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Arrays;
-import java.util.List;
-
 @Controller
 @RequestMapping("/my/*")
-@Log4j2
 public class MyApplyListController {
-
-    @Autowired
-    private MyAdoptApplyListService myAdoptApplyListService;
 
     @GetMapping("/applylist")
     public String view(Model model, String pg, Authentication authentication) {
@@ -56,7 +42,6 @@ public class MyApplyListController {
         model.addAttribute("pageGroupEnd", result[1]);
 
         model.addAttribute("applyList", applyList);
-
         return "my/applylist";
     }
 }

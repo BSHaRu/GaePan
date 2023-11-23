@@ -12,11 +12,11 @@ import java.util.Map;
 public interface MyQnaMapper {
 
     // 페이징 - 전체 게시글 갯수 계산
-    int selectQnaCountTotal(String uid);
+    public int selectQnaCountTotal(String uid);
 
-    List<BoardCateDTO> findCname(BoardCateDTO boardCateDTO);
+    public List<BoardCateDTO> findCname(BoardCateDTO boardCateDTO);
 
-    List<BoardTypeDTO> findTname(BoardTypeDTO boardTypeDTO);
+    public List<BoardTypeDTO> findTname(BoardTypeDTO boardTypeDTO);
 
     // 나의 리뷰 10개씩 출력
     List<MyQnaDTO> select_all(Map<String, Object> parameters);
