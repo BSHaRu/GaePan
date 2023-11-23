@@ -17,7 +17,6 @@ public class PetRegisterDTO {
 
     private int no;
     private String uid;
-    private String tName;
     private String title;
     private String thumb;
     private MultipartFile filethumb;
@@ -29,6 +28,9 @@ public class PetRegisterDTO {
     private LocalDateTime regDate;
     private int division;
 
+    // 추가필드
+    private String cName;
+    private String tName;
 
     public PetRegisterEntity toEntity() {
         return PetRegisterEntity.builder()
