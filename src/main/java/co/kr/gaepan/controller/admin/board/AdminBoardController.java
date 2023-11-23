@@ -46,6 +46,7 @@ public class AdminBoardController {
 //            model.addAttribute("boardDTO", boardDTO);
             model.addAttribute("cateDTO", cateDTO);
             model.addAttribute("typeDTO", typeDTO);
+            model.addAttribute("group", group);
         } catch (Exception e) {
             log.error("getWriteController error" + e.getMessage());
             throw new RuntimeException(e);
@@ -111,7 +112,6 @@ public class AdminBoardController {
             log.error("admin board view error", e.getMessage());
             throw new RuntimeException(e);
         }
-
         return "admin/board/view";
     }
 
@@ -147,8 +147,12 @@ public class AdminBoardController {
             log.error("PostModifyController error" + e.getMessage());
             throw new RuntimeException(e);
         }
-
         return "redirect:view?bno=" + bno;
     }
 
+    /*@PostMapping("/delete")
+    public String delete(int bno, String uid){
+
+        return "";
+    }*/
 }

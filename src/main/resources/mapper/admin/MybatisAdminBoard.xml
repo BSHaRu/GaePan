@@ -57,7 +57,7 @@
             ON B.`type` = BT.`type`
             ,(SELECT @rownum := 0) AS R
         WHERE `group` = #{group}
-<!--            AND parent = 0-->
+            AND title IS NOT NULL
         <include refid="search" />
         ORDER BY bno DESC
         LIMIT #{startRow}, #{perPageNum}
@@ -77,6 +77,7 @@
         WHERE bno = #{bno};
     </select>
 
+    <!-- 게시글 수정 -->
     <update id="modifyById" parameterType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
         UPDATE gp_board SET
             title = #{title},
@@ -86,6 +87,12 @@
             `type` = #{type}
         WHERE bno = #{bno};
     </update>
+
+    <!-- 게시글 삭제 -->
+    <delete id="deleteById">
+        DELETE FROM gp_board
+        WHERE bno = #{bno}
+    </delete>
 
     <!-- 해당 검색 결과에 나오는 게시글 총 개수 -->
     <select id = "searchListCount" parameterType="co.kr.gaepan.util.SearchCriteria"

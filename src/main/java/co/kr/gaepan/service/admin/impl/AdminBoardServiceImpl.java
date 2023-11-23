@@ -58,7 +58,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 
     @Override
     public void deleteAdminBoard(int bno) throws Exception {
-
+        mybatisAdminBoardMapper.deleteById(bno);
     }
 
     @Override
