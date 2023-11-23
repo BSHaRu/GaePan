@@ -1,6 +1,6 @@
 # GaePan 프로젝트 작업 일지
 
-프로젝트 기간 : **_2023-10-31 ~ 2023-12-08_**
+프로젝트 기간 : **_2023-11-03 ~ 2023-12-08_**
 
 프로젝트 한줄 소개 : __유기동물 분양 및 입양 커뮤니티 사이트__
 
@@ -18,8 +18,8 @@
 
 **개발 환경**
 - Intellj
-- Spring boot 3
 - Java 17
+- Spring boot 3.1.5
 - MySql
 - MyBatis
 - JPA
@@ -33,14 +33,14 @@
 **Dependencies**
 - JPA
 - oauth2
-- security
+- security 6
 - thymeleaf
-- thymeleaf-layout-dialect
+- thymeleaf-layout-dialect 3.3.0
 - mybatis
 - lombok
 --------------
-- modelmapper
-- mapstruct
-- commons-io
-- gson
+- modelmapper 3.1.1
+- mapstruct 1.4.2
+- commons-io 2.6
+- gson 2.8.6
 - PageMaker(paging처리 자체제작 lib)
