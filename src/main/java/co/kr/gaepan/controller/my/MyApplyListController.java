@@ -38,7 +38,7 @@ public class MyApplyListController {
         log.info("currentPage : " + currentPage);
         int start = myAdoptApplyListService.getStartNum(currentPage);
         log.info("start : " + start);
-        int total = myAdoptApplyListService.selectQnaCountTotal(currentUserUid);
+        int total = myAdoptApplyListService.selectApplyListCountTotal(currentUserUid);
         log.info("total : " + total);
         int lastPageNum = myAdoptApplyListService.getLastPageNum(total);
         log.info("lastPageNum : " + lastPageNum);
