@@ -4,12 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/my/*")
 @Controller
-public class MyMainController {
+@RequestMapping("/my/*")
+public class MyReviewController {
 
-    @GetMapping("/index")
-    public String index(){
-        return "my/index";
+    @GetMapping("/review")
+    public String view() {
+        return "my/review";
     }
 }

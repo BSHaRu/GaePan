@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{my/fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<th:block layout:fragment="content">
+    <main>
+        <div id="my">
+            <div class="home">
+                <ul>
+                    <span class="menu_else"></span>
+                    <li><a th:href="@{/my/applylist}">전체신청내역</a></li>
+                    <li><a th:href="@{/my/review}">입양일기</a></li>
+                    <li><a th:href="@{/my/qna}">나의Q&A</a></li>
+                    <li><a th:href="@{/my/support}">후원하기</a></li>
+                    <li><a th:href="@{/my/info}">개인정보설정</a></li>
+                    <li><a th:href="@{/pet/register}">아이 등록</a></li>
+                </ul>
+                <section>
+                    <article class="latest">
+                        <h3>최근분양신청내역</h3>
+                        <a href="#" class="more">더보기</a>
+                        <table border="0">
+                            <tbody>
+                                <tr>
+                                    <th>날짜</th>
+                                    <th>동물정보</th>
+                                    <th>확인/신청</th>
+                                </tr>
+                                <tr>
+                                    <td class="date">2022-12-13</td>
+                                    <td class="info">
+                                        <a href="#" class="thumb">
+                                            <img src="https://via.placeholder.com/80x80">
+                                        </a>
+                                        <ul>
+                                            <li class="company">
+                                                <a href="#">회사명</a>
+                                            </li>
+                                            <li class="p_name">
+                                                <a href="#">동물이름</a>
+                                            </li>
+                                            <li class="a_no">
+                                                <a href="#">신청번호</a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td class="confirm">
+                                        <a href="#">입양일기</a>
+                                        <a href="#">파양신청</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </article>
+                    <article class="review">
+                        <h3>최근리뷰</h3>
+                        <a href="#" class="more">더보기</a>
+                        <table border="0">
+                            <tbody>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>동물이름</th>
+                                    <th>내용</th>
+                                    <th>작성일</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>상품명</td>
+                                    <td>우리 아이 술안주 우리 남편 영양간식</td>
+                                    <td>2023-11-03</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>상품명</td>
+                                    <td>우리 아이 술안주 우리 남편 영양간식</td>
+                                    <td>2023-11-03</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>상품명</td>
+                                    <td>우리 아이 술안주 우리 남편 영양간식</td>
+                                    <td>2023-11-03</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>상품명</td>
+                                    <td>우리 아이 술안주 우리 남편 영양간식</td>
+                                    <td>2023-11-03</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </article>
+                    <article class="qna">
+                        <h3>문의내역</h3>
+                        <a href="#" class="more">더보기</a>
+                        <table border="0">
+                            <tbody>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>문의유형</th>
+                                    <th>제목</th>
+                                    <th>작성일</th>
+                                    <th>상태</th>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>주문/결제</td>
+                                    <td>신용카드 결제 중 오류가 난 경우 어떻게 하나요?</td>
+                                    <td>2023-11-03</td>
+                                    <td class="notAnswerYet">검토중</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>주문/결제</td>
+                                    <td>신용카드 결제 중 오류가 난 경우 어떻게 하나요?</td>
+                                    <td>2023-11-03</td>
+                                    <td class="answered">답변완료</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </article>
+                </section>
+            </div>
+        </div>
+    </main>
+</th:block>
+</html>
