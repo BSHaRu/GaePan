@@ -1,7 +1,7 @@
 package co.kr.gaepan.controller.my;
 
-import co.kr.gaepan.dto.pet.PetAdoptApplyDTO;
-import co.kr.gaepan.service.my.MyAdoptApplyListService;
+import co.kr.gaepan.dto.pet.PetRegisterDTO;
+import co.kr.gaepan.service.my.MyDiaryService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -13,16 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.OptionalInt;
 
 @Controller
 @RequestMapping("/my/*")
 @Log4j2
-public class MyApplyListController {
+public class MyDiaryController {
 
     @Autowired
-    private MyAdoptApplyListService myAdoptApplyListService;
+    private MyDiaryService myDiaryService;
 
-    @GetMapping("/applylist")
+    @GetMapping("/diary")
     public String view(Model model, String pg, Authentication authentication) {
 
         // 사용자 로그인 정보에서 UID 가져오기
@@ -33,21 +34,23 @@ public class MyApplyListController {
                 currentUserUid = ((UserDetails) principal).getUsername();
             }
         }
+
+
         // 페이징 처리
-        int currentPage = myAdoptApplyListService.getCurrentPage(pg);
+        int currentPage = myDiaryService.getCurrentPage(pg);
         log.info("currentPage : " + currentPage);
-        int start = myAdoptApplyListService.getStartNum(currentPage);
+        int start = myDiaryService.getStartNum(currentPage);
         log.info("start : " + start);
-        int total = myAdoptApplyListService.selectApplyListCountTotal(currentUserUid);
+        int total = myDiaryService.selectDiaryCountTotal(currentUserUid, 3);
         log.info("total : " + total);
-        int lastPageNum = myAdoptApplyListService.getLastPageNum(total);
+        int lastPageNum = myDiaryService.getLastPageNum(total);
         log.info("lastPageNum : " + lastPageNum);
-        int[] result = myAdoptApplyListService.getPageGroupNum(currentPage, lastPageNum);
+        int[] result = myDiaryService.getPageGroupNum(currentPage, lastPageNum);
         log.info("result : " + Arrays.toString(result));
-        int pageStartNum = myAdoptApplyListService.getPageStartNum(currentPage, lastPageNum);
+        int pageStartNum = myDiaryService.getPageStartNum(total, lastPageNum);
         log.info("pageStartNum : " + pageStartNum);
 
-        List<PetAdoptApplyDTO> applyList = myAdoptApplyListService.applyAll(currentUserUid, start);
+        List<PetRegisterDTO> diaryList = myDiaryService.selectAll(currentUserUid, 3, start);
 
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("total", total);
@@ -55,8 +58,8 @@ public class MyApplyListController {
         model.addAttribute("pageGroupStart", result[0]);
         model.addAttribute("pageGroupEnd", result[1]);
 
-        model.addAttribute("applyList", applyList);
+        model.addAttribute("diaryList", diaryList);
 
-        return "my/applylist";
+        return "my/diary";
     }
 }
