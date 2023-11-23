@@ -20,8 +20,11 @@ public interface AdminBoardService {
     // 게시글 수정
     void modifyAdminBoard(GP_AdminBoardDTO dto) throws Exception;
 
-    // 게시글 삭제
-    void deleteAdminBoard(int bno) throws Exception;
+    // 게시글 삭제(checkbox로 삭제)
+    void deleteAdminBoard(List<GP_AdminBoardDTO> bno) throws Exception;
+
+    // 게시글 삭제(bno로 삭제)
+    void deleteById(int bno) throws Exception;
 
     // 게시글 상세보기
     GP_AdminBoardDTO findById(int bno) throws Exception;
@@ -38,5 +41,6 @@ public interface AdminBoardService {
 
     // 페이징 블럭 정보
     PageMaker getPageMaker(SearchCriteria cri) throws Exception;
+
 
 }

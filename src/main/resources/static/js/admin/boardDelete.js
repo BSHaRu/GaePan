@@ -1,9 +1,10 @@
-$(function() {
+$(document).ready(function() {
+    const path1 = "/admin/board/deleteById";
+    const path2 = "/admin/board/list";
+
+
     $(".board_deleteBtn").click(function(e) {
         e.preventDefault();
-
-        const url1 = "/admin/board/delete";
-        const url2 = "/admin/board/list";
         const bno = $(this).data("bno");
         // const uid = $(".admin__uid").data("uid");
         const group = $(".board__group").data("group");
@@ -13,14 +14,14 @@ $(function() {
         if(confirm("정말 게시글을 삭제하시겠습니까?")){
             $.ajax({
                 type: "delete",
-                url: url1,
+                url: path1,
                 data: {
                     bno : bno
                 },
                 success: function(response) {
                     console.log(1);
                     alert("게시글이 삭제되었습니다.");
-                    location.replace(url2+"?group="+group);
+                    location.replace(path2+"?group="+group);
                 },
                 error: function(error) {
                     console.log(2);

@@ -57,7 +57,12 @@ public class AdminBoardServiceImpl implements AdminBoardService {
     }
 
     @Override
-    public void deleteAdminBoard(int bno) throws Exception {
+    public void deleteAdminBoard(List<GP_AdminBoardDTO> boardDTO) throws Exception {
+        mybatisAdminBoardMapper.deleteAdminBoard(boardDTO);
+    }
+
+    @Override
+    public void deleteById(int bno) throws Exception {
         mybatisAdminBoardMapper.deleteById(bno);
     }
 
