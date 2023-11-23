@@ -318,6 +318,13 @@ ol {
 	color: #1c1c1c;
 	margin-right: 20px;
 }
+.header__top__right__social span {
+	font-size: 14px;
+	display: inline-block;
+	color: #1c1c1c;
+	margin-right: 20px;
+	color: #8972ee;
+}
 
 .header__top__right__social a:last-child {
 	margin-right: 0;

@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <td>작성자</td>
-                    <td th:text="${boardDTO.nick}"></td>
+                    <td class="admin__uid" th:text="${boardDTO.nick}"></td>
                 </tr>
                 <tr>
                     <td>내용</td>
@@ -36,8 +36,8 @@
             <div class="admin_board_right">
                 <a th:href="@{/admin/board/modify(bno=${boardDTO.bno}, group=${boardDTO.group})}"
                    class="">게시글 수정</a>
-                <a th:href="@{/admin/board/delete(bno=${boardDTO.bno})}"
-                   class="">게시글 삭제</a>
+                <a href="#" class="board_deleteBtn" th:data-bno="${boardDTO.bno}">게시글 삭제</a>
+                <input class="board__group" type="hidden" name="group" th:value="${boardDTO.group}" th:data-group="${boardDTO.group}" />
             </div>
 
             <section class="commentList">
@@ -59,8 +59,9 @@
                 </article>
             </section>
 
-            <a href="#" class="btnList">목록보기</a>
+            <a th:href="@{/admin/board/list(group=${boardDTO.group})}" class="btnList">목록보기</a>
         </article>
     </section>
 </th:block>
 </html>
+<script th:src="@{/js/admin/boardDelete.js}"></script>
