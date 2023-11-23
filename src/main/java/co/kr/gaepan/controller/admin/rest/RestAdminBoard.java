@@ -16,24 +16,8 @@ import java.util.List;
 @RequestMapping("/admin/board/*")
 public class RestAdminBoard {
 
-//    private final AdminBoardService adminBoardService;
+    private final AdminBoardService adminBoardService;
     private final AdminBoardCateService adminBoardCateService;
-
-    /*@GetMapping("/ajaxWrite")
-    public List<GP_AdminBoardDTO> ajaxWrite(@RequestParam String optionValue,
-                                            int cate, int type,
-                                            HttpServletResponse response){
-
-        List<GP_AdminBoardDTO> boardDTO = null;
-        try {
-            boardDTO = adminBoardCateService.cateNameAndTypeName(optionValue, cate, type);
-        } catch (Exception e) {
-            log.error("ajaxWrite error : ", e.getMessage());
-            throw new RuntimeException(e);
-        }
-
-        return boardDTO;
-    }*/
 
     @PostMapping("/ajaxCate")
     public List<BoardCateDTO> selectCate(@RequestParam String group) {
@@ -51,6 +35,17 @@ public class RestAdminBoard {
             return adminBoardCateService.selectType(cate);
         } catch (Exception e) {
             log.error("ajax select type error : " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
+    @DeleteMapping("/delete")
+    public String deleteById(@RequestParam int bno) {
+        log.info("ajax bno : " + bno);
+        try {
+            adminBoardService.deleteAdminBoard(bno);
+            return "success";
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

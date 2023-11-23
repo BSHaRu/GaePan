@@ -21,8 +21,11 @@ $(document).ready(function() {
                 console.log("3");
                 loadTypes();
             });
-        });
-    }
+        }); // ajax end
+    } // loadCategories end
+
+    // 초기화
+    loadCategories();
 
     function loadTypes() {
         let cate = $("#cate").val();
@@ -32,6 +35,6 @@ $(document).ready(function() {
             $.each(data, function(index, type) {
                 $('#type').append('<option value="' + type.type + '">' + type.typeName + '</option>');
             });
-        });
-    }
+        }); // ajax end
+    } // loadTypes end
 });

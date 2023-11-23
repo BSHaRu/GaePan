@@ -78,7 +78,7 @@
             </div>
 
             <form id="formCheck" th:action="@{write}" method="get">
-                <input type="hidden" name="group" th:value="${group}" />
+                <input class="board__group" type="hidden" name="group" th:value="${group}" th:data-group="${group}"  />
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -117,7 +117,7 @@
                                     </th:block>
                                 </div>
                             </td>
-                            <td class="user">[[${board.nick}]]</td>
+                            <td class="user admin__uid" th:text="${board.nick}"></td>
                             <td class="hit">[[${board.hit}]]</td>
                             <td class="regdate">
                                 <span class="date"
@@ -125,10 +125,12 @@
                                 </span>
                             </td>
                             <td>
-                                <a th:href="@{/admin/board/modify(bno=${board.bno})}" class="btn btn-sm btn-outline-primary">
+                                <a th:href="@{/admin/board/delete(bno=${board.bno})}"
+                                   class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                                <a th:href="@{/admin/board/delete(bno=${board.bno})}" class="btn btn-sm btn-outline-danger">
+                                <a href="#" th:data-bno="${board.bno}"
+                                   class="btn btn-sm btn-outline-danger board_deleteBtn">
                                     <i class="fa fa-trash-o"></i>
                                 </a>
                             </td>
@@ -167,3 +169,4 @@
     </section>
 </th:block>
 </html>
+<script th:src="@{/js/admin/boardDelete.js}"></script>
