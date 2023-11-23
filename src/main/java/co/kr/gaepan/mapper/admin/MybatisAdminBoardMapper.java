@@ -24,7 +24,10 @@ public interface MybatisAdminBoardMapper {
     // 게시글 수정
     void modifyById(GP_AdminBoardDTO dto) throws Exception;
 
-    // 게시글 삭제
+    // 게시글 삭제(checkbox)
+    void deleteAdminBoard(List<GP_AdminBoardDTO> boardDTO) throws Exception;
+
+    // 게시글 삭제(bno)
     void deleteById(int bno) throws Exception;
 
     // 검색된 게시물의 전체 개수

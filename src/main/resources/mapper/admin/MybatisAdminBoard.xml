@@ -88,7 +88,17 @@
         WHERE bno = #{bno};
     </update>
 
-    <!-- 게시글 삭제 -->
+    <!-- 게시글 삭제(checkbox) -->
+    <delete id="deleteAdminBoard">
+        DELETE FROM gp_board
+        WHERE bno in
+        <foreach item="board" index="index" collection="boardDTO"
+                 open="(" separator="," close=")">
+            #{board.bno}
+        </foreach>
+    </delete>
+
+    <!-- 게시글 삭제(bno) -->
     <delete id="deleteById">
         DELETE FROM gp_board
         WHERE bno = #{bno}
