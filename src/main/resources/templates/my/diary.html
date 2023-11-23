@@ -33,12 +33,8 @@
                             </tr>
                             <tr th:each="list : ${diaryList}" th:if="${list.uid != null and list.division == 3 }">
                                 <td th:text="${list.no}" />
-                                <td>
-                                    <a th:text="${list.title}" th:href="@{/pet/adoptdetails(no=${list.no})}"></a>
-                                </td>
-                                <td>
-                                    <a th:text="${list.content}" th:href="@{/pet/adoptdetails(no=${list.no})}"></a>
-                                </td>
+                                <td th:text="${list.title}"><a href="#"></a></td>
+                                <td th:text="${list.content}" />
                                 <td th:text="${list.name}" />
                                 <td th:text="${list.cName}" />
                                 <td th:text="${list.tName}" />

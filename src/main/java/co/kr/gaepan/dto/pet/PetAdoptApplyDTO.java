@@ -17,7 +17,6 @@ public class PetAdoptApplyDTO {
     private int petNo;
     private int status;
     private String uid;
-    private String name;
     private String hp;
     private LocalDateTime regDate;
     private String reason;

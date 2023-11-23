@@ -3,7 +3,6 @@ package co.kr.gaepan.controller.my;
 import co.kr.gaepan.dto.board.BoardCateDTO;
 import co.kr.gaepan.dto.board.BoardTypeDTO;
 import co.kr.gaepan.dto.my.MyQnaDTO;
-import co.kr.gaepan.dto.pet.PetAdoptApplyDTO;
 import co.kr.gaepan.dto.pet.PetRegisterDTO;
 import co.kr.gaepan.service.my.MyIndexService;
 import co.kr.gaepan.service.my.MyInfoService;
@@ -46,12 +45,14 @@ public class MyMainController {
         // 입양일키 출력
         List<PetRegisterDTO> diaryList = myIndexService.selectDiary(currentUserUid);
 
-        // 최근분양신청내역 출력
-        List<PetAdoptApplyDTO> selectApplyList = myIndexService.selectApplyList(currentUserUid);
+        // 1차 카테고리 출력
+        List<BoardCateDTO> findCname = myIndexService.findCname(boardCateDTO);
+
+        // 2차 카테고리 출력
+        List<BoardTypeDTO> findTname = myIndexService.findTname(boardTypeDTO);
 
         model.addAttribute("qnaList", qnaList);
         model.addAttribute("diaryList", diaryList);
-        model.addAttribute("selectApplyList", selectApplyList);
 
         return "my/index";
     }

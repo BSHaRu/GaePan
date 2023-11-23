@@ -3,7 +3,6 @@ package co.kr.gaepan.service.my;
 import co.kr.gaepan.dto.board.BoardCateDTO;
 import co.kr.gaepan.dto.board.BoardTypeDTO;
 import co.kr.gaepan.dto.my.MyQnaDTO;
-import co.kr.gaepan.dto.pet.PetAdoptApplyDTO;
 import co.kr.gaepan.dto.pet.PetRegisterDTO;
 import co.kr.gaepan.mapper.my.MyIndexMapper;
 import lombok.RequiredArgsConstructor;
@@ -23,11 +22,15 @@ public class MyIndexService {
         return myIndexMapper.selectQna(currentUserUid);
     }
 
-    public List<PetRegisterDTO> selectDiary(String currentUserUid) {
-        return myIndexMapper.selectDiary(currentUserUid);
+    public List<BoardCateDTO> findCname(BoardCateDTO boardCateDTO) {
+        return myIndexMapper.findCname(boardCateDTO);
     }
 
-    public List<PetAdoptApplyDTO> selectApplyList(String currentUserUid) {
-        return myIndexMapper.selectApplyList(currentUserUid);
+    public List<BoardTypeDTO> findTname(BoardTypeDTO boardTypeDTO) {
+        return myIndexMapper.findTname(boardTypeDTO);
+    }
+
+    public List<PetRegisterDTO> selectDiary(String currentUserUid) {
+        return myIndexMapper.selectDiary(currentUserUid);
     }
 }

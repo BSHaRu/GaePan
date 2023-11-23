@@ -37,14 +37,4 @@
         ORDER BY `no` DESC
         LIMIT 5
     </select>
-
-    <select id="selectApplyList" resultType="co.kr.gaepan.dto.pet.PetAdoptApplyDTO">
-        SELECT
-            a.*,
-            b.`thumb`
-        FROM `gp_pet_adopt_apply` AS a
-        LEFT JOIN `gp_pet` AS b ON a.`petNo` = b.`no`
-        WHERE a.`uid` = #{uid}
-        ORDER BY a.`no` DESC
-    </select>
 </mapper>
