@@ -55,69 +55,51 @@
                         </table>
                     </article>
                     <article class="review">
-                        <h3>최근리뷰</h3>
-                        <a href="#" class="more">더보기</a>
+                    <h3>입양일기</h3>
                         <table border="0">
                             <tbody>
-                                <tr>
-                                    <th>번호</th>
-                                    <th>동물이름</th>
-                                    <th>내용</th>
-                                    <th>작성일</th>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>상품명</td>
-                                    <td>우리 아이 술안주 우리 남편 영양간식</td>
-                                    <td>2023-11-03</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>상품명</td>
-                                    <td>우리 아이 술안주 우리 남편 영양간식</td>
-                                    <td>2023-11-03</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>상품명</td>
-                                    <td>우리 아이 술안주 우리 남편 영양간식</td>
-                                    <td>2023-11-03</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>상품명</td>
-                                    <td>우리 아이 술안주 우리 남편 영양간식</td>
-                                    <td>2023-11-03</td>
-                                </tr>
+                            <tr>
+                                <th>번호</th>
+                                <th>제목</th>
+                                <th>내용</th>
+                                <th>동물명</th>
+                                <th>분류</th>
+                                <th>품종</th>
+                                <th>작성일</th>
+                            </tr>
+                            <tr th:each="list : ${diaryList}" th:if="${list.uid != null and list.division == 3 }">
+                                <td th:text="${list.no}" />
+                                <td th:text="${list.title}"><a href="#"></a></td>
+                                <td th:text="${list.content}" />
+                                <td th:text="${list.name}" />
+                                <td th:text="${list.cName}" />
+                                <td th:text="${list.tName}" />
+                                <td th:text="${#temporals.format(list.regDate, 'yyyy-MM-dd HH:mm:ss')}" />
+                            </tr>
                             </tbody>
                         </table>
                     </article>
                     <article class="qna">
-                        <h3>문의내역</h3>
+                        <h3>문의사항</h3>
                         <a href="#" class="more">더보기</a>
                         <table border="0">
                             <tbody>
-                                <tr>
-                                    <th>번호</th>
-                                    <th>문의유형</th>
-                                    <th>제목</th>
-                                    <th>작성일</th>
-                                    <th>상태</th>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>주문/결제</td>
-                                    <td>신용카드 결제 중 오류가 난 경우 어떻게 하나요?</td>
-                                    <td>2023-11-03</td>
-                                    <td class="notAnswerYet">검토중</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>주문/결제</td>
-                                    <td>신용카드 결제 중 오류가 난 경우 어떻게 하나요?</td>
-                                    <td>2023-11-03</td>
-                                    <td class="answered">답변완료</td>
-                                </tr>
+                            <tr>
+                                <th>번호</th>
+                                <th>문의유형1(cate)</th>
+                                <th>문의유형2(type)</th>
+                                <th>제목</th>
+                                <th>작성일</th>
+                                <th>상태</th>
+                            </tr>
+                            <tr th:each="list:${qnaList}" th:if="${list.uid != null}">
+                                <td class="bno" th:text="${list.bno}" />
+                                <td class="channel" th:text="${list.cateName}" />
+                                <td class="type" th:text="${list.typeName}" />
+                                <td class="tit" th:text="${list.title}"><a href="#"></a></td>
+                                <td class="date" th:text="${#temporals.format(list.regDate, 'yyyy-MM-dd HH:mm:ss')}" />
+                                <td class="status"><span class="notAnswerYet">검토중</span></td>
+                            </tr>
                             </tbody>
                         </table>
                     </article>
