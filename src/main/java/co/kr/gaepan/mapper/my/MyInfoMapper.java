@@ -17,5 +17,5 @@ public interface MyInfoMapper {
     int updatePassword(@Param("uid") String uid, @Param("newPw") String newPw);
 
     // 사용자 정보 삭제하기
-    void deleteInfo(String uid);
+    void deleteInfo(MyInfoDTO myInfoDTO);
 }

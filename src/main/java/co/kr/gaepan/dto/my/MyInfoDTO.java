@@ -1,5 +1,6 @@
 package co.kr.gaepan.dto.my;
 
+import jakarta.persistence.PostLoad;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,7 +28,7 @@ public class MyInfoDTO {
     private String email2;
     private String email = (email1 + "@" + email2);
     private String birth;
-    private int type;
+    private int role;
     private String zip;
     private String addr1;
     private String addr2;
@@ -38,7 +39,7 @@ public class MyInfoDTO {
 
     // 추가
     private String pass1;
-    private String company;
     private String bizRegNum;
+
 
 }

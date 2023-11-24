@@ -29,7 +29,22 @@
     </update>
 
     <update id="deleteInfo">
-        UPDATE `gp_member` SET `uid` = #{uid}, `gender` = #{gender}, `hp` = #{hp}, `email` = #{email}, ` type` = #{ type}, ` zip` = #{ zip}, ` addr1` = #{ addr1}, ` addr2` = #{ addr2}, ` company` = #{ company}, ` bizRegNum` = #{ bizRegNum}, ` levDate` = #{ levDate}, ` exp` = #{ exp}, ` count` = #{ count}
-        WHERE ` uid` = #{uid}
+        UPDATE
+            `gp_member`
+        SET
+            `name` = NULL,
+            `pw` = NULL,
+            `gender` = NULL,
+            `hp` = NULL,
+            `email` = NULL,
+            `birth` =NULL,
+            `role` = NULL,
+            `zip` = NULL,
+            `addr1` = NULL,
+            `addr2` = NULL,
+            `exp` = NULL,
+            `count` = NULL,
+            `levDate` = NULL
+        WHERE `uid` = #{uid}
     </update>
 </mapper>

@@ -7,6 +7,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -46,4 +48,10 @@ public class MyInfoService {
 
         return rowsAffected;
     }
+
+    @Transactional
+    public void deleteInfo(MyInfoDTO myInfoDTO) {
+        myInfoMapper.deleteInfo(myInfoDTO);
+    }
+
 }
