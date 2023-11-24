@@ -93,6 +93,24 @@
         <if test="searchType == 'name'">
             a.name LIKE CONCAT('%', #{key}, '%')
         </if>
+        LIMIT #{startNum}, 10;
+    </select>
+
+    <select id="searchPetsCount" resultType="int">
+        SELECT count(*)
+        FROM gp_pet as a
+        LEFT JOIN gp_pet_type as b ON a.`type` = b.`type`
+        LEFT JOIN gp_pet_cate as c ON a.cate = c.cate
+        WHERE
+        <if test="searchType == 'tName'">
+            b.tName LIKE CONCAT('%', #{key}, '%')
+        </if>
+        <if test="searchType == 'cName'">
+            c.cName LIKE CONCAT('%', #{key}, '%')
+        </if>
+        <if test="searchType == 'name'">
+            a.name LIKE CONCAT('%', #{key}, '%')
+        </if>
     </select>
 
 </mapper>

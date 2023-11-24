@@ -45,7 +45,7 @@
                                 <td th:text="${#temporals.format(list.regDate, 'yyyy-MM-dd HH:mm:ss')}" />
                             </tr>
                         </table>
-                        <div class="page">
+                        <div class="page" th:if="${total} != 0">
                             <span class="prev" th:if="${pageGroupStart > 1}">
                                 <a th:href="@{/my/diary(pg=${pageGroupStart - 1})}"><&nbsp;이전</a>
                             </span>

@@ -38,7 +38,7 @@
                                 <td class="status"><span class="notAnswerYet">검토중</span></td>
                             </tr>
                         </table>
-                        <div class="page">
+                        <div class="page" th:if="${total} != 0">
                             <span class="prev" th:if="${pageGroupStart > 1}">
                                 <a th:href="@{/my/qna(pg=${pageGroupStart - 1})}"><&nbsp;이전</a>
                             </span>

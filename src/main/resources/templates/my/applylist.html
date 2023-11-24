@@ -45,7 +45,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <div class="page" style="">
+                        <div class="page" th:if="${total} != 0" style="">
                             <span class="prev" th:if="${pageGroupStart > 1}">
                                 <a th:href="@{/my/applylist(pg=${pageGroupStart - 1})}"><&nbsp;이전</a>
                             </span>

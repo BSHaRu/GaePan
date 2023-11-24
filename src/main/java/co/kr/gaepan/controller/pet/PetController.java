@@ -1,7 +1,9 @@
 package co.kr.gaepan.controller.pet;
 
 import co.kr.gaepan.dto.pet.*;
+import co.kr.gaepan.mapper.pet.PetListMapper;
 import co.kr.gaepan.service.pet.PetBoardService;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import java.util.List;
 public class PetController {
 
     private final PetBoardService petBoardService;
+    private final PetListMapper petListMapper;
 
     @RequestMapping("/pet/petlist")
     public String main(PageRequestDTO pageRequestDTO , Model model) {
@@ -87,11 +90,35 @@ public class PetController {
     @GetMapping("/pet/searchpetlist")
     public String searchPets(@RequestParam String searchType,
                              @RequestParam String key,
+                             @RequestParam(defaultValue = "1") String pg,
                              Model model) {
         log.info("searchType : " + searchType);
         log.info("key : " + key);
-        List<PetRegisterDTO> petList = petBoardService.searchPets(searchType, key);
+
+        int currentPage = petBoardService.getCurrentPage(pg);
+
+        int totalPages = petListMapper.searchPetsCount(searchType, key);
+
+        int lastPage = petBoardService.getLastPageNum(totalPages);
+
+        int[] result = petBoardService.getPageGroupNum(currentPage, lastPage);
+
+        int pageStartNum = petBoardService.getPageStartNum(currentPage,totalPages);
+
+        int startNum = petBoardService.getStartNum(currentPage);
+
+        int pageGroupStart = result[0];
+        int pageGroupEnd = result[1];
+
+        List<PetRegisterDTO> petList = petBoardService.searchPets(searchType, key, startNum);
         model.addAttribute("petList", petList);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("lastPage", lastPage);
+        model.addAttribute("pageGroupStart", pageGroupStart);
+        model.addAttribute("pageGroupEnd", pageGroupEnd);
+        model.addAttribute("pageStartNum", pageStartNum + 1);
+        model.addAttribute("searchType", searchType);
+        model.addAttribute("key", key);
 
         log.info("petList : " + petList);
 
