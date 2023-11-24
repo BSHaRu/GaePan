@@ -27,7 +27,7 @@ public class AdoptController {
 
         model.addAttribute("pageResponseDTO", pageResponseDTO);
 
-        return "/pet/adoptdiary";
+        return "pet/adoptdiary";
 
     }
 

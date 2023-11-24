@@ -22,7 +22,7 @@ public interface PetListMapper {
     public List<PetCateDTO> petcategory();
     public List<PetTypeDTO> petType(int cate);
 
-    List<PetRegisterDTO> searchPets(@Param("searchType") String searchType, @Param("key")  String key, @Param("startNum") int startNum);
-    public int searchPetsCount(@Param("searchType") String searchType, @Param("key")  String key);
+    List<PetRegisterDTO> searchPets(@Param("searchType") String searchType, @Param("key")  String key, @Param("startNum") int startNum, @Param("division") int division);
+    public int searchPetsCount(@Param("searchType") String searchType, @Param("key")  String key, @Param("division") int division);
 
 }

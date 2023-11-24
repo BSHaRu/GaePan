@@ -394,9 +394,9 @@ public class PetBoardService {
 
     }
 
-    public List<PetRegisterDTO> searchPets(String searchType, String key, int startNum) {
+    public List<PetRegisterDTO> searchPets(String searchType, String key, int startNum, int division) {
 
-        return petListMapper.searchPets(searchType, key, startNum);
+        return petListMapper.searchPets(searchType, key, startNum, division);
 
     }
 
