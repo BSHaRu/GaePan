@@ -258,6 +258,11 @@ $(document).ready(function () {
                         emailInput.removeClass('is-invalid');
                         emailInput.addClass('is-valid');
                         formValidation.isEmailOk = true;
+
+                        // 유효성 검사가 통과했을 때만 버튼을 활성화
+                        $("#btnEmailAuth").removeAttr('disabled');
+
+
                         console.log("Success: 200 OK");
                     },
                     409: function() {
@@ -265,6 +270,10 @@ $(document).ready(function () {
                         emailInput.removeClass('is-valid');
                         emailInput.addClass('is-invalid');
                         formValidation.isEmailOk = false;
+
+                        // 유효성 검사가 통과하지 않았을 때는 버튼을 비활성화
+                        $("#btnEmailAuth").attr('disabled', 'disabled');
+
                         console.log("중복입니다. 409");
                     }
                 },
@@ -280,6 +289,9 @@ $(document).ready(function () {
             emailInput.removeClass('is-valid');
             emailInput.siblings('.invalid-feedback').text('');
             formValidation.isEmailOk = false;
+
+            // 유효성 검사가 통과하지 않았을 때는 버튼을 비활성화
+            $("#btnEmailAuth").attr('disabled', 'disabled');
         }
     });
 

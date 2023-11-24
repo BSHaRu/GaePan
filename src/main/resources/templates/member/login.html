@@ -24,7 +24,7 @@
             <i class="typcn typcn-eye" id="eye"></i>
             <input type="password" name="pw" placeholder="비밀번호" id="pwd" autocomplete="off">
             <label>
-                <input type="checkbox">
+                <input type="checkbox" name="auto" th:checked="${param.rememberMe}">
                 <span></span>
                 <small class="rmb">로그인 상태 유지</small>
             </label>
