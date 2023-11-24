@@ -1,17 +1,19 @@
 package co.kr.gaepan.controller.my;
 
-import co.kr.gaepan.dto.member.MemberDTO;
 import co.kr.gaepan.dto.my.MyInfoDTO;
 import co.kr.gaepan.security.MyUserDetails;
 import co.kr.gaepan.service.my.MyInfoService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -159,5 +161,48 @@ public class MyInfoController {
 
         return response;
     }
+
+    @PostMapping("/passcheck")
+    public String userDelete(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @ModelAttribute MyInfoDTO myInfoDTO,
+            RedirectAttributes redirectAttributes) {
+
+        // 사용자 정보 확인
+        String username = userDetails.getUsername();
+        log.info("username : " + username);
+        log.info("pw : " + myInfoDTO.getPw());
+
+        // 패스워드 확인
+        if (myInfoDTO.getPw() != null && passwordEncoder.matches(myInfoDTO.getPw(), userDetails.getPassword())) {
+            // 로그인된 계정 로그아웃 처리
+            SecurityContextHolder.clearContext();
+
+            // 회원 정보 삭제
+            infoService.deleteInfo(myInfoDTO);
+            log.info("deleteInfo : " + infoService);
+
+            // 로그아웃 성공 메시지 전달
+            redirectAttributes.addFlashAttribute("logoutSuccessMessage", "회원 정보가 성공적으로 삭제되었습니다. 다시 로그인해주세요.");
+        } else {
+            // 패스워드 불일치 시 메시지 전달
+            redirectAttributes.addFlashAttribute("deleteErrorMessage", "패스워드가 일치하지 않습니다. 다시 확인해주세요.");
+            log.info("logoutSuccessMessage : " + redirectAttributes);
+            log.info("deleteErrorMessage : " + redirectAttributes);
+        }
+
+
+        return "redirect:/member/login";
+    }
+
+    /*
+    @PostMapping("/passcheck")
+    public String userDelete(MyInfoDTO myInfoDTO) {
+        infoService.deleteInfo(myInfoDTO);
+
+        return "redirect:/my/index";
+    }
+     */
+
 
 }
