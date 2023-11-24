@@ -19,11 +19,11 @@ public class PetListMapperTest {
         String searchType = "tName";
         String key = "말티즈";
         int startNum = 1;
+        int division = 1;
 
-        List<PetRegisterDTO> result = petListMapper.searchPets(searchType, key, startNum);
+        List<PetRegisterDTO> result = petListMapper.searchPets(searchType, key, startNum, division);
 
         System.out.println("result: " + result);
-
 
     }
 

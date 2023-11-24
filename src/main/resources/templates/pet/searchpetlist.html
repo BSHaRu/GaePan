@@ -22,15 +22,22 @@
             <!-- 블로그 List -->
             <div class="col-lg-8 col-md-8">
                 <div class="hero__search__form" style="display: block; margin-bottom: 30px">
-                    <form th:action="@{/pet/searchpetlist}" method="get">
-                    <select name="searchType">
-                        <option>카테고리 선택</option>
-                        <option value="cName">종류</option>
-                        <option value="tName">품종</option>
-                        <option value="name">반려동물이름</option>
-                    </select>
-                    <input type="text" id="searchInput" name="key">
-                    <button style="background-color: mediumpurple; color: white; border: none; width: 100px;" type="submit">검색</button>
+                    <form th:action="@{/pet/searchpetlist}" method="get" class="nice-select-container">
+                        <select class="nice-select-division" name="division">
+                            <option>글 유형</option>
+                            <option value="1">분양</option>
+                            <option value="2">실종</option>
+                            <option value="3">입양 일기</option>
+                        </select>
+                        <!-- 두 번째 셀렉트 박스 -->
+                        <select class="nice-select-searchType" name="searchType">
+                            <option>동물 유형</option>
+                            <option value="cName">종류</option>
+                            <option value="tName">품종</option>
+                            <option value="name">반려동물이름</option>
+                        </select>
+                        <input type="text" id="searchInput" name="key">
+                        <button style="background-color: mediumpurple; color: white; border: none; width: 100px;" type="submit">검색</button>
                     </form>
                 </div>
 
@@ -50,29 +57,31 @@
                                     <li><i class="fa fa-comment-o"></i>1</li>
                                 </ul>
                                 <h5>
-                                    <a th:href="@{/pet/details(no=${pet.no})}" class="title" th:text="${pet.name}"></a>
+                                    <a th:if="${division == 1}" th:href="@{/pet/details(no=${pet.no})}" class="title" th:text="${pet.name}"></a>
+                                    <a th:if="${division == 2}" th:href="@{/pet/missingdetails(no=${pet.no})}" class="title" th:text="${pet.name}"></a>
+                                    <a th:if="${division == 3}" th:href="@{/pet/adoptdetails(no=${pet.no})}" class="title" th:text="${pet.name}"></a>
                                 </h5>
                                 <a th:href="@{/pet/details(no=${pet.no})}" class="blog__btn">
                                     READ MORE <span class="arrow_right"></span>
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </div>`
                 </div>
                 <!-- 페이징 처리 -->
                 <div class="col-lg-12">
                     <div class="product__pagination blog__pagination">
                         <th:block th:if="${pageGroupStart > 1}">
-                            <a th:href="@{/pet/searchpetlist(pg= ${pageGroupStart - 1}, searchType=${searchType}, key=${key})}"><span class="arrow_right"></span></a>
+                            <a th:href="@{/pet/searchpetlist(pg= ${pageGroupStart - 1}, searchType=${searchType}, key=${key}, division=${division})}"><span class="arrow_right"></span></a>
                         </th:block>
 
                         <th:block th:each="i : ${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
-                            <a th:href="@{/pet/searchpetlist(pg= ${i}, searchType=${searchType}, key=${key})}"
+                            <a th:href="@{/pet/searchpetlist(pg= ${i}, searchType=${searchType}, key=${key}, division=${division})}"
                                th:class="${currentPage == i} ? 'num on current' : 'num'">[[${i}]]</a>
                         </th:block>
 
                         <th:block th:if="${pageGroupEnd < lastPageNum}">
-                            <a th:href="@{/pet/searchpetlist(pg= ${pageGroupEnd + 1}, searchType=${searchType}, key=${key})}"><span class="arrow_right"></span></a>
+                            <a th:href="@{/pet/searchpetlist(pg= ${pageGroupEnd + 1}, searchType=${searchType}, key=${key}, division=${division})}"><span class="arrow_right"></span></a>
                         </th:block>
                     </div>
                 </div>
