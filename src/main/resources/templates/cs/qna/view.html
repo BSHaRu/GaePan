@@ -20,16 +20,11 @@
                         <div class="sidebar__item">
                             <h4>고객문의</h4>
                             <ul>
-                                <li><a href="#">회원</a></li>
-                                <li><a href="#">Vegetables</a></li>
-                                <li><a href="#">Fruit &amp; Nut Gifts</a></li>
-                                <li><a href="#">Fresh Berries</a></li>
-                                <li><a href="#">Ocean Foods</a></li>
-                                <li><a href="#">Butter &amp; Eggs</a></li>
-                                <li><a href="#">Fastfood</a></li>
-                                <li><a href="#">Fresh Onion</a></li>
-                                <li><a href="#">Papayaya &amp; Crisps</a></li>
-                                <li><a href="#">Oatmeal</a></li>
+                                <li><a th:href="@{/cs/qna/list(group='qna', cate=31)}">회원</a></li>
+                                <li><a href="#">#</a></li>
+                                <li><a href="#">#</a></li>
+                                <li><a href="#">#</a></li>
+                                <li><a href="#">#</a></li>
                             </ul>
                         </div>
                     </div>
@@ -40,21 +35,21 @@
 
                 <section class="qna" id="qnaList-section">
                     <div class="section-title product__discount__title">
-                        <h2><a href="#" class="btnTotal">회원</a></h2>
+                        <h2><a th:href="@{/cs/qna/list(group=${boardDTO.group}, cate=${boardDTO.cate})}" class="btnTotal">[[${boardDTO.cateName}]]</a></h2>
                     </div>
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h5 class="card-title">[[${boardDTO.title}]]</h5>
+                            <p class="card-text">[[${boardDTO.content}]]</p>
                             <a href="#" class="btn btn-primary">답글</a>
                         </div>
                     </div>
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h5 class="card-title">[[${response.title}]]</h5>
+                            <p class="card-text">[[${response.content}]]</p>
                             <a href="#" class="btn btn-primary">답글</a>
                         </div>
                     </div>
