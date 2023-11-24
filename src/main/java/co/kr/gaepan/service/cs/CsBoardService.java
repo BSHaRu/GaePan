@@ -19,6 +19,7 @@ public class CsBoardService {
     @Autowired
     private CsBoardMapper mapper;
 
+    // 글 목록 조회
     public PageResponseDTO findByGroupAndCate(PageRequestDTO pageRequestDTO){
 
         log.info("CsBoardService pageRequestDTO : " + pageRequestDTO);
@@ -39,5 +40,31 @@ public class CsBoardService {
                 .total(totalElements)
                 .build();
 
+    }
+
+    // 글 조회
+    public BoardDTO findByNo(int bno){
+
+        log.info("CsBoardService findByNo: " + bno);
+        return mapper.findByNo(bno);
+    }
+
+    // 답변(댓글) 조회
+    public BoardDTO findByParent(int bno){
+
+        return mapper.findByParent(bno);
+    }
+
+    // 문의하기
+    public void insertInquiry(BoardDTO boardDTO){
+        mapper.insertInquiry(
+                boardDTO.getUid(),
+                boardDTO.getTitle(),
+                boardDTO.getContent(),
+                boardDTO.getGroup(),
+                boardDTO.getCate(),
+                boardDTO.getType(),
+                boardDTO.getRegDate()
+        );
     }
 }

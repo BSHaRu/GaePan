@@ -20,7 +20,7 @@
                         <div class="sidebar__item">
                             <h4>FAQ</h4>
                             <ul>
-                                <li><a href="#">회원가입</a></li>
+                                <li><a th:href="@{/cs/faq/list(group='faq', cate=21)}">회원가입</a></li>
                                 <li><a href="#">#</a></li>
                                 <li><a href="#">#</a></li>
                             </ul>
@@ -33,7 +33,7 @@
 
                <section class="qna" id="qnaList-section">
                    <div class="section-title product__discount__title">
-                            <h2><a href="#" class="btnTotal">회원가입</a></h2>
+                            <h2><a th:href="@{/cs/faq/list(group=${pageResponseDTO.group}, cate=${pageResponseDTO.cate})}" class="btnTotal">[[${pageResponseDTO.dtoList[0].cateName}]]</a></h2>
                    </div>
 
                    <div class="accordion" id="accordionExample">
