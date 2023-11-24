@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
+import org.springframework.security.config.annotation.web.configurers.RememberMeConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -22,15 +23,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SecurityConfiguration implements WebMvcConfigurer {
 
     private final SecurityUserService service;
+    private final ResourceLoader resourceLoader;
 
-    //기술노트 [Spring] 정적 자원 리소스 경로설정
-
-    /*
-
-    @Autowired
-    private ResourceLoader resourceLoader;
-
-    */
 
 
     @Bean
@@ -57,7 +51,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .rememberMe(httpSecurityRememberMeConfigurer -> httpSecurityRememberMeConfigurer
                         .rememberMeParameter("auto")
                         .alwaysRemember(false)
-                        .tokenValiditySeconds(60*60*24*30*3)
+                        .tokenValiditySeconds(60*60*24*7)
                         .key("autoLogin")
                         .userDetailsService(service))
 
@@ -83,16 +77,11 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         return config.getAuthenticationManager();
     }
 
-
-    //기술노트 [Spring] 정적 자원 리소스 경로설정
-/*
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/img/**")
-                .addResourceLocations(resourceLoader.getResource("file:/img/"));
-    }
-
-*/
+    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/upload/**")
+				.addResourceLocations(resourceLoader.getResource("file:upload/"));
+	}
 
 
 }

@@ -27,11 +27,6 @@ public class MemberController {
         return "member/login";
     }
 
-    @GetMapping("/register2")
-    public String register2(){
-        return "member/register2";
-    }
-
     @GetMapping("/register")
     public String register() {
         return "member/register";
