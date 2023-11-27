@@ -5,14 +5,21 @@ import co.kr.gaepan.dto.board.BoardDTO;
 import co.kr.gaepan.dto.cs.PageRequestDTO;
 import co.kr.gaepan.dto.cs.PageResponseDTO;
 import co.kr.gaepan.service.cs.CsBoardService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RequestMapping("/cs/*")
 @Controller
@@ -98,18 +105,55 @@ public class CsMainController {
         return "cs/qna/view";
     }
     @GetMapping("/qna/write")
-    public String qnaWrite(){
+    public String qnaWrite(Model model){
+
+        // 현재 사용자의 정보 가져오기
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        // 변수 선언 및 초기화
+        String uid = null;
+        String role = null;
+
+        if(principal instanceof UserDetails) {
+
+            // uid는 현재 인증된 사용자의 아이디
+            uid = ((UserDetails) principal).getUsername();
+            List<GrantedAuthority> authorities = (List<GrantedAuthority>) ((UserDetails) principal).getAuthorities();
+
+            GrantedAuthority authority = authorities.get(0);
+
+            // role 값 substring  어떻게 할지 확인하기!
+            role = authority.getAuthority().substring(5);
+        }
+
+        model.addAttribute("uid", uid);
+
+        if(uid == null){
+
+            return "redirect:/member/login";
+        }
 
         return "cs/qna/write";
     }
     @PostMapping("/qna/write")
-    public String qnaWrite(BoardDTO boardDTO){ // DTO 받을 때 regDate값은 자동으로 지정되는 건가??
+    public String qnaWrite(HttpServletRequest request, BoardDTO boardDTO){ // DTO 받을 때 regDate값은 자동으로 지정되는 건가??
 
+        // 현재 날짜 및 시간 가져오기
+        LocalDateTime regDate = LocalDateTime.now();
+        // boardDTO의 regDate 속성으로 설정
+        boardDTO.setRegDate(regDate);
+
+        // 현재 사용자 IP 주소 가져오기
+        String regIP = request.getRemoteAddr();
+        // boardDTO의 regIp 속성으로 설정
+        boardDTO.setRegIP(regIP);
+
+        log.info("boardDTO : " + boardDTO);
         csBoardService.insertInquiry(boardDTO);
 
         // 가독성 위해 String.format 활용
         // return String.format("redirect:/cs/qna/list?group=%s&cate=%s", boardDTO.getGroup(), boardDTO.getCate());
-        return "redirect:/cs/qna/list?group=" + boardDTO.getGroup() + "&cate=" + boardDTO.getCate();  // 파라미터 안 보내면 오류나겠지??
+        return "redirect:/cs/qna/list?group=qna&cate=31";  // 파라미터 안 보내면 오류나겠지??
 
     }
 

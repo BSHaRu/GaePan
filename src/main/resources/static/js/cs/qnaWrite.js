@@ -1,17 +1,2 @@
 
-window.onload = function(){
-
-    console.log('test...1');
-    const qnaCate = document.getElementById('qnaCate');
-    const qnaType = document.getElementById('qnaType');
-
-    console.log('test...2 : ' + qnaCate);
-    // 이벤트 change ? select?
-    qnaCate.addEventListener('change', (e)=>{
-        alert('test!!!');
-    });
-
-
-
-
-}
+// 문의하기 버튼 누르면 로그인 여부 확인
