@@ -40,9 +40,10 @@
         `uid` = #{uid},
         `title` = #{title},
         `content` = #{content},
-        `group` = #{group},
+        `group` = 'qna',
         `cate` = #{cate},
         `type` = #{type},
+        `regIP` = #{regIP},
         `regDate` = #{regDate};
     </insert>
 

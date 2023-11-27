@@ -57,13 +57,16 @@ public class CsBoardService {
 
     // 문의하기
     public void insertInquiry(BoardDTO boardDTO){
+
+        log.info("CsBoardService insertInquiry: " + boardDTO);
+
         mapper.insertInquiry(
                 boardDTO.getUid(),
                 boardDTO.getTitle(),
                 boardDTO.getContent(),
-                boardDTO.getGroup(),
                 boardDTO.getCate(),
                 boardDTO.getType(),
+                boardDTO.getRegIP(),
                 boardDTO.getRegDate()
         );
     }
