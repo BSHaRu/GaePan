@@ -68,6 +68,7 @@
                     <ul class="pagination">
                         <th:block th:each="cate : ${cateDTO}">
                             <li class="board__cate">
+                                <!--TODO 이게 카테고리에 맞게 List 출력이 제대로 안되고 그냥 전부 출력함-->
                                 <a th:href="@{'list?group=' + ${group} +  '&cate='+ ${cate.cate} }">
                                     [[${cate.cateName}]]
                                 </a>
@@ -107,11 +108,11 @@
                                         [<span th:text="${board.typeName}"></span>]
                                         [[${board.title}]]
                                     </a>
-                                    <th:block th:if="${board.comment != null}">
+                                    <th:block th:if="${board.commentCount > 0}">
                                         <span class="board_comment">
-                                            <a href="#">
-                                                <!-- todo parent의 count계산을 하고 넣어줘야됨 -->
-                                                [<span th:text="${board.parent}"></span>]
+                                            <!-- todo 여기 링크 누르면 댓글창으로 바로 가게끔 설정 하고 싶음 -->
+                                            <a th:href="@{/admin/board/view(bno=${board.bno})}">
+                                                [<span th:text="${board.commentCount}"></span>]
                                             </a>
                                         </span>
                                     </th:block>
@@ -171,45 +172,52 @@
 </html>
 <script th:src="@{/js/admin/boardDelete.js}"></script>
 <script>
-    $(document).ready(function(){
-        const path = "/admin/board/deleteBoardList";
+    const path = "/admin/board/deleteBoardList";
 
-        $(".deleteBtn").click(function(){
-            if(confirm("정말 삭제 하시겠습니까?")){
-                console.log("1");
-                const checked = $(".checkbox:checked");
-                // check를 여러개 할 수 있기 때문에 배열로 초기화
-                const boardBno = [];
-                for(let i = 0; i < checked.length; i++){
-                    boardBno.push(
-                        { bno : checked[i].value * 1 }
-                    );
-                    console.log("2");
-                }
+    $(".deleteBtn").click(function(){
+        if(confirm("정말 삭제 하시겠습니까?")){
+            console.log("1");
+            /* todo 지금 여기서 checked value 값이 "" 공백으로 뜸 이거 해결 해야됨 */
+            const checked = $(".checkbox:checked");
+            console.log("Checked elements:", checked);
+            // check를 여러개 할 수 있기 때문에 배열로 초기화
+            const boardBno = [];
+            for(let i = 0; i < checked.length; i++){
+                const currentValue = checked[i].value;
+                console.log("Current value: " + currentValue);
 
-                // memberNo에 값이 있을 때만 ajax로 처리
-                // -> memberType이 1 or 2일 경우만 해당
-                if(boardBno.length > 0){
-                    console.log("3");
-                    debugger;
-                    $.ajax({
-                        url: path,
-                        type: "POST",
-                        traditional: true, // 배열을 직렬화 하는 옵션
-                        contentType: 'application/json',
-                        data: JSON.stringify(boardBno),
-                        success: function(data){
-                            console.log(1);
-                            alert("게시글이 삭제되었습니다.");
-                            location.reload();
-                        },
-                        error: function(){
-                            console.log(2);
-                            alert("게시글 삭제에 실패했습니다.");
-                        }
-                    }); // ajax end
-                }// if > ajax end
-            } // if end
-        });// click end
-    });
+                const currentValue2 = checked[i].value * 1;
+                console.log("Current value2: " + currentValue2);
+                debugger;
+                boardBno.push(
+                    { bno : checked[i].value * 1 }
+                );
+                console.log("2");
+            }
+
+            console.log("boardBno:", boardBno);
+
+            // memberNo에 값이 있을 때만 ajax로 처리
+            // -> memberType이 1 or 2일 경우만 해당
+            if(boardBno.length > 0){
+                console.log("3");
+                $.ajax({
+                    url: path,
+                    type: "POST",
+                    traditional: true, // 배열을 직렬화 하는 옵션
+                    contentType: 'application/json',
+                    data: JSON.stringify(boardBno),
+                    success: function(data){
+                        console.log("Success:", data);
+                        alert("게시글이 삭제되었습니다.");
+                        location.reload();
+                    },
+                    error: function(xhr, status, error){
+                        console.error("Error:", error);
+                        alert("게시글 삭제에 실패했습니다.");
+                    }
+                }); // ajax end
+            }// if > ajax end
+        } // if end
+    });// click end
 </script>

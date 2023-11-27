@@ -33,4 +33,8 @@ public class GP_AdminBoardDTO {
     private int rownum;
     private String nick;
 
+    private int cbno;
+    private String cComment;
+    private LocalDateTime cRegDate;
+    private int commentCount;
 }

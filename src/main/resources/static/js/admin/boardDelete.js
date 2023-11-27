@@ -2,7 +2,6 @@ $(document).ready(function() {
     const path1 = "/admin/board/deleteById";
     const path2 = "/admin/board/list";
 
-
     $(".board_deleteBtn").click(function(e) {
         e.preventDefault();
         const bno = $(this).data("bno");
