@@ -6,6 +6,7 @@ import co.kr.gaepan.dto.board.BoardCateDTO;
 import co.kr.gaepan.dto.board.BoardDTO;
 import co.kr.gaepan.dto.board.BoardTypeDTO;
 import co.kr.gaepan.service.admin.AdminBoardCateService;
+import co.kr.gaepan.service.admin.AdminBoardCommentService;
 import co.kr.gaepan.service.admin.AdminBoardService;
 import co.kr.gaepan.util.SearchCriteria;
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,20 +31,18 @@ public class AdminBoardController {
 
     private final AdminBoardService adminBoardService;
     private final AdminBoardCateService adminBoardCateService;
+    private final AdminBoardCommentService adminBoardCommentService;
 
     @GetMapping("/write")
     public String write(@RequestParam("group") String group,
                         Model model) {
         try {
-//            List<BoardDTO> boardDTO = adminBoardService.findByGroup(group);
             List<BoardCateDTO> cateDTO = adminBoardCateService.getCateName(group);
             List<BoardTypeDTO> typeDTO = adminBoardCateService.selectType(cateDTO.get(0).getCate());
 
-//            log.info("boardDTO:" + boardDTO);
             log.info("cateDTO: " + cateDTO);
             log.info("typeDTO: " + typeDTO);
 
-//            model.addAttribute("boardDTO", boardDTO);
             model.addAttribute("cateDTO", cateDTO);
             model.addAttribute("typeDTO", typeDTO);
             model.addAttribute("group", group);
@@ -81,6 +80,12 @@ public class AdminBoardController {
 
             List<BoardCateDTO> cateDTO = adminBoardCateService.getCateName(group);
             model.addAttribute("cateDTO", cateDTO);
+
+            for (GP_AdminBoardDTO board : adminBoardList) {
+                // 각 게시글에 대한 댓글 수를 조회하여 DTO에 설정
+                int commentCount = adminBoardCommentService.countComments(board.getBno());
+                board.setCommentCount(commentCount >= 0 ? commentCount : 0);
+            }
         } catch (Exception e) {
             log.error("admin board list error", e.getMessage());
             throw new RuntimeException(e);
@@ -102,12 +107,16 @@ public class AdminBoardController {
     @GetMapping("/view")
     public String findById(HttpServletRequest request,
                            HttpServletResponse response,
-                           Model model, int bno) {
+                           Model model, GP_AdminBoardDTO dto) {
         try {
-            adminBoardService.updateViewCnt(request, response, bno);
+            adminBoardService.updateViewCnt(request, response, dto.getBno());
 
-            GP_AdminBoardDTO adminBoardDTO = adminBoardService.findById(bno);
+            GP_AdminBoardDTO adminBoardDTO = adminBoardService.findById(dto.getBno());
             model.addAttribute("boardDTO", adminBoardDTO);
+
+            List<GP_AdminBoardDTO> comments = adminBoardCommentService.findComments(dto);
+            model.addAttribute("comments", comments);
+//            log.info("admin board findById comments : " + comments);
         } catch (Exception e) {
             log.error("admin board view error", e.getMessage());
             throw new RuntimeException(e);
@@ -150,9 +159,28 @@ public class AdminBoardController {
         return "redirect:view?bno=" + bno;
     }
 
-    /*@PostMapping("/delete")
-    public String delete(int bno, String uid){
 
-        return "";
-    }*/
+    @PostMapping("/commentWrite")
+    public String commentWrite(GP_AdminBoardDTO dto, HttpServletRequest request,
+                            @RequestParam("bno") int parent){
+        log.info("처음 parent : " + parent);
+        try {
+            String ip = request.getRemoteAddr();
+            dto.setRegIP(ip);
+
+            adminBoardCommentService.saveComment(dto);
+/*            log.info("dto group:" + dto.getGroup());
+            log.info("dto cate : "+ dto.getCate());
+            log.info("dto type:" + dto.getType());
+            log.info("dto comment : "+ dto.getComment());
+            log.info("dto parent:" + dto.getParent());*/
+
+        } catch (Exception e) {
+            log.error("getWriteController error" + e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return "redirect:view?bno=" + parent;
+    }
+
+
 }

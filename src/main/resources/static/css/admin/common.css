@@ -286,8 +286,25 @@ main table th {
     float: right;
     margin: 10px 0;
 }
+
 .admin_board_right{
     float: right;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+.admin_board_right a{
+    margin-left: 15px;
+}
+.admin_board_left{
+    float: left;
+    margin-bottom: 30px;
+    margin-top: 10px;
+}
+.admin_board_left a{
+    margin-right: 15px;
+}
+.boardList{
+    clear: both;
 }
 
 
@@ -355,10 +372,10 @@ main table th {
     margin-top: 10px;
 
 }
-.admin__section > .view > .commentList > .comments > div > textarea {
+.admin__section > .view > .commentList > .comments > div .comment {
     width: 100%;
     height: 100px;
-    padding: 15px 21px 2px;
+    padding: 10px 21px 2px;
     box-sizing: border-box;
     resize: none;
     border: 0;
@@ -367,6 +384,16 @@ main table th {
     font-size:17px;
     border-bottom: 3px solid #e9e9e9;
     background-color: rgba(158, 158, 158, 0.1);
+    clear: both;
+}
+.admin__section > .view > .commentList > .comments > div .comment > span {
+    font-size: 13px;
+    font-weight: bold;
+}
+.admin__section > .view > .commentList > .comments > div .comment > textarea {
+    border: none;
+    background: none;
+    margin-top: 5px;
 }
 .empty {
     width: 100%;
@@ -382,6 +409,9 @@ main table th {
     text-align: center;
     border-bottom: 3px solid #e9e9e9;
     background-color: rgba(158, 158, 158, 0.1);
+}
+.commentList{
+    clear: both;
 }
 
 #formCheck{
