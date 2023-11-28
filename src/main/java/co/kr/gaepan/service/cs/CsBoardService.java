@@ -50,7 +50,7 @@ public class CsBoardService {
     }
 
     // 답변(댓글) 조회
-    public BoardDTO findByParent(int bno){
+    public List<BoardDTO> findByParent(int bno){
 
         return mapper.findByParent(bno);
     }
@@ -69,5 +69,22 @@ public class CsBoardService {
                 boardDTO.getRegIP(),
                 boardDTO.getRegDate()
         );
+    }
+
+    // 댓글 등록
+    public void insertComment(BoardDTO boardDTO){
+        mapper.insertComment(
+                boardDTO.getUid(),
+                boardDTO.getCate(),
+                boardDTO.getType(),
+                boardDTO.getRegIP(),
+                boardDTO.getRegDate(),
+                boardDTO.getParent(),
+                boardDTO.getComment()
+        );
+    }
+
+    public void deleteArticle(int bno){
+        mapper.deleteArticle(bno);
     }
 }

@@ -47,5 +47,25 @@
         `regDate` = #{regDate};
     </insert>
 
+    <insert id="insertComment">
+        INSERT INTO `gp_board` SET
+        `uid` = #{uid},
+        `group` = 'qna',
+        `cate` = #{cate},
+        `type` = #{type},
+        `regIP` = #{regIP},
+        `regDate` = #{regDate},
+        `parent` = #{parent},
+        `comment` = #{comment};
+    </insert>
+
+    <delete id="deleteArticle">
+        DELETE FROM `gp_board` WHERE `bno`=${bno};
+
+    </delete>
+
+
+
+
 
 </mapper>

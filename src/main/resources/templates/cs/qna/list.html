@@ -9,6 +9,18 @@
 
 
 <th:block layout:fragment="content">
+    <!-- script 이렇게 layout:content 안에 넣으면 적용되는구나 -->
+    <script>
+        $(function(){
+           var uidElements = document.getElementsByClassName('uid');
+
+           for(var i=0 ; i<uidElements.length ; i++){
+               var originalUid = uidElements[i].innerText;
+               var maskedUid = originalUid.substring(0, 3) + "****";
+               uidElements[i].innerText = maskedUid;
+           }
+        });
+    </script>
 
     <div class="container">
 
@@ -47,22 +59,13 @@
                                 <h2><a th:href="@{/cs/qna/list(group=${pageResponseDTO.group}, cate=${pageResponseDTO.cate})}" class="btnTotal">[[${pageResponseDTO.dtoList[0].cateName}]]</a></h2>
                             </div>
                             <table class="table table-hover" id="qnaList-table">
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">#</th>
-                                    <th scope="col">#</th>
-                                    <th scope="col">#</th>
-                                </tr>
-                                </thead>
                                 <tbody>
                                     <tr th:each="article:${pageResponseDTO.dtoList}">
                                         <th scope="row">[[${article.typeName}]]</th>
                                         <td><a th:href="@{/cs/qna/view(bno = ${article.bno})}">[[${article.title}]]</a></td>
-                                        <td>[[${article.uid}]]</td>
-                                        <td>[[${article.regDate}]]</td>
+                                        <td class="uid">[[${article.uid}]]</td>
+                                        <td>[[${#temporals.format(article.regDate, 'yyyy-MM-dd')}]]</td><!-- thymeleaf 내장객체이용 -->
                                     </tr>
-
                                 </tbody>
                             </table>
 
