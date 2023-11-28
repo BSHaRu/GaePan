@@ -13,12 +13,13 @@ public interface AdminBoardCommentService {
     void saveComment(GP_AdminBoardDTO dto) throws Exception;
 
     // 댓글 수정
-    void modifyComment(GP_AdminBoardDTO dto) throws Exception;
+    void modifyComment(int bno, String comment) throws Exception;
 
     // 댓글 삭제
     void deleteComment(int bno) throws Exception;
 
     // 댓글 개수
     int countComments(int bno) throws Exception;
+
 
 }

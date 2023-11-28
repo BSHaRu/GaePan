@@ -72,10 +72,9 @@ public class RestAdminBoard {
     }
 
     @PutMapping("/modifyComment")
-    public ResponseEntity<String> modifyComment(GP_AdminBoardDTO dto){
-        log.info("ajax modifyComment bno : " + dto);
+    public ResponseEntity<String> modifyComment(@RequestParam int bno, @RequestParam String comment) {
         try {
-            adminBoardCommentService.modifyComment(dto);
+            adminBoardCommentService.modifyComment(bno, comment);
             return ResponseEntity.ok("댓글 수정 성공");
         } catch (Exception e) {
             log.error("ajax admin deleteById error : " + e.getMessage());

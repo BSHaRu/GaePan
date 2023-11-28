@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/fragments/layout}"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<th:block layout:fragment="content">
+    <section id="admin_config_info" class="admin__section">
+
+        <article class="view">
+            <table class="csInputTable csViewTable">
+                <tr>
+                    <td>제목</td>
+                    <td>
+                        <div>
+                            [<span th:text="${boardDTO.typeName}"></span>]
+                            [[${boardDTO.title}]]
+                            <span class="date" style="float: right;"
+                               th:text="${#temporals.format(boardDTO.regDate, 'yy-MM-dd')}">
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>작성자</td>
+                    <td class="admin__uid" th:text="${boardDTO.nick}"></td>
+                </tr>
+                <tr>
+                    <td>내용</td>
+                    <td class="content mt-3 mb-5">
+                        <textarea>[[${boardDTO.content}]]</textarea>
+                    </td>
+                </tr>
+            </table>
+
+            <section class="commentList">
+                <article class="comments">
+                    <span>댓글 📝</span>
+                    <th:block th:each="comment : ${comments}">
+                        <div class="comment">
+                            <span th:text="${comment.nick}"></span>
+                            <span class="date"
+                                  th:text="${#temporals.format(comment.CRegDate, 'yy-MM-dd')}">
+                            </span>
+                            <textarea class="commentArea" name="comment" th:text="${comment.CComment}"
+                                      th:data-cbno="${comment.cbno}" th:data-comment="${comment.CComment}"></textarea>
+                        </div>
+                        <div class="admin_board_left">
+                            <a href="#" class="btnBack">작성 취소</a>
+                            <a href="#" class="comment__modify" th:data-parent="${comment.bno}" th:data-cbno="${comment.cbno}">수정 완료</a>
+                        </div>
+                    </th:block>
+                </article>
+            </section>
+            <div class="boardList">
+                <a th:href="@{/admin/board/list(group=${boardDTO.group})}" class="btnList">목록보기</a>
+            </div>
+        </article>
+    </section>
+</th:block>
+</html>
+<script th:src="@{/js/admin/boardModifyComment.js}"></script>

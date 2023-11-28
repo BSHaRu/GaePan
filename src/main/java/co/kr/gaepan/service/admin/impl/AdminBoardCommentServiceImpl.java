@@ -38,8 +38,8 @@ public class AdminBoardCommentServiceImpl implements AdminBoardCommentService {
     }
 
     @Override
-    public void modifyComment(GP_AdminBoardDTO dto) throws Exception {
-        mybatisAdminComment.modifyComment(dto);
+    public void modifyComment(int bno, String comment) throws Exception {
+        mybatisAdminComment.modifyComment(bno,comment);
     }
 
     @Override

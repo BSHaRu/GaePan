@@ -7,7 +7,6 @@ $(".comment__delete").click(function(e) {
     const bno = $(".commentArea").data("cbno");
     const parent = $(this).data("parent");
 
-   debugger;
    if(confirm("정말 댓글 삭제 하시겠습니까?")){
        $.ajax({
            type: "delete",
