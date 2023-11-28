@@ -60,9 +60,9 @@
                                 <a href="#" class="comment__delete" th:data-parent="${comment.bno}">댓글 삭제</a>
                             </div>
                         </div>
-                        <div th:unless="${comment.comment == null}">
+<!--                        <div th:unless="${comment.comment == null}">
                             <p class="empty">등록된 댓글이 없습니다.</p>
-                        </div>
+                        </div>-->
                     </th:block>
 
                     <form th:action="@{/admin/board/commentWrite}" method="post">

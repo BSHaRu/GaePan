@@ -1,9 +1,10 @@
 package co.kr.gaepan.controller.admin.board;
 
 
+import co.kr.gaepan.dto.admin.AdminPageRequestDTO;
+import co.kr.gaepan.dto.admin.AdminPageResponseDTO;
 import co.kr.gaepan.dto.admin.GP_AdminBoardDTO;
 import co.kr.gaepan.dto.board.BoardCateDTO;
-import co.kr.gaepan.dto.board.BoardDTO;
 import co.kr.gaepan.dto.board.BoardTypeDTO;
 import co.kr.gaepan.service.admin.AdminBoardCateService;
 import co.kr.gaepan.service.admin.AdminBoardCommentService;
@@ -68,11 +69,32 @@ public class AdminBoardController {
         return "redirect:list?group="+group;
     }
 
+/*    @GetMapping("/list")
+    public String list(Model model, AdminPageRequestDTO adminPageRequestDTO,
+                       @RequestParam("group") String group){
+        try {
+            AdminPageResponseDTO adminBoardList = adminBoardService.boardList(adminPageRequestDTO);
+            model.addAttribute("adminBoardList", adminBoardList);
+
+            List<BoardCateDTO> cateDTO = adminBoardCateService.getCateName(group);
+            model.addAttribute("cateDTO", cateDTO);
+
+        } catch (Exception e) {
+            log.error("getWriteController error" + e.getMessage());
+            throw new RuntimeException(e);
+        }
+        model.addAttribute("group", group);
+
+        return "listTest";
+    }*/
+
     @GetMapping("/list")
     public String pagingBoardList(@RequestParam("group") String group,
                                   Model model, SearchCriteria cri)  {
         // board List 출력
         cri.setGroup(group);
+        log.info("list group: " + group);
+        log.info("search criteria: " + cri);
         try {
             List<GP_AdminBoardDTO> adminBoardList
                     = adminBoardService.pagingBoardList(cri);
