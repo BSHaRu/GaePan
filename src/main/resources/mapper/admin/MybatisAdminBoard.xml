@@ -107,9 +107,19 @@
     <!-- 해당 검색 결과에 나오는 게시글 총 개수 -->
     <select id = "searchListCount" parameterType="co.kr.gaepan.util.SearchCriteria"
             resultType="int">
-        SELECT count(*) FROM gp_board
-        WHERE 1 = 1
+        SELECT
+            count(*)
+        FROM gp_board AS B
+        JOIN gp_member AS M
+            ON B.uid = M.uid
+        JOIN gp_board_cate AS BC
+            ON B.cate = BC.cate
+        JOIN gp_board_type AS BT
+            ON B.`type` = BT.`type`
+            ,(SELECT @rownum := 0) AS R
+        WHERE `group` = #{group}
         <include refid="search" />
+        ORDER BY bno DESC
     </select>
 
     <!-- cateName을 출력하기 위해 간단하게 조회 -->

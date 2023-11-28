@@ -21,6 +21,10 @@ public class SearchPageMaker extends PageMaker {
                 .queryParam("keyword", sCriteria.getKeyword())
                 .build();
         String query = uri.toUriString();
+
+        if (query.contains("?")) {
+            query = query.replaceFirst("\\?", "");
+        }
         log.info("SearchPageMaker query : "+query);
         return query;
     }
