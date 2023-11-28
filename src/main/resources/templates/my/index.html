@@ -95,7 +95,9 @@
                                 <td class="bno" th:text="${list.bno}" />
                                 <td class="channel" th:text="${list.cateName}" />
                                 <td class="type" th:text="${list.typeName}" />
-                                <td class="tit" th:text="${list.title}"><a href="#"></a></td>
+                                <td class="tit">
+                                    <a th:text="${list.title}" th:href="@{/cs/qna/view(bno=${list.bno})}"></a>
+                                </td>
                                 <td class="date" th:text="${#temporals.format(list.regDate, 'yyyy-MM-dd HH:mm:ss')}" />
                                 <td class="status"><span class="notAnswerYet">검토중</span></td>
                             </tr>
