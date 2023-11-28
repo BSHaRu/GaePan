@@ -47,9 +47,8 @@
     </update>
 
     <!-- 댓글 삭제 -->
-    <update id="deleteComment">
-        UPDATE gp_board SET
-        `comment` = '댓글이 삭제 되었습니다.'
+    <delete id="deleteComment">
+        DELETE FROM gp_board
         WHERE bno = #{bno}
-    </update>
+    </delete>
 </mapper>

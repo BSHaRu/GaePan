@@ -182,5 +182,21 @@ public class AdminBoardController {
         return "redirect:view?bno=" + parent;
     }
 
+    @GetMapping("/commentModify")
+    public String commentModify(@RequestParam("bno") int bno, Model model,
+                                GP_AdminBoardDTO dto){
+        try{
+            GP_AdminBoardDTO adminBoardDTO = adminBoardService.findById(dto.getBno());
+            model.addAttribute("boardDTO", adminBoardDTO);
 
+            List<GP_AdminBoardDTO> comments = adminBoardCommentService.findComments(dto);
+            model.addAttribute("comments", comments);
+
+        }catch (Exception e) {
+            log.error("admin board view error", e.getMessage());
+            throw new RuntimeException(e);
+        }
+
+        return "admin/board/commentModify";
+    }
 }

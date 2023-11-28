@@ -55,7 +55,8 @@
                                           th:data-cbno="${comment.cbno}" th:data-cComment="${comment.CComment}" readonly></textarea>
                             </div>
                             <div class="admin_board_left">
-                                <a href="#" class="comment__modify" th:data-bno="${comment.bno}">댓글 수정</a>
+                                <a th:href="@{/admin/board/commentModify(bno=${comment.bno})}"
+                                   class="comment__modify">댓글 수정</a>
                                 <a href="#" class="comment__delete" th:data-parent="${comment.bno}">댓글 삭제</a>
                             </div>
                         </div>
@@ -91,4 +92,3 @@
 </html>
 <script th:src="@{/js/admin/boardDelete.js}"></script>
 <script th:src="@{/js/admin/boardDeleteComment.js}"></script>
-<script th:src="@{/js/admin/boardModifyComment.js}"></script>
