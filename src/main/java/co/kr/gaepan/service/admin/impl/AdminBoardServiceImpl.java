@@ -1,5 +1,7 @@
 package co.kr.gaepan.service.admin.impl;
 
+import co.kr.gaepan.dto.admin.AdminPageRequestDTO;
+import co.kr.gaepan.dto.admin.AdminPageResponseDTO;
 import co.kr.gaepan.dto.admin.GP_AdminBoardDTO;
 import co.kr.gaepan.dto.board.BoardDTO;
 import co.kr.gaepan.entity.admin.GP_AdminBoardEntity;
@@ -16,6 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import net.koreate.common.utils.PageMaker;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -50,6 +54,39 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 //        log.info("boardList group : " + boardList.get(1).getGroup());
         return boardList;
     }
+
+    /*@Override
+    public AdminPageResponseDTO boardList(AdminPageRequestDTO requestDto) throws Exception {
+        Pageable pageable = requestDto.getPageable("bno");
+
+        // List 출력해주는 구문
+        // -> size 수 만큼 List 출력
+        Page<GP_AdminBoardEntity> result = null;
+        if(requestDto.getCate() == 10
+                || requestDto.getCate() == 20
+                || requestDto.getCate() == 30){
+            result = adminBoardRepository.findAll(pageable);
+        }else{
+            result = adminBoardRepository.findByGPAdminBoardEntity_CateOrderByRdateDesc(pageable, requestDto.getCate());
+        }
+
+        // page의 List로 받은걸 content List로 변경
+        List<GP_AdminBoardDTO> boardList
+                    = result.getContent()
+                            .stream()
+                            .map(adminBoardMapper::toDTO)
+                            .toList();
+
+        // 페이지 정보
+        int total = (int) result.getTotalElements();
+        log.info("board pageResponse boardList : " + boardList);
+
+        return AdminPageResponseDTO.builder()
+                .boardList(boardList)
+                .adminPageRequestDTO(requestDto)
+                .total(total)
+                .build();
+    }*/
 
     @Override
     public void modifyAdminBoard(GP_AdminBoardDTO dto) throws Exception {
