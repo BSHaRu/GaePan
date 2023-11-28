@@ -43,8 +43,7 @@
                     <tr>
                         <td>작성자</td>
                         <td>
-                            <!--todo 이거 #authentication.principal.member.nick로 바꿔야 됨-->
-                            <input type="text" name="nick" value="admin" readonly />
+                            <input type="text" name="nick" th:value="${#authentication.principal.member.uid}" readonly />
                         </td>
                     </tr>
                     <tr>

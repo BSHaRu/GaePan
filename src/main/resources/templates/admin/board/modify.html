@@ -44,8 +44,8 @@
                     <tr>
                         <td>작성자</td>
                         <td>
-                            <!--todo 이거 #authentication.principal.member.nick로 바꿔야 됨-->
-                            <input type="text" name="nick" th:value="${boardDTO.nick}" readonly />
+                            <!-- todo 이것도 session에 있는 nick이 뜨게끔 해줘야함 -->
+                            <input type="text" name="nick" th:value="${#authentication.principal.member.nick}" readonly />
                         </td>
                     </tr>
                     <tr>
@@ -55,10 +55,13 @@
                         </td>
                     </tr>
                 </table>
-                <div class="write__div">
-                    <input type="button" class="btnBack" value="취소하기">
-                    <input type="submit" class="btnSubmit" value="수정하기">
-                </div>
+                <!-- TODO 여기에 권한 설정해서 설정 해줘야함 -->
+                <th:block>
+                    <div class="write__div">
+                        <input type="button" class="btnBack" value="취소하기">
+                        <input type="submit" class="btnSubmit" value="수정하기">
+                    </div>
+                </th:block>
             </form>
         </article>
     </section>
