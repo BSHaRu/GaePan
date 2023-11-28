@@ -81,6 +81,21 @@
 #qnaList-page{
     float: right;
 }
+
+#qnaView-btnComment{
+    float: right;
+}
+
+.delete-atag{
+    position: absolute;
+    right: 10px;
+}
+
+.update-atag{
+    position: absolute;
+    right: 50px;
+}
+
 /*bootstrap 기존 클래스는 건드리지 말기*/
 .btnTotal {
     color: black;

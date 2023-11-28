@@ -15,7 +15,7 @@
             <br>
             <br>
             <div class="main" id="qnaList-main">
-                <div class="col-lg-3 col-md-5">
+                <div class="col-lg-3 col-md-3">
                     <div class="sidebar">
                         <div class="sidebar__item">
                             <h4>고객문의</h4>
@@ -41,21 +41,50 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">[[${boardDTO.title}]]</h5>
+                            <span>[[${boardDTO.uid}]]</span>&nbsp;
+                            <span>[[${boardDTO.regDate}]]</span>
+                            <a class="update-atag" href="#">수정</a>
+                            <a class="delete-atag" th:href="@{/cs/qna/articleDelete(bno=${boardDTO.bno}, cate=${boardDTO.cate})}">삭제</a>
+                            <hr>
                             <p class="card-text">[[${boardDTO.content}]]</p>
-                            <a href="#" class="btn btn-primary">답글</a>
                         </div>
+                    </div>
+                    <br>
+
+                    <!--null이 아닐때 출력하고 null일때는 표현언어 오류 안생기도록!-->
+                    <div th:if="${responses != null}">
+                        <div class="card" th:each="response : ${responses}">
+                            <div class="card-body">
+                                <span>[[${response.uid}]]</span>&nbsp;
+                                <span>[[${response.regDate}]]</span>
+                                <a class="update-atag" href="#">수정</a>
+                                <a class="delete-atag" th:href="@{/cs/qna/commentDelete(bno=${response.bno}, parent=${response.parent})}">삭제</a>
+                                <hr>
+                                <p class="card-text">[[${response.comment}]]</p>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- 댓글 입력창 추가 -->
+                    <div class="comment-section">
+                        <form th:action="@{/cs/qna/view}" method="POST">
+                            <input type="hidden" name="uid" th:value="${uid}">
+                            <input type="hidden" name="cate" th:value="${boardDTO.cate}">
+                            <input type="hidden" name="type" th:value="${boardDTO.type}">
+                            <input type="hidden" name="parent" th:value="${boardDTO.bno}"> <!-- 기존글의 bno를 parent로 insert해야하니깐 -->
+                            <div class="form-group">
+                                <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea> <!--name="content" 로 바인딩-->
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="qnaView-btnComment">등록</button>
+                        </form>
                     </div>
 
 
 
 
-                    <div class="card" th:if="${response != null}">
-                        <div class="card-body">
-                            <h5 class="card-title">[[${response.title}]]</h5>
-                            <p class="card-text">[[${response.content}]]</p>
-                            <a href="#" class="btn btn-primary">답글</a>
-                        </div>
-                    </div>
+
+
                 </section>
             </div><!-- bootstrap 기존 설정은 안 건드리는 게 좋음(css 때문에) -->
         </section>
