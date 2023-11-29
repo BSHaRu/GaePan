@@ -57,7 +57,7 @@ public class AdminMemberController {
 
         // 페이징 처리
         try {
-            PageMaker pm = adminMemberService.getPageMaker(cri);
+            PageMaker pm = adminMemberService.getPageMaker2(cri);
             model.addAttribute("pm", pm);
         } catch (Exception e) {
             log.error("admin board pm error", e.getMessage());

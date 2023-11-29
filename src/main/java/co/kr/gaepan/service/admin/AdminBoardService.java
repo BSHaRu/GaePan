@@ -17,9 +17,6 @@ public interface AdminBoardService {
     // 게시글 리스트 보기 +  검색 결과에 따른 게시글 페이징 처리된 목록
     List<GP_AdminBoardDTO> pagingBoardList(SearchCriteria cri) throws Exception;
 
-    // 다른 페이징 처리
-//    AdminPageResponseDTO boardList(AdminPageRequestDTO requestDto) throws Exception;
-
     // 게시글 수정
     void modifyAdminBoard(GP_AdminBoardDTO dto) throws Exception;
 

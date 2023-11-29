@@ -36,10 +36,4 @@ public class AdminBoardCateServiceImpl implements AdminBoardCateService {
         return dto;
     }
 
- /*   @Override
-    public List<GP_AdminBoardDTO> cateNameAndTypeName(String group, int cate, int type) throws Exception {
-        List<GP_AdminBoardDTO> dto = mybatisAdminBoardMapper.cateNameAndTypeName(group, cate, type);
-        return null;
-    }*/
-
 }

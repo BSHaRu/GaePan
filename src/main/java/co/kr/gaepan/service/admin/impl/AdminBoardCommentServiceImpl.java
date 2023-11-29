@@ -39,7 +39,7 @@ public class AdminBoardCommentServiceImpl implements AdminBoardCommentService {
 
     @Override
     public void modifyComment(int bno, String comment) throws Exception {
-        mybatisAdminComment.modifyComment(bno,comment);
+        mybatisAdminComment.modifyComment(bno, comment);
     }
 
     @Override

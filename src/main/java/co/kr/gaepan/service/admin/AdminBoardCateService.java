@@ -16,9 +16,6 @@ public interface AdminBoardCateService {
     // board의 group과 cateDTO를 join해서 cateName가져오기
     List<BoardCateDTO> getCateName(String group) throws Exception;
 
-    // board와 group이랑 cate 다 join해서 cateName, typeName가져오기
-//    List<GP_AdminBoardDTO> cateNameAndTypeName(String group, int cate, int type) throws Exception;
-
     // cate에 따라 type변경
     List<BoardTypeDTO> selectType(int cate) throws Exception;
 
