@@ -30,8 +30,8 @@ public class AdminMemberServiceImpl implements AdminMemberService {
     }
 
     @Override
-    public List<MemberDTO> blackList(int role) throws Exception {
-        List<MemberDTO> blackList = mybatisAdminMemberMapper.blackList(role);
+    public List<MemberDTO> blackList(SearchCriteria cri, int role) throws Exception {
+        List<MemberDTO> blackList = mybatisAdminMemberMapper.blackList(cri, role);
         blackList.replaceAll(gpUtil::addrSubString);
         return blackList;
     }
@@ -82,8 +82,8 @@ public class AdminMemberServiceImpl implements AdminMemberService {
     }
 
     @Override
-    public PageMaker getPageMaker(SearchCriteria cri, int role) throws Exception {
-        int totalCount = mybatisAdminMemberMapper.blackListCount(cri, role);
+    public PageMaker getPageMaker2(SearchCriteria cri) throws Exception {
+        int totalCount = mybatisAdminMemberMapper.blackListCount(cri);
 
         PageMaker pm = new SearchPageMaker();
         pm.setCri(cri);
