@@ -59,7 +59,7 @@
         WHERE `group` = #{group}
             AND title IS NOT NULL
         <include refid="search" />
-        ORDER BY bno DESC
+        ORDER BY rownum DESC
         LIMIT #{startRow}, #{perPageNum}
     </select>
 

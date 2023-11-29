@@ -14,7 +14,7 @@ public interface AdminMemberService {
     List<MemberDTO> findAll() throws Exception;
 
     // 블랙리스트
-    List<MemberDTO> blackList(int role) throws Exception;
+    List<MemberDTO> blackList(SearchCriteria cri, int role) throws Exception;
 
     // 회원 상세 보기
     MemberDTO findById(int no) throws Exception;
@@ -35,6 +35,6 @@ public interface AdminMemberService {
     PageMaker getPageMaker(SearchCriteria cri) throws Exception;
 
     // 블랙리스트 페이징 블럭
-    PageMaker getPageMaker(SearchCriteria cri, int role) throws Exception;
+    PageMaker getPageMaker2(SearchCriteria cri) throws Exception;
 
 }

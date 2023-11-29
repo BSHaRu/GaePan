@@ -48,7 +48,7 @@ public class AdminMemberController {
                         Model model, SearchCriteria cri) {
         List<MemberDTO> memberDTOList = null;
         try {
-            memberDTOList = adminMemberService.blackList(role);
+            memberDTOList = adminMemberService.blackList(cri, role);
             model.addAttribute("memberDTO", memberDTOList);
         } catch (Exception e) {
             log.error("admin member list error", e.getMessage());
@@ -57,7 +57,7 @@ public class AdminMemberController {
 
         // 페이징 처리
         try {
-            PageMaker pm = adminMemberService.getPageMaker(cri, role);
+            PageMaker pm = adminMemberService.getPageMaker(cri);
             model.addAttribute("pm", pm);
         } catch (Exception e) {
             log.error("admin board pm error", e.getMessage());

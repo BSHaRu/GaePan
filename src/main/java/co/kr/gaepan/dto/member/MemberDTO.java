@@ -36,4 +36,7 @@ public class MemberDTO {
     private String company;
     private String bizRegNum;
 
+    // admin에서 추가
+    private int rownum;
+
 }
