@@ -33,18 +33,18 @@
             `gp_member`
         SET
             `name` = NULL,
-            `pw` = NULL,
-            `gender` = NULL,
+            `pw` = '  ',
+            `gender` = 0,
             `hp` = NULL,
             `email` = NULL,
             `birth` =NULL,
-            `role` = NULL,
-            `zip` = NULL,
-            `addr1` = NULL,
-            `addr2` = NULL,
+            `role` = 4,
+            `zip` = 0,
+            `addr1` = ' ',
+            `addr2` = ' ',
             `exp` = NULL,
-            `count` = NULL,
-            `levDate` = NULL
+            `count` = 0,
+            `levDate` = NOW()
         WHERE `uid` = #{uid}
     </update>
 </mapper>
