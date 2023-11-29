@@ -10,6 +10,7 @@ $(document).ready(function() {
         console.log("bno : " + bno);
         console.log("group : " + group);
 
+        debugger;
         if(confirm("정말 게시글을 삭제하시겠습니까?")){
             $.ajax({
                 type: "delete",

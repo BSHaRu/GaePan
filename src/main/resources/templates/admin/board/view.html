@@ -55,14 +55,20 @@
                                       th:text="${#temporals.format(comment.CRegDate, 'yy-MM-dd')}">
                                 </span>
                                 <textarea class="commentArea" name="comment" th:text="${comment.CComment}"
-                                          th:data-cbno="${comment.cbno}" th:data-cComment="${comment.CComment}" readonly></textarea>
+                                          th:data-cComment="${comment.CComment}" readonly></textarea>
                             </div>
                             <!-- TODO 여기에 권한 설정해서 설정 해줘야함 -->
                             <th:block>
-                                <div class="admin_board_left">
-                                    <a th:href="@{/admin/board/commentModify(bno=${comment.bno})}"
-                                       class="comment__modify">댓글 수정</a>
-                                    <a href="#" class="comment__delete" th:data-parent="${comment.bno}">댓글 삭제</a>
+                                <div class="admin_board_left commentClick">
+                                    <a th:href="@{/admin/board/commentModify(bno=${comment.cbno})}"
+                                       class="comment__modify1">댓글 수정</a>
+                                    <a href="#" class="comment__modify" th:data-comment="${comment.CComment}"
+                                       th:data-cbno="${comment.cbno}" th:data-parent="${comment.bno}">||수정||</a>
+                                    <a href="#" class="comment__delete" th:data-cbno="${comment.cbno}" th:data-parent="${comment.bno}">댓글 삭제</a>
+
+                                    <a href="#" class="btnBack">작성 취소</a>
+                                    <a href="#" class="modifyComplete"
+                                       th:data-parent="${comment.bno}" th:data-cbno="${comment.cbno}">수정 완료</a>
                                 </div>
                             </th:block>
                         </div>
@@ -97,4 +103,4 @@
 </th:block>
 </html>
 <script th:src="@{/js/admin/boardDelete.js}"></script>
-<script th:src="@{/js/admin/boardDeleteComment.js}"></script>
+<script th:src="@{/js/admin/boardModifyComment.js}"></script>

@@ -99,7 +99,7 @@
                     <th:block th:each="board : ${adminBoardList}">
                         <tr>
                             <td class="chk">
-                                <input type="checkbox" name="chk" class="checkbox" value="">
+                                <input type="checkbox" name="chk" class="checkbox" th:value="${board.bno}">
                             </td>
                             <td class="bno" th:text="${board.rownum}"></td>
                             <td class="tit">
@@ -176,25 +176,18 @@
 
     $(".deleteBtn").click(function(){
         if(confirm("정말 삭제 하시겠습니까?")){
-            console.log("1");
-            /* todo 지금 여기서 checked value 값이 "" 공백으로 뜸 이거 해결 해야됨 */
             const checked = $(".checkbox:checked");
-            console.log("Checked elements:", checked);
+
             // check를 여러개 할 수 있기 때문에 배열로 초기화
             const boardBno = [];
             for(let i = 0; i < checked.length; i++){
-                const currentValue = checked[i].value;
+                const currentValue = checked[i].value * 1;
                 console.log("Current value: " + currentValue);
 
-                const currentValue2 = checked[i].value * 1;
-                console.log("Current value2: " + currentValue2);
-                debugger;
                 boardBno.push(
-                    { bno : checked[i].value * 1 }
+                    { bno : currentValue }
                 );
-                console.log("2");
             }
-
             console.log("boardBno:", boardBno);
 
             // memberNo에 값이 있을 때만 ajax로 처리
