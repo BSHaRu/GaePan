@@ -36,7 +36,7 @@
                                 <td class="tit">
                                     <a th:text="${list.title}" th:href="@{/cs/qna/view(bno=${list.bno})}"></a>
                                 </td>
-                                <td class="date" th:text="${list.regDate}" />
+                                <td class="date" th:text="${#temporals.format(list.regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td class="status"><span class="notAnswerYet">검토중</span></td>
                             </tr>
                         </table>
