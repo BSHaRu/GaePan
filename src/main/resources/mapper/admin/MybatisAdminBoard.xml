@@ -27,7 +27,7 @@
                 <when test='searchType == "total"'>
                     AND title LIKE CONCAT('%',#{keyword},'%')
                     OR content LIKE CONCAT('%',#{keyword},'%')
-                    OR uid LIKE CONCAT('%',#{keyword},'%')
+                    OR nick LIKE CONCAT('%',#{keyword},'%')
                 </when>
                 <otherwise>
                     <!--

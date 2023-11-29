@@ -81,10 +81,11 @@ public class AdminMemberServiceImpl implements AdminMemberService {
         return pm;
     }
 
-    public SearchPageMaker getSearchPageMaker(SearchCriteria cri) throws Exception {
-        int totalCount = mybatisAdminMemberMapper.searchListCount(cri);
+    @Override
+    public PageMaker getPageMaker(SearchCriteria cri, int role) throws Exception {
+        int totalCount = mybatisAdminMemberMapper.blackListCount(cri, role);
 
-        SearchPageMaker pm = new SearchPageMaker();
+        PageMaker pm = new SearchPageMaker();
         pm.setCri(cri);
         pm.setTotalCount(totalCount);
         return pm;
