@@ -28,4 +28,7 @@ public interface MybatisAdminMemberMapper {
 
     // 검색된 회원 전체 개수
     int searchListCount(SearchCriteria cri) throws Exception;
+
+    // 블랙 리스트 페이징 처리
+    int blackListCount(SearchCriteria cri, int role) throws Exception;
 }

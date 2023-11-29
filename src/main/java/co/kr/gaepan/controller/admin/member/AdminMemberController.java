@@ -35,7 +35,6 @@ public class AdminMemberController {
         try {
             PageMaker pm = adminMemberService.getPageMaker(cri);
             model.addAttribute("pm", pm);
-//            SearchPageMaker spm = adminMemberService.getSearchPageMaker(cri);
         } catch (Exception e) {
             log.error("admin board pm error", e.getMessage());
             throw new RuntimeException(e);
@@ -45,15 +44,25 @@ public class AdminMemberController {
     }
 
     @GetMapping("/black")
-    public String black(@RequestParam("role") int role, Model model) {
+    public String black(@RequestParam("role") int role,
+                        Model model, SearchCriteria cri) {
         List<MemberDTO> memberDTOList = null;
         try {
             memberDTOList = adminMemberService.blackList(role);
+            model.addAttribute("memberDTO", memberDTOList);
         } catch (Exception e) {
             log.error("admin member list error", e.getMessage());
             throw new RuntimeException(e);
         }
-        model.addAttribute("memberDTO", memberDTOList);
+
+        // 페이징 처리
+        try {
+            PageMaker pm = adminMemberService.getPageMaker(cri, role);
+            model.addAttribute("pm", pm);
+        } catch (Exception e) {
+            log.error("admin board pm error", e.getMessage());
+            throw new RuntimeException(e);
+        }
         return "admin/member/black";
     }
 }

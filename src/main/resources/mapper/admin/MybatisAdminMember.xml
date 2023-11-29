@@ -39,6 +39,13 @@
         ORDER BY `no` DESC;
     </select>
 
+    <select id = "blackListCount" parameterType="co.kr.gaepan.util.SearchCriteria"
+            resultType="int">
+        SELECT count(*) FROM gp_member
+        WHERE role IN(2,3)
+        ORDER BY `no` DESC;
+    </select>
+
 
 
     <!-- blckList 등록

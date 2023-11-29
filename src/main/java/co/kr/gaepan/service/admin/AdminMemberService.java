@@ -30,8 +30,11 @@ public interface AdminMemberService {
 
     // 검색 결과에 따른 회원 페이징 처리된 목록
     List<MemberDTO> pagingMemberList(SearchCriteria cri) throws Exception;
+
     // 페이징 블럭 정보
     PageMaker getPageMaker(SearchCriteria cri) throws Exception;
 
-//    SearchPageMaker getSearchPageMaker(SearchCriteria cri) throws Exception;
+    // 블랙리스트 페이징 블럭
+    PageMaker getPageMaker(SearchCriteria cri, int role) throws Exception;
+
 }
