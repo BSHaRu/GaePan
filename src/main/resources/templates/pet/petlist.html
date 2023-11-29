@@ -43,7 +43,6 @@
                                 <div class="blog__item__text">
                                     <ul>
                                         <li th:text="${#temporals.format(pageResponseDTO.regDate, 'yy-MM-dd')}"><i class="fa fa-calendar-o"></i></li>
-                                        <li><i class="fa fa-comment-o"></i>1</li>
                                     </ul>
                                     <h5>
                                         <a th:href="@{/pet/details(no=${pageResponseDTO.getNo})}" class="title" th:text="${pageResponseDTO.getName()}"></a>

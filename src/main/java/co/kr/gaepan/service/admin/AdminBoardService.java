@@ -1,14 +1,11 @@
 package co.kr.gaepan.service.admin;
 
-import co.kr.gaepan.dto.admin.AdminPageRequestDTO;
-import co.kr.gaepan.dto.admin.AdminPageResponseDTO;
+
 import co.kr.gaepan.dto.admin.GP_AdminBoardDTO;
 import co.kr.gaepan.dto.board.BoardDTO;
 import co.kr.gaepan.util.SearchCriteria;
-import com.github.pagehelper.PageInfo;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import net.koreate.common.utils.Criteria;
 import net.koreate.common.utils.PageMaker;
 
 import java.util.List;

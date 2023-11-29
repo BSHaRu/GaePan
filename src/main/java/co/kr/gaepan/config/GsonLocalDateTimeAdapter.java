@@ -1,3 +1,4 @@
+/*
 package co.kr.gaepan.config;
 
 import com.google.gson.*;
@@ -22,3 +23,4 @@ public class GsonLocalDateTimeAdapter
                 DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 }
+*/
