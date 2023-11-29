@@ -10,8 +10,16 @@
 
 <th:block layout:fragment="content">
     <!-- script 이렇게 layout:content 안에 넣으면 적용되는구나 -->
-    <script>
+    <script th:inline="javascript">
+
+
+
         $(function(){
+            // 현재 로그인 사용자 아이디
+            const user = [[${#authentication.principal.username}]];
+
+
+            // 아이디 마스킹 처리
            var uidElements = document.getElementsByClassName('uid');
 
            for(var i=0 ; i<uidElements.length ; i++){
@@ -19,7 +27,95 @@
                var maskedUid = originalUid.substring(0, 3) + "****";
                uidElements[i].innerText = maskedUid;
            }
+
+            // a태그 클릭시 article.uid 값과 현재 사용자 아이디 비교
+            // 클릭 이벤트 처리
+            var qnaListTitle = document.querySelectorAll('.qnaList-title');
+
+           for(let i=0; i<qnaListTitle.length ; i++){
+               qnaListTitle[i].addEventListener('click', function(e) {
+
+                   const writer = e.target.getAttribute('data-writer');
+                   //alert('writer : ' +writer);
+
+                     if(user != writer){
+                         e.preventDefault();
+                         alert('해당 글 사용자가 아닙니다.');
+                       }
+
+               });
+           }
+
+
+
+            /*
+            $('.qnaList-title').click(function (e){
+                e.preventDefault();
+                alert('fesafeas!!!');
+            });
+            */
+
+            /*
+            document.addEventListener('click', function(event) {
+                // 클릭한 요소가 <a> 태그인지 확인
+                if (event.target.tagName === 'A') {
+                    alert('click');
+
+                    // 클릭한 <a> 태그의 ID 확인
+                    var clickedId = event.target.id;
+
+                    // 만약 ID가 'qnaList-title'로 시작하는 경우
+                    if (clickedId.startsWith('qnaList-title')) {
+
+                        // article.bno 추출
+                        var bno = clickedId.replace('qnaList-title', '');
+                        console.log(bno);
+
+                        // 해당 <td>의 ID 확인
+                        //var uidTdId = 'qnaList-uid' + bno;
+                        //var uid = document.getElementById(uidTdId).innerText; // 마스킹 처리되있는데 순서 상관없나?? 순서 상관없이 아예 마스킹 되있음
+                        //console.log('uid : ' + uid);
+
+                        const jsonData = {"bno" : bno};
+
+                        $.ajax({
+                            url: '/cs/qna/list',
+                            type: 'POST',
+                            data: jsonData,
+                            dataType: 'json',
+                            success: function(data){ // 여기 uid값이 반환되겠지
+                                alert('success : ' + data);
+
+                            }
+                        });
+
+
+
+
+
+
+                        // 현재 사용자 정보 가져오기
+                        //var currentUserUid = 'user'; // 실제로 사용할 값으로 대체
+
+
+                        if (articleUid === currentUserUid) {
+                            // article.uid와 현재 사용자 정보가 일치하면 동작 수행
+                            window.location.href = event.target.getAttribute('href');
+                        } else {
+                            // 일치하지 않으면 클릭 무시
+                            event.preventDefault();
+                            alert('권한이 없습니다.');
+                        }
+                    }
+                }
+            });*/
+
+
         });
+
+
+
+
     </script>
 
     <div class="container">
@@ -50,6 +146,11 @@
                     </div>
                 </div>
 
+                <!-- Spring Security의 Principal 및 권한을 통해 사용자 정보 가져오기 / 로그인 안되어 있으면 isAuthenticated() true아니므로 지나감 -->
+                <!-- 우선 인증됐나 안됐나부터 if로 작성해야 인증 안됐을 때 오류발생 안한다-->
+                <div th:if="${#authorization.expression('isAuthenticated()')}">
+                    <p>Welcome, <span th:text="${#authentication.principal.username}"></span>!</p>
+                </div>
 
 
 
@@ -62,8 +163,8 @@
                                 <tbody>
                                     <tr th:each="article:${pageResponseDTO.dtoList}">
                                         <th scope="row">[[${article.typeName}]]</th>
-                                        <td><a th:href="@{/cs/qna/view(bno = ${article.bno})}">[[${article.title}]]</a></td>
-                                        <td class="uid">[[${article.uid}]]</td>
+                                        <td><a class="qnaList-title"  th:data-writer="${article.uid}" th:href="@{/cs/qna/view(bno = ${article.bno})}">[[${article.title}]]</a></td>
+                                        <td class="qnaList-uid">[[${article.uid}]]</td>
                                         <td>[[${#temporals.format(article.regDate, 'yyyy-MM-dd')}]]</td><!-- thymeleaf 내장객체이용 -->
                                     </tr>
                                 </tbody>
