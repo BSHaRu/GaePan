@@ -59,10 +59,17 @@
         `comment` = #{comment};
     </insert>
 
-    <delete id="deleteArticle">
-        DELETE FROM `gp_board` WHERE `bno`=${bno};
-
+    <delete id="deleteArticle"> <!--$써도 #이랑 같은 기능하네-->
+        DELETE FROM `gp_board` WHERE `bno`=#{bno};
     </delete>
+
+    <update id="updateComment">
+        UPDATE `gp_board` SET `comment`=#{comment} WHERE `bno`=#{bno};
+    </update>
+
+    <update id="updateArticle">
+        UPDATE `gp_board` SET `title`=#{title}, `content`=#{content} WHERE `bno`=#{bno};
+    </update>
 
 
 
