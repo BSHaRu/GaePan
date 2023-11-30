@@ -59,7 +59,8 @@ public class AdminBoardController {
 
     @PostMapping("/write")
     public String write(GP_AdminBoardDTO dto, HttpServletRequest request,
-                    @RequestParam("group") String group){
+                    @RequestParam("group") String group,
+                    @RequestParam("cate") int cate){
         try {
             String ip = request.getRemoteAddr();
             dto.setRegIP(ip);
@@ -69,15 +70,18 @@ public class AdminBoardController {
             throw new RuntimeException(e);
         }
 
-        return "redirect:list?group="+group;
+        return "redirect:list?group="+group + "&cate="+ cate;
     }
 
     @GetMapping("/list")
-    public String pagingBoardList(@RequestParam("group") String group,
+    public String pagingBoardList(@RequestParam(name = "group") String group,
+                                  @RequestParam("cate") int cate,
                                   Model model, SearchCriteria cri)  {
         // board List 출력
         cri.setGroup(group);
+        cri.setCate(cate);
         log.info("list group: " + group);
+        log.info("list cate: " + cate);
         log.info("search criteria: " + cri);
         try {
             List<GP_AdminBoardDTO> adminBoardList
@@ -110,6 +114,7 @@ public class AdminBoardController {
             throw new RuntimeException(e);
         }
         model.addAttribute("group", group);
+        model.addAttribute("cate", cate);
 
         return "admin/board/list";
     }
@@ -117,7 +122,8 @@ public class AdminBoardController {
     @GetMapping("/view")
     public String findById(HttpServletRequest request,
                            HttpServletResponse response,
-                           Model model, GP_AdminBoardDTO dto) {
+                           Model model, GP_AdminBoardDTO dto,
+                           @RequestParam("cate") int cate) {
         try {
             adminBoardService.updateViewCnt(request, response, dto.getBno());
 
@@ -146,6 +152,8 @@ public class AdminBoardController {
             log.error("admin board view error", e.getMessage());
             throw new RuntimeException(e);
         }
+        model.addAttribute("cate", cate);
+
         return "admin/board/view";
     }
 

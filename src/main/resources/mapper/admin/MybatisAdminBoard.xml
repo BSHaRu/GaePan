@@ -21,13 +21,17 @@
                         Like : 해당 문자열 있으면 검색
                         % == *
                     -->
-                    AND title LIKE CONCAT('%',#{keyword},'%')
-                    OR content LIKE CONCAT('%',#{keyword},'%')
+                    AND (
+                        (title LIKE CONCAT('%',#{keyword},'%'))
+                        OR (content LIKE CONCAT('%',#{keyword},'%'))
+                    )
                 </when>
                 <when test='searchType == "total"'>
-                    AND title LIKE CONCAT('%',#{keyword},'%')
-                    OR content LIKE CONCAT('%',#{keyword},'%')
-                    OR nick LIKE CONCAT('%',#{keyword},'%')
+                    AND (
+                        (title LIKE CONCAT('%',#{keyword},'%'))
+                        OR (content LIKE CONCAT('%',#{keyword},'%'))
+                        OR (nick LIKE CONCAT('%',#{keyword},'%'))
+                    )
                 </when>
                 <otherwise>
                     <!--
@@ -58,6 +62,18 @@
             ,(SELECT @rownum := 0) AS R
         WHERE `group` = #{group}
             AND title IS NOT NULL
+            AND (
+            <choose>
+                <!-- cate가 10, 20, 30일 경우 -->
+                <when test="cate == 10 or cate == 20 or cate == 30">
+                    1=1 <!-- 전체 조회를 위한 항상 참인 조건 -->
+                </when>
+                <!-- 그 이외의 경우 -->
+                <otherwise>
+                    (B.cate = #{cate})
+                </otherwise>
+            </choose>
+            )
         <include refid="search" />
         ORDER BY rownum DESC
         LIMIT #{startRow}, #{perPageNum}
@@ -118,6 +134,19 @@
             ON B.`type` = BT.`type`
             ,(SELECT @rownum := 0) AS R
         WHERE `group` = #{group}
+            AND title IS NOT NULL
+            AND (
+            <choose>
+                <!-- cate가 10, 20, 30일 경우 -->
+                <when test="cate == 10 or cate == 20 or cate == 30">
+                    1=1 <!-- 전체 조회를 위한 항상 참인 조건 -->
+                </when>
+                <!-- 그 이외의 경우 -->
+                <otherwise>
+                    B.cate = #{cate}
+                </otherwise>
+            </choose>
+            )
         <include refid="search" />
         ORDER BY bno DESC
     </select>
@@ -141,49 +170,10 @@
         ORDER BY `type` ASC
     </select>
 
-    <!-- cate에 따라 boardList 출력 -->
-    <select id="getCate" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
-        SELECT
-            B.*,
-            BC.cateName,
-        FROM gp_board AS B
-        JOIN gp_board_cate AS BC
-        ON B.cate = BC.cate
-        WHERE `group` = #{group}
-        AND (
-            <choose>
-                <!-- cate가 10, 20, 30일 경우 -->
-                <when test="cate == 10 or cate == 20 or cate == 30">
-                    1=1 <!-- 전체 조회를 위한 항상 참인 조건 -->
-                </when>
-                <!-- 그 이외의 경우 -->
-                <otherwise>
-                    b.cate = #{cate}
-                </otherwise>
-            </choose>
-        )
-        ORDER BY bno DESC;
-    </select>
-
     <!-- board group만 추출 -->
     <select id="findByGroup" resultType="co.kr.gaepan.dto.board.BoardDTO">
         SELECT DISTINCT `group` FROM gp_board;
     </select>
 
-<!--    <select id="cateNameAndTypeName" resultType="co.kr.gaepan.dto.admin.GP_AdminBoardDTO">
-        SELECT DISTINCT
-            bt.*,
-            bc.cateName,
-            CASE
-                WHEN bt.`type` >= 10 AND bt.`type` < 20 THEN 'notice'
-                WHEN bt.`type` >= 20 AND bt.`type` < 30 THEN 'faq'
-                WHEN bt.`type` >= 30 AND bt.`type` < 40 THEN 'qna'
-                ELSE NULL
-            END AS `group`
-        FROM gp_board_type AS bt
-        JOIN gp_board_cate AS bc
-            ON bt.cate = bc.cate
-        ORDER BY bt.`type` ASC
-    </select>-->
 
 </mapper>
