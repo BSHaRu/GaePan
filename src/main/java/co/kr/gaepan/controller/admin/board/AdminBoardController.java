@@ -7,6 +7,7 @@ import co.kr.gaepan.dto.board.BoardTypeDTO;
 import co.kr.gaepan.service.admin.AdminBoardCateService;
 import co.kr.gaepan.service.admin.AdminBoardCommentService;
 import co.kr.gaepan.service.admin.AdminBoardService;
+import co.kr.gaepan.util.GP_Util;
 import co.kr.gaepan.util.SearchCriteria;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,10 +16,7 @@ import lombok.extern.log4j.Log4j2;
 import net.koreate.common.utils.PageMaker;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,6 +29,7 @@ public class AdminBoardController {
     private final AdminBoardService adminBoardService;
     private final AdminBoardCateService adminBoardCateService;
     private final AdminBoardCommentService adminBoardCommentService;
+    private final GP_Util gpUtil;
 
     @GetMapping("/write")
     public String write(@RequestParam("group") String group,
@@ -45,6 +44,9 @@ public class AdminBoardController {
             model.addAttribute("cateDTO", cateDTO);
             model.addAttribute("typeDTO", typeDTO);
             model.addAttribute("group", group);
+
+            // 로그인 된 nick 가져옴
+            model.addAttribute("currentNick", gpUtil.getCurrentNick());
         } catch (Exception e) {
             log.error("getWriteController error" + e.getMessage());
             throw new RuntimeException(e);
@@ -87,6 +89,7 @@ public class AdminBoardController {
                 int commentCount = adminBoardCommentService.countComments(board.getBno());
                 board.setCommentCount(commentCount >= 0 ? commentCount : 0);
             }
+
         } catch (Exception e) {
             log.error("admin board list error", e.getMessage());
             throw new RuntimeException(e);
@@ -117,6 +120,21 @@ public class AdminBoardController {
 
             List<GP_AdminBoardDTO> comments = adminBoardCommentService.findComments(dto);
             model.addAttribute("comments", comments);
+
+            // 로그인 한 사람의 정보와 게시글 작성자와 비교
+//            model.addAttribute("isboardCheckNick", gpUtil.checkAuthorization(adminBoardDTO.getNick()));
+//            log.info("adminBoardDTO.getNick() : " + adminBoardDTO.getNick());
+
+            model.addAttribute("currentUid", gpUtil.getCurrentUsername());
+            model.addAttribute("currentNick", gpUtil.getCurrentNick());
+            model.addAttribute("currentRole", gpUtil.getCurrentRole());
+
+            // 댓글 비교
+            for(GP_AdminBoardDTO comment : comments){
+                model.addAttribute("iscommentCheckNick", gpUtil.checkAuthorization(comment.getNick()));
+                log.info("comment.getNick() : " + comment.getNick());
+            }
+
 //            log.info("admin board findById comments : " + comments);
         } catch (Exception e) {
             log.error("admin board view error", e.getMessage());
@@ -140,6 +158,8 @@ public class AdminBoardController {
             model.addAttribute("cateDTO", cateDTO);
             model.addAttribute("typeDTO", typeDTO);
             model.addAttribute("boardDTO", boardDTO);
+
+            model.addAttribute("currentNick", gpUtil.getCurrentNick());
         } catch (Exception e) {
             log.error("getModifyController error" + e.getMessage());
             throw new RuntimeException(e);
@@ -181,23 +201,5 @@ public class AdminBoardController {
             throw new RuntimeException(e);
         }
         return "redirect:view?bno=" + parent;
-    }
-
-    @GetMapping("/commentModify")
-    public String commentModify(@RequestParam("bno") int bno, Model model,
-                                GP_AdminBoardDTO dto){
-        try{
-            GP_AdminBoardDTO adminBoardDTO = adminBoardService.findById(dto.getBno());
-            model.addAttribute("boardDTO", adminBoardDTO);
-
-            List<GP_AdminBoardDTO> comments = adminBoardCommentService.findComments(dto);
-            model.addAttribute("comments", comments);
-
-        }catch (Exception e) {
-            log.error("admin board view error", e.getMessage());
-            throw new RuntimeException(e);
-        }
-
-        return "admin/board/commentModify";
     }
 }

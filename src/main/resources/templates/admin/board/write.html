@@ -9,7 +9,7 @@
     <section id="admin_config_info" class="admin__section">
         <article class="write">
             <form action="write" method="post">
-                <!--<input type="hidden" name="uid" th:value="${#authentication.principal.member.uid}" />-->
+                <input type="hidden" name="uid" th:value="${#authentication.principal.member.uid}" />
                 <table>
                     <!-- group / cate / type 설정 -->
                     <div class="row group_cate">
@@ -43,7 +43,7 @@
                     <tr>
                         <td>작성자</td>
                         <td>
-                            <input type="text" name="nick" th:value="${#authentication.principal.member.uid}" readonly />
+                            <input type="text" name="nick" th:value="${currentNick}" readonly />
                         </td>
                     </tr>
                     <tr>
