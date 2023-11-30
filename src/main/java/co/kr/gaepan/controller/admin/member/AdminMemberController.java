@@ -2,6 +2,7 @@ package co.kr.gaepan.controller.admin.member;
 
 import co.kr.gaepan.dto.member.MemberDTO;
 import co.kr.gaepan.service.admin.AdminMemberService;
+import co.kr.gaepan.util.GP_Util;
 import co.kr.gaepan.util.SearchCriteria;
 import co.kr.gaepan.util.SearchPageMaker;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.List;
 public class AdminMemberController {
 
     private final AdminMemberService adminMemberService;
+    private final GP_Util gpUtil;
 
     @GetMapping("/members")
     public String index(Model model, SearchCriteria cri) {
@@ -27,6 +29,10 @@ public class AdminMemberController {
             List<MemberDTO> memberDTOList = adminMemberService.pagingMemberList(cri);
 //            log.info("admin member list : {}", memberDTOList);
             model.addAttribute("memberDTO", memberDTOList);
+
+            model.addAttribute("currentUid", gpUtil.getCurrentUsername());
+            model.addAttribute("currentNick", gpUtil.getCurrentNick());
+            model.addAttribute("currentRole", gpUtil.getCurrentRole());
         } catch (Exception e) {
             log.error("admin member list error", e.getMessage());
             throw new RuntimeException(e);
@@ -50,6 +56,10 @@ public class AdminMemberController {
         try {
             memberDTOList = adminMemberService.blackList(cri, role);
             model.addAttribute("memberDTO", memberDTOList);
+
+            model.addAttribute("currentUid", gpUtil.getCurrentUsername());
+            model.addAttribute("currentNick", gpUtil.getCurrentNick());
+            model.addAttribute("currentRole", gpUtil.getCurrentRole());
         } catch (Exception e) {
             log.error("admin member list error", e.getMessage());
             throw new RuntimeException(e);

@@ -82,8 +82,10 @@
                 </th:block>
                 </tbody>
             </table>
-            <input type="button" class="blackListRemove_Btn" value="블랙리스트 해제"/>
-            <input type="button" class="leaveMember_Btn" value="회원 추방"/>
+            <th:block th:if="${currentRole == 99}">
+                <input type="button" class="blackListRemove_Btn" value="블랙리스트 해제"/>
+                <input type="button" class="leaveMember_Btn" value="회원 추방"/>
+            </th:block>
         </form>
 
         <div class="col-lg-12 mt-5">

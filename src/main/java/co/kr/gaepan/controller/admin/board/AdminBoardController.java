@@ -47,6 +47,9 @@ public class AdminBoardController {
 
             // 로그인 된 nick 가져옴
             model.addAttribute("currentNick", gpUtil.getCurrentNick());
+            log.info("write currentNick: " + gpUtil.getCurrentNick());
+            model.addAttribute("currentRole", gpUtil.getCurrentRole());
+            log.info("write currentRole: " + gpUtil.getCurrentRole());
         } catch (Exception e) {
             log.error("getWriteController error" + e.getMessage());
             throw new RuntimeException(e);
@@ -90,6 +93,9 @@ public class AdminBoardController {
                 board.setCommentCount(commentCount >= 0 ? commentCount : 0);
             }
 
+            model.addAttribute("currentUid", gpUtil.getCurrentUsername());
+            model.addAttribute("currentNick", gpUtil.getCurrentNick());
+            model.addAttribute("currentRole", gpUtil.getCurrentRole());
         } catch (Exception e) {
             log.error("admin board list error", e.getMessage());
             throw new RuntimeException(e);
@@ -160,6 +166,7 @@ public class AdminBoardController {
             model.addAttribute("boardDTO", boardDTO);
 
             model.addAttribute("currentNick", gpUtil.getCurrentNick());
+            model.addAttribute("currentRole", gpUtil.getCurrentRole());
         } catch (Exception e) {
             log.error("getModifyController error" + e.getMessage());
             throw new RuntimeException(e);
