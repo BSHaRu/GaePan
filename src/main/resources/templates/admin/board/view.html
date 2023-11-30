@@ -33,8 +33,7 @@
                     </td>
                 </tr>
             </table>
-            <!-- TODO 여기에 권한 설정해서 설정 해줘야함 -->
-            <th:block>
+            <th:block th:if="${currentNick eq boardDTO.nick}">
                 <div class="admin_board_right">
                     <a th:href="@{/admin/board/modify(bno=${boardDTO.bno}, group=${boardDTO.group})}"
                        class="">게시글 수정</a>
@@ -57,16 +56,13 @@
                                 <textarea class="commentArea" name="comment" th:text="${comment.CComment}"
                                           th:data-cComment="${comment.CComment}" readonly></textarea>
                             </div>
-                            <!-- TODO 여기에 권한 설정해서 설정 해줘야함 -->
-                            <th:block>
+                            <th:block th:if="${currentNick eq comment.nick or currentRole==99}">
                                 <div class="admin_board_left commentClick">
-                                    <a th:href="@{/admin/board/commentModify(bno=${comment.cbno})}"
-                                       class="comment__modify1">댓글 수정</a>
                                     <a href="#" class="comment__modify" th:data-comment="${comment.CComment}"
-                                       th:data-cbno="${comment.cbno}" th:data-parent="${comment.bno}">||수정||</a>
+                                       th:data-cbno="${comment.cbno}" th:data-parent="${comment.bno}">댓글 수정</a>
                                     <a href="#" class="comment__delete" th:data-cbno="${comment.cbno}" th:data-parent="${comment.bno}">댓글 삭제</a>
 
-                                    <a href="#" class="btnBack">작성 취소</a>
+                                    <a href="#" class="modifyCancel">작성 취소</a>
                                     <a href="#" class="modifyComplete"
                                        th:data-parent="${comment.bno}" th:data-cbno="${comment.cbno}">수정 완료</a>
                                 </div>
@@ -79,13 +75,12 @@
 
                     <form th:action="@{/admin/board/commentWrite}" method="post">
                         <input type="hidden" name="bno" th:value="${boardDTO.bno}" />
-                        <!-- TODO #authentication.principal.member.uid(?) session?로 설정 해줘야함 -->
-                        <input type="hidden" name="uid" th:value="${boardDTO.uid}" />
+                        <input type="hidden" name="uid" th:value="${currentUid}" />
                         <input type="hidden" name="group" th:value="${boardDTO.group}" />
                         <input type="hidden" name="cate" th:value="${boardDTO.cate}" />
                         <input type="hidden" name="type" th:value="${boardDTO.type}" />
 
-                        <div>
+                        <div class="mt-5">
                             <textarea name="comment"></textarea>
                             <div class="admin_board_right">
                                 <input type="reset" class="btnReset" value="취소" />
@@ -102,5 +97,5 @@
     </section>
 </th:block>
 </html>
+<script th:src="@{/js/admin/boardComment.js}"></script>
 <script th:src="@{/js/admin/boardDelete.js}"></script>
-<script th:src="@{/js/admin/boardModifyComment.js}"></script>

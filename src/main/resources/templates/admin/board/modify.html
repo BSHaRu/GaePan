@@ -44,8 +44,7 @@
                     <tr>
                         <td>작성자</td>
                         <td>
-                            <!-- todo 이것도 session에 있는 nick이 뜨게끔 해줘야함 -->
-                            <input type="text" name="nick" th:value="${#authentication.principal.member.nick}" readonly />
+                            <input type="text" name="nick" th:value="${currentNick}" readonly />
                         </td>
                     </tr>
                     <tr>
@@ -55,7 +54,6 @@
                         </td>
                     </tr>
                 </table>
-                <!-- TODO 여기에 권한 설정해서 설정 해줘야함 -->
                 <th:block>
                     <div class="write__div">
                         <input type="button" class="btnBack" value="취소하기">
