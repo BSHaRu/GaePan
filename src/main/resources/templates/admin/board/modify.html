@@ -11,6 +11,7 @@
             <form action="modify" method="post">
                 <!--<input type="hidden" name="uid" th:vale="${#authentication.principal.member.uid}" />-->
                 <input type="hidden" name="bno" th:value="${boardDTO.bno}" />
+                <input type="hidden" name="cate" th:value="${boardDTO.cate}" />
                 <table>
                     <!-- group / cate / type 설정 -->
                     <div class="row group_cate">

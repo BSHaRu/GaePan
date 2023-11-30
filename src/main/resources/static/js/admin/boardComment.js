@@ -54,9 +54,14 @@ $(".comment__modify").click(function(e) {
         const parent = $(this).data("parent");
         // 수정된 내용을 가져옴
         const comment = commentTextarea.val();
+        const cate = $(this).data("cate");
+        // const cate = $(".commentArea").data("cate");
         console.log("bno : " + bno);
         console.log("parent : " + parent);
         console.log("comment : " + comment);
+        console.log("cate : " +cate);
+
+        // debugger;
 
         $.ajax({
             type: "put",
@@ -68,7 +73,7 @@ $(".comment__modify").click(function(e) {
             success: function(response) {
                 console.log("댓글 수정");
                 commentTextarea.closest('.comment').removeClass().addClass(".comment");
-                location.replace(path4+"?bno="+parent);
+                location.replace(path4+"?bno="+parent+"&cate="+cate);
             },
             error: function(error) {
                 console.log("댓글 수정 실패");
@@ -93,9 +98,11 @@ $(".comment__delete").click(function(e) {
 
     const bno = $(this).data("cbno");
     const parent = $(this).data("parent");
+    const cate = $(this).data("cate");
 
     console.log("bno : " + bno);
     console.log("parent : " + parent);
+    console.log("cate : " +cate);
 
     // debugger;
 
@@ -108,7 +115,7 @@ $(".comment__delete").click(function(e) {
             },
             success: function(response) {
                 alert("댓글이 삭제되었습니다.");
-                location.replace(path4+"?bno="+parent);
+                location.replace(path4+"?bno="+parent+"&cate="+cate);
             },
             error: function(error) {
                 alert("댓글 삭제에 실패했습니다.");

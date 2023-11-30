@@ -184,7 +184,8 @@ public class AdminBoardController {
 
     @PostMapping("/modify")
     public String modify(GP_AdminBoardDTO dto,
-                         @RequestParam("bno") int bno){
+                         @RequestParam("bno") int bno,
+                         @RequestParam("cate") int cate){
         log.info("modify bno:" + bno);
         try {
             adminBoardService.modifyAdminBoard(dto);
@@ -192,21 +193,23 @@ public class AdminBoardController {
             log.error("PostModifyController error" + e.getMessage());
             throw new RuntimeException(e);
         }
-        return "redirect:view?bno=" + bno;
+        return "redirect:view?bno=" + bno+ "&cate=" +cate;
     }
 
 
     @PostMapping("/commentWrite")
     public String commentWrite(GP_AdminBoardDTO dto, HttpServletRequest request,
-                            @RequestParam("bno") int parent){
+                            @RequestParam("bno") int parent,
+                            @RequestParam("cate") int cate){
         log.info("처음 parent : " + parent);
+        log.info("처음 cate : " + cate);
         try {
             String ip = request.getRemoteAddr();
             dto.setRegIP(ip);
 
             adminBoardCommentService.saveComment(dto);
-/*            log.info("dto group:" + dto.getGroup());
             log.info("dto cate : "+ dto.getCate());
+/*            log.info("dto group:" + dto.getGroup());
             log.info("dto type:" + dto.getType());
             log.info("dto comment : "+ dto.getComment());
             log.info("dto parent:" + dto.getParent());*/
@@ -215,6 +218,6 @@ public class AdminBoardController {
             log.error("getWriteController error" + e.getMessage());
             throw new RuntimeException(e);
         }
-        return "redirect:view?bno=" + parent;
+        return "redirect:view?bno=" + parent + "&cate=" +cate;
     }
 }

@@ -60,10 +60,11 @@
                                 <div class="admin_board_left commentClick">
                                     <a href="#" class="comment__modify" th:data-comment="${comment.CComment}"
                                        th:data-cbno="${comment.cbno}" th:data-parent="${comment.bno}">댓글 수정</a>
-                                    <a href="#" class="comment__delete" th:data-cbno="${comment.cbno}" th:data-parent="${comment.bno}">댓글 삭제</a>
+                                    <a href="#" class="comment__delete" th:data-cate="${comment.cate}"
+                                       th:data-cbno="${comment.cbno}" th:data-parent="${comment.bno}">댓글 삭제</a>
 
                                     <a href="#" class="modifyCancel">작성 취소</a>
-                                    <a href="#" class="modifyComplete"
+                                    <a href="#" class="modifyComplete" th:data-cate="${cate}"
                                        th:data-parent="${comment.bno}" th:data-cbno="${comment.cbno}">수정 완료</a>
                                 </div>
                             </th:block>
@@ -77,7 +78,7 @@
                         <input type="hidden" name="bno" th:value="${boardDTO.bno}" />
                         <input type="hidden" name="uid" th:value="${currentUid}" />
                         <input type="hidden" name="group" th:value="${boardDTO.group}" />
-                        <input type="hidden" name="cate" th:value="${boardDTO.cate}" />
+                        <input type="hidden" name="cate" th:value="${cate}" />
                         <input type="hidden" name="type" th:value="${boardDTO.type}" />
 
                         <div class="mt-5">
