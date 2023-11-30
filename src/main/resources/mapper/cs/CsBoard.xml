@@ -14,6 +14,16 @@
         LIMIT #{offset}, #{limit} <!-- 1페이지에는 인덱스 0부터 10개, 2페이지에는 10부터 10개 이렇게 리스트 출력한다! -->
     </select>
 
+    <!-- 전체 기능 없지만 쿼리문만 작성해놓음 / 동적쿼리는 뭘 의미???-->
+    <select id="findAllByGroup" resultType="co.kr.gaepan.dto.board.BoardDTO"> <!-- LEFT JOIN 해야됨-->
+        SELECT a.*, b.cateName, c.typeName FROM gp_board a
+        LEFT JOIN gp_board_cate b ON a.cate = b.cate
+        LEFT JOIN gp_board_type c ON a.cate = c.cate AND a.type = c.type <!--cate랑 type으로 동시에 JOIN, cate만 하면 안됨 -->
+        WHERE a.parent = 0 AND a.group = #{group}
+        ORDER BY a.bno DESC
+        LIMIT #{offset}, #{limit} <!-- 1페이지에는 인덱스 0부터 10개, 2페이지에는 10부터 10개 이렇게 리스트 출력한다! -->
+    </select>
+
     <select id="countByGroupAndCate" resultType="int">
         SELECT COUNT(*) FROM gp_board a
         LEFT JOIN gp_board_cate b ON a.cate = b.cate

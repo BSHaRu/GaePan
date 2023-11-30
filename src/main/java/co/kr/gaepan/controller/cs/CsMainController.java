@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -72,7 +73,14 @@ public class CsMainController {
         return "cs/faq/list";
     }
     @GetMapping("/qna/list")
-    public String qnaList(Model model, PageRequestDTO pageRequestDTO){ // DTO 속성으로 group, cate 있으므로 파라미터 받을 수 있음
+    public String qnaList(Principal principal, Model model, PageRequestDTO pageRequestDTO){ // DTO 속성으로 group, cate 있으므로 파라미터 받을 수 있음
+
+        if(principal == null){
+            log.info("로그인 안됨");
+        }else{
+            log.info("로그인 됨 userName : " + principal.getName());
+        }
+
 
         // pg 값이 변경될 때마다 호출하여 offset 갱신
         pageRequestDTO.updateOffset();
@@ -83,6 +91,10 @@ public class CsMainController {
         log.info("pageResponseDTO : " + pageResponseDTO);
 
         model.addAttribute(pageResponseDTO);
+
+        if(principal != null){
+            model.addAttribute("currentUser", principal.getName());
+        }
 
         return "cs/qna/list";
     }
@@ -107,14 +119,14 @@ public class CsMainController {
 
         if(principal instanceof UserDetails) {
 
-            // uid는 현재 인증된 사용자의 아이디
+            // uid는 현재 인증된 사용자의 아이디 / 이렇게 할 필요없이 qna/list처럼 prinipal 객체 바로 이용하면됨
             uid = ((UserDetails) principal).getUsername();
             List<GrantedAuthority> authorities = (List<GrantedAuthority>) ((UserDetails) principal).getAuthorities();
 
             GrantedAuthority authority = authorities.get(0);
 
             // role 값 substring  어떻게 할지 확인하기!
-            role = authority.getAuthority().substring(5);
+            //role = authority.getAuthority().substring(5);
         }
 
         model.addAttribute("uid", uid);

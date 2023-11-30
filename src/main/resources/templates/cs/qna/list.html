@@ -15,38 +15,42 @@
 
 
         $(function(){
+
+
+
             // 현재 로그인 사용자 아이디
-            const user = [[${#authentication.principal.username}]];
-
-
-            // 아이디 마스킹 처리
-           var uidElements = document.getElementsByClassName('uid');
-
-           for(var i=0 ; i<uidElements.length ; i++){
-               var originalUid = uidElements[i].innerText;
-               var maskedUid = originalUid.substring(0, 3) + "****";
-               uidElements[i].innerText = maskedUid;
-           }
-
-            // a태그 클릭시 article.uid 값과 현재 사용자 아이디 비교
-            // 클릭 이벤트 처리
+            const currentUser = [[${currentUser}]];
             var qnaListTitle = document.querySelectorAll('.qnaList-title');
 
-           for(let i=0; i<qnaListTitle.length ; i++){
-               qnaListTitle[i].addEventListener('click', function(e) {
+            for(let i=0; i<qnaListTitle.length ; i++){
+                qnaListTitle[i].addEventListener('click', function(e) {
 
-                   const writer = e.target.getAttribute('data-writer');
-                   //alert('writer : ' +writer);
+                    // 여기서 e(event)는 내가 클릭하는 a 태그 / 사용자정의 속성도 해당 태그에 추가해야함
+                    const writer = e.target.getAttribute('data-writer');
+                    //alert('writer : ' +writer);
 
-                     if(user != writer){
-                         e.preventDefault();
-                         alert('해당 글 사용자가 아닙니다.');
-                       }
+                    // currentUser가 admin이면 여기로 안 들어옴
+                    if(currentUser != 'admin'){
+                        console.log('admin 아님 : ' + currentUser);
 
-               });
-           }
+                        if(currentUser != writer){
+                            e.preventDefault();
+                            alert('권한이 없습니다');
+                        }
+                    }
+                });
+            }
 
+            // 아이디 마스킹
+            var uidElements = document.getElementsByClassName('qnaList-uid');
 
+            for(var i=0 ; i<uidElements.length ; i++){
+                var originalUid = uidElements[i].innerText;
+                var maskedUid = originalUid.substring(0, 3) + "****";
+                uidElements[i].innerText = maskedUid;
+            }
+
+        });
 
             /*
             $('.qnaList-title').click(function (e){
@@ -54,68 +58,6 @@
                 alert('fesafeas!!!');
             });
             */
-
-            /*
-            document.addEventListener('click', function(event) {
-                // 클릭한 요소가 <a> 태그인지 확인
-                if (event.target.tagName === 'A') {
-                    alert('click');
-
-                    // 클릭한 <a> 태그의 ID 확인
-                    var clickedId = event.target.id;
-
-                    // 만약 ID가 'qnaList-title'로 시작하는 경우
-                    if (clickedId.startsWith('qnaList-title')) {
-
-                        // article.bno 추출
-                        var bno = clickedId.replace('qnaList-title', '');
-                        console.log(bno);
-
-                        // 해당 <td>의 ID 확인
-                        //var uidTdId = 'qnaList-uid' + bno;
-                        //var uid = document.getElementById(uidTdId).innerText; // 마스킹 처리되있는데 순서 상관없나?? 순서 상관없이 아예 마스킹 되있음
-                        //console.log('uid : ' + uid);
-
-                        const jsonData = {"bno" : bno};
-
-                        $.ajax({
-                            url: '/cs/qna/list',
-                            type: 'POST',
-                            data: jsonData,
-                            dataType: 'json',
-                            success: function(data){ // 여기 uid값이 반환되겠지
-                                alert('success : ' + data);
-
-                            }
-                        });
-
-
-
-
-
-
-                        // 현재 사용자 정보 가져오기
-                        //var currentUserUid = 'user'; // 실제로 사용할 값으로 대체
-
-
-                        if (articleUid === currentUserUid) {
-                            // article.uid와 현재 사용자 정보가 일치하면 동작 수행
-                            window.location.href = event.target.getAttribute('href');
-                        } else {
-                            // 일치하지 않으면 클릭 무시
-                            event.preventDefault();
-                            alert('권한이 없습니다.');
-                        }
-                    }
-                }
-            });*/
-
-
-        });
-
-
-
-
     </script>
 
     <div class="container">
@@ -136,11 +78,10 @@
                             <h4>고객문의</h4>
                             <ul>
                                 <li><a th:href="@{/cs/qna/list(group='qna', cate=31)}">회원</a></li>
-                                <li><a href="#">#</a></li>
-                                <li><a href="#">#</a></li>
-                                <li><a href="#">#</a></li>
-                                <li><a href="#">#</a></li>
-
+                                <li><a th:href="@{/cs/qna/list(group='qna', cate=32)}">32</a></li>
+                                <li><a th:href="@{/cs/qna/list(group='qna', cate=33)}">33</a></li>
+                                <li><a th:href="@{/cs/qna/list(group='qna', cate=34)}">34</a></li>
+                                <li><a th:href="@{/cs/qna/list(group='qna', cate=35)}">35</a></li>
                             </ul>
                         </div>
                     </div>
@@ -148,10 +89,10 @@
 
                 <!-- Spring Security의 Principal 및 권한을 통해 사용자 정보 가져오기 / 로그인 안되어 있으면 isAuthenticated() true아니므로 지나감 -->
                 <!-- 우선 인증됐나 안됐나부터 if로 작성해야 인증 안됐을 때 오류발생 안한다-->
-                <div th:if="${#authorization.expression('isAuthenticated()')}">
+                <!--<div th:if="${#authorization.expression('isAuthenticated()')}">
                     <p>Welcome, <span th:text="${#authentication.principal.username}"></span>!</p>
                 </div>
-
+                -->
 
 
                <section class="qna" id="qnaList-section">
