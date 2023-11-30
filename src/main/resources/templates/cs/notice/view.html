@@ -9,6 +9,15 @@
 
 
 <th:block layout:fragment="content">
+    <script>
+        $(function(){
+           const uid = document.getElementById('uid');
+           const originalUid = uid.innerText;
+            const markedUid = originalUid.substring(0,3) + "****";
+           uid.innerText = markedUid;
+        });
+
+    </script>
 
     <div class="container">
         <section id="cs">
@@ -21,8 +30,10 @@
                             <h4>공지사항</h4>
                             <ul>
                                 <li><a th:href="@{/cs/notice/list(group='notice', cate=11)}">고객서비스</a></li>
-                                <li><a href="#">#</a></li>
-                                <li><a href="#">#</a></li>
+                                <li><a th:href="@{/cs/notice/list(group='notice', cate=12)}">12</a></li>
+                                <li><a th:href="@{/cs/notice/list(group='notice', cate=13)}">13</a></li>
+                                <li><a th:href="@{/cs/notice/list(group='notice', cate=14)}">14</a></li>
+                                <li><a th:href="@{/cs/notice/list(group='notice', cate=15)}">15</a></li>
                             </ul>
                         </div>
                     </div>
@@ -39,6 +50,10 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">[[${boardDTO.title}]]</h5>
+                            <span id="uid">[[${boardDTO.uid}]]</span>&nbsp;
+                            <span>[[${#temporals.format(boardDTO.regDate, 'yyyy-MM-dd')}]]</span>
+                            <br>
+                            <br>
                             <p class="card-text">[[${boardDTO.content}]]</p>
 
                         </div>
