@@ -32,6 +32,7 @@
                 <dvi class="col-md-12">
                     <form id="serachForm" class="row">
                         <input type="hidden" name="group" th:value="${group}" />
+                        <input type="hidden" name="cate" th:value="${cate}" />
                         <!-- 검색 카테고리 만들기 -->
                         <div class="col-md-3">
                             <select class="form-control" name="searchType">
@@ -105,7 +106,7 @@
                             <td class="tit">
                                 <div class="admin_title_board">
                                     <a class="admin_title_board"
-                                       th:href="@{/admin/board/view(bno=${board.bno})}">
+                                       th:href="@{/admin/board/view(bno=${board.bno}, cate=${cate})}">
                                         [<span th:text="${board.typeName}"></span>]
                                         [[${board.title}]]
                                     </a>
@@ -154,18 +155,18 @@
                 <div class="product__pagination blog__pagination">
                     <!-- 이전 페이지 -->
                     <th:block th:if="${pm.prev}">
-                        <a th:href="@{'list?group=' + ${group} +'&'+ ${pm.makeQuery(pm.startPage-1)}}">
+                        <a th:href="@{'list?group=' + ${group} +'&cate=' +${cate} +'&'+ ${pm.makeQuery(pm.startPage-1)}}">
                             <i class="fa fa-long-arrow-left"></i>
                         </a>
                     </th:block>
                     <!-- 현재 페이지-->
                     <th:block th:each="i : ${#numbers.sequence(pm.startPage, pm.endPage)}">
                         <a th:class="${pm.cri.page == i} ? 'active' : ''"
-                           th:href="@{'list?group=' + ${group} +'&'+ ${pm.makeQuery(i)}}">[[${i}]]</a>
+                           th:href="@{'list?group=' + ${group} +'&cate=' +${cate} +'&'+ ${pm.makeQuery(i)}}">[[${i}]]</a>
                     </th:block>
                     <!-- 다음 페이지 -->
                     <th:block th:if="${pm.next}">
-                        <a th:href="@{'list?group=' + ${group} +'&'+ ${pm.makeQuery(pm.endPage+1)}}">
+                        <a th:href="@{'list?group=' + ${group} +'&cate=' +${cate} +'&'+ ${pm.makeQuery(pm.endPage+1)}}">
                             <i class="fa fa-long-arrow-right"></i>
                         </a>
                     </th:block>

@@ -38,7 +38,7 @@ $(".comment__modify").click(function(e) {
                                 .find('.commentArea');
     commentTextarea.attr('readonly', false).focus();
 
-    // focus() 이후에 setSelectionRange()를 사용하여 텍스트 맨 끝에 커서를 두도록 합니다.
+    // focus() 이후에 setSelectionRange()를 사용하여 텍스트 맨 끝에 커서를 두도록 함
     const textLength = commentTextarea.val().length;
     commentTextarea[0].setSelectionRange(textLength, textLength);
     
@@ -52,7 +52,7 @@ $(".comment__modify").click(function(e) {
 
         const bno = $(this).data("cbno");
         const parent = $(this).data("parent");
-        // 수정된 내용을 가져옵니다.
+        // 수정된 내용을 가져옴
         const comment = commentTextarea.val();
         console.log("bno : " + bno);
         console.log("parent : " + parent);
@@ -107,12 +107,10 @@ $(".comment__delete").click(function(e) {
                 bno : bno
             },
             success: function(response) {
-                console.log(1);
                 alert("댓글이 삭제되었습니다.");
                 location.replace(path4+"?bno="+parent);
             },
             error: function(error) {
-                console.log(2);
                 alert("댓글 삭제에 실패했습니다.");
             }
         }); // ajax end
