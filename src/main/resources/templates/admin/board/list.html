@@ -70,7 +70,7 @@
                         <th:block th:each="cate : ${cateDTO}">
                             <li class="board__cate">
                                 <!--TODO 이게 카테고리에 맞게 List 출력이 제대로 안되고 그냥 전부 출력함-->
-                                <a th:href="@{'list?group=' + ${group} +  '&cate='+ ${cate.cate} }">
+                                <a th:href="@{list(group=${group}, cate=${cate.cate}) }">
                                     [[${cate.cateName}]]
                                 </a>
                             </li>
@@ -126,7 +126,7 @@
                                       th:text="${#temporals.format(board.regDate, 'MM-dd')}">
                                 </span>
                             </td>
-                            <td>
+                            <td th:if="${currentNick eq board.nick or currentRole==99}">
                                 <a th:href="@{/admin/board/delete(bno=${board.bno})}"
                                    class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-pencil"></i>
@@ -140,8 +140,13 @@
                     </th:block>
                     </tbody>
                 </table>
-                <input type="button" class="deleteBtn " value="선택삭제" />
-                <input type="submit" class="primary-btn admin_btn board_write" value="글 쓰기" />
+                <th:block th:if="${currentRole == 99}">
+                    <input type="button" class="deleteBtn " value="선택삭제" />
+                </th:block>
+                <!-- todo 모든 글쓰기에서 role이 3이면 못쓰게 막아야함 -->
+                <th:block th:if="${currentRole != 3}">
+                    <input type="submit" class="primary-btn admin_btn board_write" value="글 쓰기" />
+                </th:block>
             </form>
 
             <!-- 페이징 -->
