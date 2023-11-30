@@ -82,6 +82,7 @@
 
             <form id="formCheck" th:action="@{write}" method="get">
                 <input class="board__group" type="hidden" name="group" th:value="${group}" th:data-group="${group}"  />
+                <input class="board__cate" type="hidden" name="cate" th:value="${cate}" />
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -128,11 +129,11 @@
                                 </span>
                             </td>
                             <td th:if="${currentNick eq board.nick or currentRole==99}">
-                                <a th:href="@{/admin/board/delete(bno=${board.bno})}"
+                                <a th:href="@{/admin/board/delete(bno=${board.bno}, cate=${cate})}"
                                    class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-pencil"></i>
                                 </a>
-                                <a href="#" th:data-bno="${board.bno}"
+                                <a href="#" th:data-bno="${board.bno}" th:data-cate="${cate}"
                                    class="btn btn-sm btn-outline-danger board_deleteBtn">
                                     <i class="fa fa-trash-o"></i>
                                 </a>

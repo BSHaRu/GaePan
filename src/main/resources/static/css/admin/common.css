@@ -547,7 +547,8 @@ main table th {
 }
 
 .active{
-    color: #5caeef;
+    background-color: #c4baee !important;
+    color: #020715 !important;
 }
 
 /* =============== chart =================== */

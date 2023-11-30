@@ -51,10 +51,12 @@ $(document).ready(function() {
         const bno = $(this).data("bno");
         // const uid = $(".admin__uid").data("uid");
         const group = $(".board__group").data("group");
+        const cate = $(this).data("cate");
         console.log("bno : " + bno);
         console.log("group : " + group);
+        console.log("cate : " + cate);
 
-        debugger;
+        // debugger;
         if(confirm("정말 게시글을 삭제하시겠습니까?")){
             $.ajax({
                 type: "delete",
@@ -65,7 +67,7 @@ $(document).ready(function() {
                 success: function(response) {
                     console.log(1);
                     alert("게시글이 삭제되었습니다.");
-                    location.replace(path3+"?group="+group);
+                    location.replace(path3+"?group="+group+"&cate="+cate);
                 },
                 error: function(error) {
                     console.log(2);
