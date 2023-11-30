@@ -7,6 +7,7 @@ import co.kr.gaepan.dto.board.BoardTypeDTO;
 import co.kr.gaepan.service.admin.AdminBoardCateService;
 import co.kr.gaepan.service.admin.AdminBoardCommentService;
 import co.kr.gaepan.service.admin.AdminBoardService;
+import co.kr.gaepan.util.GP_Util;
 import co.kr.gaepan.util.SearchCriteria;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,10 +16,7 @@ import lombok.extern.log4j.Log4j2;
 import net.koreate.common.utils.PageMaker;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -31,9 +29,11 @@ public class AdminBoardController {
     private final AdminBoardService adminBoardService;
     private final AdminBoardCateService adminBoardCateService;
     private final AdminBoardCommentService adminBoardCommentService;
+    private final GP_Util gpUtil;
 
     @GetMapping("/write")
     public String write(@RequestParam("group") String group,
+                        @RequestParam("cate") int cate,
                         Model model) {
         try {
             List<BoardCateDTO> cateDTO = adminBoardCateService.getCateName(group);
@@ -45,6 +45,13 @@ public class AdminBoardController {
             model.addAttribute("cateDTO", cateDTO);
             model.addAttribute("typeDTO", typeDTO);
             model.addAttribute("group", group);
+            model.addAttribute("cate", cate);
+
+            // 로그인 된 nick 가져옴
+            model.addAttribute("currentNick", gpUtil.getCurrentNick());
+            log.info("write currentNick: " + gpUtil.getCurrentNick());
+            model.addAttribute("currentRole", gpUtil.getCurrentRole());
+            log.info("write currentRole: " + gpUtil.getCurrentRole());
         } catch (Exception e) {
             log.error("getWriteController error" + e.getMessage());
             throw new RuntimeException(e);
@@ -54,7 +61,8 @@ public class AdminBoardController {
 
     @PostMapping("/write")
     public String write(GP_AdminBoardDTO dto, HttpServletRequest request,
-                    @RequestParam("group") String group){
+                    @RequestParam("group") String group,
+                    @RequestParam("cate") int cate){
         try {
             String ip = request.getRemoteAddr();
             dto.setRegIP(ip);
@@ -64,15 +72,18 @@ public class AdminBoardController {
             throw new RuntimeException(e);
         }
 
-        return "redirect:list?group="+group;
+        return "redirect:list?group="+group + "&cate="+ cate;
     }
 
     @GetMapping("/list")
-    public String pagingBoardList(@RequestParam("group") String group,
+    public String pagingBoardList(@RequestParam(name = "group") String group,
+                                  @RequestParam("cate") int cate,
                                   Model model, SearchCriteria cri)  {
         // board List 출력
         cri.setGroup(group);
+        cri.setCate(cate);
         log.info("list group: " + group);
+        log.info("list cate: " + cate);
         log.info("search criteria: " + cri);
         try {
             List<GP_AdminBoardDTO> adminBoardList
@@ -87,6 +98,10 @@ public class AdminBoardController {
                 int commentCount = adminBoardCommentService.countComments(board.getBno());
                 board.setCommentCount(commentCount >= 0 ? commentCount : 0);
             }
+
+            model.addAttribute("currentUid", gpUtil.getCurrentUsername());
+            model.addAttribute("currentNick", gpUtil.getCurrentNick());
+            model.addAttribute("currentRole", gpUtil.getCurrentRole());
         } catch (Exception e) {
             log.error("admin board list error", e.getMessage());
             throw new RuntimeException(e);
@@ -101,6 +116,7 @@ public class AdminBoardController {
             throw new RuntimeException(e);
         }
         model.addAttribute("group", group);
+        model.addAttribute("cate", cate);
 
         return "admin/board/list";
     }
@@ -108,7 +124,8 @@ public class AdminBoardController {
     @GetMapping("/view")
     public String findById(HttpServletRequest request,
                            HttpServletResponse response,
-                           Model model, GP_AdminBoardDTO dto) {
+                           Model model, GP_AdminBoardDTO dto,
+                           @RequestParam("cate") int cate) {
         try {
             adminBoardService.updateViewCnt(request, response, dto.getBno());
 
@@ -117,11 +134,28 @@ public class AdminBoardController {
 
             List<GP_AdminBoardDTO> comments = adminBoardCommentService.findComments(dto);
             model.addAttribute("comments", comments);
+
+            // 로그인 한 사람의 정보와 게시글 작성자와 비교
+//            model.addAttribute("isboardCheckNick", gpUtil.checkAuthorization(adminBoardDTO.getNick()));
+//            log.info("adminBoardDTO.getNick() : " + adminBoardDTO.getNick());
+
+            model.addAttribute("currentUid", gpUtil.getCurrentUsername());
+            model.addAttribute("currentNick", gpUtil.getCurrentNick());
+            model.addAttribute("currentRole", gpUtil.getCurrentRole());
+
+            // 댓글 비교
+            for(GP_AdminBoardDTO comment : comments){
+                model.addAttribute("iscommentCheckNick", gpUtil.checkAuthorization(comment.getNick()));
+                log.info("comment.getNick() : " + comment.getNick());
+            }
+
 //            log.info("admin board findById comments : " + comments);
         } catch (Exception e) {
             log.error("admin board view error", e.getMessage());
             throw new RuntimeException(e);
         }
+        model.addAttribute("cate", cate);
+
         return "admin/board/view";
     }
 
@@ -140,6 +174,9 @@ public class AdminBoardController {
             model.addAttribute("cateDTO", cateDTO);
             model.addAttribute("typeDTO", typeDTO);
             model.addAttribute("boardDTO", boardDTO);
+
+            model.addAttribute("currentNick", gpUtil.getCurrentNick());
+            model.addAttribute("currentRole", gpUtil.getCurrentRole());
         } catch (Exception e) {
             log.error("getModifyController error" + e.getMessage());
             throw new RuntimeException(e);
@@ -149,7 +186,8 @@ public class AdminBoardController {
 
     @PostMapping("/modify")
     public String modify(GP_AdminBoardDTO dto,
-                         @RequestParam("bno") int bno){
+                         @RequestParam("bno") int bno,
+                         @RequestParam("cate") int cate){
         log.info("modify bno:" + bno);
         try {
             adminBoardService.modifyAdminBoard(dto);
@@ -157,21 +195,23 @@ public class AdminBoardController {
             log.error("PostModifyController error" + e.getMessage());
             throw new RuntimeException(e);
         }
-        return "redirect:view?bno=" + bno;
+        return "redirect:view?bno=" + bno+ "&cate=" +cate;
     }
 
 
     @PostMapping("/commentWrite")
     public String commentWrite(GP_AdminBoardDTO dto, HttpServletRequest request,
-                            @RequestParam("bno") int parent){
+                            @RequestParam("bno") int parent,
+                            @RequestParam("cate") int cate){
         log.info("처음 parent : " + parent);
+        log.info("처음 cate : " + cate);
         try {
             String ip = request.getRemoteAddr();
             dto.setRegIP(ip);
 
             adminBoardCommentService.saveComment(dto);
-/*            log.info("dto group:" + dto.getGroup());
             log.info("dto cate : "+ dto.getCate());
+/*            log.info("dto group:" + dto.getGroup());
             log.info("dto type:" + dto.getType());
             log.info("dto comment : "+ dto.getComment());
             log.info("dto parent:" + dto.getParent());*/
@@ -180,24 +220,6 @@ public class AdminBoardController {
             log.error("getWriteController error" + e.getMessage());
             throw new RuntimeException(e);
         }
-        return "redirect:view?bno=" + parent;
-    }
-
-    @GetMapping("/commentModify")
-    public String commentModify(@RequestParam("bno") int bno, Model model,
-                                GP_AdminBoardDTO dto){
-        try{
-            GP_AdminBoardDTO adminBoardDTO = adminBoardService.findById(dto.getBno());
-            model.addAttribute("boardDTO", adminBoardDTO);
-
-            List<GP_AdminBoardDTO> comments = adminBoardCommentService.findComments(dto);
-            model.addAttribute("comments", comments);
-
-        }catch (Exception e) {
-            log.error("admin board view error", e.getMessage());
-            throw new RuntimeException(e);
-        }
-
-        return "admin/board/commentModify";
+        return "redirect:view?bno=" + parent + "&cate=" +cate;
     }
 }

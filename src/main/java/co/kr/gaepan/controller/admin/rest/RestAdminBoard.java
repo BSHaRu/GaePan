@@ -45,9 +45,8 @@ public class RestAdminBoard {
     }
 
     // 게시글 checkbox로 삭제
-    /* todo 지금 checkbox 삭제가 문제가 있음... 원인 모름 */
     @PostMapping("/deleteBoardList")
-    public ResponseEntity<String> deleteBoardList(List<GP_AdminBoardDTO> boardDTO){
+    public ResponseEntity<String> deleteBoardList(@RequestBody List<GP_AdminBoardDTO> boardDTO){
         log.info("deleteBoardList : " + boardDTO);
         try {
             adminBoardService.deleteAdminBoard(boardDTO);
@@ -72,12 +71,16 @@ public class RestAdminBoard {
     }
 
     @PutMapping("/modifyComment")
-    public ResponseEntity<String> modifyComment(@RequestParam int bno, @RequestParam String comment) {
+    public ResponseEntity<String> modifyComment(@RequestParam int bno,
+                                                @RequestParam String comment) {
+        log.info("BNO : " + bno);
+        log.info("COMMENT : " + comment);
         try {
+            log.info("2");
             adminBoardCommentService.modifyComment(bno, comment);
             return ResponseEntity.ok("댓글 수정 성공");
         } catch (Exception e) {
-            log.error("ajax admin deleteById error : " + e.getMessage());
+            log.error("ajax admin modifyComment error : " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("댓글 수정 실패");
         }
     }

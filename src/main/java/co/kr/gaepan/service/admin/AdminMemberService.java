@@ -1,9 +1,7 @@
 package co.kr.gaepan.service.admin;
 
-import co.kr.gaepan.dto.admin.GP_AdminBoardDTO;
 import co.kr.gaepan.dto.member.MemberDTO;
 import co.kr.gaepan.util.SearchCriteria;
-import co.kr.gaepan.util.SearchPageMaker;
 import net.koreate.common.utils.PageMaker;
 
 import java.util.List;
@@ -14,7 +12,7 @@ public interface AdminMemberService {
     List<MemberDTO> findAll() throws Exception;
 
     // 블랙리스트
-    List<MemberDTO> blackList(int role) throws Exception;
+    List<MemberDTO> blackList(SearchCriteria cri, int role) throws Exception;
 
     // 회원 상세 보기
     MemberDTO findById(int no) throws Exception;
@@ -30,8 +28,10 @@ public interface AdminMemberService {
 
     // 검색 결과에 따른 회원 페이징 처리된 목록
     List<MemberDTO> pagingMemberList(SearchCriteria cri) throws Exception;
+
     // 페이징 블럭 정보
     PageMaker getPageMaker(SearchCriteria cri) throws Exception;
 
-//    SearchPageMaker getSearchPageMaker(SearchCriteria cri) throws Exception;
+    // 블랙리스트 페이징 블럭
+    PageMaker getPageMaker2(SearchCriteria cri) throws Exception;
 }

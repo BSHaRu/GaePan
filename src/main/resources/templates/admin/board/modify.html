@@ -11,6 +11,7 @@
             <form action="modify" method="post">
                 <!--<input type="hidden" name="uid" th:vale="${#authentication.principal.member.uid}" />-->
                 <input type="hidden" name="bno" th:value="${boardDTO.bno}" />
+                <input type="hidden" name="cate" th:value="${boardDTO.cate}" />
                 <table>
                     <!-- group / cate / type 설정 -->
                     <div class="row group_cate">
@@ -44,8 +45,7 @@
                     <tr>
                         <td>작성자</td>
                         <td>
-                            <!-- todo 이것도 session에 있는 nick이 뜨게끔 해줘야함 -->
-                            <input type="text" name="nick" th:value="${#authentication.principal.member.nick}" readonly />
+                            <input type="text" name="nick" th:value="${currentNick}" readonly />
                         </td>
                     </tr>
                     <tr>
@@ -55,7 +55,6 @@
                         </td>
                     </tr>
                 </table>
-                <!-- TODO 여기에 권한 설정해서 설정 해줘야함 -->
                 <th:block>
                     <div class="write__div">
                         <input type="button" class="btnBack" value="취소하기">

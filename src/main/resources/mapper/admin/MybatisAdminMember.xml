@@ -34,9 +34,23 @@
 
     <!-- black List 출력 -->
     <select id="blackList" resultType="co.kr.gaepan.dto.member.MemberDTO">
-        SELECT * FROM gp_member
+        SELECT
+            @rownum := @rownum + 1 AS rownum,
+            m.*
+        FROM gp_member AS m
+        ,(SELECT @rownum := 0) AS R
         WHERE role IN(2,3)
-        ORDER BY `no` DESC;
+        ORDER BY rownum DESC
+        LIMIT #{cri.startRow}, #{cri.perPageNum}
+    </select>
+
+    <select id = "blackListCount" parameterType="co.kr.gaepan.util.SearchCriteria"
+            resultType="int">
+        SELECT
+            count(*)
+        FROM gp_member
+        WHERE role IN(2,3)
+        ORDER BY `no` DESC
     </select>
 
 

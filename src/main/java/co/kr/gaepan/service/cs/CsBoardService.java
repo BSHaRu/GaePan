@@ -85,6 +85,16 @@ public class CsBoardService {
     }
 
     public void deleteArticle(int bno){
+
         mapper.deleteArticle(bno);
     }
+
+
+    public void updateComment(BoardDTO boardDTO){
+        mapper.updateComment(boardDTO.getComment(), boardDTO.getBno());
+    }
+    public void updateArticle(BoardDTO boardDTO){
+        mapper.updateArticle(boardDTO.getTitle(), boardDTO.getContent(), boardDTO.getBno());
+    }
+
 }
