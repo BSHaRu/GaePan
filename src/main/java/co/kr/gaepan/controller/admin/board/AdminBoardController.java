@@ -33,6 +33,7 @@ public class AdminBoardController {
 
     @GetMapping("/write")
     public String write(@RequestParam("group") String group,
+                        @RequestParam("cate") int cate,
                         Model model) {
         try {
             List<BoardCateDTO> cateDTO = adminBoardCateService.getCateName(group);
@@ -44,6 +45,7 @@ public class AdminBoardController {
             model.addAttribute("cateDTO", cateDTO);
             model.addAttribute("typeDTO", typeDTO);
             model.addAttribute("group", group);
+            model.addAttribute("cate", cate);
 
             // 로그인 된 nick 가져옴
             model.addAttribute("currentNick", gpUtil.getCurrentNick());
