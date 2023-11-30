@@ -8,10 +8,10 @@
 <th:block layout:fragment="content">
     <section class="admin__section">
         <nav>
-            <h3>반려동물 관리</h3>
+            <h3>입양일기 관리</h3>
             <p class="admin__p">
                 <a th:href="@{/admin/index}">HOME</a> &gt; 반려동물 &gt;
-                <strong>시설</strong>
+                <strong>입양일기</strong>
             </p>
         </nav>
 
@@ -35,28 +35,28 @@
                     <th scope="col"><input type="checkbox" name="all" id="selectAll"/></th>
                     <th scope="col">번호</th>
                     <th scope="col">이미지</th>
-                    <th scope="col">제목</th>
                     <th scope="col">종류</th>
+                    <th scope="col">품종</th>
+                    <th scope="col">제목</th>
                     <th scope="col">글쓴이</th>
                     <th scope="col">날짜</th>
-                    <th scope="col">조회</th>
                     <th scope="col">관리</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr th:each="pet : ${Adminadopt}">
                     <td class="chk">
                         <input type="checkbox" name ="chk" class="checkbox" value="">
                     </td>
-                    <td>1</td>
+                    <td>[[${pet.no}]]</td>
                     <td>
-                        <img src="#" class="thumb">
+                        <img style="width: 50px; height: 50px" th:src="@{/upload/} + ${pet.thumb}">
                     </td>
-                    <td>Title</td>
-                    <td>유기견</td>
-                    <td>admin</td>
-                    <td>23-11-02</td>
-                    <td>1</td>
+                    <td>[[${pet.cName}]]</td>
+                    <td>[[${pet.tName}]]</td>
+                    <td>[[${pet.title}]]</td>
+                    <td>[[${pet.uid}]]</td>
+                    <td th:text="${#temporals.format(pet.regDate, 'yy-MM-dd')}"></td>
                     <td>
                         <a href="#" class="btn btn-sm btn-outline-danger">
                             <i class="fa fa-trash-o"></i>
@@ -68,13 +68,20 @@
         </table>
         <input type="button" class="deleteBtn" value="선택삭제" />
 
-        <div class="col-lg-12 mt-5">
+        <div class="col-lg-12">
             <div class="product__pagination blog__pagination">
-                <a href="#"><i class="fa fa-long-arrow-left"></i></a>
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                <th:block th:if="${pageGroupStart > 1}">
+                    <a th:href="@{/admin/animal/adopt(pg= ${pageGroupStart - 1})}"><span class="arrow_right"></span></a>
+                </th:block>
+
+                <th:block th:each="i : ${#numbers.sequence(pageGroupStart, pageGroupEnd)}">
+                    <a th:href="@{/admin/animal/adopt(pg= ${i})}"
+                       th:class="${currentPage == i} ? 'num on current' : 'num'">[[${i}]]</a>
+                </th:block>
+
+                <th:block th:if="${pageGroupEnd < lastPageNum}">
+                    <a th:href="@{/admin/animal/adopt(pg= ${pageGroupEnd + 1})}"><span class="arrow_right"></span></a>
+                </th:block>
             </div>
         </div>
     </section>

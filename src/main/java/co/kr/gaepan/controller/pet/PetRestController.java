@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequestMapping("/pet/*")
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class PetRestController {
 

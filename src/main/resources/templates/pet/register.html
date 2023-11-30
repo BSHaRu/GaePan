@@ -123,8 +123,9 @@
 
                     var data= JSON.parse(xhr.response);
                     for (var i = 0; i < data.length; i++) {
-                        console.log(data); // Access each item in the array
+                        //console.log(data); // Access each item in the array
                     }
+
                     var defaultOption = document.createElement('option');
                     defaultOption.value = 'cate0';
                     defaultOption.text = '품종 선택';
@@ -133,7 +134,7 @@
                     data.forEach(function(type) {
                         var option = document.createElement('option');
                         option.value = type.type;
-                        option.text = type.tName;
+                        option.text = type.tname;
                         category2Select.appendChild(option);
                     });
                 } else {
@@ -142,6 +143,7 @@
             };
 
             xhr.send();
+
         });
 
 
