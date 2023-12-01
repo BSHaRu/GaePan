@@ -78,7 +78,7 @@
                     <td class="chk">
                         <input type="checkbox" name="chk" class="checkbox" th:value="${member.no}">
                     </td>
-                    <td th:text="${member.no}"></td>
+                    <td th:text="${member.rownum}"></td>
                     <td th:text="${member.uid}"></td>
                     <td th:text="${member.name}"></td>
                     <td th:text="${member.nick}"></td>
@@ -117,7 +117,9 @@
                 </th:block>
                 </tbody>
             </table>
-            <input type="button" class="blackList_Btn" value="블랙리스트 등록"/>
+            <th:block th:if="${currentRole == 99}">
+                <input type="button" class="blackList_Btn" value="블랙리스트 등록"/>
+            </th:block>
         </form>
 
         <div class="col-lg-12 mt-5">

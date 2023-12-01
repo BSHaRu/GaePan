@@ -65,7 +65,7 @@
                         <a th:if="${pageResponseDTO.next}" th:href="@{/pet/adoptdiary(pg=${pageResponseDTO.end + 1})}"><i class="fa fa-long-arrow-right"></i></a>
                     </div>
                 </div>
-                <div class="blog__item__text">
+                <div class="blog__item__text " th:if="${currentNick} != null">
                 <a th:href="@{/pet/adoptdiaryregister}" class="blog__btn">
                     글쓰기
                 </a>

@@ -5,6 +5,7 @@ import co.kr.gaepan.dto.pet.PageResponseDTO;
 import co.kr.gaepan.dto.pet.PetCateDTO;
 import co.kr.gaepan.dto.pet.PetRegisterDTO;
 import co.kr.gaepan.service.pet.PetBoardService;
+import co.kr.gaepan.util.GP_Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import java.util.List;
 public class AdoptController {
 
     private final PetBoardService petBoardService;
+    private final GP_Util gpUtil;
 
     @RequestMapping("/pet/adoptdiary")
     public String adoptdiary(PageRequestDTO pageRequestDTO , Model model) {
@@ -26,7 +28,7 @@ public class AdoptController {
         PageResponseDTO pageResponseDTO = petBoardService.AdoptAll(pageRequestDTO,3);
 
         model.addAttribute("pageResponseDTO", pageResponseDTO);
-
+        model.addAttribute("currentNick", gpUtil.getCurrentNick());
         return "pet/adoptdiary";
 
     }
@@ -70,7 +72,7 @@ public class AdoptController {
 
         List<PetCateDTO> petcate = petBoardService.petcate();
         model.addAttribute("petcate", petcate);
-
+        model.addAttribute("currentNick", gpUtil.getCurrentNick());
         return "pet/adoptdiaryregister";
     }
 

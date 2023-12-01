@@ -39,4 +39,8 @@ public interface CsBoardMapper { // interface선언
     );
 
     public void deleteArticle(@Param("bno") int bno);
+
+
+    public void updateComment(@Param("comment") String comment, @Param("bno") int bno);
+    public void updateArticle(@Param("title") String title, @Param("content") String content, @Param("bno") int bno);
 }

@@ -18,7 +18,7 @@
             ON b.bno = c.parent
         JOIN gp_member AS m
             ON c.uid = m.uid
-        WHERE b.bno = #{bno};
+        WHERE b.bno = #{bno}
     </select>
 
     <!-- 댓글 작성-->
@@ -35,8 +35,14 @@
 
     <!-- 댓글 개수-->
     <select id="countComments">
-        SELECT COUNT(*) FROM gp_board
-        WHERE parent = #{bno};
+        SELECT
+            COUNT(*)
+        FROM gp_board AS b
+        LEFT JOIN gp_board AS c
+            ON b.bno = c.parent
+        JOIN gp_member AS m
+            ON c.uid = m.uid
+        WHERE c.parent = #{bno}
     </select>
 
     <!-- 댓글 수정 -->

@@ -10,16 +10,54 @@
 
 <th:block layout:fragment="content">
     <!-- script 이렇게 layout:content 안에 넣으면 적용되는구나 -->
-    <script>
-        $(function(){
-           var uidElements = document.getElementsByClassName('uid');
+    <script th:inline="javascript">
 
-           for(var i=0 ; i<uidElements.length ; i++){
-               var originalUid = uidElements[i].innerText;
-               var maskedUid = originalUid.substring(0, 3) + "****";
-               uidElements[i].innerText = maskedUid;
-           }
+
+
+        $(function(){
+
+
+
+            // 현재 로그인 사용자 아이디
+            const currentUser = [[${currentUser}]];
+            var qnaListTitle = document.querySelectorAll('.qnaList-title');
+
+            for(let i=0; i<qnaListTitle.length ; i++){
+                qnaListTitle[i].addEventListener('click', function(e) {
+
+                    // 여기서 e(event)는 내가 클릭하는 a 태그 / 사용자정의 속성도 해당 태그에 추가해야함
+                    const writer = e.target.getAttribute('data-writer');
+                    //alert('writer : ' +writer);
+
+                    // currentUser가 admin이면 여기로 안 들어옴
+                    if(currentUser != 'admin'){
+                        console.log('admin 아님 : ' + currentUser);
+
+                        if(currentUser != writer){
+                            e.preventDefault();
+                            alert('권한이 없습니다');
+                        }
+                    }
+                });
+            }
+
+            // 아이디 마스킹
+            var uidElements = document.getElementsByClassName('qnaList-uid');
+
+            for(var i=0 ; i<uidElements.length ; i++){
+                var originalUid = uidElements[i].innerText;
+                var maskedUid = originalUid.substring(0, 3) + "****";
+                uidElements[i].innerText = maskedUid;
+            }
+
         });
+
+            /*
+            $('.qnaList-title').click(function (e){
+                e.preventDefault();
+                alert('fesafeas!!!');
+            });
+            */
     </script>
 
     <div class="container">
@@ -40,17 +78,21 @@
                             <h4>고객문의</h4>
                             <ul>
                                 <li><a th:href="@{/cs/qna/list(group='qna', cate=31)}">회원</a></li>
-                                <li><a href="#">#</a></li>
-                                <li><a href="#">#</a></li>
-                                <li><a href="#">#</a></li>
-                                <li><a href="#">#</a></li>
-
+                                <li><a th:href="@{/cs/qna/list(group='qna', cate=32)}">32</a></li>
+                                <li><a th:href="@{/cs/qna/list(group='qna', cate=33)}">33</a></li>
+                                <li><a th:href="@{/cs/qna/list(group='qna', cate=34)}">34</a></li>
+                                <li><a th:href="@{/cs/qna/list(group='qna', cate=35)}">35</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-
+                <!-- Spring Security의 Principal 및 권한을 통해 사용자 정보 가져오기 / 로그인 안되어 있으면 isAuthenticated() true아니므로 지나감 -->
+                <!-- 우선 인증됐나 안됐나부터 if로 작성해야 인증 안됐을 때 오류발생 안한다-->
+                <!--<div th:if="${#authorization.expression('isAuthenticated()')}">
+                    <p>Welcome, <span th:text="${#authentication.principal.username}"></span>!</p>
+                </div>
+                -->
 
 
                <section class="qna" id="qnaList-section">
@@ -62,8 +104,8 @@
                                 <tbody>
                                     <tr th:each="article:${pageResponseDTO.dtoList}">
                                         <th scope="row">[[${article.typeName}]]</th>
-                                        <td><a th:href="@{/cs/qna/view(bno = ${article.bno})}">[[${article.title}]]</a></td>
-                                        <td class="uid">[[${article.uid}]]</td>
+                                        <td><a class="qnaList-title"  th:data-writer="${article.uid}" th:href="@{/cs/qna/view(bno = ${article.bno})}">[[${article.title}]]</a></td>
+                                        <td class="qnaList-uid">[[${article.uid}]]</td>
                                         <td>[[${#temporals.format(article.regDate, 'yyyy-MM-dd')}]]</td><!-- thymeleaf 내장객체이용 -->
                                     </tr>
                                 </tbody>

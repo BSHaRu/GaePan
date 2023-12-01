@@ -83,17 +83,32 @@
 }
 
 #qnaView-btnComment{
+    border: none;
+    background-color: #8972ee;
     float: right;
 }
 
 .delete-atag{
+    color: #3818c9;
     position: absolute;
     right: 10px;
 }
 
 .update-atag{
+    color: #3818c9;
     position: absolute;
     right: 50px;
+}
+
+.smallBtn{
+    border: none;
+    color: white;
+    background-color: #8972ee;
+}
+
+#updateTitle{
+    display: inline-block;
+    width: auto;
 }
 
 /*bootstrap 기존 클래스는 건드리지 말기*/

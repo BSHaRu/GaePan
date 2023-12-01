@@ -133,7 +133,7 @@
                     data.forEach(function(type) {
                         var option = document.createElement('option');
                         option.value = type.type;
-                        option.text = type.tName;
+                        option.text = type.tname;
                         category2Select.appendChild(option);
                     });
                 } else {
@@ -157,7 +157,7 @@
             <br>
             <form class="registerForm" th:action="@{/pet/adoptregister}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="regip" value="0.0.0.1">
-                <input type="hidden" name="uid" value="test">
+                <input type="hidden" name="uid" th:value="${currentNick}">
                 <input type="hidden" name="division" value="3">
                 <div class="mb-3">
                     <label>종류</label>

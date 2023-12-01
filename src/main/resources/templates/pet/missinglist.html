@@ -23,9 +23,9 @@
                         <h4>유형별로 찾아보기</h4>
                         <ul>
                             <li><a th:href="@{/pet/missinglist}">All</a></li>
-                            <li><a th:href="@{/pet/petdoglist}">유기견</a></li>
-                            <li><a th:href="@{/pet/petcatlist}">유기묘</a></li>
-                            <li><a th:href="@{/pet/petetclist}">기타</a></li>
+                            <li><a th:href="@{/pet/missingdoglist}">유기견</a></li>
+                            <li><a th:href="@{/pet/missingcatlist}">유기묘</a></li>
+                            <li><a th:href="@{/pet/missingetclist}">기타</a></li>
                         </ul>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                         <a th:if="${pageResponseDTO.next}" th:href="@{/pet/missinglist(pg=${pageResponseDTO.end + 1})}"><i class="fa fa-long-arrow-right"></i></a>
                     </div>
                 </div>
-                <div class="blog__item__text">
+                <div class="blog__item__text" th:if="${currentNick} != null">
                     <a th:href="@{/pet/missingregister}" class="blog__btn">
                         제보하기
                     </a>

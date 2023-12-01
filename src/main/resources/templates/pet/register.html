@@ -123,8 +123,9 @@
 
                     var data= JSON.parse(xhr.response);
                     for (var i = 0; i < data.length; i++) {
-                        console.log(data); // Access each item in the array
+                        //console.log(data); // Access each item in the array
                     }
+
                     var defaultOption = document.createElement('option');
                     defaultOption.value = 'cate0';
                     defaultOption.text = '품종 선택';
@@ -133,7 +134,7 @@
                     data.forEach(function(type) {
                         var option = document.createElement('option');
                         option.value = type.type;
-                        option.text = type.tName;
+                        option.text = type.tname;
                         category2Select.appendChild(option);
                     });
                 } else {
@@ -142,6 +143,7 @@
             };
 
             xhr.send();
+
         });
 
 
@@ -157,7 +159,7 @@
             <br>
             <form class="registerForm" th:action="@{/pet/register}" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="regip" value="0.0.0.1">
-                <input type="hidden" name="uid" value="test">
+                <input type="hidden" name="uid" th:value="${currentNick}">
                 <input type="hidden" name="division" value="1">
                 <div class="mb-3">
                     <label>종류</label>

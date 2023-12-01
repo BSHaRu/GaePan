@@ -13,11 +13,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -75,7 +73,14 @@ public class CsMainController {
         return "cs/faq/list";
     }
     @GetMapping("/qna/list")
-    public String qnaList(Model model, PageRequestDTO pageRequestDTO){ // DTO 속성으로 group, cate 있으므로 파라미터 받을 수 있음
+    public String qnaList(Principal principal, Model model, PageRequestDTO pageRequestDTO){ // DTO 속성으로 group, cate 있으므로 파라미터 받을 수 있음
+
+        if(principal == null){
+            log.info("로그인 안됨");
+        }else{
+            log.info("로그인 됨 userName : " + principal.getName());
+        }
+
 
         // pg 값이 변경될 때마다 호출하여 offset 갱신
         pageRequestDTO.updateOffset();
@@ -87,7 +92,20 @@ public class CsMainController {
 
         model.addAttribute(pageResponseDTO);
 
+        if(principal != null){
+            model.addAttribute("currentUser", principal.getName());
+        }
+
         return "cs/qna/list";
+    }
+    // AJAX활용을 위한 PostMapping
+    @ResponseBody
+    @PostMapping("/qna/list")
+    public String qnaList(int bno){
+        log.info("qnaList : " + bno);
+        BoardDTO boardDTO = csBoardService.findByNo(bno);
+        String uid = boardDTO.getUid();
+        return uid;
     }
     @GetMapping("/qna/view")
     public String qnaView(Model model, int bno) {
@@ -101,14 +119,14 @@ public class CsMainController {
 
         if(principal instanceof UserDetails) {
 
-            // uid는 현재 인증된 사용자의 아이디
+            // uid는 현재 인증된 사용자의 아이디 / 이렇게 할 필요없이 qna/list처럼 prinipal 객체 바로 이용하면됨
             uid = ((UserDetails) principal).getUsername();
             List<GrantedAuthority> authorities = (List<GrantedAuthority>) ((UserDetails) principal).getAuthorities();
 
             GrantedAuthority authority = authorities.get(0);
 
             // role 값 substring  어떻게 할지 확인하기!
-            role = authority.getAuthority().substring(5);
+            //role = authority.getAuthority().substring(5);
         }
 
         model.addAttribute("uid", uid);
@@ -122,12 +140,12 @@ public class CsMainController {
         BoardDTO boardDTO= csBoardService.findByNo(bno);
         log.info("boardDTO : " + boardDTO);
         //답변 조회(리스트)
-        List<BoardDTO> responses = csBoardService.findByParent(bno);
-        log.info("responses : " + responses);
+        List<BoardDTO> replies = csBoardService.findByParent(bno);
+        log.info("replies : " + replies);
 
 
         model.addAttribute(boardDTO); // 속성이름 없이 바로 설정하는 건 이렇게 DTO만 가능한가봄
-        model.addAttribute("responses", responses);
+        model.addAttribute("replies", replies);
 
         return "cs/qna/view";
     }
@@ -219,10 +237,32 @@ public class CsMainController {
     @GetMapping("/qna/articleDelete")
     public String qnaArticleDelete(BoardDTO boardDTO){
 
+        // bno, cate값 확인하기
         log.info("BoardDTO : " +boardDTO);
         csBoardService.deleteArticle(boardDTO.getBno());
 
         return "redirect:/cs/qna/list?group=qna&cate=" + boardDTO.getCate();
+    }
+
+    // 댓글 수정
+    @GetMapping("/qna/commentUpdate")
+    public String qnaCommentUpdate(BoardDTO boardDTO){
+
+        // comment, bno, parent값 확인하기
+        log.info("BoardDTO : " +boardDTO);
+        csBoardService.updateComment(boardDTO);
+
+        return "redirect:/cs/qna/view?bno=" + boardDTO.getParent();
+    }
+
+    //글 수정
+    @GetMapping("/qna/articleUpdate")
+    public String qnaArticleUpdate(BoardDTO boardDTO){
+
+        // bno, title, content 값 확인하기
+        csBoardService.updateArticle(boardDTO);
+
+        return "redirect:/cs/qna/view?bno=" + boardDTO.getBno();
     }
 
 }

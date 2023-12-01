@@ -332,6 +332,8 @@ main table th {
 }
 .admin__section > .view table tr > td  > textarea{
     border: 0;
+    height: 360px;
+    margin: 15px;
 }
 
 .admin__section > .view table tr > td > div {
@@ -374,7 +376,6 @@ main table th {
 }
 .admin__section > .view > .commentList > .comments > div .comment {
     width: 100%;
-    height: 100px;
     padding: 10px 21px 2px;
     box-sizing: border-box;
     resize: none;
@@ -386,7 +387,24 @@ main table th {
     background-color: rgba(158, 158, 158, 0.1);
     clear: both;
 }
+.admin__section > .view > .commentList > .comments > div .modifyCommentDiv {
+    width: 100%;
+    padding: 10px 21px 2px;
+    box-sizing: border-box;
+    resize: none;
+    border: 0;
+    color: #000;
+    margin-top: 15px;
+    font-size:17px;
+    border-bottom: 3px solid #e9e9e9;
+    background-color: #fff;
+    clear: both;
+}
 .admin__section > .view > .commentList > .comments > div .comment > span {
+    font-size: 13px;
+    font-weight: bold;
+}
+.admin__section > .view > .commentList > .comments > div .modifyCommentDiv > span {
     font-size: 13px;
     font-weight: bold;
 }
@@ -394,6 +412,13 @@ main table th {
     border: none;
     background: none;
     margin-top: 5px;
+    line-height: 1.7;
+}
+.admin__section > .view > .commentList > .comments > div .modifyCommentDiv > textarea {
+    border: none;
+    background: none;
+    margin-top: 5px;
+    line-height: 1.7;
 }
 .empty {
     width: 100%;
@@ -524,7 +549,8 @@ main table th {
 }
 
 .active{
-    color: #5caeef;
+    background-color: #c4baee !important;
+    color: #020715 !important;
 }
 
 /* =============== chart =================== */
