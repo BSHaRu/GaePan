@@ -15,7 +15,33 @@
             </p>
         </nav>
 
-        <div>
+        <div class="row">
+            <!-- 검색 -->
+            <div class="col-md-12">
+                <form id="serachForm" class="row">
+                    <!-- 검색 카테고리 만들기 -->
+                    <div class="col-md-3">
+                        <select class="form-control" name="searchType">
+                            <!-- 검색할 때 옵션이  null이면 이거 선택 | 아니면 비워둠 -->
+                            <option value="prodName">종류</option>
+                            <option value="prodNo">All</option>
+                            <option value="company">유기견</option>
+                            <option value="seller">유기묘</option>
+                        </select>
+                    </div>
+                    <!-- 어떤 키워드로 검색할지 키워드 작성칸 -->
+                    <div class="col-md-4">
+                        <input class="form-control" type="text" search/>
+                    </div>
+                    <div class="col-md-2">
+                        <!-- 검색 버튼 -->
+                        <div>
+                            <input class="form-control searchBtn" type="submit" value="검색" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        <!--<div>
             <form class="admin_search_form" action="#" method="get">
                 <select name="searchCate">
                     <option value="prodName">종류</option>
@@ -26,7 +52,7 @@
                 <input type="text" name="search">
                 <input type="submit" class="searchBtn" value="검색" />
             </form>
-        </div>
+        </div>-->
 
         <table class="table table-hover">
             <form id="formCheck" action="#" method="post">

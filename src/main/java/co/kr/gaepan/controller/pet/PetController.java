@@ -3,6 +3,7 @@ package co.kr.gaepan.controller.pet;
 import co.kr.gaepan.dto.pet.*;
 import co.kr.gaepan.mapper.pet.PetListMapper;
 import co.kr.gaepan.service.pet.PetBoardService;
+import co.kr.gaepan.util.GP_Util;
 import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -21,6 +22,7 @@ public class PetController {
 
     private final PetBoardService petBoardService;
     private final PetListMapper petListMapper;
+    private final GP_Util gpUtil;
 
     @RequestMapping("/pet/petlist")
     public String main(PageRequestDTO pageRequestDTO , Model model) {
@@ -75,7 +77,7 @@ public class PetController {
 
         List<PetCateDTO> petcate = petBoardService.petcate();
         model.addAttribute("petcate", petcate);
-
+        model.addAttribute("currentNick", gpUtil.getCurrentNick());
         return "pet/register";
 
     }
@@ -114,6 +116,7 @@ public class PetController {
 
         List<PetRegisterDTO> petList = petBoardService.searchPets(searchType, key, startNum, division);
         model.addAttribute("petList", petList);
+        model.addAttribute("totalPages", totalPages);
         model.addAttribute("currentPage", currentPage);
         model.addAttribute("lastPage", lastPage);
         model.addAttribute("pageGroupStart", pageGroupStart);
