@@ -8,7 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface AdminBoardRepository extends JpaRepository<GP_AdminBoardEntity, Integer> {
-    /*Page<GP_AdminBoardEntity> findAll(Pageable pageable);
 
-    Page<GP_AdminBoardEntity> findByGPAdminBoardEntity_CateOrderByRdateDesc(Pageable pageable, int cate);*/
 }

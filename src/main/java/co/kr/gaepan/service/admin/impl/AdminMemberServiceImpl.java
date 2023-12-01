@@ -23,13 +23,6 @@ public class AdminMemberServiceImpl implements AdminMemberService {
     private final GP_Util gpUtil;
 
     @Override
-    public List<MemberDTO> findAll() throws Exception {
-        List<MemberDTO> memberList = mybatisAdminMemberMapper.findAll();
-        memberList.replaceAll(gpUtil::addrSubString);
-        return memberList;
-    }
-
-    @Override
     public List<MemberDTO> blackList(SearchCriteria cri, int role) throws Exception {
         List<MemberDTO> blackList = mybatisAdminMemberMapper.blackList(cri, role);
         blackList.replaceAll(gpUtil::addrSubString);

@@ -25,14 +25,14 @@
                         </div>
                         <div class="col-md-4">
                             <select id="cate" class="form-control" name="cate">
-                                <option selected disabled th:value="${boardDTO.cate}" th:text="${boardDTO.cateName}"></option>
-                                <option th:each="cate : ${cateDTO}" th:value="${cate.cate}" th:text="${cate.cateName}"></option>
+                                <option disabled required th:value="${boardDTO.cate}" th:text="${boardDTO.cateName}"></option>
+                                <option required th:each="cate : ${cateDTO}" th:value="${cate.cate}" th:text="${cate.cateName}"></option>
                             </select>
                         </div>
                         <div class="col-md-4">
                             <select id="type" class="form-control" name="type">
-                                <option selected disabled th:value="${boardDTO.type}" th:text="${boardDTO.typeName}"></option>
-                                <option th:each="type : ${typeDTO}" th:value="${type.type}" th:text="${type.typeName}"></option>
+                                <option selected disabled required th:value="${boardDTO.type}" th:text="${boardDTO.typeName}"></option>
+                                <option required th:each="type : ${typeDTO}" th:value="${type.type}" th:text="${type.typeName}"></option>
                             </select>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                         </td>
                     </tr>
                 </table>
-                <th:block>
+                <th:block sec:authorize="isAuthenticated()" th:if="${currentRole != 3}">
                     <div class="write__div">
                         <input type="button" class="btnBack" value="취소하기">
                         <input type="submit" class="btnSubmit" value="수정하기">

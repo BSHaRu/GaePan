@@ -33,7 +33,7 @@
                     </td>
                 </tr>
             </table>
-            <th:block th:if="${currentNick eq boardDTO.nick}">
+            <th:block th:if="${currentNick eq boardDTO.nick and currentRole != 3}">
                 <div class="admin_board_right">
                     <a th:href="@{/admin/board/modify(bno=${boardDTO.bno}, group=${boardDTO.group})}"
                        class="">게시글 수정</a>
@@ -56,7 +56,7 @@
                                 <textarea class="commentArea" name="comment" th:text="${comment.CComment}"
                                           th:data-cComment="${comment.CComment}" readonly></textarea>
                             </div>
-                            <th:block th:if="${currentNick eq comment.nick or currentRole==99}">
+                            <th:block th:if="${currentNick eq comment.nick and currentRole != 3 or currentRole==99}">
                                 <div class="admin_board_left commentClick">
                                     <a href="#" class="comment__modify" th:data-comment="${comment.CComment}"
                                        th:data-cbno="${comment.cbno}" th:data-parent="${comment.bno}">댓글 수정</a>
@@ -81,7 +81,7 @@
                         <input type="hidden" name="cate" th:value="${cate}" />
                         <input type="hidden" name="type" th:value="${boardDTO.type}" />
 
-                        <th:block sec:authorize="isAuthenticated()">
+                        <th:block sec:authorize="isAuthenticated()" th:if="${currentRole != 3}" >
                             <div class="mt-5">
                                 <textarea name="comment"></textarea>
                                 <div class="admin_board_right">
