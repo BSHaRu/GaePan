@@ -70,18 +70,16 @@
 
 
             <div class="main" id="qnaList-main">
-                <a th:href="@{/cs/qna/write}"><button type="button" class="btn btn-primary" id="qnaList-button">문의하기</button></a>
+                <a th:href="@{/cs/qna/write}"><button type="button" class="btn btn-primary" id="qnaList-button">글쓰기</button></a>
 
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="sidebar__item">
                             <h4>고객문의</h4>
                             <ul>
-                                <li><a th:href="@{/cs/qna/list(group='qna', cate=31)}">회원</a></li>
-                                <li><a th:href="@{/cs/qna/list(group='qna', cate=32)}">32</a></li>
-                                <li><a th:href="@{/cs/qna/list(group='qna', cate=33)}">33</a></li>
-                                <li><a th:href="@{/cs/qna/list(group='qna', cate=34)}">34</a></li>
-                                <li><a th:href="@{/cs/qna/list(group='qna', cate=35)}">35</a></li>
+                                <li><a th:href="@{/cs/qna/list(group='qna', cate=31)}">회원/자유게시판</a></li>
+                                <li><a th:href="@{/cs/qna/list(group='qna', cate=32)}">입양/분양</a></li>
+                                <li><a th:href="@{/cs/qna/list(group='qna', cate=33)}">제휴/이벤트</a></li>
                             </ul>
                         </div>
                     </div>

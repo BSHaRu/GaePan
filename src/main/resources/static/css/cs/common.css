@@ -33,7 +33,7 @@
 
 
 .index-atag{
-    color: black;
+    color: #3818c9;
     display: block;
 }
 
@@ -49,6 +49,11 @@
 }
 .card-body{
 
+}
+
+/*notice*/
+#noticeArticle{
+    height: 500px;
 }
 
 /* qna */
@@ -73,13 +78,13 @@
     right: 60px;
     width: 200px;
     height: 50px;
-
-
     background: #d4ccf7;
     border: none;
 }
+
 #qnaList-page{
-    float: right;
+    position: absolute;
+    right: 480px;
 }
 
 #qnaView-btnComment{
@@ -108,7 +113,29 @@
 
 #updateTitle{
     display: inline-block;
-    width: auto;
+    width: 600px;
+}
+
+#updateContent{
+    line-height: inherit;
+    height: 320px;
+}
+
+#qnaArticle{
+    height: 500px;
+}
+
+#qnaWriteForm{
+    padding-top: 0px;
+    margin-bottom: -100px;
+}
+
+.contact__form__title h2{
+    color: #8972ee;
+}
+
+#qnaWriteContent{
+    height: 350px;
 }
 
 /*bootstrap 기존 클래스는 건드리지 말기*/
@@ -126,7 +153,8 @@
 }
 
 .accordion > div{
-    background-color: #d4ccf7;
+    border-color: #8972ee;
+    background-color: white;
 }
 
 .accordion > div > button{
@@ -134,13 +162,14 @@
 }
 
 .accordion > div div{
-    background-color: #d4ccf7;
+    background-color: white;
     border: none;
 }
 
 .card-body {
     padding-left: 35px; /* 여백 크기 조절 */
 }
+
 
 
 
