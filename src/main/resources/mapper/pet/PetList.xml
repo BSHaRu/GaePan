@@ -93,8 +93,9 @@
         <if test="searchType == 'name'">
             a.name LIKE CONCAT('%', #{key}, '%') AND a.division = #{division}
         </if>
-        LIMIT #{startNum}, 10;
         ORDER BY `no` DESC
+        LIMIT #{startNum}, 10;
+
     </select>
 
     <select id="searchPetsCount" resultType="int">
