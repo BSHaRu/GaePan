@@ -161,6 +161,7 @@ public class AdminBoardController {
 
     @GetMapping("/modify")
     public String modify(@RequestParam("group") String group,
+//                         @RequestParam("cate") int cate,
                          Model model, int bno){
 
         try {
@@ -168,12 +169,15 @@ public class AdminBoardController {
             List<BoardTypeDTO> typeDTO = adminBoardCateService.selectType(cateDTO.get(0).getCate());
             GP_AdminBoardDTO boardDTO = adminBoardService.findById(bno);
 
-            log.info("cateDTO: " + cateDTO);
-            log.info("typeDTO: " + typeDTO);
+            log.info("modify cate : " + cateDTO.get(0).getCate());
+         /*   log.info("cateDTO: " + cateDTO);
+            log.info("typeDTO: " + typeDTO);*/
 
             model.addAttribute("cateDTO", cateDTO);
             model.addAttribute("typeDTO", typeDTO);
             model.addAttribute("boardDTO", boardDTO);
+//            model.addAttribute("cate", cate);
+
 
             model.addAttribute("currentNick", gpUtil.getCurrentNick());
             model.addAttribute("currentRole", gpUtil.getCurrentRole());
@@ -188,7 +192,8 @@ public class AdminBoardController {
     public String modify(GP_AdminBoardDTO dto,
                          @RequestParam("bno") int bno,
                          @RequestParam("cate") int cate){
-        log.info("modify bno:" + bno);
+        log.info("modify post bno:" + bno);
+        log.info("modify post cate:" + cate);
         try {
             adminBoardService.modifyAdminBoard(dto);
         } catch (Exception e) {

@@ -26,6 +26,7 @@ public class RestAdminBoard {
 
     @PostMapping("/ajaxCate")
     public List<BoardCateDTO> selectCate(@RequestParam String group) {
+        log.info("ajax group : " + group);
         try {
             return adminBoardCateService.getCateName(group);
         } catch (Exception e) {
@@ -36,6 +37,7 @@ public class RestAdminBoard {
 
     @PostMapping("/ajaxType")
     public List<BoardTypeDTO> selectType(@RequestParam int cate){
+        log.info("ajax cate : " + cate);
         try {
             return adminBoardCateService.selectType(cate);
         } catch (Exception e) {
