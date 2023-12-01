@@ -4,10 +4,8 @@ import co.kr.gaepan.dto.my.MyInfoDTO;
 import co.kr.gaepan.mapper.my.MyInfoMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -28,19 +26,22 @@ public class MyInfoService {
         return updatedRowCount;
     }
 
-    public int updatePassword(String uid, String currentPw, String newPw) {
+    public int updatePassword(String uid, String currentPw, String newPw, String confirmNewPw) {
         // 현재 비밀번호 확인
         MyInfoDTO currentInfo = myInfoMapper.selectInfo(uid);
 
         if (currentInfo == null) {
-            // 현재 정보가 없으면 실패를 나타내는 값을 반환하거나 예외를 던질 수 있습니다.
             return 0; // 현재 정보가 없음
         }
 
         // 사용자가 입력한 현재 비밀번호를 암호화하여 데이터베이스에 저장된 암호화된 비밀번호와 비교
         if (!passwordEncoder.matches(currentPw, currentInfo.getPw())) {
-            // 비밀번호가 일치하지 않으면 실패를 나타내는 값을 반환하거나 예외를 던질 수 있습니다.
             return 0; // 비밀번호 불일치
+        }
+
+        // 새로운 비밀번호와 확인용 비밀번호가 일치하는지 확인
+        if (!newPw.equals(confirmNewPw)) {
+            return 0; // 새로운 비밀번호와 확인용 비밀번호 불일치
         }
 
         // MyBatis 매퍼를 통해 비밀번호 변경 쿼리 수행
@@ -54,4 +55,13 @@ public class MyInfoService {
         myInfoMapper.deleteInfo(myInfoDTO);
     }
 
+    @Transactional
+    public boolean isNickDuplicate(String uid, String nick) {
+        // 닉네임이 중복되면 true, 중복되지 않으면 false 반환
+        int count = myInfoMapper.countByNick(nick);
+        MyInfoDTO currentInfo = myInfoMapper.selectInfo(uid);
+
+        // 만약 현재 사용자의 닉네임과 변경하려는 닉네임이 같다면 중복으로 처리하지 않음
+        return count > 0 && !currentInfo.getNick().equals(nick);
+    }
 }

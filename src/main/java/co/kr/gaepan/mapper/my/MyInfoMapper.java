@@ -18,4 +18,7 @@ public interface MyInfoMapper {
 
     // 사용자 정보 삭제하기
     void deleteInfo(MyInfoDTO myInfoDTO);
+
+    // 닉네임 중복검사
+    int countByNick(@Param("nick") String nick);
 }

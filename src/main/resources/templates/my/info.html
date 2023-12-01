@@ -47,6 +47,9 @@
                                     <td>닉네임</td>
                                     <td>
                                         <input name="nick" th:value="${myInfoDTO.  nick}" style="width: 130px; height: 23px">
+                                        <th:block th:if="${param.nickError}">
+                                            <div class="error-message">이미 사용 중인 닉네임입니다.</div>
+                                        </th:block>
                                     </td>
                                 </tr>
                                 <tr>
@@ -66,19 +69,19 @@
                                     <td>휴대폰</td>
                                     <td>
                                         <p class="hp">
-                                            <input name="hp1" th:value="${myInfoDTO.hp.substring(0, 3)}" style="width: 130px; height: 23px"/>-
-                                            <input name="hp2" th:value="${myInfoDTO.hp.substring(4, 8)}" style="width: 130px; height: 23px"/>-
-                                            <input name="hp3" th:value="${myInfoDTO.hp.substring(9)}" style="width: 130px; height: 23px"/>
+                                            <input name="hp1" th:value="${myInfoDTO.hp.substring(0, 3)}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 3)" style="width: 130px; height: 23px"/>-
+                                            <input name="hp2" th:value="${myInfoDTO.hp.substring(4, 8)}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)" style="width: 130px; height: 23px"/>-
+                                            <input name="hp3" th:value="${myInfoDTO.hp.substring(9)}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)" style="width: 130px; height: 23px"/>
                                         </p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>주소</td>
                                     <td>
-                                        <input id="zip" name="zip" th:value="${myInfoDTO.zip}" style="width: 130px; height: 23px; margin-bottom: 1px"/>
+                                        <input id="zip" name="zip" th:value="${myInfoDTO.zip}" readonly style="width: 130px; height: 23px; margin-bottom: 1px"/>
                                         <button type="button" onclick="zipcode()" >주소검색</button>
                                         <p class="address">
-                                            <input id="addr1" name="addr1" th:value="${myInfoDTO.addr1}" style="width: 300px; height: 25px; margin-bottom: 2px"/>
+                                            <input id="addr1" name="addr1" th:value="${myInfoDTO.addr1}" readonly style="width: 300px; height: 25px; margin-bottom: 2px"/>
                                             <input id="addr2" name="addr2" th:value="${myInfoDTO.addr2}" style="width: 300px; height: 25px"/>
                                         </p>
                                     </td>
@@ -93,7 +96,7 @@
                                 <tr>
                                     <td>입양횟수</td>
                                     <td>
-                                        <input type="text" name="count" th:value="${myInfoDTO.count}" style="width: 130px; height: 23px"> 회
+                                        <input type="number" name="count" th:value="${myInfoDTO.count}" style="width: 130px; height: 23px" min="0"> 회
                                     </td>
                                 </tr>
                                 <tr>

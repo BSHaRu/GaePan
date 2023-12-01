@@ -1186,7 +1186,7 @@ header > .menu > div > ul > li:last-child > a {
     position: relative;
 }
 #my > .info > section > article > table td:first-child {
-    width: 120px;
+    width: 150px;
     border-left: none;
     background-color: #f7f7f7;
 }
@@ -1583,3 +1583,9 @@ header > .menu > div > ul > li:last-child > a {
     display: inline-block;
     margin-right: 10px;
 }
+
+.error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px; /* 상단 여백 조절 */
+        }

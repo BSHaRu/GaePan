@@ -5,6 +5,9 @@ import co.kr.gaepan.security.MyUserDetails;
 import co.kr.gaepan.service.my.MyInfoService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashMap;
@@ -27,6 +31,16 @@ public class MyInfoController {
     private MyInfoService infoService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    // 추가: 닉네임 중복 검사를 위한 서비스
+    @Autowired
+    private MyInfoService myInfoService;
+
+    // 추가: RestTemplate을 사용하기 위한 Bean 정의
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
+    }
 
     @GetMapping("/info")
     public String view(Model model) {
@@ -62,7 +76,13 @@ public class MyInfoController {
     @PostMapping("/info")
     public String modify(@ModelAttribute MyInfoDTO myInfoDTO) {
 
-        log.info("myInfoDTO : " + myInfoDTO);
+        // 닉네임 중복 확인
+        boolean isNickDuplicate = myInfoService.isNickDuplicate(myInfoDTO.getUid(), myInfoDTO.getNick());
+        if (isNickDuplicate) {
+            // 중복된 닉네임이면 알림 추가 (예: 모델에 에러 메시지 추가)
+            // 여기서는 간단한 예시로 모델에 에러 메시지를 추가하겠습니다.
+            return "redirect:/my/info?nickError=true";
+        }
 
         // 서비스 메서드 호출
         int updatedRows = infoService.updateInfo(myInfoDTO);
@@ -74,7 +94,7 @@ public class MyInfoController {
             log.info("정보 수정에 실패한 아이디: " + myInfoDTO.getUid());
         }
 
-        return "redirect:index";
+        return "redirect:/my/info";
     }
 
     @GetMapping("/passcheck")
@@ -121,7 +141,8 @@ public class MyInfoController {
     @ResponseBody
     public Map<String, Object> passmodify(@ModelAttribute("myInfoDTO") MyInfoDTO myInfoDTO,
                                           @RequestParam("currentPw") String currentPw,
-                                          @RequestParam("newPw") String newPw) {
+                                          @RequestParam("newPw") String newPw,
+                                          @RequestParam("confirmNewPw") String confirmNewPw) {
 
         log.info("passmodify...1");
 
@@ -138,7 +159,7 @@ public class MyInfoController {
                 log.info("passmodify...4");
                 if (storedInfo != null && passwordEncoder.matches(currentPw, storedInfo.getPw())) {
                     // 현재 비밀번호가 일치하면 변경
-                    int rowsAffected = infoService.updatePassword(uid, currentPw, newPw);
+                    int rowsAffected = infoService.updatePassword(uid, currentPw, newPw, confirmNewPw);
                     log.info("passmodify...5");
                     if (rowsAffected > 0) {
                         response.put("success", true);
@@ -195,14 +216,6 @@ public class MyInfoController {
         return "redirect:/member/login";
     }
 
-    /*
-    @PostMapping("/passcheck")
-    public String userDelete(MyInfoDTO myInfoDTO) {
-        infoService.deleteInfo(myInfoDTO);
-
-        return "redirect:/my/index";
-    }
-     */
 
 
 }
