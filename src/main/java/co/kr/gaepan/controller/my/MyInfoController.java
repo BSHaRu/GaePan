@@ -80,49 +80,49 @@ public class MyInfoController {
 
     @PostMapping("/info")
     public String modify(@ModelAttribute MyInfoDTO myInfoDTO, @RequestParam("email1") String email1, @RequestParam("email2") String email2, RedirectAttributes redirectAttributes) {
-        // 닉네임 중복 확인
-        boolean isNickDuplicate = myInfoService.isNickDuplicate(myInfoDTO.getUid(), myInfoDTO.getNick());
-        if (isNickDuplicate) {
-            // 중복된 닉네임이면 알림 추가
-            return "redirect:/my/info?nickError=true";
-        }
 
-        // 이메일 값 설정
-        myInfoDTO.setEmail1(email1);
-        myInfoDTO.setEmail2(email2);
+        // 서비스 메서드 호출
+        int updatedRows = infoService.updateInfo(myInfoDTO);
 
-        log.info("myInfoDTO.getEmail : " + myInfoDTO.getEmail());
-        try {
-            // 이메일 중복 확인
-            boolean isEmailDuplicate = myInfoService.isEmailDuplicate(myInfoDTO.getUid(), myInfoDTO.getEmail());
-            log.info("isEmailDuplicat...1 : " + isEmailDuplicate);
-
-            if (isEmailDuplicate) {
-                log.info("isEmailDuplicate..2");
-                // 중복된 이메일이면 에러 메시지 추가
-                redirectAttributes.addFlashAttribute("emailError", true);
-                return "redirect:/my/info";
-            }
-            log.info("isEmailDuplicate..3");
-
-            // 서비스 메서드 호출
-            int updatedRows = infoService.updateInfo(myInfoDTO);
-
-            // 업데이트가 성공했을 경우에 대한 로직 추가
-            if (updatedRows > 0) {
-                log.info("정보 수정 완료된 아이디: " + myInfoDTO.getUid());
-            } else {
-                log.info("정보 수정에 실패한 아이디: " + myInfoDTO.getUid());
-            }
-
-        } catch (DuplicateKeyException ex) {
-            // DuplicateKeyException이 발생하면 에러 메시지 추가
-            redirectAttributes.addFlashAttribute("emailError", true);
-            return "redirect:/my/info";
-        }
-        log.info("updatedRows : " + infoService);
         return "redirect:/member/login";
     }
+
+    @GetMapping("/check/email/{newEmail}")
+    @ResponseBody
+    public boolean isEmailDuplicate(@PathVariable String newEmail) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String uid = null;
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            if (authentication.getPrincipal() instanceof String) {
+                uid = (String) authentication.getPrincipal();
+            } else if (authentication.getPrincipal() instanceof MyUserDetails) {
+                MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+                uid = userDetails.getMember().getUid();
+            }
+        }
+
+        return myInfoService.isEmailDuplicate(uid, newEmail);
+    }
+
+    @GetMapping("/check/nick/{newNick}")
+    @ResponseBody
+    public boolean isNickDuplicate(@PathVariable String newNick) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String uid = null;
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            if (authentication.getPrincipal() instanceof String) {
+                uid = (String) authentication.getPrincipal();
+            } else if (authentication.getPrincipal() instanceof MyUserDetails) {
+                MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
+                uid = userDetails.getMember().getUid();
+            }
+        }
+
+        return myInfoService.isNickDuplicate(uid, newNick);
+    }
+
 
     @GetMapping("/passcheck")
     public String passCheck(Model model) {

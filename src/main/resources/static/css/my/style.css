@@ -1585,7 +1585,13 @@ header > .menu > div > ul > li:last-child > a {
 }
 
 .error-message {
-            color: red;
-            font-size: 14px;
-            margin-top: 5px; /* 상단 여백 조절 */
-        }
+    color: red;
+    font-size: 14px;
+    margin-top: 5px; /* 상단 여백 조절 */
+}
+
+.success-message {
+    color: blue;
+    font-size: 14px;
+    margin-top: 5px; /* 상단 여백 조절 */
+}
