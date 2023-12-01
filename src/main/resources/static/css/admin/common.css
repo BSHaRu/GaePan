@@ -333,6 +333,7 @@ main table th {
 .admin__section > .view table tr > td  > textarea{
     border: 0;
     height: 360px;
+    margin: 15px;
 }
 
 .admin__section > .view table tr > td > div {
@@ -411,11 +412,13 @@ main table th {
     border: none;
     background: none;
     margin-top: 5px;
+    line-height: 1.7;
 }
 .admin__section > .view > .commentList > .comments > div .modifyCommentDiv > textarea {
     border: none;
     background: none;
     margin-top: 5px;
+    line-height: 1.7;
 }
 .empty {
     width: 100%;
