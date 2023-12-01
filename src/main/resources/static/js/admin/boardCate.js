@@ -4,7 +4,6 @@ $(document).ready(function() {
     const typeUrl = "/admin/board/ajaxType"
 
     $("#boardGroup").change(function() {
-        console.log("1");
         loadCategories();
     });
 
@@ -18,7 +17,6 @@ $(document).ready(function() {
             });
             // 카테고리가 변경되면 타입도 업데이트
             $("#cate").change(function (){
-                console.log("3");
                 loadTypes();
             });
         }); // ajax end

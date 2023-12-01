@@ -114,7 +114,7 @@
                                     <th:block th:if="${board.commentCount > 0}">
                                         <span class="board_comment">
                                             <!-- todo 여기 링크 누르면 댓글창으로 바로 가게끔 설정 하고 싶음 -->
-                                            <a th:href="@{/admin/board/view(bno=${board.bno})}">
+                                            <a th:href="@{/admin/board/view(bno=${board.bno}, cate=${cate})}">
                                                 [<span th:text="${board.commentCount}"></span>]
                                             </a>
                                         </span>
@@ -146,7 +146,7 @@
                     <input type="button" class="deleteBtn " value="선택삭제" />
                 </th:block>
                 <!-- todo 모든 글쓰기에서 role이 3이면 못쓰게 막아야함 -->
-                <th:block th:if="${currentRole != 3}">
+                <th:block sec:authorize="isAuthenticated()" th:if="${currentRole != 3}">
                     <input type="submit" class="primary-btn admin_btn board_write" value="글 쓰기" />
                 </th:block>
             </form>

@@ -19,8 +19,8 @@
                             <select id="boardGroup" class="form-control" name="group">
                                 <option value="null">게시판 선택</option>
                                 <option th:selected="${boardDTO.group} eq 'notice'" value="notice">공지사항</option>
-                                <option th:selected="${boardDTO.group} eq 'faq'">FAQ</option>
-                                <option th:selected="${boardDTO.group} eq 'qna'">QnA</option>
+                                <option th:selected="${boardDTO.group} eq 'faq'" value="faq">FAQ</option>
+                                <option th:selected="${boardDTO.group} eq 'qna'" value="qna">QnA</option>
                             </select>
                         </div>
                         <div class="col-md-4">
