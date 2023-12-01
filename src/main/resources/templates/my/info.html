@@ -63,6 +63,9 @@
                                     <td>
                                         <input name="email1" th:value="${myInfoDTO.email.substring(0, myInfoDTO.email.indexOf('@'))}" style="width: 130px; height: 23px">@
                                         <input name="email2" th:value="${myInfoDTO.email.substring(myInfoDTO.email.indexOf('@') + 1)}" style="width: 130px; height: 23px">
+                                        <th:block th:if="${param.emailError}">
+                                            <div class="error-message">이미 사용 중인 이메일입니다.</div>
+                                        </th:block>
                                     </td>
                                 </tr>
                                 <tr>
@@ -96,7 +99,7 @@
                                 <tr>
                                     <td>입양횟수</td>
                                     <td>
-                                        <input type="number" name="count" th:value="${myInfoDTO.count}" style="width: 130px; height: 23px" min="0"> 회
+                                        <input type="number" name="count" th:value="${myInfoDTO.count}" style="width: 130px; height: 23px" min="0" th:disabled="${myInfoDTO.exp == 'N'}"> 회
                                     </td>
                                 </tr>
                                 <tr>

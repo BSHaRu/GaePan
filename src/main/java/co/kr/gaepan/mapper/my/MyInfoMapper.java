@@ -21,4 +21,7 @@ public interface MyInfoMapper {
 
     // 닉네임 중복검사
     int countByNick(@Param("nick") String nick);
+
+    // 이메일 중복 검사
+    int countByEmail(@Param("email") String eamil);
 }
