@@ -8,9 +8,6 @@ import java.util.List;
 
 public interface AdminMemberService {
 
-    // 회원관리 List
-    List<MemberDTO> findAll() throws Exception;
-
     // 블랙리스트
     List<MemberDTO> blackList(SearchCriteria cri, int role) throws Exception;
 

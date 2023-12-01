@@ -128,8 +128,8 @@
                                       th:text="${#temporals.format(board.regDate, 'MM-dd')}">
                                 </span>
                             </td>
-                            <td th:if="${currentNick eq board.nick or currentRole==99}">
-                                <a th:href="@{/admin/board/delete(bno=${board.bno}, cate=${cate})}"
+                            <td th:if="${currentNick eq board.nick and currentRole != 3 or currentRole==99}">
+                                <a th:href="@{/admin/board/modify(bno=${board.bno}, group=${group})}"
                                    class="btn btn-sm btn-outline-primary">
                                     <i class="fa fa-pencil"></i>
                                 </a>
