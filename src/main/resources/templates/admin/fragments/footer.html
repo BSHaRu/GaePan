@@ -48,6 +48,11 @@
                 // keyword 입력칸의 값을 빈 값으로 설정
                 $("input[name='keyword']").val('');
             });
+
+            $("textarea").keyup(function () {
+                $(this).css("height", "auto");
+                $(this).height(this.scrollHeight);
+            });
         })
     </script>
 </footer>
