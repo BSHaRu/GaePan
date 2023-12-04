@@ -7,7 +7,7 @@
 
 <th:block th:if="${myInfoDTO != null }" layout:fragment="content">
     <main>
-        <form th:action="@{/my/info}" method="post" th:object="${myInfoDTO}">
+        <form th:action="@{/my/info}" method="post" th:object="${myInfoDTO}" onsubmit="return validateForm()">
 
         <div id="my">
             <div class="info">
@@ -17,7 +17,7 @@
                     <li><a th:href="@{/my/diary}">입양일기</a></li>
                     <li><a th:href="@{/my/qna}">나의Q&A</a></li>
                     <li><a th:href="@{/my/support}">후원하기</a></li>
-                    <li><a th:href="@{/my/info}">개인정보설정</a></li>
+                    <li><a th:href="@{/my/infoCheck}">개인정보설정</a></li>
                     <li><a th:href="@{/pet/register}">아이 등록</a></li>
                 </ul>
                 <section>
@@ -64,7 +64,12 @@
                                         <input name="email1" id="email1" th:value="${myInfoDTO.email.substring(0, myInfoDTO.email.indexOf('@'))}" style="width: 130px; height: 23px">
                                         @
                                         <input name="email2" id="email2" th:value="${myInfoDTO.email.substring(myInfoDTO.email.indexOf('@') + 1)}" style="width: 130px; height: 23px">
-                                        <button type="button" onclick="validateEmail()">이메일 중복 확인</button>
+                                        <button type="button" onclick="validateEmail()">이메일 중복 확인</button><br><br>
+                                        <button type="button" onclick="toggleEmailVerification()">이메일 인증번호 받기</button><br><br>
+                                        <!-- 새로운 입력 칸 -->
+                                        <div id="emailVerification" style="display: none;">
+                                            <input type="text" id="verificationCode" name="verificationCode" style="width: 130px; height: 23px" placeholder="인증번호 입력">
+                                        </div>
                                         <div class="error-message" id="emailError" style="display: none;">이미 사용 중인 이메일입니다.</div>
                                         <div class="success-message" id="emailSuccess" style="display: none;">사용 가능한 이메일입니다.</div>
                                     </td>
@@ -123,33 +128,45 @@
     <script src="/js/my/myInfo.js"></script>
     <script src="/js/my/findzip.js"></script>
     <script th:inline="javascript">
-    function validateEmail() {
-        var email1Value = $('input[name="email1"]').val();
-        var email2Value = $('input[name="email2"]').val();
-        var emailValue = email1Value + '@' + email2Value;
+        function validateName() {
+            var nameValue = $('input[name="name"]').val();
+            var nameRegex = /^[가-힣]{2,10}$/;
 
-        $.ajax({
-            type: 'GET',
-            url: '/my/check/email/' + emailValue,
-            success: function (result) {
-                if (result) {
-                    // 중복된 이메일일 경우 에러 메시지 표시, 성공 메시지 감추기
+            if (!nameRegex.test(nameValue)) {
+                alert('이름은 2~10자 사이의 한글만 입력 가능합니다.');
+                return false;
+            }
+            return true;
+        }
+
+        function validateEmail() {
+            var email1Value = $('input[name="email1"]').val();
+            var email2Value = $('input[name="email2"]').val();
+            var emailValue = email1Value + '@' + email2Value;
+            var emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
+            $.ajax({
+                type: 'GET',
+                url: '/my/check/email/' + emailValue,
+                success: function (result) {
+                    if (result) {
+                        // 중복된 이메일일 경우 에러 메시지 표시, 성공 메시지 감추기
+                        $('#emailError').show();
+                        $('#emailSuccess').hide();
+                    } else {
+                        // 중복이 아닌 경우 에러 메시지 감추기, 성공 메시지 표시
+                        $('#emailError').hide();
+                        $('#emailSuccess').show();
+                    }
+                },
+                error: function () {
+                    console.error('Error validating email');
+                    // 에러가 발생 했을 경우 에러 메시지 표시, 성공 메시지 감추기
                     $('#emailError').show();
                     $('#emailSuccess').hide();
-                } else {
-                    // 중복이 아닌 경우 에러 메시지 감추기, 성공 메시지 표시
-                    $('#emailError').hide();
-                    $('#emailSuccess').show();
                 }
-            },
-            error: function () {
-                console.error('Error validating email');
-                // 에러가 발생 했을 경우 에러 메시지 표시, 성공 메시지 감추기
-                $('#emailError').show();
-                $('#emailSuccess').hide();
-            }
-        });
-    }
+            });
+        }
     </script>
     <script>
         function validateNick() {
@@ -175,6 +192,17 @@
                     $('#nickSuccess').hide();
                 }
             });
+        }
+    </script>
+    <script th:inline="javascript">
+        function toggleEmailVerification() {
+            var emailVerification = document.getElementById('emailVerification');
+            emailVerification.style.display = (emailVerification.style.display === 'none' || emailVerification.style.display === '') ? 'block' : 'none';
+        }
+    </script>
+    <script>
+        function validateForm() {
+            return validateName() && validateEmail();
         }
     </script>
 </th:block>
