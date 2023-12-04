@@ -14,7 +14,7 @@
                     <li><a th:href="@{/my/diary}">입양일기</a></li>
                     <li><a th:href="@{/my/qna}">나의Q&A</a></li>
                     <li><a th:href="@{/my/support}">후원하기</a></li>
-                    <li><a th:href="@{/my/info}">개인정보설정</a></li>
+                    <li><a th:href="@{/my/infoCheck}">개인정보설정</a></li>
                     <li><a th:href="@{/pet/register}">아이 등록</a></li>
                 </ul>
                 <section>
@@ -29,12 +29,13 @@
                             <tr th:each="list : ${applyList}" th:if="${list.uid != null}">
                                 <td class="date" th:text="${#temporals.format(list.regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                 <td>
-                                    <a href="#" class="thumb">
-                                        <img th:if="${list.thumb ne null}" th:src="${list.thumb}">
-                                        <span th:unless="${list.thumb ne null}" th:text="현재 이미지가 등록되지 않은 동물입니다."></span>
+                                    <a th:href="@{/pet/details(no=${list.petNo})}" class="thumb">
+                                        <img th:if="${list.thumb ne null}" th:src="@{/upload/}+${list.thumb}" style="max-width: 50%;">
                                     </a>
                                     <ul>
-                                        <li class="prodName" th:text="${list.name}">동물명<a href="#"></a></li>
+                                        <li class="prodName" th:text="${list.name}">
+                                            동물명<a th:href="@{/pet/details(no=${list.petNo})}"></a>
+                                        </li>
                                         <li class="a_no" th:text="${list.petNo}">동물등록번호</li>
                                     </ul>
                                 </td>
