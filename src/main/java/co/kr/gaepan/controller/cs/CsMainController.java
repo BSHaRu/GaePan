@@ -214,6 +214,7 @@ public class CsMainController {
         // boardDTO의 regIp 속성으로 설정
         boardDTO.setRegIP(regIP);
 
+        // uid, title, cate, type, secret, content 확인하기
         log.info("boardDTO : " + boardDTO);
         csBoardService.insertInquiry(boardDTO);
 

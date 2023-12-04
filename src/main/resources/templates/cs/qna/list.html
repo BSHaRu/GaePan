@@ -12,11 +12,7 @@
     <!-- script 이렇게 layout:content 안에 넣으면 적용되는구나 -->
     <script th:inline="javascript">
 
-
-
         $(function(){
-
-
 
             // 현재 로그인 사용자 아이디
             const currentUser = [[${currentUser}]];
@@ -27,15 +23,23 @@
 
                     // 여기서 e(event)는 내가 클릭하는 a 태그 / 사용자정의 속성도 해당 태그에 추가해야함
                     const writer = e.target.getAttribute('data-writer');
+                    const secret = e.target.getAttribute('data-secret');
+
+                    // view 페이지로 바로 넘어가서 console 기록이 떴다가 바로 사라지니까 alert 사용하자! / secret 0 또는 1 확인
+                    //alert('secret : ' + secret);
+                    //console.log('secret : ' + secret);
                     //alert('writer : ' +writer);
 
                     // currentUser가 admin이면 여기로 안 들어옴
                     if(currentUser != 'admin'){
                         console.log('admin 아님 : ' + currentUser);
 
-                        if(currentUser != writer){
-                            e.preventDefault();
-                            alert('권한이 없습니다');
+                        if(secret == 1){
+
+                            if(currentUser != writer){
+                                e.preventDefault();
+                                alert('권한이 없습니다');
+                            }
                         }
                     }
                 });
@@ -102,7 +106,13 @@
                                 <tbody>
                                     <tr th:each="article:${pageResponseDTO.dtoList}">
                                         <th scope="row">[[${article.typeName}]]</th>
-                                        <td><a class="qnaList-title"  th:data-writer="${article.uid}" th:href="@{/cs/qna/view(bno = ${article.bno})}">[[${article.title}]]</a></td>
+                                        <td>
+                                            <span th:if="${article.secret} == 1"><img src="/img/cs/secretIcon.png" class="secretImage"></span>
+                                            <!-- th:data-??? 사용자정의 속성, script에서 참조하기 위함 -->
+                                            <a class="qnaList-title"  th:data-writer="${article.uid}" th:data-secret="${article.secret}" th:href="@{/cs/qna/view(bno = ${article.bno})}">
+                                                [[${article.title}]]
+                                            </a>
+                                        </td>
                                         <td class="qnaList-uid">[[${article.uid}]]</td>
                                         <td>[[${#temporals.format(article.regDate, 'yyyy-MM-dd')}]]</td><!-- thymeleaf 내장객체이용 -->
                                     </tr>

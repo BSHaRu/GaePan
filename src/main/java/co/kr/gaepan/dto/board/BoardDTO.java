@@ -25,7 +25,10 @@ public class BoardDTO {
     private int hit;
     private int parent;
     private String comment;
-    
+
+    //추가
+    private int secret;
+
     // 추가필드(JOIN 한 후에 데이터 조회시 필요)
     private String cateName;
     private String typeName;

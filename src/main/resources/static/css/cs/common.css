@@ -44,7 +44,7 @@
     margin-left: 435px;
     margin-top: 50px;
     margin-bottom: 50px;
-    background: #d4ccf7;
+    background: #8972ee;
     border: none;
 }
 .card-body{
@@ -78,13 +78,19 @@
     right: 60px;
     width: 200px;
     height: 50px;
-    background: #d4ccf7;
+    background: #8972ee;
     border: none;
 }
 
 #qnaList-page{
     position: absolute;
     right: 480px;
+}
+
+.secretImage{
+    margin-bottom: 5px;
+    width: 15px;
+    height: 15px;
 }
 
 #qnaView-btnComment{
