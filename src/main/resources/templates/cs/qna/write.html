@@ -6,8 +6,16 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <th:block layout:fragment="content">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script th:src="@{/js/cs/qnaWrite.js}"></script>
+    <script>
+        function updateCheckboxValue(){
+            const isSecret = document.getElementById('isSecret');
+            isSecret.value = isSecret.checked ? 1 : 0;
+        }
+
+
+
+    </script>
+
     <div class="container">
 
 
@@ -51,6 +59,12 @@
                                 <option value="39">이벤트문의</option>
                             </select>
                         </div>
+
+                        <div>
+                            <label for="isSecret">비밀글</label>
+                            <input type="checkbox" id="isSecret" name="secret" value="0" onchange="updateCheckboxValue()">
+                        </div>
+
                         <div class="col-lg-12 text-center">
                             <textarea id="qnaWriteContent" name="content" placeholder="내용"></textarea>
                             <button type="submit" class="site-btn">전송</button>

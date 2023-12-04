@@ -54,7 +54,8 @@
         `cate` = #{cate},
         `type` = #{type},
         `regIP` = #{regIP},
-        `regDate` = #{regDate};
+        `regDate` = #{regDate},
+        `secret` = #{secret};
     </insert>
 
     <insert id="insertComment">

@@ -67,7 +67,8 @@ public class CsBoardService {
                 boardDTO.getCate(),
                 boardDTO.getType(),
                 boardDTO.getRegIP(),
-                boardDTO.getRegDate()
+                boardDTO.getRegDate(),
+                boardDTO.getSecret()
         );
     }
 

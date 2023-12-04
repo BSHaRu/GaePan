@@ -25,8 +25,9 @@ public interface CsBoardMapper { // interface선언
             @Param("cate") int cate,
             @Param("type") int type,
             @Param("regIP") String regIP,
-            @Param("regDate") LocalDateTime regDate // 타입 String 아니라 LocalDateTime / 이렇게 한다고 regDate 값 자동으로 정해지는 게 아니구나
-            );
+            @Param("regDate") LocalDateTime regDate, // 타입 String 아니라 LocalDateTime / 이렇게 한다고 regDate 값 자동으로 정해지는 게 아니구나
+            @Param("secret") int secret
+    );
 
     public void insertComment(
             @Param("uid") String uid,
