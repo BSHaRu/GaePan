@@ -64,4 +64,14 @@ public class MyInfoService {
         // 만약 현재 사용자의 닉네임과 변경하려는 닉네임이 같다면 중복으로 처리하지 않음
         return count > 0 && !currentInfo.getNick().equals(nick);
     }
+
+    @Transactional
+    public boolean isEmailDuplicate(String uid, String email) {
+        // 이메일이 중복되면 true, 중복되지 않으면 false 반환
+        int count = myInfoMapper.countByEmail(email);
+        MyInfoDTO currentInfo = myInfoMapper.selectInfo(uid);
+
+        // 만약 현재 사용자의 이메일과 변경하려는 이메일이 같다면 중복으로 처리하지 않음
+        return count > 0 && !currentInfo.getEmail().equals(email);
+    }
 }

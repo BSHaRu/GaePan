@@ -46,10 +46,10 @@
                                 <tr>
                                     <td>닉네임</td>
                                     <td>
-                                        <input name="nick" th:value="${myInfoDTO.  nick}" style="width: 130px; height: 23px">
-                                        <th:block th:if="${param.nickError}">
-                                            <div class="error-message">이미 사용 중인 닉네임입니다.</div>
-                                        </th:block>
+                                        <input name="nick" th:value="${myInfoDTO.nick}" style="width: 130px; height: 23px">
+                                        <button type="button" onclick="validateNick()">닉네임 중복 확인</button>
+                                        <div class="error-message" id="nickError" style="display: none;">이미 사용 중인 닉네임입니다.</div>
+                                        <div class="success-message" id="nickSuccess" style="display: none;">사용 가능한 닉네임입니다.</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -61,27 +61,31 @@
                                 <tr>
                                     <td>E-mail</td>
                                     <td>
-                                        <input name="email1" th:value="${myInfoDTO.email.substring(0, myInfoDTO.email.indexOf('@'))}" style="width: 130px; height: 23px">@
-                                        <input name="email2" th:value="${myInfoDTO.email.substring(myInfoDTO.email.indexOf('@') + 1)}" style="width: 130px; height: 23px">
+                                        <input name="email1" id="email1" th:value="${myInfoDTO.email.substring(0, myInfoDTO.email.indexOf('@'))}" style="width: 130px; height: 23px">
+                                        @
+                                        <input name="email2" id="email2" th:value="${myInfoDTO.email.substring(myInfoDTO.email.indexOf('@') + 1)}" style="width: 130px; height: 23px">
+                                        <button type="button" onclick="validateEmail()">이메일 중복 확인</button>
+                                        <div class="error-message" id="emailError" style="display: none;">이미 사용 중인 이메일입니다.</div>
+                                        <div class="success-message" id="emailSuccess" style="display: none;">사용 가능한 이메일입니다.</div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>휴대폰</td>
                                     <td>
                                         <p class="hp">
-                                            <input name="hp1" th:value="${myInfoDTO.hp.substring(0, 3)}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 3)" style="width: 130px; height: 23px"/>-
-                                            <input name="hp2" th:value="${myInfoDTO.hp.substring(4, 8)}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)" style="width: 130px; height: 23px"/>-
-                                            <input name="hp3" th:value="${myInfoDTO.hp.substring(9)}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4)" style="width: 130px; height: 23px"/>
+                                            <input name="hp1" th:value="${myInfoDTO.hp.substring(0, 3)}" style="width: 130px; height: 23px"/>-
+                                            <input name="hp2" th:value="${myInfoDTO.hp.substring(4, 8)}" style="width: 130px; height: 23px"/>-
+                                            <input name="hp3" th:value="${myInfoDTO.hp.substring(9)}" style="width: 130px; height: 23px"/>
                                         </p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>주소</td>
                                     <td>
-                                        <input id="zip" name="zip" th:value="${myInfoDTO.zip}" readonly style="width: 130px; height: 23px; margin-bottom: 1px"/>
+                                        <input id="zip" name="zip" th:value="${myInfoDTO.zip}" style="width: 130px; height: 23px; margin-bottom: 1px"/>
                                         <button type="button" onclick="zipcode()" >주소검색</button>
                                         <p class="address">
-                                            <input id="addr1" name="addr1" th:value="${myInfoDTO.addr1}" readonly style="width: 300px; height: 25px; margin-bottom: 2px"/>
+                                            <input id="addr1" name="addr1" th:value="${myInfoDTO.addr1}" style="width: 300px; height: 25px; margin-bottom: 2px"/>
                                             <input id="addr2" name="addr2" th:value="${myInfoDTO.addr2}" style="width: 300px; height: 25px"/>
                                         </p>
                                     </td>
@@ -96,7 +100,7 @@
                                 <tr>
                                     <td>입양횟수</td>
                                     <td>
-                                        <input type="number" name="count" th:value="${myInfoDTO.count}" style="width: 130px; height: 23px" min="0"> 회
+                                        <input type="text" name="count" th:value="${myInfoDTO.count}" style="width: 130px; height: 23px"> 회
                                     </td>
                                 </tr>
                                 <tr>
@@ -118,5 +122,60 @@
     <script src="/js/my/passCheck.js"></script>
     <script src="/js/my/myInfo.js"></script>
     <script src="/js/my/findzip.js"></script>
+    <script th:inline="javascript">
+    function validateEmail() {
+        var email1Value = $('input[name="email1"]').val();
+        var email2Value = $('input[name="email2"]').val();
+        var emailValue = email1Value + '@' + email2Value;
+
+        $.ajax({
+            type: 'GET',
+            url: '/my/check/email/' + emailValue,
+            success: function (result) {
+                if (result) {
+                    // 중복된 이메일일 경우 에러 메시지 표시, 성공 메시지 감추기
+                    $('#emailError').show();
+                    $('#emailSuccess').hide();
+                } else {
+                    // 중복이 아닌 경우 에러 메시지 감추기, 성공 메시지 표시
+                    $('#emailError').hide();
+                    $('#emailSuccess').show();
+                }
+            },
+            error: function () {
+                console.error('Error validating email');
+                // 에러가 발생 했을 경우 에러 메시지 표시, 성공 메시지 감추기
+                $('#emailError').show();
+                $('#emailSuccess').hide();
+            }
+        });
+    }
+    </script>
+    <script>
+        function validateNick() {
+            var nickValue = $('input[name="nick"]').val();
+            $.ajax({
+                type: 'GET',
+                url: '/my/check/nick/' + nickValue,
+                success: function (result) {
+                    if (result) {
+                        // 중복된 닉네임일 경우 에러 메시지 표시, 성공 메시지 감추기
+                        $('#nickError').show();
+                        $('#nickSuccess').hide();
+                    } else {
+                        // 중복이 아닌 경우 에러 메시지 감추기, 성공 메시지 표시
+                        $('#nickError').hide();
+                        $('#nickSuccess').show();
+                    }
+                },
+                error: function () {
+                    console.error('Error validating nick');
+                    // 에러가 발생했을 경우 에러 메시지 표시, 성공 메시지 감추기
+                    $('#nickError').show();
+                    $('#nickSuccess').hide();
+                }
+            });
+        }
+    </script>
 </th:block>
 </html>
