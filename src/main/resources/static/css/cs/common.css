@@ -56,6 +56,11 @@
     height: 500px;
 }
 
+.card-text{
+    overflow: auto;
+    max-height: 370px;
+}
+
 /* qna */
 #qnaList-main{
     position: relative;
@@ -131,6 +136,11 @@
     height: 500px;
 }
 
+#content{
+    overflow: auto;
+    max-height: 370px;
+}
+
 #qnaWriteForm{
     padding-top: 0px;
     margin-bottom: -100px;
@@ -143,6 +153,24 @@
 #qnaWriteContent{
     height: 350px;
 }
+
+#secretDiv{
+    position: relative;
+}
+
+#secretLabel{
+    position: absolute;
+    right: 37%;
+}
+
+#isSecret{
+    top: 243px;
+    width: 20px;
+    position: absolute;
+    right: 36%;
+}
+
+
 
 /*bootstrap 기존 클래스는 건드리지 말기*/
 .btnTotal {
