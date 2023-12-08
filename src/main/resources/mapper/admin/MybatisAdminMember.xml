@@ -5,12 +5,6 @@
 
 <mapper namespace="co.kr.gaepan.mapper.admin.MybatisAdminMemberMapper">
 
-    <!-- member List 출력 -->
-    <select id="findAll" resultType="co.kr.gaepan.dto.member.MemberDTO">
-        SELECT * FROM gp_member
-        ORDER BY `no` DESC;
-    </select>
-
     <!-- 검색 쿼리 -->
     <sql id="search">
         <if test='searchType != null and !searchType.equals("") and searchType != "n" '>
@@ -19,24 +13,45 @@
     </sql>
 
     <select id="searchList" resultType="co.kr.gaepan.dto.member.MemberDTO">
-        SELECT * FROM gp_member
+        SELECT
+            @rownum := @rownum + 1 AS rownum,
+            m.*
+        FROM gp_member as m
+            ,(SELECT @rownum := 0) AS R
         <include refid="search" />
-        ORDER BY `no` DESC
+        ORDER BY rownum DESC
         LIMIT #{startRow}, #{perPageNum}
     </select>
 
     <select id = "searchListCount" parameterType="co.kr.gaepan.util.SearchCriteria"
             resultType="int">
-        SELECT count(*) FROM gp_member
+        SELECT
+            count(*)
+        FROM gp_member
+            ,(SELECT @rownum := 0) AS R
         <include refid="search" />
     </select>
 
 
     <!-- black List 출력 -->
     <select id="blackList" resultType="co.kr.gaepan.dto.member.MemberDTO">
-        SELECT * FROM gp_member
+        SELECT
+            @rownum := @rownum + 1 AS rownum,
+            m.*
+        FROM gp_member AS m
+        ,(SELECT @rownum := 0) AS R
         WHERE role IN(2,3)
-        ORDER BY `no` DESC;
+        ORDER BY rownum DESC
+        LIMIT #{cri.startRow}, #{cri.perPageNum}
+    </select>
+
+    <select id = "blackListCount" parameterType="co.kr.gaepan.util.SearchCriteria"
+            resultType="int">
+        SELECT
+            count(*)
+        FROM gp_member
+        WHERE role IN(2,3)
+        ORDER BY `no` DESC
     </select>
 
 

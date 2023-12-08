@@ -1186,7 +1186,7 @@ header > .menu > div > ul > li:last-child > a {
     position: relative;
 }
 #my > .info > section > article > table td:first-child {
-    width: 120px;
+    width: 150px;
     border-left: none;
     background-color: #f7f7f7;
 }
@@ -1572,4 +1572,26 @@ header > .menu > div > ul > li:last-child > a {
 #my > .qna > section > article > .page > .next {
     background: url('/static/img/my/my_sprites2.png') no-repeat -120px -300px;
     font-size: 0;
+}
+
+#my > .regular > section > article > ul {
+    list-style: none;
+    padding: 0;
+}
+
+#my > .regular > section > article > ul {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px; /* 상단 여백 조절 */
+}
+
+.success-message {
+    color: blue;
+    font-size: 14px;
+    margin-top: 5px; /* 상단 여백 조절 */
 }

@@ -6,6 +6,7 @@ import co.kr.gaepan.dto.board.BoardDTO;
 import co.kr.gaepan.dto.board.BoardTypeDTO;
 import co.kr.gaepan.util.SearchCriteria;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

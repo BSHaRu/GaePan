@@ -6,7 +6,7 @@
   box-sizing: border-box;
   clear: both;
   cursor: pointer;
-  display: block;
+  display:inline-block;
   float: left;
   font-family: inherit;
   font-size: 14px;
@@ -27,10 +27,73 @@
           user-select: none;
   white-space: nowrap;
   width: auto; }
+
+.nice-select-division {
+  -webkit-tap-highlight-color: transparent;
+  background-color: #fff;
+  border-radius: 5px;
+  border: solid 1px #e8e8e8;
+  box-sizing: border-box;
+  clear: both;
+  cursor: pointer;
+  display:inline-block;
+  float: left;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: normal;
+  height: 48px;
+  line-height: 40px;
+  outline: none;
+  padding-left: 18px;
+  padding-right: 30px;
+  padding-top: 3px;
+  position: relative;
+  text-align: left !important;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  white-space: nowrap;
+  width: auto; }
+
+.nice-select-searchType {
+  -webkit-tap-highlight-color: transparent;
+  background-color: #fff;
+  border-radius: 5px;
+  border: solid 1px #e8e8e8;
+  box-sizing: border-box;
+  clear: both;
+  cursor: pointer;
+  display:inline-block;
+  float: left;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: normal;
+  height: 48px;
+  line-height: 40px;
+  outline: none;
+  padding-left: 18px;
+  padding-right: 30px;
+  padding-top: 3px;
+  position: relative;
+  text-align: left !important;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  white-space: nowrap;
+  width: auto; }
+
   .nice-select:hover {
     border-color: #dbdbdb; }
+
   .nice-select:active, .nice-select.open, .nice-select:focus {
     border-color: #999; }
+
   .nice-select:after {
     border-bottom: 2px solid #999;
     border-right: 2px solid #999;
@@ -51,22 +114,27 @@
     -webkit-transition: all 0.15s ease-in-out;
     transition: all 0.15s ease-in-out;
     width: 5px; }
+
   .nice-select.open:after {
     -webkit-transform: rotate(-135deg);
         -ms-transform: rotate(-135deg);
             transform: rotate(-135deg); }
+
   .nice-select.open .list {
     opacity: 1;
     pointer-events: auto;
     -webkit-transform: scale(1) translateY(0);
         -ms-transform: scale(1) translateY(0);
             transform: scale(1) translateY(0); }
+
   .nice-select.disabled {
     border-color: #ededed;
     color: #999;
     pointer-events: none; }
-    .nice-select.disabled:after {
+
+  .nice-select.disabled:after {
       border-color: #cccccc; }
+
   .nice-select.wide {
     width: 100%; }
     .nice-select.wide .list {
@@ -137,3 +205,8 @@
 
 .no-csspointerevents .nice-select.open .list {
   display: block; }
+
+.nice-select-container {
+  display: flex;
+  align-items: center;
+}

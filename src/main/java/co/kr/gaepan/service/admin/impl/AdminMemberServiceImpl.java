@@ -23,16 +23,10 @@ public class AdminMemberServiceImpl implements AdminMemberService {
     private final GP_Util gpUtil;
 
     @Override
-    public List<MemberDTO> findAll() throws Exception {
-        List<MemberDTO> memberList = mybatisAdminMemberMapper.findAll();
-        memberList.replaceAll(gpUtil::addrSubString);
-        return memberList;
-    }
-
-    @Override
-    public List<MemberDTO> blackList(int role) throws Exception {
-        List<MemberDTO> blackList = mybatisAdminMemberMapper.blackList(role);
+    public List<MemberDTO> blackList(SearchCriteria cri, int role) throws Exception {
+        List<MemberDTO> blackList = mybatisAdminMemberMapper.blackList(cri, role);
         blackList.replaceAll(gpUtil::addrSubString);
+
         return blackList;
     }
 
@@ -66,9 +60,9 @@ public class AdminMemberServiceImpl implements AdminMemberService {
 
         List<MemberDTO> memberList = mybatisAdminMemberMapper.searchList(cri);
         memberList.replaceAll(gpUtil::addrSubString);
+
 //        log.info("memberList : " + memberList);
         return memberList;
-//        return null;
     }
 
     @Override
@@ -81,10 +75,11 @@ public class AdminMemberServiceImpl implements AdminMemberService {
         return pm;
     }
 
-    public SearchPageMaker getSearchPageMaker(SearchCriteria cri) throws Exception {
-        int totalCount = mybatisAdminMemberMapper.searchListCount(cri);
+    @Override
+    public PageMaker getPageMaker2(SearchCriteria cri) throws Exception {
+        int totalCount = mybatisAdminMemberMapper.blackListCount(cri);
 
-        SearchPageMaker pm = new SearchPageMaker();
+        PageMaker pm = new SearchPageMaker();
         pm.setCri(cri);
         pm.setTotalCount(totalCount);
         return pm;

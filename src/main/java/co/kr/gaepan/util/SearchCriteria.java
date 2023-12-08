@@ -18,16 +18,19 @@ public class SearchCriteria extends Criteria {
     private String keyword;
     // board 땜에 group 추가
     private String group;
+    private int cate;
 
 
     // 기존 Criteria가 가지고 있는 속성
     // + SearchCriteria에서 추가한 속성
     public SearchCriteria(int page, int perPageNum,
-                          String searchType, String keyword, String group) {
+                          String searchType, String keyword,
+                          String group, int cate) {
         super(page, perPageNum);
         this.searchType = searchType;
         this.keyword = keyword;
         this.group = group;
+        this.cate = cate;
     }
 
     public SearchCriteria(int page, int perPageNum,

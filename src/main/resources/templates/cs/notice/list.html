@@ -20,9 +20,9 @@
                         <div class="sidebar__item">
                             <h4>공지사항</h4>
                             <ul>
-                                <li><a href="#">고객서비스</a></li>
-                                <li><a href="#">#</a></li>
-                                <li><a href="#">#</a></li>
+                                <li><a th:href="@{/cs/notice/list(group='notice', cate=11)}">고객서비스</a></li>
+                                <li><a th:href="@{/cs/notice/list(group='notice', cate=12)}">반려동물</a></li>
+                                <li><a th:href="@{/cs/notice/list(group='notice', cate=13)}">제휴</a></li>
                             </ul>
                         </div>
                     </div>
@@ -33,21 +33,15 @@
 
                <section class="qna" id="qnaList-section">
                             <div class="section-title product__discount__title">
-                                <h2><a href="#" class="btnTotal">고객서비스</a></h2>
+                                <h2><a th:href="@{/cs/notice/list(group=${pageResponseDTO.group}, cate=${pageResponseDTO.cate})}" class="btnTotal">[[${pageResponseDTO.dtoList[0].cateName}]]</a></h2>
                             </div>
                             <table class="table table-hover" id="qnaList-table">
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">#</th>
-                                    <th scope="col">#</th>
-                                </tr>
-                                </thead>
+
                                 <tbody>
                                 <tr th:each="article:${pageResponseDTO.dtoList}">
                                     <th scope="row">[[${article.typeName}]]</th>
-                                    <td>[[${article.title}]]</td>
-                                    <td>[[${article.regDate}]]</td>
+                                    <td><a th:href="@{/cs/notice/view(bno = ${article.bno})}">[[${article.title}]]</a></td>
+                                    <td>[[${#temporals.format(article.regDate, 'yyyy-MM-dd')}]]</td>
                                 </tr>
                                 </tbody>
                             </table>

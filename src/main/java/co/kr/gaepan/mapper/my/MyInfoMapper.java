@@ -17,5 +17,11 @@ public interface MyInfoMapper {
     int updatePassword(@Param("uid") String uid, @Param("newPw") String newPw);
 
     // 사용자 정보 삭제하기
-    void deleteInfo(String uid);
+    void deleteInfo(MyInfoDTO myInfoDTO);
+
+    // 닉네임 중복검사
+    int countByNick(@Param("nick") String nick);
+
+    // 이메일 중복 검사
+    int countByEmail(@Param("email") String eamil);
 }

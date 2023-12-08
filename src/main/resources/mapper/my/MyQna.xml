@@ -13,7 +13,7 @@
         FROM `gp_board` AS a
         LEFT JOIN `gp_board_cate` AS b ON a.`cate` = b.`cate`
         LEFT JOIN `gp_board_type` AS c ON a.`type` = c.`type`
-        WHERE a.`uid` = #{uid}
+        WHERE a.`uid` = #{uid} AND a.`title` IS NOT NULL
         ORDER BY a.`bno` DESC
         LIMIT #{start}, 10
     </select>

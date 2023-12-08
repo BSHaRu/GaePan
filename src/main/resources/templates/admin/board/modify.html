@@ -18,20 +18,20 @@
                             <select id="boardGroup" class="form-control" name="group">
                                 <option value="null">게시판 선택</option>
                                 <option th:selected="${boardDTO.group} eq 'notice'" value="notice">공지사항</option>
-                                <option th:selected="${boardDTO.group} eq 'faq'">FAQ</option>
-                                <option th:selected="${boardDTO.group} eq 'qna'">QnA</option>
+                                <option th:selected="${boardDTO.group} eq 'faq'" value="faq">FAQ</option>
+                                <option th:selected="${boardDTO.group} eq 'qna'" value="qna">QnA</option>
                             </select>
                         </div>
                         <div class="col-md-4">
                             <select id="cate" class="form-control" name="cate">
-                                <option selected disabled th:value="${boardDTO.cate}" th:text="${boardDTO.cateName}"></option>
-                                <option th:each="cate : ${cateDTO}" th:value="${cate.cate}" th:text="${cate.cateName}"></option>
+                                <option disabled required th:value="${boardDTO.cate}" th:text="${boardDTO.cateName}"></option>
+                                <option required th:each="cate : ${cateDTO}" th:value="${cate.cate}" th:text="${cate.cateName}"></option>
                             </select>
                         </div>
                         <div class="col-md-4">
                             <select id="type" class="form-control" name="type">
-                                <option selected disabled th:value="${boardDTO.type}" th:text="${boardDTO.typeName}"></option>
-                                <option th:each="type : ${typeDTO}" th:value="${type.type}" th:text="${type.typeName}"></option>
+                                <option selected disabled required th:value="${boardDTO.type}" th:text="${boardDTO.typeName}"></option>
+                                <option required th:each="type : ${typeDTO}" th:value="${type.type}" th:text="${type.typeName}"></option>
                             </select>
                         </div>
                     </div>
@@ -44,8 +44,7 @@
                     <tr>
                         <td>작성자</td>
                         <td>
-                            <!--todo 이거 #authentication.principal.member.nick로 바꿔야 됨-->
-                            <input type="text" name="nick" th:value="${boardDTO.nick}" readonly />
+                            <input type="text" name="nick" th:value="${currentNick}" readonly />
                         </td>
                     </tr>
                     <tr>
@@ -55,10 +54,12 @@
                         </td>
                     </tr>
                 </table>
-                <div class="write__div">
-                    <input type="button" class="btnBack" value="취소하기">
-                    <input type="submit" class="btnSubmit" value="수정하기">
-                </div>
+                <th:block sec:authorize="isAuthenticated()" th:if="${currentRole != 3}">
+                    <div class="write__div">
+                        <input type="button" class="btnBack" value="취소하기">
+                        <input type="submit" class="btnSubmit" value="수정하기">
+                    </div>
+                </th:block>
             </form>
         </article>
     </section>

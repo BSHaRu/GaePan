@@ -19,6 +19,7 @@ public class CsBoardService {
     @Autowired
     private CsBoardMapper mapper;
 
+    // 글 목록 조회
     public PageResponseDTO findByGroupAndCate(PageRequestDTO pageRequestDTO){
 
         log.info("CsBoardService pageRequestDTO : " + pageRequestDTO);
@@ -40,4 +41,61 @@ public class CsBoardService {
                 .build();
 
     }
+
+    // 글 조회
+    public BoardDTO findByNo(int bno){
+
+        log.info("CsBoardService findByNo: " + bno);
+        return mapper.findByNo(bno);
+    }
+
+    // 답변(댓글) 조회
+    public List<BoardDTO> findByParent(int bno){
+
+        return mapper.findByParent(bno);
+    }
+
+    // 문의하기
+    public void insertInquiry(BoardDTO boardDTO){
+
+        log.info("CsBoardService insertInquiry: " + boardDTO);
+
+        mapper.insertInquiry(
+                boardDTO.getUid(),
+                boardDTO.getTitle(),
+                boardDTO.getContent(),
+                boardDTO.getCate(),
+                boardDTO.getType(),
+                boardDTO.getRegIP(),
+                boardDTO.getRegDate(),
+                boardDTO.getSecret()
+        );
+    }
+
+    // 댓글 등록
+    public void insertComment(BoardDTO boardDTO){
+        mapper.insertComment(
+                boardDTO.getUid(),
+                boardDTO.getCate(),
+                boardDTO.getType(),
+                boardDTO.getRegIP(),
+                boardDTO.getRegDate(),
+                boardDTO.getParent(),
+                boardDTO.getComment()
+        );
+    }
+
+    public void deleteArticle(int bno){
+
+        mapper.deleteArticle(bno);
+    }
+
+
+    public void updateComment(BoardDTO boardDTO){
+        mapper.updateComment(boardDTO.getComment(), boardDTO.getBno());
+    }
+    public void updateArticle(BoardDTO boardDTO){
+        mapper.updateArticle(boardDTO.getTitle(), boardDTO.getContent(), boardDTO.getBno());
+    }
+
 }

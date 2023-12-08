@@ -18,13 +18,6 @@ public class AdminBoardCateServiceImpl implements AdminBoardCateService {
     private final MybatisAdminBoardMapper mybatisAdminBoardMapper;
 
     @Override
-    public List<GP_AdminBoardDTO> getCate(String group, int cate) throws Exception{
-        List<GP_AdminBoardDTO> dto = mybatisAdminBoardMapper.getCate(group, cate);
-        log.info("Service getCate dto : " + dto);
-        return dto;
-    }
-
-    @Override
     public List<BoardCateDTO> getCateName(String group) throws Exception{
         List<BoardCateDTO> dto = mybatisAdminBoardMapper.getCateName(group);
         return dto;
@@ -35,11 +28,5 @@ public class AdminBoardCateServiceImpl implements AdminBoardCateService {
         List<BoardTypeDTO> dto = mybatisAdminBoardMapper.selectType(cate);
         return dto;
     }
-
- /*   @Override
-    public List<GP_AdminBoardDTO> cateNameAndTypeName(String group, int cate, int type) throws Exception {
-        List<GP_AdminBoardDTO> dto = mybatisAdminBoardMapper.cateNameAndTypeName(group, cate, type);
-        return null;
-    }*/
 
 }

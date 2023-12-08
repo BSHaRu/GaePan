@@ -109,6 +109,7 @@ public class AdminBoardServiceImpl implements AdminBoardService {
         PageMaker pm = new SearchPageMaker();
         pm.setCri(cri);
         pm.setTotalCount(totalCount);
+
         return pm;
     }
 

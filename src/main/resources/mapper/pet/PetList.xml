@@ -26,7 +26,7 @@
                       ON a.`type` = b.`type`
         WHERE a.cate= 1 AND division = 1
         ORDER BY `no` DESC
-        LIMIT 12;
+        LIMIT 8;
 
     </select>
 
@@ -40,7 +40,7 @@
                       ON a.`type` = b.`type`
         WHERE a.cate= 2 AND division = 1
         ORDER BY `no` DESC
-        LIMIT 12;
+        LIMIT 8;
 
     </select>
 
@@ -54,7 +54,7 @@
                       ON a.`type` = b.`type`
         WHERE a.cate= 3 AND division = 1
         ORDER BY `no` DESC
-        LIMIT 12;
+        LIMIT 8;
 
     </select>
 
@@ -85,13 +85,33 @@
         LEFT JOIN gp_pet_cate as c ON a.cate = c.cate
         WHERE
         <if test="searchType == 'tName'">
-            b.tName LIKE CONCAT('%', #{key}, '%')
+            b.tName LIKE CONCAT('%', #{key}, '%') AND a.division = #{division}
         </if>
         <if test="searchType == 'cName'">
-            c.cName LIKE CONCAT('%', #{key}, '%')
+            c.cName LIKE CONCAT('%', #{key}, '%') AND a.division = #{division}
         </if>
         <if test="searchType == 'name'">
-            a.name LIKE CONCAT('%', #{key}, '%')
+            a.name LIKE CONCAT('%', #{key}, '%') AND a.division = #{division}
+        </if>
+        ORDER BY `no` DESC
+        LIMIT #{startNum}, 10;
+
+    </select>
+
+    <select id="searchPetsCount" resultType="int">
+        SELECT count(*)
+        FROM gp_pet as a
+        LEFT JOIN gp_pet_type as b ON a.`type` = b.`type`
+        LEFT JOIN gp_pet_cate as c ON a.cate = c.cate
+        WHERE
+        <if test="searchType == 'tName'">
+            b.tName LIKE CONCAT('%', #{key}, '%') AND a.division = #{division}
+        </if>
+        <if test="searchType == 'cName'">
+            c.cName LIKE CONCAT('%', #{key}, '%') AND a.division = #{division}
+        </if>
+        <if test="searchType == 'name'">
+            a.name LIKE CONCAT('%', #{key}, '%') AND a.division = #{division}
         </if>
     </select>
 

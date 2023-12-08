@@ -10,6 +10,7 @@
 
 <th:block layout:fragment="content">
 
+
     <div class="container">
         <section id="cs">
             <br>
@@ -20,16 +21,9 @@
                         <div class="sidebar__item">
                             <h4>공지사항</h4>
                             <ul>
-                                <li><a href="#">고객서비스</a></li>
-                                <li><a href="#">Vegetables</a></li>
-                                <li><a href="#">Fruit &amp; Nut Gifts</a></li>
-                                <li><a href="#">Fresh Berries</a></li>
-                                <li><a href="#">Ocean Foods</a></li>
-                                <li><a href="#">Butter &amp; Eggs</a></li>
-                                <li><a href="#">Fastfood</a></li>
-                                <li><a href="#">Fresh Onion</a></li>
-                                <li><a href="#">Papayaya &amp; Crisps</a></li>
-                                <li><a href="#">Oatmeal</a></li>
+                                <li><a th:href="@{/cs/notice/list(group='notice', cate=11)}">고객서비스</a></li>
+                                <li><a th:href="@{/cs/notice/list(group='notice', cate=12)}">반려동물</a></li>
+                                <li><a th:href="@{/cs/notice/list(group='notice', cate=13)}">제휴</a></li>
                             </ul>
                         </div>
                     </div>
@@ -40,13 +34,17 @@
 
                 <section class="qna" id="qnaList-section">
                     <div class="section-title product__discount__title">
-                        <h2><a href="#" class="btnTotal">고객서비스</a></h2>
+                        <h2><a th:href="@{/cs/notice/list(group=${boardDTO.group}, cate=${boardDTO.cate})}" class="btnTotal">[[${boardDTO.cateName}]]</a></h2>
                     </div>
 
-                    <div class="card">
+                    <div class="card" id="noticeArticle">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            <h5 class="card-title">[[${boardDTO.title}]]</h5>
+                            <span id="uid">[[${boardDTO.uid}]]</span>&nbsp;
+                            <span>[[${#temporals.format(boardDTO.regDate, 'yyyy-MM-dd')}]]</span>
+                            <br>
+                            <br>
+                            <p class="card-text">[[${boardDTO.content}]]</p>
 
                         </div>
                     </div>
