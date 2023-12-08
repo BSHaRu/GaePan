@@ -158,6 +158,7 @@
             <a href="/index"><img src="/img/font-logo.png" class="registerLogo"></a>
             <br>
             <form class="registerForm" method="post">
+                <input type="hidden" name="division" th:value="REGISTER"/>
                 <div class="mb-3">
                     <label for="uid">아이디<span class="require"></span></label>
                     <input type="text" class="form-control" name="uid" id="uid" placeholder="" required>

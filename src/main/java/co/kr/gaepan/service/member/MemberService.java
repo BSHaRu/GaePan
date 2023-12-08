@@ -36,5 +36,10 @@ public class MemberService {
         return count == 0;
     }
 
+    public int countEmail(String email) {
+        int count = mapper.checkDuplicateEmail(email);
+        return count;
+    }
+
 
 }
